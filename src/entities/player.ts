@@ -18,6 +18,8 @@ export class Player extends Entity {
     public radius = 50;
     public angle = 0;
     public rotationSpeed = 0.01;
+    public currentPokeLength = 0;
+    public maxPokeLength = 150;
     constructor(x: number, y: number) {
         super(x, y);
     }
@@ -43,7 +45,12 @@ export class Player extends Entity {
 
         this.kinematics(dt);
 
-        const targetAngle = angleBetweenPoints(mousePosition, this);
+        let targetAngle = angleBetweenPoints(mousePosition, this);
+        let adjustment = -0.2;
+        if (targetAngle > Math.PI / 2 && targetAngle < Math.PI * 1.5) {
+            adjustment = 0.2;
+        }
+        targetAngle += adjustment;
         let angleDiff = angleDistance(this.angle, targetAngle);
 
         const angleTick = this.rotationSpeed * dt;
@@ -74,6 +81,12 @@ export class Player extends Entity {
             context.scale(1, -1);
         }
         context.drawImage(playerImage1, -this.radius, -this.radius);
+
+        if (this.currentPokeLength) {
+            context.rotate(0.2);
+            context.fillStyle = "black";
+            context.fillRect(this.radius, 0, this.currentPokeLength, 10);
+        }
         context.restore();
     }
 }
