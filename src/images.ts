@@ -25,6 +25,9 @@ export const playerImage1 = loadImage(playerImage1Url);
 import redRectImageUrl from "../assets/collectable/red_rect.png";
 export const redRectImage = loadImage(redRectImageUrl);
 
+import backgroundImageUrl from "../assets/ocean_background.png";
+export const backgroundImage = loadImage(backgroundImageUrl);
+
 let resolveImageLoad: () => void;
 export const imageLoadPromise = new Promise<void>((resolve) => {
     resolveImageLoad = resolve;

@@ -1,9 +1,10 @@
 import { positionWallCollision } from "#src/collision.ts";
 import { playerImage1 } from "#src/images.ts";
-import { InputState } from "#src/input.ts";
+import { InputState, mousePosition } from "#src/input.ts";
 import {
     add,
     addMut,
+    angleBetweenPoints,
     angleDistance,
     copyMut,
     getDirectionAngle,
@@ -42,18 +43,16 @@ export class Player extends Entity {
 
         this.kinematics(dt);
 
-        if (this.velocity.x || this.velocity.y) {
-            const targetAngle = getDirectionAngle(this.velocity);
-            let angleDiff = angleDistance(this.angle, targetAngle);
+        const targetAngle = angleBetweenPoints(mousePosition, this);
+        let angleDiff = angleDistance(this.angle, targetAngle);
 
-            const angleTick = this.rotationSpeed * dt;
-            if (Math.abs(angleDiff) < angleTick) {
-                this.angle = targetAngle;
-            } else if (angleDiff > 0) {
-                this.angle += angleTick;
-            } else {
-                this.angle -= angleTick;
-            }
+        const angleTick = this.rotationSpeed * dt;
+        if (Math.abs(angleDiff) < angleTick) {
+            this.angle = targetAngle;
+        } else if (angleDiff > 0) {
+            this.angle += angleTick;
+        } else {
+            this.angle -= angleTick;
         }
 
         const newPosition = add(this, this.velocity);

@@ -1,6 +1,6 @@
 import { gameManager } from "./GameManager";
-import { wallsImage } from "./images";
-import { mousePosition } from "./input";
+import { backgroundImage, wallsImage } from "./images";
+import { mousePosition, mousePositionGlobal } from "./input";
 
 let canvas: HTMLCanvasElement;
 let context: CanvasRenderingContext2D | null;
@@ -31,9 +31,13 @@ function lockCameraBounds() {
     }
 }
 
-export function mapMousePosition(mouseX: number, mouseY: number) {
+export function mapMousePosition() {
+    const visibleWidth = canvas.width / camera.scale;
+    const visibleHeight = canvas.height / camera.scale;
+
     const rect = canvas.getBoundingClientRect();
-    return { x: mouseX - rect.left, y: mouseY - rect.top };
+    mousePosition.x = ((mousePositionGlobal.x - rect.left) / rect.width) * visibleWidth + camera.x - visibleWidth / 2;
+    mousePosition.y = ((mousePositionGlobal.y - rect.top) / rect.height) * visibleHeight + camera.y - visibleHeight / 2;
 }
 
 export function drawFrame() {
@@ -55,6 +59,8 @@ export function drawFrame() {
 
     lockCameraBounds();
 
+    mapMousePosition();
+
     context.save();
     context.translate(
         Math.round(canvas.width / 2 - camera.x * camera.scale),
@@ -66,7 +72,7 @@ export function drawFrame() {
     bgGradient.addColorStop(0, "darkblue");
     bgGradient.addColorStop(1, "black");
     context.fillStyle = bgGradient;
-    context.fillRect(0, 0, wallsImage.width, wallsImage.height);
+    context.drawImage(backgroundImage, 0, 0, backgroundImage.width, backgroundImage.height);
 
     context.drawImage(wallsImage, 0, 0, wallsImage.width, wallsImage.height);
 
@@ -78,7 +84,9 @@ export function drawFrame() {
         ent.draw(context);
     }
 
-    const darknessMaskColor = "black";
+    const maskOpacity = Math.min(1, camera.y / (wallsImage.height / 2));
+    const darknessMaskColor = `rgba(0,0,0,${maskOpacity})`;
+    const playerMaskColor = `rgba(0,0,0,${Math.min(maskOpacity - 0.5, 0.7)})`;
 
     const flashlightGradient = context.createConicGradient(
         gameManager.player.angle,
@@ -100,16 +108,14 @@ export function drawFrame() {
         gameManager.player.y + (Math.sin(gameManager.player.angle) * gameManager.player.radius) / 2
     );
     flashlightPlayerGradient.addColorStop(0, "transparent");
-    flashlightPlayerGradient.addColorStop(0.3, "rgba(0, 0, 0, 0.7)");
-    flashlightPlayerGradient.addColorStop(0.7, "rgba(0, 0, 0, 0.7)");
+    flashlightPlayerGradient.addColorStop(0.3, playerMaskColor);
+    flashlightPlayerGradient.addColorStop(0.7, playerMaskColor);
     flashlightPlayerGradient.addColorStop(1, "transparent");
     context.fillStyle = flashlightPlayerGradient;
-    context.fillRect(
-        gameManager.player.x - gameManager.player.radius,
-        gameManager.player.y - gameManager.player.radius,
-        gameManager.player.radius * 2,
-        gameManager.player.radius * 2
-    );
+    context.beginPath();
+    context.arc(gameManager.player.x, gameManager.player.y, gameManager.player.radius, 0, Math.PI * 2);
+    context.closePath();
+    context.fill();
 
     context.fillStyle = "pink";
     context.fillRect(mousePosition.x - 2, mousePosition.y - 2, 4, 4);

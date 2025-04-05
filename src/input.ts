@@ -11,7 +11,10 @@ export type Input = (typeof inputs)[number];
 
 export const InputState = new Map<Input, boolean>();
 
+export const mousePositionGlobal: Vector = { x: 0, y: 0 };
 export const mousePosition: Vector = { x: 0, y: 0 };
+// @ts-ignore
+window.DEV_mousePosition = mousePosition;
 
 function onKeyDown(event: KeyboardEvent) {
     if (isSupportedInput(event.key)) {
@@ -24,13 +27,10 @@ function onKeyUp(event: KeyboardEvent) {
     }
 }
 
-function onMouseMove(event: MouseEvent) {
-    let x = event.clientX;
-    let y = event.clientY;
-
-    copyMut(mousePosition, mapMousePosition(x, y));
+export function onMouseMove(event: React.MouseEvent<HTMLCanvasElement, MouseEvent>) {
+    mousePositionGlobal.x = event.clientX;
+    mousePositionGlobal.y = event.clientY;
 }
 
 document.body.addEventListener("keydown", onKeyDown);
 document.body.addEventListener("keyup", onKeyUp);
-document.body.addEventListener("mousemove", onMouseMove);
