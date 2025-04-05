@@ -4,7 +4,7 @@ function App() {
     return (
         <div className={"App"}>
             <div className={"LeftUI"}>GINAS UI PART</div>
-            <div className={"Center"}>TOM YOU CAN HAVE THIS PART</div>
+            <canvas className={"Center"}></canvas>
             <div className={"RightUI"}>GINAS OTHER UI PART</div>
         </div>
     );

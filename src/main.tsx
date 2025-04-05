@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import { tick } from "./tick";
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
@@ -8,3 +9,9 @@ root.render(
         <App />
     </React.StrictMode>
 );
+
+function startGame() {
+    tick();
+}
+
+startGame();
