@@ -1,8 +1,7 @@
+import { gameManager } from "./GameManager";
 import { tick } from "./tick";
-import { GameManager } from "./GameManager";
 
-export const gameManager = new GameManager();
-//gameManager.forceUpdate();
+gameManager.forceUpdate();
 
 function startGame() {
     tick();

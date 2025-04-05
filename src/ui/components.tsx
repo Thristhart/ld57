@@ -1,4 +1,4 @@
-import { gameManager } from "#src/main.tsx";
+import { gameManager } from "#src/GameManager.tsx";
 
 export const Inventory = () => {
     return <div>Inventory BOX</div>;

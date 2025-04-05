@@ -54,3 +54,5 @@ export class GameManager {
 
     public forceUpdate = () => this.rerenderUI();
 }
+
+export const gameManager = new GameManager();
