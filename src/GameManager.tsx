@@ -71,6 +71,8 @@ export class GameManager {
             ent.tick(dt);
         }
     }
+
+    public click() {}
 }
 
 export const gameManager = new GameManager();
