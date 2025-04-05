@@ -1,3 +1,5 @@
+import library from "js-svg-path";
+
 const unloadedImages = new Set<HTMLImageElement>();
 
 function loadImage(url: string) {
@@ -16,8 +18,26 @@ function loadImage(url: string) {
     return image;
 }
 
+function loadVectorPaths(vectorURL: string) {
+    let paths = [];
+    const step1 = vectorURL.split("path");
+    step1.splice(0, 1);
+    console.log(step1);
+    for (const string of step1) {
+        paths.push(string.split('"')[1]);
+    }
+    let vectorPaths = [];
+    for (const path of paths) {
+        vectorPaths.push(library.parse(path));
+    }
+    return vectorPaths;
+}
+
 import wallsImageUrl from "../assets/walls.png";
 export const wallsImage = loadImage(wallsImageUrl);
+
+import wallsVectorUrl from "../assets/Walls - Spiky Stuff.svg?raw";
+export const wallsVectors = loadVectorPaths(wallsVectorUrl);
 
 import playerImage1Url from "../assets/sub/level1.png";
 export const playerImage1 = loadImage(playerImage1Url);

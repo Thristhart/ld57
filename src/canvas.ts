@@ -1,6 +1,7 @@
 import { gameManager } from "./GameManager";
 import { backgroundImage, wallsImage } from "./images";
 import { mousePosition, mousePositionGlobal } from "./input";
+import { wallLines } from "./collision";
 
 let canvas: HTMLCanvasElement;
 let context: CanvasRenderingContext2D | null;
@@ -120,6 +121,16 @@ export function drawFrame() {
     context.arc(gameManager.player.x, gameManager.player.y, gameManager.player.radius, 0, Math.PI * 2);
     context.closePath();
     context.fill();
+
+    context.strokeStyle = "purple";
+    context.lineWidth = 20;
+    for (const line of wallLines) {
+        context.beginPath();
+        context.moveTo(line.x1, line.y1);
+        context.lineTo(line.x2, line.y2);
+        context.closePath();
+        context.stroke();
+    }
 
     context.fillStyle = "pink";
     context.fillRect(mousePosition.x - 2, mousePosition.y - 2, 4, 4);
