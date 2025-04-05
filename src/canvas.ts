@@ -2,19 +2,8 @@ let canvas: HTMLCanvasElement | null;
 let context: CanvasRenderingContext2D | null;
 let parent: HTMLElement;
 
-let width = 0;
-let height = 0;
-
-function onResize() {
-    const parentRect = parent?.getBoundingClientRect();
-    if (!parentRect) {
-        return;
-    }
-    width = parentRect.width;
-    height = parentRect.height;
-}
-
-window.addEventListener("resize", onResize);
+let width = 1080;
+let height = 1920;
 
 export function drawFrame() {
     canvas ??= document.querySelector("canvas")!;
@@ -25,17 +14,22 @@ export function drawFrame() {
     if (!context) {
         return;
     }
-    const hadParent = !!parent;
-    parent ??= canvas?.parentElement!;
-    if (parent && !hadParent) {
-        onResize();
-    }
 
     canvas.width = width;
     canvas.height = height;
 
-    context.fillStyle = "black";
-    context.arc(100, 100, 100, 0, Math.PI * 2);
+    context.fillStyle = "darkblue";
+    context.fillRect(0, 0, width, height);
 
+    context.fillStyle = "black";
+    context.beginPath();
+    context.arc(100, 100, 100, 0, Math.PI * 2);
+    context.closePath();
+    context.fill();
+
+    context.fillStyle = "pink";
+    context.beginPath();
+    context.arc(width - 100, 100, 100, 0, Math.PI * 2);
+    context.closePath();
     context.fill();
 }

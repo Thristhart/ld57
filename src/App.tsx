@@ -10,9 +10,7 @@ function App() {
                 <Fuel />
                 <LightSwitch />
             </div>
-            <div className={"Center"}>
-                <canvas />
-            </div>
+            <canvas className={"Center"} />
             <div className={"RightUI"}>
                 <Inventory />
                 <UpgradeGUI />
