@@ -75,9 +75,9 @@ export class Player extends Entity {
             for (const col of this.collisions) {
                 const closestPoint = findClosestPoint(col.start, col.end, this);
                 const vectorToClosestPoint = subtract(closestPoint, this);
-                const inverseVelocity = normalizeVector(vectorToClosestPoint);
-                scaleMut(inverseVelocity, -this.radius);
-                const newPosition = add(closestPoint, inverseVelocity);
+                const minimumDistanceVector = normalizeVector(vectorToClosestPoint);
+                scaleMut(minimumDistanceVector, -this.radius);
+                const newPosition = add(closestPoint, minimumDistanceVector);
                 copyMut(this, newPosition);
 
                 this.velocity = subtract(this.velocity, scale(col.normal, dot(this.velocity, col.normal) * 2));
