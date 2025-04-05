@@ -22,6 +22,9 @@ export const wallsImage = loadImage(wallsImageUrl);
 import playerImage1Url from "../assets/sub/level1.png";
 export const playerImage1 = loadImage(playerImage1Url);
 
+import redRectImageUrl from "../assets/collectable/red_rect.png";
+export const redRectImage = loadImage(redRectImageUrl);
+
 let resolveImageLoad: () => void;
 export const imageLoadPromise = new Promise<void>((resolve) => {
     resolveImageLoad = resolve;

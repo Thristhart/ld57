@@ -1,3 +1,4 @@
+import { CollectableConfig } from "#src/gametypes.ts";
 import { Entity } from "./entity";
 
 export class Collectable extends Entity {
@@ -6,7 +7,8 @@ export class Collectable extends Entity {
     public width: number;
     public image: HTMLImageElement;
 
-    constructor(resource: string, x: number, y: number, width: number, height: number, image: HTMLImageElement) {
+    constructor(collectable: CollectableConfig) {
+        const { x, y, width, height, image, resource } = collectable;
         super(x, y);
         (this.width = width), (this.height = height);
         this.image = image;

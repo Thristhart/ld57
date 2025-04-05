@@ -1,4 +1,5 @@
 import { CollectableConfig, GameState, Upgrade } from "./gametypes";
+import { redRectImage } from "./images";
 
 export const upgrades: { [type: string]: Upgrade[] } = {
     fuelUpgradeLevel: [
@@ -117,3 +118,14 @@ export const defaultGameState: GameState = {
     inventory: [],
     upgrades: upgrades,
 };
+
+export const collectablesList: CollectableConfig[] = [
+    {
+        resource: "copper",
+        x: 2000,
+        y: 200,
+        height: 20,
+        width: 20,
+        image: redRectImage,
+    },
+];

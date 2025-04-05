@@ -4,7 +4,8 @@ import App from "./App";
 import { Entity } from "./entities/entity";
 import { Player } from "./entities/player";
 import { GameState, GameUpgradeLevels } from "./gametypes";
-import { defaultGameState } from "./startstate";
+import { collectablesList, defaultGameState } from "./startstate";
+import { Collectable } from "./entities/collectable";
 
 let nextEntId = 0;
 
@@ -28,6 +29,9 @@ export class GameManager {
         this.rerenderUI = rootRender;
 
         this.player = this.addEntity(new Player(2000, 200));
+        collectablesList.forEach((collectable) => {
+            this.addEntity(new Collectable(collectable));
+        });
     }
 
     public setGameState<K extends keyof GameState>(property: K, value: GameState[K]): void {
