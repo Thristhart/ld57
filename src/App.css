@@ -1,0 +1,18 @@
+.App {
+    display: flex;
+}
+
+.LeftUI {
+    width: 15%;
+    height: 100%;
+}
+
+.Center {
+    flex-grow: 1;
+    height: 100%;
+}
+
+.RightUI {
+    width: 15%;
+    height: 100%;
+}

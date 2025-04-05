@@ -3,8 +3,10 @@ import React from "react";
 
 function App() {
     return (
-        <div>
-            <h1>Hello, React!</h1>
+        <div className={"App"}>
+            <div className={"LeftUI"}>GINAS UI PART</div>
+            <div className={"Center"}>TOM YOU CAN HAVE THIS PART</div>
+            <div className={"RightUI"}>GINAS OTHER UI PART</div>
         </div>
     );
 }
