@@ -16,6 +16,12 @@ export function prepareWallData() {
         vectorLines[0].end = lastPoint.main;
         wallLines.push(...vectorLines);
     }
+    wallLines.push({ start: { x: 0, y: 0 }, end: { x: wallsImage.width, y: 0 }, normal: { x: 0, y: 1 } });
+    wallLines.push({
+        start: { x: 0, y: wallsImage.height },
+        end: { x: wallsImage.width, y: wallsImage.height },
+        normal: { x: 0, y: -1 },
+    });
 }
 
 function pointIntersectsCircle(x: number, y: number, circleCenter: Vector, radius: number) {
