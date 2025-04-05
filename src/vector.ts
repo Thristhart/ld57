@@ -21,6 +21,9 @@ export function scaleMut(vector: Vector, scalar: number) {
     vector.x *= scalar;
     vector.y *= scalar;
 }
+export function scale(vector: Vector, scalar: number) {
+    return { x: vector.x * scalar, y: vector.y * scalar };
+}
 
 export function addMut(a: Vector, b: Vector) {
     a.x += b.x;

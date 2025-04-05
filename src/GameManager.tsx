@@ -211,3 +211,6 @@ export class GameManager {
 }
 
 export const gameManager = new GameManager();
+
+// @ts-ignore
+window.DEV_gameManager = gameManager;

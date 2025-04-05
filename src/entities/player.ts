@@ -10,23 +10,26 @@ export class Player extends Entity {
 
     collisions: Array<Vector> = [];
     tick(dt: number): void {
-        let velocity: Vector = { x: 0, y: 0 };
+        let acceleration: Vector = { x: 0, y: 0 };
         if (InputState.get("w")) {
-            velocity.y += -1;
+            acceleration.y += -1;
         }
         if (InputState.get("s")) {
-            velocity.y += 1;
+            acceleration.y += 1;
         }
         if (InputState.get("a")) {
-            velocity.x -= 1;
+            acceleration.x -= 1;
         }
         if (InputState.get("d")) {
-            velocity.x += 1;
+            acceleration.x += 1;
         }
-        velocity = normalizeVector(velocity);
-        scaleMut(velocity, dt);
+        acceleration = normalizeVector(acceleration);
+        scaleMut(acceleration, dt * 0.001);
+        copyMut(this.acceleration, acceleration);
 
-        const newPosition = add(this, velocity);
+        this.kinematics(dt);
+
+        const newPosition = add(this, this.velocity);
         const collisions = positionWallCollision(newPosition, this.radius);
         if (collisions.length === 0) {
             copyMut(this, newPosition);
