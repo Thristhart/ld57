@@ -51,9 +51,6 @@ export function drawFrame() {
         return;
     }
 
-    canvas.width = width;
-    canvas.height = height;
-
     // point camera at player
     camera.x = gameManager.player.x;
     camera.y = gameManager.player.y;
