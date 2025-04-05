@@ -38,3 +38,26 @@ export function copyMut(a: Vector, b: Vector) {
     a.x = b.x;
     a.y = b.y;
 }
+
+export function getDirectionAngle(vector: Vector) {
+    let a = Math.atan2(vector.y, vector.x);
+    while (a < 0) {
+        a += Math.PI * 2;
+    }
+    while (a > Math.PI * 2) {
+        a -= Math.PI * 2;
+    }
+    return a;
+}
+
+function alwaysPositiveMod(n: number, mod: number) {
+    return ((n % mod) + mod) % mod;
+}
+
+export function angleDistance(current: number, target: number) {
+    let diff = alwaysPositiveMod(target - current, Math.PI * 2);
+    if (diff > Math.PI) {
+        diff = -(Math.PI * 2 - diff);
+    }
+    return diff;
+}

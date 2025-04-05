@@ -1,9 +1,22 @@
 import { positionWallCollision } from "#src/collision.ts";
+import { playerImage1 } from "#src/images.ts";
 import { InputState } from "#src/input.ts";
-import { add, addMut, copyMut, normalizeVector, scaleMut, Vector } from "#src/vector.ts";
+import {
+    add,
+    addMut,
+    angleDistance,
+    copyMut,
+    getDirectionAngle,
+    normalizeVector,
+    scaleMut,
+    Vector,
+} from "#src/vector.ts";
 import { Entity } from "./entity";
 
 export class Player extends Entity {
+    public radius = 50;
+    public angle = 0;
+    public rotationSpeed = 0.01;
     constructor(x: number, y: number) {
         super(x, y);
     }
@@ -29,6 +42,20 @@ export class Player extends Entity {
 
         this.kinematics(dt);
 
+        if (this.velocity.x || this.velocity.y) {
+            const targetAngle = getDirectionAngle(this.velocity);
+            let angleDiff = angleDistance(this.angle, targetAngle);
+
+            const angleTick = this.rotationSpeed * dt;
+            if (Math.abs(angleDiff) < angleTick) {
+                this.angle = targetAngle;
+            } else if (angleDiff > 0) {
+                this.angle += angleTick;
+            } else {
+                this.angle -= angleTick;
+            }
+        }
+
         const newPosition = add(this, this.velocity);
         const collisions = positionWallCollision(newPosition, this.radius);
         if (collisions.length === 0) {
@@ -36,10 +63,18 @@ export class Player extends Entity {
         }
     }
     draw(context: CanvasRenderingContext2D) {
-        context.fillStyle = "cornflowerblue";
-        context.beginPath();
-        context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        context.fill();
-        context.closePath();
+        let drawAngle = this.angle;
+        let flip = false;
+        if (drawAngle > Math.PI / 2 && drawAngle < Math.PI * 1.5) {
+            flip = true;
+        }
+        context.save();
+        context.translate(this.x, this.y);
+        context.rotate(this.angle);
+        if (flip) {
+            context.scale(1, -1);
+        }
+        context.drawImage(playerImage1, -this.radius, -this.radius);
+        context.restore();
     }
 }

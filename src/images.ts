@@ -19,6 +19,9 @@ function loadImage(url: string) {
 import wallsImageUrl from "../assets/temp_walls.png";
 export const wallsImage = loadImage(wallsImageUrl);
 
+import playerImage1Url from "../assets/sub/level1.png";
+export const playerImage1 = loadImage(playerImage1Url);
+
 let resolveImageLoad: () => void;
 export const imageLoadPromise = new Promise<void>((resolve) => {
     resolveImageLoad = resolve;
