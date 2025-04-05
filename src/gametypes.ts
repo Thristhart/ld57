@@ -24,3 +24,12 @@ export interface Upgrade {
     isVisible: boolean;
     description: string;
 }
+
+export interface CollectableConfig {
+    resource: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    image: HTMLImageElement;
+}

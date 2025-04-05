@@ -1,4 +1,4 @@
-import { GameState, Upgrade } from "./gametypes";
+import { CollectableConfig, GameState, Upgrade } from "./gametypes";
 
 export const upgrades: { [type: string]: Upgrade[] } = {
     fuelUpgradeLevel: [
