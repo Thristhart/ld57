@@ -1,0 +1,66 @@
+import FlockingBoid from "./flockingboid";
+import Predator from "./predator";
+import { move, mutableFilter } from "./utils";
+import { BoidVector, FlockInstances, FlockSetting, SpawnConfig } from "./types";
+import { mousePosition } from "#src/input.ts";
+import { accelerateFlockingBoids } from "./accelerate";
+import { Entity } from "../entity";
+
+export const BOID_TYPES = {
+    FLOCKING_BOIDS: "flockingBoids",
+    PREDATORS: "predators",
+};
+
+export default class Flock extends Entity {
+    public instances: FlockInstances;
+    public mouse: BoidVector;
+    public settings: FlockSetting;
+
+    constructor(settings: FlockSetting) {
+        super(settings.x, settings.y);
+        this.instances = {
+            flockingBoids: [],
+        };
+        this.mouse = mousePosition;
+        this.settings = settings;
+    }
+
+    tick() {
+        const flockingBoids = this.instances.flockingBoids;
+
+        this.mouse = mousePosition;
+        this.populateFlock();
+        accelerateFlockingBoids(this.settings, flockingBoids, this.mouse);
+        move(flockingBoids, this.settings);
+    }
+
+    populateFlock() {
+        const instances = this.instances["flockingBoids"];
+        const characteristic = this.settings.characteristics["flockingBoids"];
+        const diff = characteristic.count - instances.length;
+        if (!diff) {
+            return;
+        }
+
+        const spawnConfig = characteristic.spawnPattern as SpawnConfig;
+        const maxGrowthPerTick = spawnConfig.maxGrowthPerTick || Infinity;
+        const maxShrinkPerTick = spawnConfig.maxShrinkPerTick || Infinity;
+        const effect = Math.max(-maxShrinkPerTick, Math.min(diff, maxGrowthPerTick));
+
+        if (effect > 0) {
+            for (let i = 0; i < effect; i += 1) {
+                instances.push(new FlockingBoid(spawnConfig, this));
+            }
+        } else {
+            const reduceEachOf = -Math.floor(instances.length / effect);
+            mutableFilter(instances, (_: any, i: number) => (i + 1) % reduceEachOf);
+        }
+    }
+
+    draw(virtualContext: CanvasRenderingContext2D) {
+        const { flockingBoids } = this.instances;
+        for (let i = 0; i < flockingBoids.length; i += 1) {
+            flockingBoids[i].draw(virtualContext);
+        }
+    }
+}

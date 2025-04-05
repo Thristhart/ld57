@@ -4,8 +4,9 @@ import App from "./App";
 import { Entity } from "./entities/entity";
 import { Player } from "./entities/player";
 import { GameState, GameUpgradeLevels } from "./gametypes";
-import { collectablesList, defaultGameState } from "./startstate";
+import { collectablesList, defaultGameState, flockList } from "./startstate";
 import { Collectable } from "./entities/collectable";
+import Flock from "./entities/boids/flock";
 
 let nextEntId = 0;
 
@@ -29,8 +30,11 @@ export class GameManager {
         this.rerenderUI = rootRender;
 
         this.player = this.addEntity(new Player(2000, 200));
-        collectablesList.forEach((collectable) => {
-            this.addEntity(new Collectable(collectable));
+        // collectablesList.forEach((collectable) => {
+        //     this.addEntity(new Collectable(collectable));
+        // });
+        flockList.forEach((flock) => {
+            this.addEntity(new Flock(flock));
         });
     }
 

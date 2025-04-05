@@ -1,3 +1,5 @@
+import { exampleFlock } from "./entities/boids/constants";
+import { FlockSetting } from "./entities/boids/types";
 import { CollectableConfig, GameState, Upgrade } from "./gametypes";
 import { redRectImage } from "./images";
 
@@ -129,3 +131,5 @@ export const collectablesList: CollectableConfig[] = [
         image: redRectImage,
     },
 ];
+
+export const flockList: FlockSetting[] = [exampleFlock];
