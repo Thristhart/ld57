@@ -14,6 +14,7 @@ import {
     dot,
     scale,
     subtract,
+    length,
 } from "#src/vector.ts";
 import { Entity } from "./entity";
 
@@ -72,6 +73,9 @@ export class Player extends Entity {
         } else {
             for (const col of this.collisions) {
                 this.velocity = subtract(this.velocity, scale(col.normal, dot(this.velocity, col.normal) * 2));
+                if (length(this.velocity) < 4) {
+                    scaleMut(this.velocity, 2);
+                }
             }
         }
     }
