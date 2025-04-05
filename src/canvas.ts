@@ -1,5 +1,6 @@
 import { gameManager } from "./GameManager";
 import { wallsImage } from "./images";
+import { mousePosition } from "./input";
 
 let canvas: HTMLCanvasElement;
 let context: CanvasRenderingContext2D | null;
@@ -28,6 +29,11 @@ function lockCameraBounds() {
     if (camera.y + visibleHeight / 2 > wallsImage.height) {
         camera.y = wallsImage.height - visibleHeight / 2;
     }
+}
+
+export function mapMousePosition(mouseX: number, mouseY: number) {
+    const rect = canvas.getBoundingClientRect();
+    return { x: mouseX - rect.left, y: mouseY - rect.top };
 }
 
 export function drawFrame() {
@@ -72,6 +78,8 @@ export function drawFrame() {
         ent.draw(context);
     }
 
+    const darknessMaskColor = "black";
+
     const flashlightGradient = context.createConicGradient(
         gameManager.player.angle,
         gameManager.player.x,
@@ -79,8 +87,8 @@ export function drawFrame() {
     );
     flashlightGradient.addColorStop(0, "transparent");
     flashlightGradient.addColorStop(0.05, "transparent");
-    flashlightGradient.addColorStop(0.1, "black");
-    flashlightGradient.addColorStop(0.9, "black");
+    flashlightGradient.addColorStop(0.1, darknessMaskColor);
+    flashlightGradient.addColorStop(0.9, darknessMaskColor);
     flashlightGradient.addColorStop(0.95, "transparent");
     flashlightGradient.addColorStop(1, "transparent");
     context.fillStyle = flashlightGradient;
@@ -102,6 +110,9 @@ export function drawFrame() {
         gameManager.player.radius * 2,
         gameManager.player.radius * 2
     );
+
+    context.fillStyle = "pink";
+    context.fillRect(mousePosition.x - 2, mousePosition.y - 2, 4, 4);
 
     context.restore();
 }

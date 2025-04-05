@@ -1,7 +1,7 @@
 import "./App.css";
 import { DepthMeter, Fuel, HullIntegrity, Inventory, LightSwitch, UpgradeGUI } from "./ui/components";
 
-function App() {
+function App({ loading }: { loading: boolean }) {
     return (
         <>
             <div className={"LeftUI"}>
@@ -10,11 +10,12 @@ function App() {
                 <Fuel />
                 <LightSwitch />
             </div>
-            <canvas className={"Center"} />
+            <canvas className={"Center"} width={1080} height={1920} />
             <div className={"RightUI"}>
                 <Inventory />
                 <UpgradeGUI />
             </div>
+            {loading && <div className="LoadingSpinner">Loading...</div>}
         </>
     );
 }

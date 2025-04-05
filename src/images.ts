@@ -16,7 +16,7 @@ function loadImage(url: string) {
     return image;
 }
 
-import wallsImageUrl from "../assets/temp_walls.png";
+import wallsImageUrl from "../assets/walls.png";
 export const wallsImage = loadImage(wallsImageUrl);
 
 import playerImage1Url from "../assets/sub/level1.png";

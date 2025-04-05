@@ -158,17 +158,19 @@ export class GameManager {
 
     public player: Player;
 
+    public loading = true;
+
     constructor() {
         const root = ReactDOM.createRoot(document.getElementById("root")!);
         const rootRender = () =>
             root.render(
                 <React.StrictMode>
-                    <App />
+                    <App loading={this.loading} />
                 </React.StrictMode>
             );
         this.rerenderUI = rootRender;
 
-        this.player = this.addEntity(new Player(200, 200));
+        this.player = this.addEntity(new Player(2000, 200));
     }
 
     public setGameState<K extends keyof GameState>(property: K, value: GameState[K]): void {

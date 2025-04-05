@@ -8,6 +8,8 @@ gameManager.forceUpdate();
 async function startGame() {
     await imageLoadPromise;
     prepareWallData();
+    gameManager.loading = false;
+    gameManager.forceUpdate();
     requestAnimationFrame(tick);
 }
 
