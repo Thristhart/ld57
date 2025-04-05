@@ -11,6 +11,7 @@ export interface GameState {
     currentDepth: number;
     maxDepth: number;
     inventory: string[];
+    maxInventorySlots: number;
     upgradesAvailable: string[];
     upgradesTaken: string[];
 }
@@ -24,6 +25,7 @@ const defaultGameState: GameState = {
     currentDepth: 0,
     maxDepth: 0,
     inventory: [],
+    maxInventorySlots: 3,
     upgradesAvailable: [],
     upgradesTaken: [],
 };

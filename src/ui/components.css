@@ -1,0 +1,9 @@
+.inventoryCtn {
+    display: flex;
+}
+
+.inventorySlot {
+    height: 40px;
+    width: 40px;
+    border: 2px solid blue;
+}
