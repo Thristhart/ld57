@@ -93,12 +93,16 @@ export function drawFrame() {
         gameManager.player.x,
         gameManager.player.y
     );
-    flashlightGradient.addColorStop(0, "transparent");
-    flashlightGradient.addColorStop(0.05, "transparent");
+    if (gameManager.getGameState("lightOn")) {
+        flashlightGradient.addColorStop(0, "transparent");
+        flashlightGradient.addColorStop(0.05, "transparent");
+        flashlightGradient.addColorStop(0.95, "transparent");
+        flashlightGradient.addColorStop(1, "transparent");
+    }
+
     flashlightGradient.addColorStop(0.1, darknessMaskColor);
     flashlightGradient.addColorStop(0.9, darknessMaskColor);
-    flashlightGradient.addColorStop(0.95, "transparent");
-    flashlightGradient.addColorStop(1, "transparent");
+
     context.fillStyle = flashlightGradient;
     context.fillRect(0, 0, wallsImage.width, wallsImage.height);
     gameManager.player.draw(context);
