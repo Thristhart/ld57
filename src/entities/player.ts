@@ -11,6 +11,10 @@ import {
     normalizeVector,
     scaleMut,
     Vector,
+    dot,
+    scale,
+    subtract,
+    length,
 } from "#src/vector.ts";
 import { Entity } from "./entity";
 
@@ -18,11 +22,13 @@ export class Player extends Entity {
     public radius = 50;
     public angle = 0;
     public rotationSpeed = 0.01;
+    public currentPokeLength = 0;
+    public maxPokeLength = 150;
     constructor(x: number, y: number) {
         super(x, y);
     }
 
-    collisions: Array<Vector> = [];
+    collisions: Array<{ start: Vector; end: Vector; normal: Vector }> = [];
     tick(dt: number): void {
         let acceleration: Vector = { x: 0, y: 0 };
         if (InputState.get("w")) {
@@ -43,7 +49,12 @@ export class Player extends Entity {
 
         this.kinematics(dt);
 
-        const targetAngle = angleBetweenPoints(mousePosition, this);
+        let targetAngle = angleBetweenPoints(mousePosition, this);
+        let adjustment = -0.2;
+        if (targetAngle > Math.PI / 2 && targetAngle < Math.PI * 1.5) {
+            adjustment = 0.2;
+        }
+        targetAngle += adjustment;
         let angleDiff = angleDistance(this.angle, targetAngle);
 
         const angleTick = this.rotationSpeed * dt;
@@ -56,9 +67,16 @@ export class Player extends Entity {
         }
 
         const newPosition = add(this, this.velocity);
-        const collisions = positionWallCollision(newPosition, this.radius);
-        if (collisions.length === 0) {
+        this.collisions = positionWallCollision(newPosition, this.radius);
+        if (this.collisions.length === 0) {
             copyMut(this, newPosition);
+        } else {
+            for (const col of this.collisions) {
+                this.velocity = subtract(this.velocity, scale(col.normal, dot(this.velocity, col.normal) * 2));
+                if (length(this.velocity) < 4) {
+                    scaleMut(this.velocity, 2);
+                }
+            }
         }
     }
     draw(context: CanvasRenderingContext2D) {
@@ -73,7 +91,23 @@ export class Player extends Entity {
         if (flip) {
             context.scale(1, -1);
         }
-        context.drawImage(playerImage1, -this.radius, -this.radius);
+        context.drawImage(playerImage1.bitmap, -this.radius, -this.radius);
+
+        if (this.currentPokeLength) {
+            context.rotate(0.2);
+            context.fillStyle = "black";
+            context.fillRect(this.radius, 0, this.currentPokeLength, 10);
+        }
         context.restore();
+
+        context.strokeStyle = "green";
+        context.lineWidth = 20;
+        for (const line of this.collisions) {
+            context.beginPath();
+            context.moveTo(line.start.x, line.start.y);
+            context.lineTo(line.end.x, line.end.y);
+            context.closePath();
+            context.stroke();
+        }
     }
 }

@@ -1,24 +1,27 @@
-import { wallsImage } from "./images";
-import { Vector } from "./vector";
+import { wallsImage, wallsVectors } from "./images";
+import { add, dot, isEqual, length, lengthSquared, normalizeVector, roundMut, scale, subtract, Vector } from "./vector";
 
-const wallPoints: boolean[][] = [];
+export const wallLines: { start: Vector; end: Vector; normal: Vector }[] = [];
+
 export function prepareWallData() {
-    const wallDataCanvas = document.createElement("canvas");
-    const wallDataContext = wallDataCanvas.getContext("2d")!;
-    wallDataCanvas.width = wallsImage.width;
-    wallDataCanvas.height = wallsImage.height;
-    wallDataContext.drawImage(wallsImage, 0, 0, wallsImage.width, wallsImage.height);
-    const imageData = wallDataContext.getImageData(0, 0, wallDataCanvas.width, wallDataCanvas.height);
-    for (let x = 0; x < imageData.width; x++) {
-        wallPoints[x] = [];
-        for (let y = 0; y < imageData.height; y++) {
-            wallPoints[x][y] = imageData.data[(y * imageData.width + x) * 4 + 3] > 0;
+    for (const vector of wallsVectors) {
+        let vectorLines = [];
+        let lastPoint = { main: { x: 0, y: 0 } };
+        for (const point of vector.curveshapes[0].points) {
+            const segment = subtract(point.main, lastPoint.main);
+            const normal = normalizeVector({ x: segment.y, y: -segment.x });
+            vectorLines.push({ start: point.main, end: lastPoint.main, normal });
+            lastPoint = point;
         }
+        vectorLines[0].end = lastPoint.main;
+        wallLines.push(...vectorLines);
     }
-}
-
-function isPointWall(x: number, y: number) {
-    return wallPoints[x]?.[y] ?? true;
+    wallLines.push({ start: { x: 0, y: 0 }, end: { x: wallsImage.width, y: 0 }, normal: { x: 0, y: 1 } });
+    wallLines.push({
+        start: { x: 0, y: wallsImage.height },
+        end: { x: wallsImage.width, y: wallsImage.height },
+        normal: { x: 0, y: -1 },
+    });
 }
 
 function pointIntersectsCircle(x: number, y: number, circleCenter: Vector, radius: number) {
@@ -27,14 +30,47 @@ function pointIntersectsCircle(x: number, y: number, circleCenter: Vector, radiu
     return Math.sqrt(dx * dx + dy * dy) < radius;
 }
 
+export function findClosestPoint(a: Vector, b: Vector, p: Vector) {
+    //A->B
+    const AtB: Vector = subtract(b, a);
+    //A->P
+    const AtP: Vector = subtract(p, a);
+
+    const magAtBSq: number = lengthSquared(subtract(a, b));
+
+    const dotAtBwAtP = dot(AtP, AtB);
+
+    const distanceAtoCP = dotAtBwAtP / magAtBSq;
+
+    return add(a, scale(AtB, distanceAtoCP));
+}
+
+function isCircleCollidingWithOrOutsideLinesegment(position: Vector, radius: number, a: Vector, b: Vector) {
+    //P
+    const p: Vector = position;
+
+    const CP = findClosestPoint(a, b, p);
+
+    const smallerX = Math.min(a.x, b.x);
+    const biggerX = Math.max(a.x, b.x);
+    const smallerY = Math.min(a.y, b.y);
+    const biggerY = Math.max(a.y, b.y);
+
+    const closestDistance = length(subtract(CP, p));
+
+    if (CP.x >= smallerX && CP.x <= biggerX && CP.y >= smallerY && CP.y <= biggerY && closestDistance < radius) {
+        return CP;
+    }
+    return undefined;
+}
+
 export function positionWallCollision(point: Vector, radius: number) {
     const collisions = [];
     const pixel = { x: Math.round(point.x), y: Math.round(point.y) };
-    for (let x = pixel.x - radius; x < pixel.x + radius; x++) {
-        for (let y = pixel.y - radius; y < pixel.y + radius; y++) {
-            if (isPointWall(x, y) && pointIntersectsCircle(x, y, pixel, radius)) {
-                collisions.push({ x, y });
-            }
+
+    for (const line of wallLines) {
+        if (isCircleCollidingWithOrOutsideLinesegment(pixel, radius, line.start, line.end)) {
+            collisions.push(line);
         }
     }
     return collisions;

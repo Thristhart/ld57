@@ -115,7 +115,7 @@ export const defaultGameState: GameState = {
     speedUpgradeLevel: 0,
     fuelPoints: 100,
     hullPoints: 100,
-    lightOn: false,
+    lightOn: true,
     currentDepth: 0,
     inventory: [],
     upgrades: upgrades,

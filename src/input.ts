@@ -1,5 +1,4 @@
-import { mapMousePosition } from "./canvas";
-import { copyMut, Vector } from "./vector";
+import { Vector } from "./vector";
 
 const inputs = ["w", "a", "s", "d"] as const;
 
