@@ -24,7 +24,7 @@ export class Player extends Entity {
         super(x, y);
     }
 
-    collisions: Array<Vector> = [];
+    collisions: Array<{ start: Vector; end: Vector }> = [];
     tick(dt: number): void {
         let acceleration: Vector = { x: 0, y: 0 };
         if (InputState.get("w")) {
@@ -63,8 +63,8 @@ export class Player extends Entity {
         }
 
         const newPosition = add(this, this.velocity);
-        const collisions = positionWallCollision(newPosition, this.radius);
-        if (collisions.length === 0) {
+        this.collisions = positionWallCollision(newPosition, this.radius);
+        if (this.collisions.length === 0) {
             copyMut(this, newPosition);
         }
     }
@@ -88,5 +88,15 @@ export class Player extends Entity {
             context.fillRect(this.radius, 0, this.currentPokeLength, 10);
         }
         context.restore();
+
+        context.strokeStyle = "green";
+        context.lineWidth = 20;
+        for (const line of this.collisions) {
+            context.beginPath();
+            context.moveTo(line.start.x, line.start.y);
+            context.lineTo(line.end.x, line.end.y);
+            context.closePath();
+            context.stroke();
+        }
     }
 }

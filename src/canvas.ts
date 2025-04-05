@@ -2,6 +2,7 @@ import { gameManager } from "./GameManager";
 import { backgroundImage, wallsImage } from "./images";
 import { mousePosition, mousePositionGlobal } from "./input";
 import { wallLines } from "./collision";
+import { add, length, normalizeVector, scale, subtract } from "./vector";
 
 let canvas: HTMLCanvasElement;
 let context: CanvasRenderingContext2D | null;
@@ -82,6 +83,26 @@ export function drawFrame() {
         ent.draw(context);
     }
 
+    context.lineWidth = 20;
+    for (const line of wallLines) {
+        context.strokeStyle = "purple";
+        context.beginPath();
+        context.moveTo(line.start.x, line.start.y);
+        context.lineTo(line.end.x, line.end.y);
+        context.closePath();
+        context.stroke();
+
+        context.strokeStyle = "pink";
+        context.beginPath();
+        const diff = subtract(line.end, line.start);
+        const center = add(line.start, scale(normalizeVector(diff), length(diff) / 2));
+        const normalDisplay = scale(line.normal, 50);
+        context.moveTo(center.x, center.y);
+        context.lineTo(center.x + normalDisplay.x, center.y + normalDisplay.y);
+        context.closePath();
+        context.stroke();
+    }
+
     const maskOpacity = Math.min(1, camera.y / (wallsImage.height / 2));
     const darknessMaskColor = `rgba(0,0,0,${maskOpacity})`;
     const playerMaskColor = `rgba(0,0,0,${Math.min(maskOpacity - 0.5, 0.7)})`;
@@ -118,16 +139,6 @@ export function drawFrame() {
     context.arc(gameManager.player.x, gameManager.player.y, gameManager.player.radius, 0, Math.PI * 2);
     context.closePath();
     context.fill();
-
-    context.strokeStyle = "purple";
-    context.lineWidth = 20;
-    for (const line of wallLines) {
-        context.beginPath();
-        context.moveTo(line.x1, line.y1);
-        context.lineTo(line.x2, line.y2);
-        context.closePath();
-        context.stroke();
-    }
 
     context.fillStyle = "pink";
     context.fillRect(mousePosition.x - 2, mousePosition.y - 2, 4, 4);

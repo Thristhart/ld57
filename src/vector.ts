@@ -29,6 +29,15 @@ export function scale(vector: Vector, scalar: number) {
     return { x: vector.x * scalar, y: vector.y * scalar };
 }
 
+export function roundMut(vector: Vector) {
+    vector.x = Math.round(vector.x);
+    vector.y = Math.round(vector.y);
+}
+
+export function isEqual(a: Vector, b: Vector) {
+    return a.x === b.x && a.y === b.y;
+}
+
 export function addMut(a: Vector, b: Vector) {
     a.x += b.x;
     a.y += b.y;
@@ -59,6 +68,10 @@ export function subtract(a: Vector, b: Vector) {
         x: a.x - b.x,
         y: a.y - b.y,
     };
+}
+
+export function dot(a: Vector, b: Vector) {
+    return a.x * b.x + a.y * b.y;
 }
 
 export function angleBetweenPoints(a: Vector, b: Vector) {
