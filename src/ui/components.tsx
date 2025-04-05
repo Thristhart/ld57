@@ -1,6 +1,7 @@
-import { gameManager, Upgrade } from "#src/GameManager.tsx";
+import { gameManager } from "#src/GameManager.tsx";
 import { JSX } from "react";
 import "./components.css";
+import { Upgrade } from "#src/gametypes.ts";
 
 export const DepthMeter = () => {
     const currentDepth = gameManager.getGameState("currentDepth");
