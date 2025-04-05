@@ -10,7 +10,7 @@ function App() {
                 <Fuel />
                 <LightSwitch />
             </div>
-            <div className={"Center"}>TOM YOU CAN HAVE THIS PART</div>
+            <canvas className={"Center"}></canvas>
             <div className={"RightUI"}>
                 <Inventory />
                 <UpgradeGUI />
