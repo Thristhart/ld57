@@ -3,7 +3,7 @@ import { DepthMeter, Fuel, HullIntegrity, Inventory, LightSwitch, UpgradeGUI } f
 
 function App() {
     return (
-        <div className={"App"}>
+        <div id={"App"} className={"App"}>
             <div className={"LeftUI"}>
                 <DepthMeter />
                 <HullIntegrity />

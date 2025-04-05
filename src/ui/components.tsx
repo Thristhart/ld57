@@ -1,3 +1,5 @@
+import { gameManager } from "#src/main.tsx";
+
 export const Inventory = () => {
     return <div>Inventory BOX</div>;
 };
@@ -20,9 +22,13 @@ export const Fuel = () => {
 };
 
 export const LightSwitch = () => {
+    const isLightOn = gameManager.getGameState("lightOn");
+    const onClick = () => {
+        gameManager.setGameState("lightOn", !isLightOn);
+    };
     return (
         <div>
-            Lights: <input type="checkbox" />
+            Lights: <input checked={isLightOn} type="checkbox" onClick={onClick} />
         </div>
     );
 };
