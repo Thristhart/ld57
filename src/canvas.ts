@@ -1,6 +1,5 @@
 let canvas: HTMLCanvasElement | null;
 let context: CanvasRenderingContext2D | null;
-let parent: HTMLElement;
 
 let width = 1080;
 let height = 1920;
