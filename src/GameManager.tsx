@@ -17,13 +17,13 @@ export interface GameState {
 }
 
 const defaultGameState: GameState = {
-    maxFuelPoints: 0,
-    fuelPoints: 0,
-    hullPoints: 0,
-    maxHullPoints: 0,
+    maxFuelPoints: 100,
+    fuelPoints: 100,
+    hullPoints: 100,
+    maxHullPoints: 100,
     lightOn: false,
     currentDepth: 0,
-    maxDepth: 0,
+    maxDepth: 100,
     inventory: [],
     maxInventorySlots: 3,
     upgradesAvailable: [],
