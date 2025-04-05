@@ -1,3 +1,5 @@
+import { gameManager } from "./GameManager";
+
 let canvas: HTMLCanvasElement | null;
 let context: CanvasRenderingContext2D | null;
 
@@ -17,18 +19,12 @@ export function drawFrame() {
     canvas.width = width;
     canvas.height = height;
 
-    context.fillStyle = "darkblue";
+    const bgGradient = context.createLinearGradient(width / 2, 0, width / 2, height);
+    bgGradient.addColorStop(0, "darkblue");
+    bgGradient.addColorStop(1, "black");
+    context.fillStyle = bgGradient;
     context.fillRect(0, 0, width, height);
-
-    context.fillStyle = "black";
-    context.beginPath();
-    context.arc(100, 100, 100, 0, Math.PI * 2);
-    context.closePath();
-    context.fill();
-
-    context.fillStyle = "pink";
-    context.beginPath();
-    context.arc(width - 100, 100, 100, 0, Math.PI * 2);
-    context.closePath();
-    context.fill();
+    for (const ent of gameManager.getAllEntities()) {
+        ent.draw(context);
+    }
 }

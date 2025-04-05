@@ -4,7 +4,7 @@ import { tick } from "./tick";
 gameManager.forceUpdate();
 
 function startGame() {
-    tick();
+    requestAnimationFrame(tick);
 }
 
 startGame();
