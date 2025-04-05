@@ -3,19 +3,21 @@ import { DepthMeter, Fuel, HullIntegrity, Inventory, LightSwitch, UpgradeGUI } f
 
 function App() {
     return (
-        <div className={"App"}>
+        <>
             <div className={"LeftUI"}>
                 <DepthMeter />
                 <HullIntegrity />
                 <Fuel />
                 <LightSwitch />
             </div>
-            <canvas className={"Center"}></canvas>
+            <div className={"Center"}>
+                <canvas />
+            </div>
             <div className={"RightUI"}>
                 <Inventory />
                 <UpgradeGUI />
             </div>
-        </div>
+        </>
     );
 }
 
