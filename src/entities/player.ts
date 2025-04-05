@@ -11,6 +11,9 @@ import {
     normalizeVector,
     scaleMut,
     Vector,
+    dot,
+    scale,
+    subtract,
 } from "#src/vector.ts";
 import { Entity } from "./entity";
 
@@ -24,7 +27,7 @@ export class Player extends Entity {
         super(x, y);
     }
 
-    collisions: Array<{ start: Vector; end: Vector }> = [];
+    collisions: Array<{ start: Vector; end: Vector; normal: Vector }> = [];
     tick(dt: number): void {
         let acceleration: Vector = { x: 0, y: 0 };
         if (InputState.get("w")) {
@@ -66,6 +69,10 @@ export class Player extends Entity {
         this.collisions = positionWallCollision(newPosition, this.radius);
         if (this.collisions.length === 0) {
             copyMut(this, newPosition);
+        } else {
+            for (const col of this.collisions) {
+                this.velocity = subtract(this.velocity, scale(col.normal, dot(this.velocity, col.normal) * 2));
+            }
         }
     }
     draw(context: CanvasRenderingContext2D) {
