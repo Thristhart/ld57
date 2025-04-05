@@ -6,6 +6,8 @@
 .LeftUI {
     width: 420px;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .Center {
@@ -16,4 +18,6 @@
 .RightUI {
     width: 420px;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
