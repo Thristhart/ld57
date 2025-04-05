@@ -156,7 +156,7 @@ export class GameManager {
     private gameState: GameState = defaultGameState;
     private mapEntities = new Map<number, Entity>();
 
-    private player: Player;
+    public player: Player;
 
     constructor() {
         const root = ReactDOM.createRoot(document.getElementById("root")!);
