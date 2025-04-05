@@ -1,4 +1,5 @@
 import { gameManager } from "./GameManager";
+import { wallsImage } from "./images";
 
 let canvas: HTMLCanvasElement | null;
 let context: CanvasRenderingContext2D | null;
@@ -24,6 +25,9 @@ export function drawFrame() {
     bgGradient.addColorStop(1, "black");
     context.fillStyle = bgGradient;
     context.fillRect(0, 0, width, height);
+
+    context.drawImage(wallsImage, 0, 0, wallsImage.width, wallsImage.height);
+
     for (const ent of gameManager.getAllEntities()) {
         ent.draw(context);
     }

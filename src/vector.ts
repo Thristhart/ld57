@@ -26,3 +26,12 @@ export function addMut(a: Vector, b: Vector) {
     a.x += b.x;
     a.y += b.y;
 }
+
+export function add(a: Vector, b: Vector) {
+    return { x: a.x + b.x, y: a.y + b.y };
+}
+
+export function copyMut(a: Vector, b: Vector) {
+    a.x = b.x;
+    a.y = b.y;
+}

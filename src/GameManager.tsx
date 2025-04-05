@@ -188,7 +188,7 @@ export class GameManager {
 
     public forceUpdate = () => this.rerenderUI();
 
-    public addEntity(ent: Entity) {
+    public addEntity<Ent extends Entity>(ent: Ent) {
         let id = nextEntId++;
         this.mapEntities.set(id, ent);
         ent.id = id;
