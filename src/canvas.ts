@@ -70,9 +70,9 @@ export function drawFrame() {
     bgGradient.addColorStop(0, "darkblue");
     bgGradient.addColorStop(1, "black");
     context.fillStyle = bgGradient;
-    context.drawImage(backgroundImage, 0, 0, backgroundImage.width, backgroundImage.height);
+    context.drawImage(backgroundImage.bitmap, 0, 0, backgroundImage.width, backgroundImage.height);
 
-    context.drawImage(wallsImage, 0, 0, wallsImage.width, wallsImage.height);
+    context.drawImage(wallsImage.bitmap, 0, 0, wallsImage.width, wallsImage.height);
 
     for (const ent of gameManager.getAllEntities()) {
         if (ent === gameManager.player) {

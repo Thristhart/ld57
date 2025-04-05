@@ -3,9 +3,10 @@ import library from "js-svg-path";
 const unloadedImages = new Set<HTMLImageElement>();
 
 function loadImage(url: string) {
-    const image = new Image();
+    const image = new Image() as HTMLImageElement & { bitmap: ImageBitmap };
     unloadedImages.add(image);
-    image.addEventListener("load", () => {
+    image.addEventListener("load", async () => {
+        image.bitmap = await createImageBitmap(image);
         unloadedImages.delete(image);
         if (unloadedImages.size === 0) {
             resolveImageLoad();

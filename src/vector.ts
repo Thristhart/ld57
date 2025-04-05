@@ -13,8 +13,12 @@ export function normalizeVector(vector: Vector): Vector {
     };
 }
 
+export function lengthSquared(vector: Vector) {
+    return vector.x * vector.x + vector.y * vector.y;
+}
+
 export function length(vector: Vector) {
-    return Math.sqrt(vector.x * vector.x + vector.y * vector.y);
+    return Math.sqrt(lengthSquared(vector));
 }
 
 export function scaleMut(vector: Vector, scalar: number) {

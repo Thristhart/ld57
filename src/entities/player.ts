@@ -80,7 +80,7 @@ export class Player extends Entity {
         if (flip) {
             context.scale(1, -1);
         }
-        context.drawImage(playerImage1, -this.radius, -this.radius);
+        context.drawImage(playerImage1.bitmap, -this.radius, -this.radius);
 
         if (this.currentPokeLength) {
             context.rotate(0.2);
