@@ -12,6 +12,8 @@ export type Input = (typeof inputs)[number];
 export const InputState = new Map<Input, boolean>();
 
 export const mousePosition: Vector = { x: 0, y: 0 };
+// @ts-ignore
+window.DEV_mousePosition = mousePosition;
 
 function onKeyDown(event: KeyboardEvent) {
     if (isSupportedInput(event.key)) {
@@ -24,7 +26,7 @@ function onKeyUp(event: KeyboardEvent) {
     }
 }
 
-function onMouseMove(event: MouseEvent) {
+export function onMouseMove(event: React.MouseEvent<HTMLCanvasElement, MouseEvent>) {
     let x = event.clientX;
     let y = event.clientY;
 
@@ -33,4 +35,3 @@ function onMouseMove(event: MouseEvent) {
 
 document.body.addEventListener("keydown", onKeyDown);
 document.body.addEventListener("keyup", onKeyUp);
-document.body.addEventListener("mousemove", onMouseMove);

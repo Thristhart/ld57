@@ -32,8 +32,14 @@ function lockCameraBounds() {
 }
 
 export function mapMousePosition(mouseX: number, mouseY: number) {
+    const visibleWidth = canvas.width / camera.scale;
+    const visibleHeight = canvas.height / camera.scale;
+
     const rect = canvas.getBoundingClientRect();
-    return { x: mouseX - rect.left, y: mouseY - rect.top };
+    return {
+        x: ((mouseX - rect.left) / rect.width) * visibleWidth + camera.x - visibleWidth / 2,
+        y: ((mouseY - rect.top) / rect.height) * visibleHeight + camera.y - visibleHeight / 2,
+    };
 }
 
 export function drawFrame() {
