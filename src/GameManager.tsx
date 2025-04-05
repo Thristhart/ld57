@@ -4,32 +4,149 @@ import App from "./App";
 import { Entity } from "./entities/entity";
 import { Player } from "./entities/player";
 
-export interface GameState {
-    maxFuelPoints: number;
-    fuelPoints: number;
-    hullPoints: number;
-    maxHullPoints: number;
-    lightOn: boolean;
-    currentDepth: number;
-    maxDepth: number;
-    inventory: string[];
-    maxInventorySlots: number;
-    upgradesAvailable: string[];
-    upgradesTaken: string[];
+export interface GameUpgradeLevels {
+    fuelUpgradeLevel: number;
+    hullUpgradeLevel: number;
+    depthUpgradeLevel: number;
+    inventoryUpgradeLevel: number;
+    grabberUpgradeLevel: number;
+    lightUpgradeLevel: number;
+    speedUpgradeLevel: number;
 }
 
+export interface GameState extends GameUpgradeLevels {
+    fuelPoints: number;
+    hullPoints: number;
+    lightOn: boolean;
+    currentDepth: number;
+    inventory: string[];
+
+    upgrades: { [type: string]: Upgrade[] };
+}
+
+export interface Upgrade {
+    upgradeValue: number | string;
+    materials: { [matType: string]: number };
+    isVisible: boolean;
+    description: string;
+}
+
+const upgrades: { [type: string]: Upgrade[] } = {
+    fuelUpgradeLevel: [
+        { description: "increases max fuel to 100", upgradeValue: 100, materials: {}, isVisible: true },
+        { description: "increases max fuel to 200", upgradeValue: 200, materials: { sand: 1 }, isVisible: true },
+        {
+            description: "increases max fuel to 300",
+            upgradeValue: 300,
+            materials: { copper: 1, sand: 1 },
+            isVisible: false,
+        },
+        {
+            description: "increases max fuel to 400",
+            upgradeValue: 400,
+            materials: { copper: 2, sand: 2 },
+            isVisible: false,
+        },
+    ],
+    speedUpgradeLevel: [
+        { description: "increases max fuel to 400", upgradeValue: 10, materials: {}, isVisible: true },
+        { description: "increases max fuel to 400", upgradeValue: 20, materials: { sand: 1 }, isVisible: false },
+        {
+            description: "increases max fuel to 400",
+            upgradeValue: 30,
+            materials: { copper: 1, sand: 1 },
+            isVisible: false,
+        },
+        {
+            description: "increases max fuel to 400",
+            upgradeValue: 40,
+            materials: { copper: 2, sand: 2 },
+            isVisible: false,
+        },
+    ],
+    hullUpgradeLevel: [
+        { description: "increases max fuel to 400", upgradeValue: 100, materials: {}, isVisible: true },
+        { description: "increases max fuel to 400", upgradeValue: 200, materials: { sand: 1 }, isVisible: false },
+        {
+            description: "increases max fuel to 400",
+            upgradeValue: 300,
+            materials: { copper: 1, sand: 1 },
+            isVisible: false,
+        },
+        {
+            description: "increases max fuel to 400",
+            upgradeValue: 400,
+            materials: { copper: 2, sand: 2 },
+            isVisible: false,
+        },
+    ],
+    depthUpgradeLevel: [
+        { description: "increases max fuel to 400", upgradeValue: 100, materials: {}, isVisible: true },
+        { description: "increases max fuel to 400", upgradeValue: 200, materials: { sand: 1 }, isVisible: false },
+        {
+            description: "increases max fuel to 400",
+            upgradeValue: 300,
+            materials: { copper: 1, sand: 1 },
+            isVisible: false,
+        },
+        {
+            description: "increases max fuel to 400",
+            upgradeValue: 400,
+            materials: { copper: 2, sand: 2 },
+            isVisible: false,
+        },
+    ],
+    inventoryUpgradeLevel: [
+        { description: "increases max fuel to 400", upgradeValue: 3, materials: {}, isVisible: true },
+        { description: "increases max fuel to 400", upgradeValue: 5, materials: { sand: 1 }, isVisible: false },
+        {
+            description: "increases max fuel to 400",
+            upgradeValue: 10,
+            materials: { copper: 1, sand: 1 },
+            isVisible: false,
+        },
+    ],
+    lightUpgradeLevel: [
+        { description: "increases max fuel to 400", upgradeValue: "small cone", materials: {}, isVisible: true },
+        {
+            description: "increases max fuel to 400",
+            upgradeValue: "medium cone",
+            materials: { sand: 1 },
+            isVisible: false,
+        },
+        {
+            description: "increases max fuel to 400",
+            upgradeValue: "angler fish",
+            materials: { copper: 1, sand: 1 },
+            isVisible: false,
+        },
+    ],
+    grabberUpgradeLevel: [
+        { description: "increases max fuel to 400", upgradeValue: "short", materials: {}, isVisible: true },
+        { description: "increases max fuel to 400", upgradeValue: "long", materials: { sand: 1 }, isVisible: false },
+        {
+            description: "increases max fuel to 400",
+            upgradeValue: "tentacle",
+            materials: { copper: 1, sand: 1 },
+            isVisible: false,
+        },
+    ],
+};
+
 const defaultGameState: GameState = {
-    maxFuelPoints: 100,
+    fuelUpgradeLevel: 0,
+    hullUpgradeLevel: 0,
+    depthUpgradeLevel: 0,
+    inventoryUpgradeLevel: 0,
+    grabberUpgradeLevel: 0,
+    lightUpgradeLevel: 0,
+    speedUpgradeLevel: 0,
     fuelPoints: 100,
     hullPoints: 100,
-    maxHullPoints: 100,
     lightOn: false,
     currentDepth: 0,
-    maxDepth: 100,
     inventory: [],
-    maxInventorySlots: 3,
-    upgradesAvailable: [],
-    upgradesTaken: [],
+    upgrades: upgrades,
 };
 
 let nextEntId = 0;
@@ -61,6 +178,12 @@ export class GameManager {
 
     public getGameState<K extends keyof GameState>(property: K): GameState[K] {
         return this.gameState[property];
+    }
+
+    public getUpgradedMaxValue<K extends keyof GameUpgradeLevels>(property: K): number | string {
+        const level = this.gameState[property];
+        const value = this.gameState.upgrades[property][level].upgradeValue;
+        return value;
     }
 
     public forceUpdate = () => this.rerenderUI();

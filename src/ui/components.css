@@ -1,9 +1,25 @@
 .inventoryCtn {
     display: flex;
+    padding: 8px;
 }
 
 .inventorySlot {
     height: 40px;
     width: 40px;
     border: 2px solid blue;
+}
+
+.UpgradeGroup {
+    padding: 8px;
+}
+
+.UpgradeList {
+    display: flex;
+    gap: 24px;
+}
+
+.UpgradeItem {
+    width: 100px;
+    min-width: 100px;
+    border: 2px solid navy;
 }
