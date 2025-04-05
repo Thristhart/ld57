@@ -11,6 +11,7 @@ export type Input = (typeof inputs)[number];
 
 export const InputState = new Map<Input, boolean>();
 
+export const mousePositionGlobal: Vector = { x: 0, y: 0 };
 export const mousePosition: Vector = { x: 0, y: 0 };
 // @ts-ignore
 window.DEV_mousePosition = mousePosition;
@@ -27,10 +28,8 @@ function onKeyUp(event: KeyboardEvent) {
 }
 
 export function onMouseMove(event: React.MouseEvent<HTMLCanvasElement, MouseEvent>) {
-    let x = event.clientX;
-    let y = event.clientY;
-
-    copyMut(mousePosition, mapMousePosition(x, y));
+    mousePositionGlobal.x = event.clientX;
+    mousePositionGlobal.y = event.clientY;
 }
 
 document.body.addEventListener("keydown", onKeyDown);

@@ -22,6 +22,9 @@ export const wallsImage = loadImage(wallsImageUrl);
 import playerImage1Url from "../assets/sub/level1.png";
 export const playerImage1 = loadImage(playerImage1Url);
 
+import backgroundImageUrl from "../assets/ocean_background.png";
+export const backgroundImage = loadImage(backgroundImageUrl);
+
 let resolveImageLoad: () => void;
 export const imageLoadPromise = new Promise<void>((resolve) => {
     resolveImageLoad = resolve;

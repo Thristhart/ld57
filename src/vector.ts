@@ -50,6 +50,17 @@ export function getDirectionAngle(vector: Vector) {
     return a;
 }
 
+export function subtract(a: Vector, b: Vector) {
+    return {
+        x: a.x - b.x,
+        y: a.y - b.y,
+    };
+}
+
+export function angleBetweenPoints(a: Vector, b: Vector) {
+    return getDirectionAngle(subtract(a, b));
+}
+
 function alwaysPositiveMod(n: number, mod: number) {
     return ((n % mod) + mod) % mod;
 }
