@@ -12,7 +12,7 @@ import { DebugVector } from "./entities/debugvector";
 import { length } from "#src/vector.ts";
 import Boid from "./entities/boids/boid";
 import FlockingBoid from "./entities/boids/flockingboid";
-import { bgmBiome1, bgmBiome2, currentBgm, pressureDamageSFX1, switchBGM } from "./audio";
+import { bgmBiome1, bgmBiome2, currentBgm, pressureDamageSFX1, pressureDamageSFX2, switchBGM } from "./audio";
 import { screenshakeKeyframes } from "./screenshake";
 
 const fuelScale = 10;
@@ -184,6 +184,11 @@ export class GameManager {
         if (fuel <= 0) {
             const hp = gameManager.getGameState("hullPoints");
             gameManager.setGameState("hullPoints", hp - 0.002 * dt);
+            if (!pressureDamageSFX2.playing()) {
+                pressureDamageSFX2.play();
+            }
+        } else if (pressureDamageSFX2.playing()) {
+            pressureDamageSFX2.stop();
         }
     }
 
