@@ -2,7 +2,7 @@ import { gameManager } from "./GameManager";
 import { backgroundImage, wallsImage } from "./images";
 import { mousePosition, mousePositionGlobal } from "./input";
 import { wallLines } from "./collision";
-import { add, length, normalizeVector, scale, subtract } from "./vector";
+import { add, length, normalizeVector, scale, subtract, Vector } from "./vector";
 
 let canvas: HTMLCanvasElement;
 let context: CanvasRenderingContext2D | null;
@@ -31,6 +31,20 @@ function lockCameraBounds() {
     if (camera.y + visibleHeight / 2 > wallsImage.height) {
         camera.y = wallsImage.height - visibleHeight / 2;
     }
+}
+
+export function isPointOnScreen(point: Vector) {
+    if (!canvas) {
+        return false;
+    }
+    const halfVisibleWidth = canvas.width / camera.scale / 2;
+    const halfVisibleHeight = canvas.height / camera.scale / 2;
+    return (
+        camera.x - halfVisibleWidth < point.x &&
+        camera.x + halfVisibleWidth > point.x &&
+        camera.y - halfVisibleHeight < point.y &&
+        camera.y + halfVisibleHeight > point.y
+    );
 }
 
 export function mapMousePosition() {

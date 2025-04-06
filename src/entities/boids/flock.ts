@@ -6,6 +6,7 @@ import { mousePosition } from "#src/input.ts";
 import { accelerateFlockingBoids } from "./accelerate";
 import { Entity } from "../entity";
 import { gameManager } from "#src/GameManager.tsx";
+import { isPointOnScreen } from "#src/canvas.ts";
 
 export const BOID_TYPES = {
     FLOCKING_BOIDS: "flockingBoids",
@@ -15,6 +16,10 @@ export const BOID_TYPES = {
 export default class Flock extends Entity {
     public instances: FlockInstances;
     public settings: FlockSetting;
+
+    get children() {
+        return this.instances.flockingBoids;
+    }
 
     constructor(settings: FlockSetting) {
         super(settings.characteristics.roost.position.x, settings.characteristics.roost.position.y);
@@ -37,6 +42,10 @@ export default class Flock extends Entity {
         const characteristic = this.settings.characteristics["flockingBoids"];
         const diff = characteristic.count - instances.length;
         if (!diff) {
+            return;
+        }
+
+        if (isPointOnScreen(this)) {
             return;
         }
 

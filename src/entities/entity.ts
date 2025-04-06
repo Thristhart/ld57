@@ -1,10 +1,23 @@
-import { addMut, scale, scaleMut, Vector } from "#src/vector.ts";
+import { positionWallCollision, findClosestPoint } from "#src/collision.ts";
+import { add, addMut, copyMut, dot, length, normalizeVector, scale, scaleMut, subtract, Vector } from "#src/vector.ts";
 
 export class Entity {
     public x: number;
     public y: number;
     public radius: number = 50;
     public frictionRate: number = -0.003;
+    public bounceFactor: number = 1;
+    public grabbable = false;
+
+    public inventoryType: string | undefined;
+
+    public get children(): Entity[] {
+        return [];
+    }
+
+    public shouldCollideWithWall = false;
+
+    collisions: Array<{ start: Vector; end: Vector; normal: Vector; color: string }> = [];
 
     public id!: number;
 
@@ -30,9 +43,38 @@ export class Entity {
         if (Math.abs(this.velocity.y) < 0.001) {
             this.velocity.y = 0;
         }
+        const newPosition = add(this, this.velocity);
+
+        if (this.shouldCollideWithWall) {
+            this.collisions = positionWallCollision(newPosition, this.radius);
+            if (this.collisions.length === 0) {
+                copyMut(this, newPosition);
+            } else {
+                for (const col of this.collisions) {
+                    const closestPoint = findClosestPoint(col.start, col.end, this);
+                    const vectorToClosestPoint = subtract(closestPoint, this);
+                    const minimumDistanceVector = normalizeVector(vectorToClosestPoint);
+                    scaleMut(minimumDistanceVector, -this.radius);
+                    const newPosition = add(closestPoint, minimumDistanceVector);
+                    copyMut(this, newPosition);
+
+                    const bounceAmount = scale(col.normal, dot(this.velocity, col.normal) * 2);
+                    this.velocity = subtract(this.velocity, bounceAmount);
+                    if (length(this.velocity) < 4) {
+                        scaleMut(this.velocity, 1.2);
+                    }
+                    scaleMut(this.velocity, this.bounceFactor);
+                }
+            }
+        } else {
+            copyMut(this, newPosition);
+        }
     }
 
-    tick(dt: number) {}
+    tick(dt: number) {
+        this.kinematics(dt);
+        addMut(this, this.velocity);
+    }
 
     draw(context: CanvasRenderingContext2D) {
         context.fillStyle = "cornflowerblue";

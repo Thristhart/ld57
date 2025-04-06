@@ -5,27 +5,30 @@ import { BoidVector, Factor, SpawnConfig, SpawnSpotPattern } from "./types";
 import Flock from "./flock";
 import { redRectImage } from "#src/images.ts";
 import { getDirectionAngle } from "#src/vector.ts";
+import { Entity } from "../entity";
 
 const RAD = Math.PI / 180;
 const SWAY_DIRECTION = { CLOCKWISE: -1, COUNTERCLOCKWISE: 1 };
 
-export default class Boid {
+export default class Boid extends Entity {
     public width = 20;
     public height = 20;
     public color = "red";
     public swayFlapAngle = 0;
 
-    public position: BoidVector = { x: 0, y: 0 };
     public flock: Flock;
     public speed: BoidVector;
     public swayDirection: number;
     public swayAngle: number;
 
     constructor(config: SpawnConfig, flock: Flock) {
+        super(0, 0);
         this.flock = flock;
-        this.position = spawnPosition(config, this.flock.instances.flockingBoids);
-        vectorMutable.add(this.position, flock.settings.characteristics.roost.position);
-        this.speed = spawnSpeed(this.position, config);
+        const position = spawnPosition(config, this.flock.instances.flockingBoids);
+        this.x = position.x;
+        this.y = position.y;
+        vectorMutable.add(this, flock.settings.characteristics.roost.position);
+        this.speed = spawnSpeed(this, config);
         this.swayAngle = Math.floor(Math.random() * 30) - 15;
         this.swayDirection = Math.random() > 0.5 ? SWAY_DIRECTION.CLOCKWISE : SWAY_DIRECTION.COUNTERCLOCKWISE;
     }
@@ -53,7 +56,7 @@ export default class Boid {
 
     draw(context: CanvasRenderingContext2D) {
         context.save();
-        context.translate(this.position.x, this.position.y);
+        context.translate(this.x, this.y);
         const directionAngleRad = getDirectionAngle(this.speed);
         context.rotate(directionAngleRad + Math.PI / 2 + this.swayAngle * RAD);
         const gradient = context.createLinearGradient(

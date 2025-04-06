@@ -22,7 +22,7 @@ export function accelerateFlockingBoids(settings: FlockSetting, flockingBoids: F
 
 export function calcRoostForceFactor(flockingBoid: FlockingBoid) {
     const roostPosition = flockingBoid.flock.settings.characteristics.roost.position;
-    const flockingBoidPosition = flockingBoid.position;
+    const flockingBoidPosition = flockingBoid;
 
     const isOutOfRoost =
         vectorImmutable.squareDistance(flockingBoidPosition, roostPosition) >
@@ -51,7 +51,7 @@ export function calcAvoidHumanForceFactor(flockingBoid: FlockingBoid, mouse: Boi
     if (
         !mouse ||
         !checkIsCloseEnough(
-            flockingBoid.position,
+            flockingBoid,
             mouse,
             flockingBoid.flock.settings.forces.predatorAvoidance.distance / carelessnessRatio ** 2
         )
@@ -60,7 +60,7 @@ export function calcAvoidHumanForceFactor(flockingBoid: FlockingBoid, mouse: Boi
     }
 
     return {
-        force: vectorImmutable.subtract(flockingBoid.position, mouse),
+        force: vectorImmutable.subtract(flockingBoid, mouse),
         strength: flockingBoid.flock.settings.forces.predatorAvoidance.strength / carelessnessRatio,
     };
 }
@@ -68,16 +68,10 @@ export function calcAvoidHumanForceFactor(flockingBoid: FlockingBoid, mouse: Boi
 export function calcBoundaryForceFactor(flockingBoid: FlockingBoid) {
     const boundaryAvoidances: Factor[] = [];
     wallLines.forEach((wallLine) => {
-        const boundary = findClosestPoint(wallLine.start, wallLine.end, flockingBoid.position);
-        if (
-            checkIsCloseEnough(
-                flockingBoid.position,
-                boundary,
-                flockingBoid.flock.settings.forces.boundaryAvoidance.distance
-            )
-        ) {
-            gameManager.addDebugVector(flockingBoid.position, boundary, wallLine.color);
-            const force = normalizeVector(subtract(flockingBoid.position, boundary));
+        const boundary = findClosestPoint(wallLine.start, wallLine.end, flockingBoid);
+        if (checkIsCloseEnough(flockingBoid, boundary, flockingBoid.flock.settings.forces.boundaryAvoidance.distance)) {
+            gameManager.addDebugVector(flockingBoid, boundary, wallLine.color);
+            const force = normalizeVector(subtract(flockingBoid, boundary));
             boundaryAvoidances.push({
                 force,
                 strength: flockingBoid.flock.settings.forces.boundaryAvoidance.strength,
