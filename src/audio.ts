@@ -11,8 +11,8 @@ export function switchBGM(newBGM: Howl) {
     if (newBGM == currentBgm) {
         return;
     }
-    currentBgm?.fade(1, 0, 500);
-    newBGM.fade(0, 1, 500);
+    currentBgm?.fade(1, 0, 5000);
+    newBGM.fade(0, 1, 5000);
     const currentTimestamp = currentBgm?.seek();
     if (currentTimestamp !== undefined) {
         newBGM.seek(currentTimestamp);
