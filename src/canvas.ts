@@ -3,6 +3,7 @@ import { backgroundImage, wallsImage } from "./images";
 import { mousePosition, mousePositionGlobal } from "./input";
 import { wallLines } from "./collision";
 import { add, length, normalizeVector, scale, subtract, Vector } from "./vector";
+import { clamp } from "./util";
 
 let canvas: HTMLCanvasElement;
 let context: CanvasRenderingContext2D | null;
@@ -116,28 +117,36 @@ export function drawFrame(avgFrameLength: number) {
         ent.draw(context);
     }
 
-    const maskOpacity = Math.min(1, camera.y / (wallsImage.height / 2));
+    let maskOpacity = Math.min(1, camera.y / (wallsImage.height / 2));
+
+    let flashlightSize = 0.1;
+    if (gameManager.gameOverTimestamp) {
+        flashlightSize *= 1 - clamp((performance.now() - gameManager.gameOverTimestamp) / 400, 0, 1);
+        maskOpacity = clamp((performance.now() - gameManager.gameOverTimestamp) / 400, maskOpacity, 1);
+    }
+
     const darknessMaskColor = `rgba(0,0,0,${maskOpacity})`;
     const playerMaskColor = `rgba(0,0,0,${Math.min(maskOpacity - 0.5, 0.7)})`;
-
     const flashlightGradient = context.createConicGradient(
         gameManager.player.angle,
         gameManager.player.x,
         gameManager.player.y
     );
-    if (gameManager.getGameState("lightOn")) {
+    if (gameManager.getGameState("lightOn") && flashlightSize) {
         flashlightGradient.addColorStop(0, "transparent");
-        flashlightGradient.addColorStop(0.05, "transparent");
-        flashlightGradient.addColorStop(0.95, "transparent");
+        flashlightGradient.addColorStop(flashlightSize / 2, "transparent");
+        flashlightGradient.addColorStop(1 - flashlightSize / 2, "transparent");
         flashlightGradient.addColorStop(1, "transparent");
     }
 
-    flashlightGradient.addColorStop(0.1, darknessMaskColor);
-    flashlightGradient.addColorStop(0.9, darknessMaskColor);
+    flashlightGradient.addColorStop(flashlightSize, darknessMaskColor);
+    flashlightGradient.addColorStop(1 - flashlightSize, darknessMaskColor);
 
     context.fillStyle = flashlightGradient;
     context.fillRect(0, 0, wallsImage.width, wallsImage.height);
-    gameManager.player.draw(context);
+    if (!gameManager.gameOverTimestamp) {
+        gameManager.player.draw(context);
+    }
     const flashlightPlayerGradient = context.createConicGradient(
         gameManager.player.angle,
         gameManager.player.x + (Math.cos(gameManager.player.angle) * gameManager.player.radius) / 2,

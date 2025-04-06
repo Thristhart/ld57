@@ -1,5 +1,6 @@
 import { gameManager } from "./GameManager";
 import { wallsImage, wallsVectors } from "./images";
+import { clamp } from "./util";
 import { add, dot, isEqual, length, lengthSquared, normalizeVector, roundMut, scale, subtract, Vector } from "./vector";
 
 interface WallLine {
@@ -62,16 +63,6 @@ export function circleVsCircleCollision(a: Vector, aRadius: number, b: Vector, b
     const distance = length(subtract(b, a));
     const totalRadius = aRadius + bRadius;
     return totalRadius > distance;
-}
-
-function clamp(n: number, min: number, max: number) {
-    if (n < min) {
-        return min;
-    }
-    if (n > max) {
-        return max;
-    }
-    return n;
 }
 
 export function findClosestPoint(a: Vector, b: Vector, p: Vector) {

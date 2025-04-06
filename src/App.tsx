@@ -5,7 +5,7 @@ import { onMouseMove } from "./input";
 import { Fuel, Grabber, HullIntegrity, Inventory, LightSwitch, Message, UpgradeGUI, DepthMeter } from "./ui/components";
 import { TooltipRootProvider } from "./ui/Tooltip";
 
-function App({ loading }: { loading: boolean }) {
+function App({ loading, gameOver }: { loading: boolean; gameOver: boolean }) {
     return (
         <div className={"AppCtn"}>
             <div className={"LeftUI"}>
@@ -22,7 +22,13 @@ function App({ loading }: { loading: boolean }) {
                 onClick={() => gameManager.click()}
             />
             <RightUI />
-            {loading && <div className="LoadingSpinner">Loading...</div>}
+            {loading && <div className="LoadingSpinner Overlay">Loading...</div>}
+            {gameOver && (
+                <div className="LoadingSpinner Overlay">
+                    GAME OVER
+                    <button onClick={() => (location.href = location.href)}>Retry</button>
+                </div>
+            )}
         </div>
     );
 }

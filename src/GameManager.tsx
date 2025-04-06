@@ -2,7 +2,15 @@ import { length } from "#src/vector.ts";
 import React, { useSyncExternalStore } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { bgmBiome1, bgmBiome2, playCollisionSound, pressureDamageSFX1, pressureDamageSFX2, switchBGM } from "./audio";
+import {
+    bgmBiome1,
+    bgmBiome2,
+    playCollisionSound,
+    pressureDamageSFX1,
+    pressureDamageSFX2,
+    switchBGM,
+    youDied,
+} from "./audio";
 import Flock from "./entities/boids/flock";
 import FlockingBoid from "./entities/boids/flockingboid";
 import { DebugVector } from "./entities/debugvector";
@@ -42,13 +50,14 @@ export class GameManager {
     public player: Player;
 
     public loading = true;
+    public gameOverTimestamp: number | undefined;
 
     constructor() {
         const root = ReactDOM.createRoot(document.getElementById("root")!);
         const rootRender = () =>
             root.render(
                 <React.StrictMode>
-                    <App loading={this.loading} />
+                    <App loading={this.loading} gameOver={this.gameOverTimestamp !== undefined} />
                 </React.StrictMode>
             );
         this.rerenderUI = rootRender;
@@ -125,6 +134,9 @@ export class GameManager {
     }
 
     public tick(dt: number) {
+        if (this.gameOverTimestamp) {
+            return;
+        }
         for (const ent of this.getAllEntities()) {
             ent.tick(dt);
         }
@@ -181,8 +193,6 @@ export class GameManager {
             }
         }
 
-        // TODO: check for game over conditions
-        // no more hull points
         if (fuel <= 0) {
             const hp = this.getGameState("hullPoints");
             this.setGameState("hullPoints", hp - 0.002 * dt);
@@ -192,6 +202,15 @@ export class GameManager {
             }
         } else if (pressureDamageSFX2.playing()) {
             pressureDamageSFX2.stop();
+        }
+
+        const hp = gameManager.getGameState("hullPoints");
+        if (hp <= 0) {
+            this.gameOverTimestamp = performance.now();
+            pressureDamageSFX1.stop();
+            pressureDamageSFX2.stop();
+            youDied.play();
+            setTimeout(() => this.forceUpdate(), 1000);
         }
     }
 

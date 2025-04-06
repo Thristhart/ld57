@@ -37,3 +37,6 @@ export function playCollisionSound() {
     const sound = collisionSounds[Math.floor(Math.random() * collisionSounds.length)];
     sound.play();
 }
+
+import youDiedUrl from "#assets/fakesound_workspace/you_died.mp3";
+export const youDied = new Howl({ src: youDiedUrl });

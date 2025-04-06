@@ -7,15 +7,15 @@
     -   [ ] For upgrades
     -   [ ] For fuel
     -   [ ] For hull repair
--   [ ] Game over / retry / whatever
-    -   [ ] ... when your hull runs out
-    -   [ ] ... when your fuel runs out
-    -   [ ] ... when you go too deep
+-   [x] Game over / retry / whatever
+    -   [x] ... when your hull runs out
+    -   [x] ... when your fuel runs out
+    -   [x] ... when you go too deep
 -   [ ] Intro screen
 -   [ ] Different region art assets (wall image?)
 -   [ ] Music
 -   [ ] Sound effects
-    -   [ ] Bump into wall
+    -   [x] Bump into wall
     -   [ ] Maybe propulsion?
     -   [ ] Grabber thing
     -   as appropriate
