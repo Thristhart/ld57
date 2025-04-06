@@ -3,7 +3,7 @@ import { JSX, useRef } from "react";
 import "./components.css";
 import { CollectableMetadata, Upgrade } from "#src/gametypes.ts";
 import React from "react";
-import { collectablesMetadata, upgrades } from "#src/startstate.ts";
+import { CollectableName, collectablesMetadata, upgrades } from "#src/startstate.ts";
 import { ETooltipPosition, useTooltip } from "./Tooltip";
 
 export const DepthMeter = React.memo(() => {
@@ -122,7 +122,7 @@ export const Inventory = () => {
     const nodes: JSX.Element[] = [];
 
     for (let i = 0; i < maxInventoryAmount; i++) {
-        const inventoryItemName = filledInventorySlot[i];
+        const inventoryItemName = filledInventorySlot[i] as CollectableName;
         if (inventoryItemName) {
             const metaData = collectablesMetadata[inventoryItemName];
             if (metaData) {
