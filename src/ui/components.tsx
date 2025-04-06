@@ -48,7 +48,7 @@ export const HullIntegrity = () => {
             <div className="MeterHeader">{`HULL INTEGRITY`} </div>
             <div className="MeterContent">
                 <div className="MeterCurrent">
-                    <div>{`${hullPoints}/${maxHullPoints}`}</div>
+                    <div>{`${Math.floor(hullPoints)}/${maxHullPoints}`}</div>
                 </div>
                 <div className={"MeterFillCtn"}>
                     <div

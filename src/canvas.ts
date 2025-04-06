@@ -56,7 +56,7 @@ export function mapMousePosition() {
     mousePosition.y = ((mousePositionGlobal.y - rect.top) / rect.height) * visibleHeight + camera.y - visibleHeight / 2;
 }
 
-export function drawFrame() {
+export function drawFrame(avgFrameLength: number) {
     canvas ??= document.querySelector("canvas")!;
     if (!canvas) {
         return;
@@ -158,4 +158,7 @@ export function drawFrame() {
     context.fillRect(mousePosition.x - 2, mousePosition.y - 2, 4, 4);
 
     context.restore();
+    context.strokeStyle = "white";
+    context.font = "24px arial";
+    context.strokeText(`FPS: ${1 / (avgFrameLength / 1000)}`, 100, 100);
 }

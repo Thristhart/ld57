@@ -23,7 +23,6 @@ function loadVectorPaths(vectorURL: string) {
     let paths = [];
     const step1 = vectorURL.split("path");
     step1.splice(0, 1);
-    console.log(step1);
     for (const string of step1) {
         paths.push(string.split('"')[1]);
     }
