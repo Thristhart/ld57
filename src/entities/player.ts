@@ -39,6 +39,8 @@ export class Player extends Entity {
             if (InputState.get("d")) {
                 acceleration.x += 1;
             }
+        } else {
+            acceleration.y += 0.2;
         }
         acceleration = normalizeVector(acceleration);
         scaleMut(acceleration, dt * 0.001);

@@ -149,7 +149,7 @@ export class GameManager {
         this.setGameState("currentDepth", depth);
 
         // set the hull damage
-        if (this.player.collisions.length > 0) {
+        if (this.player.collisions.length > 0 && length(this.player.velocity) > 1) {
             const hullPoints = this.gameState.hullPoints;
             const damage = length(this.player.velocity);
             const newHullPoints = hullPoints - Math.floor(damage);
@@ -194,14 +194,7 @@ export class GameManager {
         }
 
         if (fuel <= 0) {
-            const hp = this.getGameState("hullPoints");
-            this.setGameState("hullPoints", hp - 0.002 * dt);
             this.setGameState("warning", "FUEL DEPLETED");
-            if (!pressureDamageSFX2.playing()) {
-                pressureDamageSFX2.play();
-            }
-        } else if (pressureDamageSFX2.playing()) {
-            pressureDamageSFX2.stop();
         }
 
         const hp = gameManager.getGameState("hullPoints");
