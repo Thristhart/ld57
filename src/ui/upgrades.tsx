@@ -7,7 +7,7 @@ import { CollectableName, collectablesMetadata } from "#src/startstate.ts";
 
 import ownedImageUrl from "#assets/ui_elements/skilltree_blocks/skilltree_block_owned.png";
 import unlockableImageUrl from "#assets/ui_elements/skilltree_blocks/skilltree_block_available.png";
-import needsMaterialsImageUrl from "#assets/ui_elements/skilltree_blocks/skilltree_block_needsItems.png";
+import needsMaterialsImageUrl from "#assets/ui_elements/skilltree_blocks/skilltree_block_needsitems.png";
 import lockedImageUrl from "#assets/ui_elements/skilltree_blocks/skilltree_block_locked.png";
 import leftClickImageUrl from "#assets/ui_elements/left_click.png";
 

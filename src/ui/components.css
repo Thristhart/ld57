@@ -50,16 +50,29 @@
     border-radius: 3px;
 }
 
-.IndividualMessage {
-    padding-bottom: 24px;
-}
-
 .MessageBG {
     position: absolute;
     top: 24px;
     bottom: 24px;
     left: 20px;
     right: 20px;
-    height: 95%;
+    height: 90%;
     width: 95%;
+}
+
+.IndividualMessage {
+    padding-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.MessageText {
+    align-self: flex-start;
+}
+
+.MessageImage {
+    height: 30%;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
 }

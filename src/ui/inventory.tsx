@@ -49,7 +49,7 @@ const InventoryItem = (props: { inventoryIndex: number; metadata: CollectableMet
         const seenMaterials = gameManager.getGameState("seenMaterials");
         if (!seenMaterials.has(collectableName)) {
             seenMaterials.add(collectableName);
-            gameManager.addGameStateMessage(storyMessage);
+            gameManager.addGameStateMessage({ text: storyMessage, image: imageUrl });
             gameManager.addGameStateSeenMaterial(collectableName);
         }
     }, [name, storyMessage]);

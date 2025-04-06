@@ -1,4 +1,4 @@
-import { CollectableName, collectablesMetadata, upgrades } from "./startstate";
+import { CollectableName, upgrades } from "./startstate";
 
 export interface GameUpgradeLevels {
     depthUpgradeLevel: number;
@@ -11,6 +11,10 @@ export interface GameUpgradeLevels {
 }
 
 export type UpgradeType = keyof GameUpgradeLevels;
+export interface Message {
+    text: string;
+    image?: string;
+}
 
 export interface GameState extends GameUpgradeLevels {
     fuelPoints: number;
@@ -21,7 +25,7 @@ export interface GameState extends GameUpgradeLevels {
     seenMaterials: Set<CollectableName>;
 
     upgrades: { [type: string]: Array<(typeof upgrades)[keyof typeof upgrades][number]> };
-    messageList: string[];
+    messageList: Message[];
     warning: string;
 }
 

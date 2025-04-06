@@ -71,6 +71,7 @@
 .UnlockedIcon {
     position: absolute;
     font-size: 42px;
+    z-index: 1;
 }
 
 .UpgradeCanUnlock {
@@ -87,17 +88,20 @@
 @keyframes pulse-animation {
     0% {
         opacity: 0;
+        filter: brightness(1);
     }
     50% {
         opacity: 0.5;
+        filter: brightness(1.5);
     }
     100% {
         opacity: 0;
+        filter: brightness(1);
     }
 }
 
 .PurchasedTooltip {
-    z-index: 12;
+    z-index: 99;
     background-color: white;
     padding: 4px;
 }
@@ -108,6 +112,8 @@
     flex-direction: column;
     padding: 4px;
     gap: 4px;
+    z-index: 99;
+    position: relative;
 }
 
 .UpgradeTooltipDesc {

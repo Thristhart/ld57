@@ -16,7 +16,7 @@ import FlockingBoid from "./entities/boids/flockingboid";
 import { DebugVector } from "./entities/debugvector";
 import { Entity } from "./entities/entity";
 import { Player } from "./entities/player";
-import { GameState, GameUpgradeLevels } from "./gametypes";
+import { GameState, GameUpgradeLevels, Message } from "./gametypes";
 import { screenshakeKeyframes } from "./screenshake";
 import { CollectableName, defaultGameState, flockList, upgrades } from "./startstate";
 import { Vector } from "./vector";
@@ -93,7 +93,7 @@ export class GameManager {
         this.stateChangeSubscriptions.get(property)?.forEach((callback) => callback());
     }
 
-    public addGameStateMessage(value: string): void {
+    public addGameStateMessage(value: Message): void {
         const messages = this.gameState.messageList;
         this.gameState.messageList = [...messages, value];
         this.stateChangeSubscriptions.get("messageList")?.forEach((callback) => callback());
