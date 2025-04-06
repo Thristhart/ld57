@@ -70,10 +70,13 @@ export const collectablesList: CollectableConfig[] = [
 
 export const flockList: FlockSetting[] = [exampleFlock];
 
+import ironImageUrl from "#assets/ocean_objects/minerals/iron_ore.png";
+import cuteFishImageUrl from "#assets/ocean_objects/fish/cute_fish_1.png";
+
 export const collectablesMetadata = {
     iron: {
         name: "iron",
-        imageUrl: "./assets/ocean_objects/minerals/iron_ore.png",
+        imageUrl: ironImageUrl,
         description: "a chunk of iron ore",
         fuelPoints: 0,
         hullPoints: 20,
@@ -81,7 +84,7 @@ export const collectablesMetadata = {
     },
     cuteFish: {
         name: "cuteFish",
-        imageUrl: "./assets/ocean_objects/fish/cute_fish_1.png",
+        imageUrl: cuteFishImageUrl,
         description: "almost too cute to subsume",
         fuelPoints: 20,
         hullPoints: 0,

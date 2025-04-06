@@ -6,6 +6,11 @@ import React from "react";
 import { CollectableName, collectablesMetadata, upgrades } from "#src/startstate.ts";
 import { ETooltipPosition, useTooltip } from "./Tooltip";
 
+import depthMarkerImageUrl from "#assets/ui_elements/DepthMarker.png";
+import messageBoxImageUrl from "#assets/ui_elements/MessageBlock.png";
+import leftClickImageUrl from "#assets/ui_elements/left_click.png";
+import rightClickImageUrl from "#assets/ui_elements/right_click.png";
+
 export const DepthMeter = React.memo(() => {
     const currentDepth = useGameStateValue("currentDepth");
     const maxDepth = useUpgradedMaxValue("depthUpgradeLevel");
@@ -17,7 +22,7 @@ export const DepthMeter = React.memo(() => {
                 <div className="MeterCurrent">
                     <div>{`${currentDepth} m`}</div>
                 </div>
-                <img className={"MeterBGImage"} src={"./assets/ui_elements/DepthMarker.png"} />
+                <img className={"MeterBGImage"} src={depthMarkerImageUrl} />
                 <MeterArrow
                     className={"MeterArrow"}
                     style={{ top: `calc(${arrowPosition}% - 30px)`, color: arrowPosition > 80 ? "red" : "#217B9C" }}
@@ -56,7 +61,7 @@ export const HullIntegrity = () => {
                         style={{ height: `${percent}%`, backgroundColor: percent < 20 ? "red" : "#217B9C" }}
                     />
                 </div>
-                <img className={"MeterBGImage"} src={"./assets/ui_elements/DepthMarker.png"} />
+                <img className={"MeterBGImage"} src={depthMarkerImageUrl} />
             </div>
         </div>
     );
@@ -79,7 +84,7 @@ export const Fuel = React.memo(() => {
                         style={{ height: `${percent}%`, backgroundColor: percent < 20 ? "red" : "#217B9C" }}
                     />
                 </div>
-                <img className={"MeterBGImage"} src={"./assets/ui_elements/DepthMarker.png"} />
+                <img className={"MeterBGImage"} src={depthMarkerImageUrl} />
             </div>
         </div>
     );
@@ -110,7 +115,7 @@ export const Message = () => {
                     return <div className={"IndividualMessage"}>{message}</div>;
                 })}
             </div>
-            <img className={"MessageBG"} src={"./assets/ui_elements/MessageBlock.png"} />
+            <img className={"MessageBG"} src={messageBoxImageUrl} />
         </div>
     );
 };
@@ -146,19 +151,19 @@ const InventoryItem = (props: { inventoryIndex: number; metadata: CollectableMet
             <div className={"itemDescription"}>{description}</div>
             {!!fuelPoints && (
                 <div className={"inventoryAction"}>
-                    <img height={20} width={16} src={"./assets/ui_elements/left_click.png"}></img>
+                    <img height={20} width={16} src={leftClickImageUrl}></img>
                     <div className={"itemFuel"}>{`Add Fuel (${fuelPoints}) `}</div>
                 </div>
             )}
             {!!hullPoints && (
                 <div className={"inventoryAction"}>
-                    <img height={20} width={16} src={"./assets/ui_elements/left_click.png"}></img>
+                    <img height={20} width={16} src={leftClickImageUrl}></img>
                     <div className={"itemHull"}>{`Repair Hull (${hullPoints})`}</div>
                 </div>
             )}
             <div>
                 <div className={"inventoryAction"}>
-                    <img height={20} width={16} src={"./assets/ui_elements/right_click.png"}></img>
+                    <img height={20} width={16} src={rightClickImageUrl}></img>
                     <div>{`Delete`}</div>
                 </div>
             </div>
@@ -253,10 +258,11 @@ function UpgradePath(props: { category: string; upgrades: Upgrade[] }) {
     );
 }
 
+import skillTreeBlockLockedUrl from "#/assets/ui_elements/skilltree_blocks/skilltree_block_locked.png";
 function LockedUpgrade() {
     return (
         <div className={"UpgradeItem"}>
-            <img height={100} width={100} src={"./assets/ui_elements/skilltree_blocks/skilltree_block_locked.png"} />
+            <img height={100} width={100} src={skillTreeBlockLockedUrl} />
         </div>
     );
 }
