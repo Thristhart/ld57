@@ -1,5 +1,5 @@
 import { findClosestPoint, positionWallCollision } from "#src/collision.ts";
-import { gameManager } from "#src/GameManager.tsx";
+import { gameManager, useUpgradedMaxValue } from "#src/GameManager.tsx";
 import { playerImage1 } from "#src/images.ts";
 import { InputState, mousePosition } from "#src/input.ts";
 import {
@@ -30,7 +30,7 @@ export class Player extends Entity {
     }
     tick(dt: number): void {
         let acceleration: Vector = { x: 0, y: 0 };
-        let fuel = gameManager.getGameState("fuelPoints");
+        const fuel = gameManager.getGameState("fuelPoints");
         if (fuel > 0) {
             if (InputState.get("w")) {
                 acceleration.y += -1;
@@ -45,8 +45,14 @@ export class Player extends Entity {
                 acceleration.x += 1;
             }
         } else {
-            let hp = gameManager.getGameState("hullPoints");
+            const hp = gameManager.getGameState("hullPoints");
             gameManager.setGameState("hullPoints", hp - 0.002 * dt);
+        }
+
+        const depth = gameManager.getGameState("currentDepth");
+        if (depth > gameManager.getUpgradedMaxValue("depthUpgradeLevel")) {
+            const hp = gameManager.getGameState("hullPoints");
+            gameManager.setGameState("hullPoints", hp - 0.02 * dt);
         }
         acceleration = normalizeVector(acceleration);
         scaleMut(acceleration, dt * 0.001);
