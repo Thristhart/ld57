@@ -156,9 +156,6 @@ export function drawFrame(avgFrameLength: number) {
     context.closePath();
     context.fill();
 
-    context.fillStyle = "pink";
-    context.fillRect(mousePosition.x - 2, mousePosition.y - 2, 4, 4);
-
     context.restore();
     context.strokeStyle = "white";
     context.font = "24px arial";
