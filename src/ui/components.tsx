@@ -5,12 +5,30 @@ import { Upgrade } from "#src/gametypes.ts";
 
 export const DepthMeter = () => {
     const currentDepth = gameManager.getGameState("currentDepth");
-    const maxDepth = gameManager.getUpgradedMaxValue("depthUpgradeLevel");
+    const maxDepth = gameManager.getUpgradedMaxValue("depthUpgradeLevel") as number;
+    const arrowPosition = (currentDepth / maxDepth) * 95;
     return (
-        <div>
-            <div>{`CURRENT DEPTH: ${currentDepth}m`} </div>
-            <div>{`MAX DEPTH: ${maxDepth}m`} </div>
+        <div className="DepthMeter">
+            <div className="DepthHeader">{`CURRENT DEPTH`} </div>
+            <div className="DepthContent">
+                <div className="DepthCurrent">
+                    <div>{`${currentDepth} m`}</div>
+                </div>
+                <img className={"DepthMeterBG"} src={"./assets/ui_elements/DepthMarker.png"} />
+                <DepthArrow
+                    className={"DepthArrow"}
+                    style={{ top: `calc(${arrowPosition}% - 30px)`, color: arrowPosition > 80 ? "darkred" : "green" }}
+                />
+            </div>
         </div>
+    );
+};
+
+export const DepthArrow = (props: { style: React.CSSProperties; className: string }) => {
+    return (
+        <svg width="65" height="61" viewBox="0 0 65 61" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+            <path d="M65 30.5L0 0V61L65 30.5Z" fill="currentColor" fill-opacity="0.7" />
+        </svg>
     );
 };
 
@@ -18,14 +36,14 @@ export const HullIntegrity = () => {
     const hullPoints = gameManager.getGameState("hullPoints");
     const maxHullPoints = gameManager.getUpgradedMaxValue("hullUpgradeLevel");
 
-    return <div>{`Hull Integrity: ${hullPoints}/${maxHullPoints}`}</div>;
+    return <div className="HullIntegrity">{`Hull Integrity: ${hullPoints}/${maxHullPoints}`}</div>;
 };
 
 export const Fuel = () => {
     const fuelPoints = gameManager.getGameState("fuelPoints");
     const maxFuelPoints = gameManager.getUpgradedMaxValue("fuelUpgradeLevel");
 
-    return <div>{`Current Fuel: ${fuelPoints}/${maxFuelPoints}`}</div>;
+    return <div className="Fuel">{`Current Fuel: ${fuelPoints}/${maxFuelPoints}`}</div>;
 };
 
 export const LightSwitch = () => {
@@ -34,10 +52,18 @@ export const LightSwitch = () => {
         gameManager.setGameState("lightOn", !isLightOn);
     };
     return (
-        <div>
+        <div className="Light">
             Lights: <input checked={isLightOn} type="checkbox" onChange={onChange} />
         </div>
     );
+};
+
+export const Grabber = () => {
+    return <div className="Grabber"></div>;
+};
+
+export const Message = () => {
+    return <div className="Message"></div>;
 };
 
 export const Inventory = () => {

@@ -23,3 +23,85 @@
     min-width: 100px;
     border: 2px solid navy;
 }
+
+.DepthMeter {
+    padding: 20px;
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    display: flex;
+    flex-direction: column;
+}
+
+.DepthHeader {
+    height: 30px;
+}
+
+.DepthContent {
+    position: relative;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.DepthCurrent {
+    position: absolute;
+    z-index: 12;
+    width: 100%;
+    text-align: center;
+}
+
+.DepthMeterBG {
+    position: absolute;
+    top: -6px;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+}
+
+.DepthArrow {
+    position: absolute;
+    left: 11px;
+    z-index: 11;
+    color: green;
+}
+
+.HullIntegrity {
+    background: orange;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.Fuel {
+    background: blue;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.Light {
+    background: pink;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 3;
+}
+
+.Grabber {
+    background: green;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 3;
+}
+
+.Message {
+    background: purple;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 4;
+    grid-row-end: 9;
+}

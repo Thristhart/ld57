@@ -12,7 +12,7 @@ export const exampleFlock = {
         },
         avoidance: {
             distance: 0.0001,
-            strength: 0.5,
+            strength: 0.05,
         },
         cohesion: {
             distance: 0.02,
@@ -23,7 +23,7 @@ export const exampleFlock = {
             strength: 1,
         },
         boundaryAvoidance: {
-            distance: 0.01,
+            distance: 0.00001,
             strength: 0.1,
         },
         roosting: {
