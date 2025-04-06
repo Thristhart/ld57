@@ -1,19 +1,17 @@
+import { length } from "#src/vector.ts";
 import React, { useSyncExternalStore } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import { bgmBiome1, bgmBiome2, playCollisionSound, pressureDamageSFX1, pressureDamageSFX2, switchBGM } from "./audio";
+import Flock from "./entities/boids/flock";
+import FlockingBoid from "./entities/boids/flockingboid";
+import { DebugVector } from "./entities/debugvector";
 import { Entity } from "./entities/entity";
 import { Player } from "./entities/player";
 import { GameState, GameUpgradeLevels } from "./gametypes";
-import { collectablesList, defaultGameState, flockList, upgrades } from "./startstate";
-import { Collectable } from "./entities/collectable";
-import Flock from "./entities/boids/flock";
-import { Vector } from "./vector";
-import { DebugVector } from "./entities/debugvector";
-import { length } from "#src/vector.ts";
-import Boid from "./entities/boids/boid";
-import FlockingBoid from "./entities/boids/flockingboid";
-import { bgmBiome1, bgmBiome2, currentBgm, pressureDamageSFX1, pressureDamageSFX2, switchBGM } from "./audio";
 import { screenshakeKeyframes } from "./screenshake";
+import { defaultGameState, flockList, upgrades } from "./startstate";
+import { Vector } from "./vector";
 
 const fuelScale = 10;
 let nextEntId = 0;
@@ -142,6 +140,7 @@ export class GameManager {
             const damage = length(this.player.velocity);
             const newHullPoints = hullPoints - Math.floor(damage);
             this.setGameState("hullPoints", newHullPoints);
+            playCollisionSound();
         }
 
         const fuel = this.gameState.fuelPoints;
