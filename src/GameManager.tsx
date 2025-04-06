@@ -45,7 +45,7 @@ export class GameManager {
     private rerenderUI: () => void = () => {};
     private gameState: GameState = defaultGameState;
     public maxPixelHeight: number = 0;
-    public maxDepth = 400;
+    public maxDepth = 200;
     private mapEntities = new Map<number, Entity>();
     public player: Player;
 
@@ -173,6 +173,10 @@ export class GameManager {
             switchBGM(bgmBiome2);
         }
 
+        if (fuel <= 0) {
+            this.setGameState("warning", "FUEL DEPLETED");
+        }
+
         if (depth > gameManager.getUpgradedMaxValue("depthUpgradeLevel")) {
             this.setGameState("warning", "MAXIMUM DEPTH EXCEEDED");
             if (!pressureDamageSFX1.playing()) {
@@ -191,10 +195,6 @@ export class GameManager {
             if (pressureDamageSFX1.playing()) {
                 pressureDamageSFX1.stop();
             }
-        }
-
-        if (fuel <= 0) {
-            this.setGameState("warning", "FUEL DEPLETED");
         }
 
         const hp = gameManager.getGameState("hullPoints");
