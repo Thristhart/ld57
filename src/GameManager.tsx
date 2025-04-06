@@ -37,7 +37,7 @@ export class GameManager {
     private rerenderUI: () => void = () => {};
     private gameState: GameState = defaultGameState;
     public maxPixelHeight: number = 0;
-    public maxDepth = 500;
+    public maxDepth = 400;
     private mapEntities = new Map<number, Entity>();
     public player: Player;
 

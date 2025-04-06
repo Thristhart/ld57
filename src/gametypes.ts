@@ -1,13 +1,13 @@
-import { upgrades } from "./startstate";
+import { CollectableName, upgrades } from "./startstate";
 
 export interface GameUpgradeLevels {
-    fuelUpgradeLevel: number;
-    hullUpgradeLevel: number;
     depthUpgradeLevel: number;
     inventoryUpgradeLevel: number;
-    grabberUpgradeLevel: number;
-    lightUpgradeLevel: number;
-    speedUpgradeLevel: number;
+    fuelUpgradeLevel: number;
+    hullUpgradeLevel: number;
+    // grabberUpgradeLevel: number;
+    // lightUpgradeLevel: number;
+    // speedUpgradeLevel: number;
 }
 
 export interface GameState extends GameUpgradeLevels {
@@ -16,6 +16,7 @@ export interface GameState extends GameUpgradeLevels {
     lightOn: boolean;
     currentDepth: number;
     inventory: string[];
+    seenMaterials: Set<CollectableName>;
 
     upgrades: { [type: string]: Array<(typeof upgrades)[keyof typeof upgrades][number]> };
     messageList: string[];
