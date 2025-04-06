@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { findClosestPoint, wallLines } from "#src/collision.ts";
 import { gameManager } from "#src/GameManager.tsx";
-import { scale, scaleMut } from "#src/vector.ts";
+import { normalizeVector, scale, scaleMut, subtract } from "#src/vector.ts";
 import Boid from "./boid";
 import FlockingBoid from "./flockingboid";
 import { BoidVector, Factor, FlockSetting } from "./types";
@@ -77,8 +77,9 @@ export function calcBoundaryForceFactor(flockingBoid: FlockingBoid) {
             )
         ) {
             gameManager.addDebugVector(flockingBoid.position, boundary, wallLine.color);
+            const force = normalizeVector(subtract(flockingBoid.position, boundary));
             boundaryAvoidances.push({
-                force: scale(boundary, 1),
+                force,
                 strength: flockingBoid.flock.settings.forces.boundaryAvoidance.strength,
             });
         }

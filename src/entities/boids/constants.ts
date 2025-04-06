@@ -20,7 +20,7 @@ export const exampleFlock = {
         },
         boundaryAvoidance: {
             distance: 2,
-            strength: 10,
+            strength: 100,
         },
         roosting: {
             distance: 20,
