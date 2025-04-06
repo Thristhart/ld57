@@ -1,10 +1,10 @@
-import FlockingBoid from "./flockingboid";
-import Predator from "./predator";
-import { move, mutableFilter } from "./utils";
-import { BoidVector, FlockInstances, FlockSetting, SpawnConfig } from "./types";
-import { mousePosition } from "#src/input.ts";
-import { accelerateFlockingBoids } from "./accelerate";
+import { gameManager } from "#src/GameManager.tsx";
+import { isPointOnScreen } from "#src/canvas.ts";
 import { Entity } from "../entity";
+import { accelerateFlockingBoids } from "./accelerate";
+import FlockingBoid from "./flockingboid";
+import { FlockInstances, FlockSetting, SpawnConfig } from "./types";
+import { move, mutableFilter } from "./utils";
 
 export const BOID_TYPES = {
     FLOCKING_BOIDS: "flockingBoids",
@@ -13,24 +13,25 @@ export const BOID_TYPES = {
 
 export default class Flock extends Entity {
     public instances: FlockInstances;
-    public mouse: BoidVector;
     public settings: FlockSetting;
 
+    get children() {
+        return this.instances.flockingBoids;
+    }
+
     constructor(settings: FlockSetting) {
-        super(settings.x, settings.y);
+        super(settings.characteristics.roost.position.x, settings.characteristics.roost.position.y);
         this.instances = {
             flockingBoids: [],
         };
-        this.mouse = mousePosition;
         this.settings = settings;
     }
 
     tick() {
         const flockingBoids = this.instances.flockingBoids;
 
-        this.mouse = mousePosition;
         this.populateFlock();
-        accelerateFlockingBoids(this.settings, flockingBoids, this.mouse);
+        accelerateFlockingBoids(this.settings, flockingBoids, gameManager.player);
         move(flockingBoids, this.settings);
     }
 
@@ -39,6 +40,10 @@ export default class Flock extends Entity {
         const characteristic = this.settings.characteristics["flockingBoids"];
         const diff = characteristic.count - instances.length;
         if (!diff) {
+            return;
+        }
+
+        if (isPointOnScreen(this)) {
             return;
         }
 

@@ -3,6 +3,7 @@ import * as vectorMutable from "./vectorMutable";
 import { FlockingForce, FlockSetting, SpawnConfig } from "./types";
 import Boid from "./boid";
 import Flock from "./flock";
+import { CollectableName } from "#src/startstate.ts";
 
 export default class FlockingBoid extends Boid {
     public flockingForces: FlockingForce = {
@@ -11,9 +12,11 @@ export default class FlockingBoid extends Boid {
         cohesion: { x: 0, y: 0 },
     };
     public carelessnessRatio: number = 0;
+    public grabbable = true;
+    public inventoryType: CollectableName = "cuteFish";
 
     static calcFlockingForces(settings: FlockSetting, boids: FlockingBoid[], callback: (boids: FlockingBoid) => void) {
-        const actualBoids = boids.sort(({ position: { x: aX } }, { position: { x: bX } }) => {
+        const actualBoids = boids.sort(({ x: aX }, { x: bX }) => {
             return aX - bX;
         });
         const maxInfluenceDistance = Math.max(
@@ -28,7 +31,7 @@ export default class FlockingBoid extends Boid {
             currentBoid.resetFlockingForces();
             for (let j = firstCloseEnoughBoidIndex; j < i; j += 1) {
                 const influencingBoid = actualBoids[j];
-                if (currentBoid.position.x - influencingBoid.position.x <= maxInfluenceDistance) {
+                if (currentBoid.x - influencingBoid.x <= maxInfluenceDistance) {
                     currentBoid.accumulateFlockingForces(influencingBoid, settings);
                 } else {
                     firstCloseEnoughBoidIndex += 1;
@@ -36,7 +39,7 @@ export default class FlockingBoid extends Boid {
             }
             for (let j = i + 1; j < length; j += 1) {
                 const influencingBoid = actualBoids[j];
-                if (influencingBoid.position.x - currentBoid.position.x <= maxInfluenceDistance) {
+                if (influencingBoid.x - currentBoid.x <= maxInfluenceDistance) {
                     currentBoid.accumulateFlockingForces(influencingBoid, settings);
                 } else {
                     break;
@@ -50,7 +53,7 @@ export default class FlockingBoid extends Boid {
         super(config, flock);
         this.resetFlockingForces();
         this.carelessnessRatio = 1 + Math.random();
-        this.swayFlapAngle = 15;
+        this.swayFlapAngle = 30;
     }
 
     resetFlockingForces() {
@@ -70,13 +73,13 @@ export default class FlockingBoid extends Boid {
             },
         } = settings;
 
-        const boidsDistance = vectorImmutable.squareDistance(this.position, influencingBoid.position);
+        const boidsDistance = vectorImmutable.squareDistance(this, influencingBoid);
 
         if (boidsDistance < avoidanceDistance) {
             vectorMutable.add(
                 this.flockingForces.avoidance,
                 vectorMutable.multiply(
-                    vectorImmutable.subtract(this.position, influencingBoid.position),
+                    vectorImmutable.subtract(this, influencingBoid),
                     calcAvoidanceRatio(boidsDistance, avoidanceDistance)
                 )
             );
@@ -87,10 +90,7 @@ export default class FlockingBoid extends Boid {
         }
 
         if (boidsDistance < cohesionDistance) {
-            vectorMutable.add(
-                this.flockingForces.cohesion,
-                vectorImmutable.subtract(influencingBoid.position, this.position)
-            );
+            vectorMutable.add(this.flockingForces.cohesion, vectorImmutable.subtract(influencingBoid, this));
         }
     }
 

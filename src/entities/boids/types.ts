@@ -1,3 +1,4 @@
+import { CollectableName } from "#src/startstate.ts";
 import Boid from "./boid";
 import FlockingBoid from "./flockingboid";
 import Predator from "./predator";
@@ -51,10 +52,7 @@ export interface FlockInstances {
 }
 
 export interface FlockSetting {
-    x: number;
-    y: number;
-    height: number;
-    width: number;
+    flockType: CollectableName;
     forces: {
         alignment: {
             distance: number;

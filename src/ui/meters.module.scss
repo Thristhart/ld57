@@ -1,0 +1,99 @@
+.MeterHeader {
+    height: 30px;
+    width: 100%;
+    text-align: center;
+}
+
+.MeterContent {
+    position: relative;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.MeterCurrent {
+    position: absolute;
+    z-index: 12;
+    top: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+.MeterBGImage {
+    position: absolute;
+    top: -6px;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+}
+
+.MeterFillCtn {
+    position: absolute;
+    bottom: 12px;
+    top: -26px;
+    width: 75%;
+    margin: 20px;
+    height: 95%;
+    position: relative;
+}
+
+.MeterFill {
+    position: absolute;
+    bottom: 0;
+    opacity: 0.75;
+    z-index: 12;
+    width: 100%;
+}
+
+.MeterArrow {
+    position: absolute;
+    left: 11px;
+    z-index: 11;
+    color: green;
+}
+
+.DepthMax {
+    position: absolute;
+    bottom: 24px;
+    z-index: 12;
+    width: 100%;
+    text-align: center;
+}
+
+.MaxMeterHeader {
+    z-index: 12;
+    width: 100%;
+    text-align: center;
+}
+
+.DepthMeter {
+    padding: 20px;
+    padding-bottom: 0px;
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    display: flex;
+    flex-direction: column;
+}
+
+.HullIntegrity {
+    padding: 20px;
+    padding-bottom: 0px;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    display: flex;
+    flex-direction: column;
+}
+
+.Fuel {
+    padding: 20px;
+    padding-bottom: 0px;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 4;
+    display: flex;
+    flex-direction: column;
+}

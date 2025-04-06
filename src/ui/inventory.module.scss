@@ -1,0 +1,56 @@
+.InventorySection {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 24px;
+    padding-top: 34px;
+}
+
+.InventoryHeader {
+    font-size: 32px;
+}
+
+.inventoryCtn {
+    height: 200px;
+    width: 500px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 8px;
+}
+
+.unlockedInventory {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("./assets/ui_elements/inventory_box2.png");
+    background-size: 100px;
+}
+
+.lockedInventory {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("./assets/ui_elements/inventory_box1.png");
+    background-size: 100px;
+}
+.inventoryItem {
+    cursor: pointer;
+}
+
+.itemTooltip {
+    padding: 8px;
+    font-size: 20px;
+    background: white;
+}
+
+.inventoryAction {
+    display: flex;
+    gap: 4px;
+}

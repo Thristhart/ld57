@@ -23,7 +23,6 @@ function loadVectorPaths(vectorURL: string) {
     let paths = [];
     const step1 = vectorURL.split("path");
     step1.splice(0, 1);
-    console.log(step1);
     for (const string of step1) {
         paths.push(string.split('"')[1]);
     }
@@ -48,6 +47,9 @@ export const redRectImage = loadImage(redRectImageUrl);
 
 import backgroundImageUrl from "../assets/ocean_background.png";
 export const backgroundImage = loadImage(backgroundImageUrl);
+
+import cuteFish1ImageUrl from "../assets/ocean_objects/fish/cute_fish_1.png";
+export const cuteFish1Image = loadImage(cuteFish1ImageUrl);
 
 let resolveImageLoad: () => void;
 export const imageLoadPromise = new Promise<void>((resolve) => {

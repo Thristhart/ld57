@@ -1,51 +1,52 @@
-import { findClosestPoint, positionWallCollision } from "#src/collision.ts";
 import { gameManager } from "#src/GameManager.tsx";
 import { playerImage1 } from "#src/images.ts";
 import { InputState, mousePosition } from "#src/input.ts";
 import {
-    add,
     addMut,
     angleBetweenPoints,
     angleDistance,
     copyMut,
-    getDirectionAngle,
     normalizeVector,
-    scaleMut,
-    Vector,
-    dot,
     scale,
+    scaleMut,
     subtract,
-    length,
+    Vector,
 } from "#src/vector.ts";
 import { Entity } from "./entity";
+import { Grabber } from "./grabber";
 
 export class Player extends Entity {
     public radius = 50;
     public angle = 0;
     public rotationSpeed = 0.01;
-    public currentPokeLength = 0;
-    public maxPokeLength = 150;
+    public shouldCollideWithWall = true;
     constructor(x: number, y: number) {
         super(x, y);
     }
-
-    collisions: Array<{ start: Vector; end: Vector; normal: Vector; color: string }> = [];
     tick(dt: number): void {
         let acceleration: Vector = { x: 0, y: 0 };
-        if (InputState.get("w")) {
-            acceleration.y += -1;
-        }
-        if (InputState.get("s")) {
-            acceleration.y += 1;
-        }
-        if (InputState.get("a")) {
-            acceleration.x -= 1;
-        }
-        if (InputState.get("d")) {
-            acceleration.x += 1;
+        const fuel = gameManager.getGameState("fuelPoints");
+        if (fuel > 0 || localStorage.getItem("noclip")) {
+            if (InputState.get("w")) {
+                acceleration.y += -1;
+            }
+            if (InputState.get("s")) {
+                acceleration.y += 1;
+            }
+            if (InputState.get("a")) {
+                acceleration.x -= 1;
+            }
+            if (InputState.get("d")) {
+                acceleration.x += 1;
+            }
+        } else {
+            acceleration.y += 0.2;
         }
         acceleration = normalizeVector(acceleration);
         scaleMut(acceleration, dt * 0.001);
+        if (localStorage.getItem("noclip")) {
+            scaleMut(acceleration, 4);
+        }
         copyMut(this.acceleration, acceleration);
 
         this.kinematics(dt);
@@ -66,31 +67,10 @@ export class Player extends Entity {
         } else {
             this.angle -= angleTick;
         }
-
-        const newPosition = add(this, this.velocity);
-        this.collisions = positionWallCollision(newPosition, this.radius);
-        if (this.collisions.length === 0) {
-            copyMut(this, newPosition);
-        } else {
-            for (const col of this.collisions) {
-                const closestPoint = findClosestPoint(col.start, col.end, this);
-                const vectorToClosestPoint = subtract(closestPoint, this);
-                const minimumDistanceVector = normalizeVector(vectorToClosestPoint);
-                scaleMut(minimumDistanceVector, -this.radius);
-                const newPosition = add(closestPoint, minimumDistanceVector);
-                copyMut(this, newPosition);
-
-                this.velocity = subtract(this.velocity, scale(col.normal, dot(this.velocity, col.normal) * 2));
-                if (length(this.velocity) < 4) {
-                    scaleMut(this.velocity, 1.2);
-                }
-            }
-        }
     }
     draw(context: CanvasRenderingContext2D) {
-        let drawAngle = this.angle;
         let flip = false;
-        if (drawAngle > Math.PI / 2 && drawAngle < Math.PI * 1.5) {
+        if (this.angle > Math.PI / 2 && this.angle < Math.PI * 1.5) {
             flip = true;
         }
         context.save();
@@ -101,11 +81,44 @@ export class Player extends Entity {
         }
         context.drawImage(playerImage1.bitmap, -this.radius, -this.radius);
 
-        if (this.currentPokeLength) {
-            context.rotate(0.2);
-            context.fillStyle = "black";
-            context.fillRect(this.radius, 0, this.currentPokeLength, 10);
-        }
         context.restore();
+
+        if (this.grabber) {
+            this.calcGrabberEmitPoint();
+            context.strokeStyle = "black";
+            context.lineWidth = 6;
+
+            context.beginPath();
+            context.moveTo(this.grabberEmitPoint!.x, this.grabberEmitPoint!.y);
+            context.lineTo(this.grabber.x, this.grabber.y);
+            context.closePath();
+            context.stroke();
+        }
+    }
+    calcGrabberEmitPoint() {
+        let flip = false;
+        if (this.angle > Math.PI / 2 && this.angle < Math.PI * 1.5) {
+            flip = true;
+        }
+        let emitPointAngleAdjustment = 0.35 * (flip ? -1 : 1);
+        const emitPointDistance = this.radius - 1;
+        this.grabberEmitPoint = {
+            x: this.x + Math.cos(this.angle + emitPointAngleAdjustment) * emitPointDistance,
+            y: this.y + Math.sin(this.angle + emitPointAngleAdjustment) * emitPointDistance,
+        };
+    }
+    grabber: Grabber | undefined;
+    grabberEmitPoint: Vector | undefined;
+    emitGrabber() {
+        this.calcGrabberEmitPoint();
+        const emitVector = normalizeVector(subtract(mousePosition, this));
+        this.grabber = gameManager.addEntity(new Grabber(this.grabberEmitPoint!.x, this.grabberEmitPoint!.y));
+        this.grabber.velocity = scale(emitVector, 2);
+        addMut(this.grabber.velocity, this.velocity);
+    }
+    retractGrabber() {
+        if (this.grabber) {
+            this.grabber.retracting = true;
+        }
     }
 }

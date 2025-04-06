@@ -2,26 +2,24 @@ import { gameManager } from "./GameManager";
 import { backgroundImage, wallsImage } from "./images";
 import { mousePosition, mousePositionGlobal } from "./input";
 import { wallLines } from "./collision";
-import { add, length, normalizeVector, scale, subtract } from "./vector";
+import { add, length, normalizeVector, scale, subtract, Vector } from "./vector";
+import { clamp } from "./util";
 
 let canvas: HTMLCanvasElement;
 let context: CanvasRenderingContext2D | null;
-
-let width = 1080;
-let height = 1920;
 
 const camera = { x: 0, y: 0, scale: 1 };
 
 function lockCameraBounds() {
     const visibleWidth = canvas.width / camera.scale;
     const visibleHeight = canvas.height / camera.scale;
-    // left
-    if (camera.x - visibleWidth / 2 < 0) {
-        camera.x = visibleWidth / 2;
-    }
     // right
     if (camera.x + visibleWidth / 2 > wallsImage.width) {
         camera.x = wallsImage.width - visibleWidth / 2;
+    }
+    // left
+    if (camera.x - visibleWidth / 2 < 0) {
+        camera.x = visibleWidth / 2;
     }
     // top
     if (camera.y - visibleHeight / 2 < 0) {
@@ -33,6 +31,20 @@ function lockCameraBounds() {
     }
 }
 
+export function isPointOnScreen(point: Vector) {
+    if (!canvas) {
+        return false;
+    }
+    const halfVisibleWidth = canvas.width / camera.scale / 2;
+    const halfVisibleHeight = canvas.height / camera.scale / 2;
+    return (
+        camera.x - halfVisibleWidth < point.x &&
+        camera.x + halfVisibleWidth > point.x &&
+        camera.y - halfVisibleHeight < point.y &&
+        camera.y + halfVisibleHeight > point.y
+    );
+}
+
 export function mapMousePosition() {
     const visibleWidth = canvas.width / camera.scale;
     const visibleHeight = canvas.height / camera.scale;
@@ -42,7 +54,7 @@ export function mapMousePosition() {
     mousePosition.y = ((mousePositionGlobal.y - rect.top) / rect.height) * visibleHeight + camera.y - visibleHeight / 2;
 }
 
-export function drawFrame() {
+export function drawFrame(avgFrameLength: number) {
     canvas ??= document.querySelector("canvas")!;
     if (!canvas) {
         return;
@@ -75,6 +87,28 @@ export function drawFrame() {
 
     context.drawImage(wallsImage.bitmap, 0, 0, wallsImage.width, wallsImage.height);
 
+    if (localStorage.getItem("debug")) {
+        context.lineWidth = 20;
+        for (const line of wallLines) {
+            context.strokeStyle = line.color;
+            context.beginPath();
+            context.moveTo(line.start.x, line.start.y);
+            context.lineTo(line.end.x, line.end.y);
+            context.closePath();
+            context.stroke();
+
+            context.strokeStyle = "pink";
+            context.beginPath();
+            const diff = subtract(line.end, line.start);
+            const center = add(line.start, scale(normalizeVector(diff), length(diff) / 2));
+            const normalDisplay = scale(line.normal, 50);
+            context.moveTo(center.x, center.y);
+            context.lineTo(center.x + normalDisplay.x, center.y + normalDisplay.y);
+            context.closePath();
+            context.stroke();
+        }
+    }
+
     for (const ent of gameManager.getAllEntities()) {
         if (ent === gameManager.player) {
             // skip so we can draw later with the flashlight
@@ -83,48 +117,36 @@ export function drawFrame() {
         ent.draw(context);
     }
 
-    context.lineWidth = 20;
-    for (const line of wallLines) {
-        context.strokeStyle = line.color;
-        context.beginPath();
-        context.moveTo(line.start.x, line.start.y);
-        context.lineTo(line.end.x, line.end.y);
-        context.closePath();
-        context.stroke();
+    let maskOpacity = Math.min(1, gameManager.player.y / (wallsImage.height / 2));
 
-        context.strokeStyle = "pink";
-        context.beginPath();
-        const diff = subtract(line.end, line.start);
-        const center = add(line.start, scale(normalizeVector(diff), length(diff) / 2));
-        const normalDisplay = scale(line.normal, 50);
-        context.moveTo(center.x, center.y);
-        context.lineTo(center.x + normalDisplay.x, center.y + normalDisplay.y);
-        context.closePath();
-        context.stroke();
+    let flashlightSize = 0.1;
+    if (gameManager.gameOverTimestamp) {
+        flashlightSize *= 1 - clamp((performance.now() - gameManager.gameOverTimestamp) / 400, 0, 1);
+        maskOpacity = clamp((performance.now() - gameManager.gameOverTimestamp) / 400, maskOpacity, 1);
     }
 
-    const maskOpacity = Math.min(1, camera.y / (wallsImage.height / 2));
     const darknessMaskColor = `rgba(0,0,0,${maskOpacity})`;
     const playerMaskColor = `rgba(0,0,0,${Math.min(maskOpacity - 0.5, 0.7)})`;
-
     const flashlightGradient = context.createConicGradient(
         gameManager.player.angle,
         gameManager.player.x,
         gameManager.player.y
     );
-    if (gameManager.getGameState("lightOn")) {
+    if (gameManager.getGameState("lightOn") && flashlightSize) {
         flashlightGradient.addColorStop(0, "transparent");
-        flashlightGradient.addColorStop(0.05, "transparent");
-        flashlightGradient.addColorStop(0.95, "transparent");
+        flashlightGradient.addColorStop(flashlightSize / 2, "transparent");
+        flashlightGradient.addColorStop(1 - flashlightSize / 2, "transparent");
         flashlightGradient.addColorStop(1, "transparent");
     }
 
-    flashlightGradient.addColorStop(0.1, darknessMaskColor);
-    flashlightGradient.addColorStop(0.9, darknessMaskColor);
+    flashlightGradient.addColorStop(flashlightSize, darknessMaskColor);
+    flashlightGradient.addColorStop(1 - flashlightSize, darknessMaskColor);
 
     context.fillStyle = flashlightGradient;
     context.fillRect(0, 0, wallsImage.width, wallsImage.height);
-    gameManager.player.draw(context);
+    if (!gameManager.gameOverTimestamp) {
+        gameManager.player.draw(context);
+    }
     const flashlightPlayerGradient = context.createConicGradient(
         gameManager.player.angle,
         gameManager.player.x + (Math.cos(gameManager.player.angle) * gameManager.player.radius) / 2,
@@ -140,8 +162,29 @@ export function drawFrame() {
     context.closePath();
     context.fill();
 
-    context.fillStyle = "pink";
-    context.fillRect(mousePosition.x - 2, mousePosition.y - 2, 4, 4);
+    let warning = gameManager.getGameState("warning");
+    if (warning) {
+        let x = gameManager.player.x;
+        let y = gameManager.player.y - gameManager.player.radius - 10;
+
+        context.strokeStyle = "red";
+        context.font = `bold 36pt "Jersey 25"`;
+
+        x -= context.measureText(warning).width / 2;
+
+        context.fillStyle = "red";
+        context.fillText(warning, x, y);
+    }
 
     context.restore();
+
+    if (localStorage.getItem("debug")) {
+        context.fillStyle = "white";
+        context.font = "24px arial";
+        context.fillText(`FPS: ${Math.floor(1 / (avgFrameLength / 1000))}`, 100, 100);
+
+        context.fillStyle = "pink";
+
+        context.fillText(`${Math.floor(mousePosition.x)}, ${Math.floor(mousePosition.y)}`, 100, 300);
+    }
 }

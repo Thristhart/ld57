@@ -3,33 +3,36 @@ import * as vectorMutable from "./vectorMutable";
 import { spawnPosition, spawnSpeed } from "./utils";
 import { BoidVector, Factor, SpawnConfig, SpawnSpotPattern } from "./types";
 import Flock from "./flock";
-import { redRectImage } from "#src/images.ts";
+import { cuteFish1Image, redRectImage } from "#src/images.ts";
+import { getDirectionAngle } from "#src/vector.ts";
+import { Entity } from "../entity";
 
 const RAD = Math.PI / 180;
 const SWAY_DIRECTION = { CLOCKWISE: -1, COUNTERCLOCKWISE: 1 };
 
-export default class Boid {
-    public width = 20;
-    public height = 20;
-    public color = "red";
+export default class Boid extends Entity {
+    radius = 30;
     public swayFlapAngle = 0;
 
-    public position: BoidVector = { x: 0, y: 0 };
     public flock: Flock;
     public speed: BoidVector;
     public swayDirection: number;
     public swayAngle: number;
 
     constructor(config: SpawnConfig, flock: Flock) {
+        super(0, 0);
         this.flock = flock;
-        this.position = spawnPosition(config, this.flock.instances.flockingBoids);
-        this.speed = spawnSpeed(this.position, config);
+        const position = spawnPosition(config, this.flock.instances.flockingBoids);
+        this.x = position.x;
+        this.y = position.y;
+        vectorMutable.add(this, flock.settings.characteristics.roost.position);
+        this.speed = spawnSpeed(this, config);
         this.swayAngle = Math.floor(Math.random() * 30) - 15;
         this.swayDirection = Math.random() > 0.5 ? SWAY_DIRECTION.CLOCKWISE : SWAY_DIRECTION.COUNTERCLOCKWISE;
     }
 
     sway() {
-        this.swayAngle += (this.swayDirection * this.swayFlapAngle) / 2;
+        this.swayAngle += (this.swayDirection * this.swayFlapAngle) / 100;
         if (this.swayAngle > this.swayFlapAngle) {
             this.swayDirection = SWAY_DIRECTION.CLOCKWISE;
         } else if (this.swayAngle < -this.swayFlapAngle) {
@@ -51,13 +54,19 @@ export default class Boid {
 
     draw(context: CanvasRenderingContext2D) {
         context.save();
-        context.translate(
-            this.position.x * this.flock.settings.width + this.flock.x,
-            this.position.y * this.flock.settings.height + this.flock.y
-        );
-        const directionAngleRad = (Math.PI / 2 - Math.acos(this.speed.x)) / 1.5;
-        context.rotate(Math.PI / 2 - directionAngleRad + this.swayAngle * RAD);
-        context.drawImage(redRectImage, -this.width / 2, -this.height / 2);
+        context.translate(this.x, this.y);
+        const directionAngleRad = getDirectionAngle(this.speed);
+        let flip = false;
+        if (directionAngleRad > Math.PI / 2 && directionAngleRad < Math.PI * 1.5) {
+            flip = true;
+        }
+        context.rotate(directionAngleRad - Math.PI + this.swayAngle * RAD);
+        if (flip) {
+            context.scale(1, -1);
+        }
+
+        context.drawImage(cuteFish1Image, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
+
         context.restore();
     }
 }

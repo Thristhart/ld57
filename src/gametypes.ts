@@ -1,12 +1,16 @@
+import { CollectableName, collectablesMetadata, upgrades } from "./startstate";
+
 export interface GameUpgradeLevels {
-    fuelUpgradeLevel: number;
-    hullUpgradeLevel: number;
     depthUpgradeLevel: number;
     inventoryUpgradeLevel: number;
-    grabberUpgradeLevel: number;
-    lightUpgradeLevel: number;
-    speedUpgradeLevel: number;
+    fuelUpgradeLevel: number;
+    hullUpgradeLevel: number;
+    // grabberUpgradeLevel: number;
+    // lightUpgradeLevel: number;
+    // speedUpgradeLevel: number;
 }
+
+export type UpgradeType = keyof GameUpgradeLevels;
 
 export interface GameState extends GameUpgradeLevels {
     fuelPoints: number;
@@ -14,14 +18,16 @@ export interface GameState extends GameUpgradeLevels {
     lightOn: boolean;
     currentDepth: number;
     inventory: string[];
+    seenMaterials: Set<CollectableName>;
 
-    upgrades: { [type: string]: Upgrade[] };
+    upgrades: { [type: string]: Array<(typeof upgrades)[keyof typeof upgrades][number]> };
+    messageList: string[];
+    warning: string;
 }
 
 export interface Upgrade {
     upgradeValue: number | string;
     materials: { [matType: string]: number };
-    isVisible: boolean;
     description: string;
 }
 
@@ -32,4 +38,13 @@ export interface CollectableConfig {
     width: number;
     height: number;
     image: HTMLImageElement;
+}
+
+export interface CollectableMetadata {
+    name: string;
+    imageUrl: string;
+    description: string;
+    fuelPoints: number;
+    hullPoints: number;
+    storyMessage: string;
 }

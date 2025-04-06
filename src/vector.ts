@@ -24,6 +24,7 @@ export function length(vector: Vector) {
 export function scaleMut(vector: Vector, scalar: number) {
     vector.x *= scalar;
     vector.y *= scalar;
+    return vector;
 }
 export function scale(vector: Vector, scalar: number) {
     return { x: vector.x * scalar, y: vector.y * scalar };

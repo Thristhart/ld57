@@ -1,0 +1,22 @@
+-   [x] Grabber
+-   [ ] Things to grab
+    -   [ ] Fish
+    -   [ ] Collectables
+    -   [ ] Story things
+-   [x] Grabbed things go in inventory
+    -   [ ] For upgrades
+    -   [ ] For fuel
+    -   [ ] For hull repair
+-   [x] Game over / retry / whatever
+    -   [x] ... when your hull runs out
+    -   [x] ... when your fuel runs out
+    -   [x] ... when you go too deep
+-   [ ] Intro screen
+-   [ ] Different region art assets (wall image?)
+-   [ ] Music
+-   [ ] Sound effects
+    -   [x] Bump into wall
+    -   [ ] Maybe propulsion?
+    -   [ ] Grabber thing
+    -   as appropriate
+-   [ ] Right hand panels design

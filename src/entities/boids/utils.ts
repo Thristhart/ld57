@@ -40,7 +40,7 @@ export function spawnPosition(spawnConfig: SpawnConfig, boidInstances: Boid[]) {
             break;
         case SpawnSpotPattern.NEAR:
             const buddy = boidInstances[Math.floor(Math.random() * boidInstances.length)];
-            spotPosition = buddy ? { ...buddy.position } : randomSpotPosition();
+            spotPosition = buddy ? { x: buddy.x, y: buddy.y } : randomSpotPosition();
             break;
         case SpawnSpotPattern.RANDOM:
         default:
@@ -115,8 +115,8 @@ function randomSpotPosition(): BoidVector {
 export function move(boids: Boid[], settings: FlockSetting) {
     const speedRatio = settings.characteristics.flockingBoids.speedRatio;
     for (let i = 0; i < boids.length; i += 1) {
-        boids[i].position.x = Math.min(boids[i].position.x + speedRatio * boids[i].speed.x, 1);
-        boids[i].position.y = Math.min(boids[i].position.y + speedRatio * boids[i].speed.y, 1);
+        boids[i].x = boids[i].x + speedRatio * boids[i].speed.x;
+        boids[i].y = boids[i].y + speedRatio * boids[i].speed.y;
         boids[i].sway();
     }
 }

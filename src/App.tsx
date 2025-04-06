@@ -1,19 +1,17 @@
+import { useRef } from "react";
 import "./App.css";
 import { gameManager } from "./GameManager";
+import { TooltipRootProvider } from "./ui/Tooltip";
+import { Inventory } from "./ui/inventory";
 import { onMouseMove } from "./input";
-import { DepthMeter, Fuel, Grabber, HullIntegrity, Inventory, LightSwitch, Message, UpgradeGUI } from "./ui/components";
+import { Message, LightSwitch, Grabber } from "./ui/components";
+import { DepthMeter, HullIntegrity, Fuel } from "./ui/meters";
+import { UpgradeGUI } from "./ui/upgrades";
 
-function App({ loading }: { loading: boolean }) {
+function App({ loading, gameOver }: { loading: boolean; gameOver: boolean }) {
     return (
-        <>
-            <div className={"LeftUI"}>
-                <DepthMeter />
-                <HullIntegrity />
-                <Fuel />
-                <LightSwitch />
-                <Grabber />
-                <Message />
-            </div>
+        <div className={"AppCtn"}>
+            <LeftUI />
             <canvas
                 className={"Center"}
                 width={1080}
@@ -21,12 +19,40 @@ function App({ loading }: { loading: boolean }) {
                 onPointerMove={onMouseMove}
                 onClick={() => gameManager.click()}
             />
-            <div className={"RightUI"}>
+            <RightUI />
+            {loading && <div className="LoadingSpinner Overlay">Loading...</div>}
+            {gameOver && (
+                <div className="LoadingSpinner Overlay">
+                    GAME OVER
+                    <button onClick={() => (location.href = location.href)}>Retry</button>
+                </div>
+            )}
+        </div>
+    );
+}
+
+function LeftUI() {
+    return (
+        <div className={"LeftUI"}>
+            <DepthMeter />
+            <HullIntegrity />
+            <Fuel />
+            <Message />
+        </div>
+    );
+}
+
+function RightUI() {
+    const rootRef = useRef<HTMLDivElement>(null);
+    return (
+        <TooltipRootProvider rootRef={rootRef}>
+            <div ref={rootRef} className={"RightUI"}>
+                <LightSwitch />
+                <Grabber />
                 <Inventory />
                 <UpgradeGUI />
             </div>
-            {loading && <div className="LoadingSpinner">Loading...</div>}
-        </>
+        </TooltipRootProvider>
     );
 }
 

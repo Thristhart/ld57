@@ -1,124 +1,57 @@
-import { exampleFlock } from "./entities/boids/constants";
+import { baseFlock } from "./entities/boids/constants";
 import { FlockSetting } from "./entities/boids/types";
-import { CollectableConfig, GameState, Upgrade } from "./gametypes";
+import { CollectableConfig, CollectableMetadata, GameState, Upgrade } from "./gametypes";
 import { redRectImage } from "./images";
 
-export const upgrades: { [type: string]: Upgrade[] } = {
-    fuelUpgradeLevel: [
-        { description: "increases max fuel to 100", upgradeValue: 100, materials: {}, isVisible: true },
-        { description: "increases max fuel to 200", upgradeValue: 200, materials: { sand: 1 }, isVisible: true },
-        {
-            description: "increases max fuel to 300",
-            upgradeValue: 300,
-            materials: { copper: 1, sand: 1 },
-            isVisible: false,
-        },
-        {
-            description: "increases max fuel to 400",
-            upgradeValue: 400,
-            materials: { copper: 2, sand: 2 },
-            isVisible: false,
-        },
-    ],
-    speedUpgradeLevel: [
-        { description: "increases max fuel to 400", upgradeValue: 10, materials: {}, isVisible: true },
-        { description: "increases max fuel to 400", upgradeValue: 20, materials: { sand: 1 }, isVisible: false },
-        {
-            description: "increases max fuel to 400",
-            upgradeValue: 30,
-            materials: { copper: 1, sand: 1 },
-            isVisible: false,
-        },
-        {
-            description: "increases max fuel to 400",
-            upgradeValue: 40,
-            materials: { copper: 2, sand: 2 },
-            isVisible: false,
-        },
-    ],
-    hullUpgradeLevel: [
-        { description: "increases max fuel to 400", upgradeValue: 100, materials: {}, isVisible: true },
-        { description: "increases max fuel to 400", upgradeValue: 200, materials: { sand: 1 }, isVisible: false },
-        {
-            description: "increases max fuel to 400",
-            upgradeValue: 300,
-            materials: { copper: 1, sand: 1 },
-            isVisible: false,
-        },
-        {
-            description: "increases max fuel to 400",
-            upgradeValue: 400,
-            materials: { copper: 2, sand: 2 },
-            isVisible: false,
-        },
-    ],
+export const upgrades = {
     depthUpgradeLevel: [
-        { description: "increases max fuel to 400", upgradeValue: 100, materials: {}, isVisible: true },
-        { description: "increases max fuel to 400", upgradeValue: 200, materials: { sand: 1 }, isVisible: false },
+        { description: "Max Depth 100m", upgradeValue: 100, materials: {} },
+        { description: "Max Depth 200m", upgradeValue: 200, materials: { cuteFish: 1 } },
         {
-            description: "increases max fuel to 400",
+            description: "Max Depth 300m",
             upgradeValue: 300,
-            materials: { copper: 1, sand: 1 },
-            isVisible: false,
+            materials: { cuteFish: 1, iron: 1 },
         },
         {
-            description: "increases max fuel to 400",
+            description: "Max Depth 300m",
             upgradeValue: 400,
-            materials: { copper: 2, sand: 2 },
-            isVisible: false,
+            materials: { iron: 2, cuteFish: 2 },
         },
     ],
     inventoryUpgradeLevel: [
-        { description: "increases max fuel to 400", upgradeValue: 3, materials: {}, isVisible: true },
-        { description: "increases max fuel to 400", upgradeValue: 5, materials: { sand: 1 }, isVisible: false },
+        { description: "3 slots", upgradeValue: 3, materials: {} },
+        { description: "5 slots", upgradeValue: 5, materials: { sand: 1 } },
         {
-            description: "increases max fuel to 400",
+            description: "10 slots",
             upgradeValue: 10,
             materials: { copper: 1, sand: 1 },
-            isVisible: false,
         },
     ],
-    lightUpgradeLevel: [
-        { description: "increases max fuel to 400", upgradeValue: "small cone", materials: {}, isVisible: true },
-        {
-            description: "increases max fuel to 400",
-            upgradeValue: "medium cone",
-            materials: { sand: 1 },
-            isVisible: false,
-        },
-        {
-            description: "increases max fuel to 400",
-            upgradeValue: "angler fish",
-            materials: { copper: 1, sand: 1 },
-            isVisible: false,
-        },
-    ],
-    grabberUpgradeLevel: [
-        { description: "increases max fuel to 400", upgradeValue: "short", materials: {}, isVisible: true },
-        { description: "increases max fuel to 400", upgradeValue: "long", materials: { sand: 1 }, isVisible: false },
-        {
-            description: "increases max fuel to 400",
-            upgradeValue: "tentacle",
-            materials: { copper: 1, sand: 1 },
-            isVisible: false,
-        },
-    ],
-};
+    fuelUpgradeLevel: [{ description: "", upgradeValue: 100, materials: {} }],
+    hullUpgradeLevel: [{ description: "", upgradeValue: 100, materials: {} }],
+} as const satisfies { [type: string]: Upgrade[] };
 
 export const defaultGameState: GameState = {
+    depthUpgradeLevel: 0,
+    inventoryUpgradeLevel: 1,
     fuelUpgradeLevel: 0,
     hullUpgradeLevel: 0,
-    depthUpgradeLevel: 0,
-    inventoryUpgradeLevel: 0,
-    grabberUpgradeLevel: 0,
-    lightUpgradeLevel: 0,
-    speedUpgradeLevel: 0,
+
+    // grabberUpgradeLevel: 0,
+    // lightUpgradeLevel: 0,
+    // speedUpgradeLevel: 0,
     fuelPoints: 100,
     hullPoints: 100,
     lightOn: true,
     currentDepth: 0,
-    inventory: [],
+    inventory: ["iron", "iron"],
     upgrades: upgrades,
+    seenMaterials: new Set(),
+    messageList: [
+        "A scientist who had been a close and trusted colleague of yours for many years went on a solo deep sea exploration in a state of the art Neo Human Interface Submarine one year ago. Back in college, where you were roommates, the two of you dreamed about creating such a vessel. Building another one by yourself was a difficult endeavor. It was much easier to work alongside them. You have your own Neo Human Interface Submarine now. It's time to rescue your partner.",
+        "The Neo Human Interface Submarine is a state of the art vessel capable of adapting to hostile environments by subsuming local resources for the purpose of self modification. It's also finally done! I couldn't resist taking it for a quick little dive. I'm sure my colleague will understand. Now let's get to cataloging what sorts of materials are available to me down here.",
+    ],
+    warning: "",
 };
 
 export const collectablesList: CollectableConfig[] = [
@@ -132,4 +65,43 @@ export const collectablesList: CollectableConfig[] = [
     },
 ];
 
-export const flockList: FlockSetting[] = [exampleFlock];
+function makeFlock(flockType: CollectableName, position: Vector): FlockSetting {
+    return {
+        ...baseFlock,
+        flockType,
+        characteristics: {
+            ...baseFlock.characteristics,
+            roost: {
+                ...baseFlock.characteristics.roost,
+                position,
+            },
+        },
+    };
+}
+
+export const flockList: FlockSetting[] = [makeFlock("cuteFish", { x: 2000, y: 600 })];
+
+import ironImageUrl from "#assets/ocean_objects/minerals/iron_ore.png";
+import cuteFishImageUrl from "#assets/ocean_objects/fish/cute_fish_1.png";
+import { Vector } from "./vector";
+
+export const collectablesMetadata = {
+    iron: {
+        name: "iron",
+        imageUrl: ironImageUrl,
+        description: "a chunk of iron ore",
+        fuelPoints: 0,
+        hullPoints: 20,
+        storyMessage: "can fix or upgrade the sub",
+    },
+    cuteFish: {
+        name: "cuteFish",
+        imageUrl: cuteFishImageUrl,
+        description: "almost too cute to subsume",
+        fuelPoints: 20,
+        hullPoints: 0,
+        storyMessage: "fish are fuel not food",
+    },
+} as const satisfies { [name: string]: CollectableMetadata };
+
+export type CollectableName = keyof typeof collectablesMetadata;

@@ -1,87 +1,3 @@
-.inventoryCtn {
-    display: flex;
-    padding: 8px;
-}
-
-.inventorySlot {
-    height: 40px;
-    width: 40px;
-    border: 2px solid blue;
-}
-
-.UpgradeGroup {
-    padding: 8px;
-}
-
-.UpgradeList {
-    display: flex;
-    gap: 24px;
-}
-
-.UpgradeItem {
-    width: 100px;
-    min-width: 100px;
-    border: 2px solid navy;
-}
-
-.DepthMeter {
-    padding: 20px;
-    grid-column-start: 1;
-    grid-column-end: 1;
-    grid-row-start: 1;
-    grid-row-end: 4;
-    display: flex;
-    flex-direction: column;
-}
-
-.DepthHeader {
-    height: 30px;
-}
-
-.DepthContent {
-    position: relative;
-    flex-grow: 1;
-    overflow: hidden;
-}
-
-.DepthCurrent {
-    position: absolute;
-    z-index: 12;
-    width: 100%;
-    text-align: center;
-}
-
-.DepthMeterBG {
-    position: absolute;
-    top: -6px;
-    z-index: 10;
-    width: 100%;
-    height: 100%;
-}
-
-.DepthArrow {
-    position: absolute;
-    left: 11px;
-    z-index: 11;
-    color: green;
-}
-
-.HullIntegrity {
-    background: orange;
-    grid-column-start: 2;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 2;
-}
-
-.Fuel {
-    background: blue;
-    grid-column-start: 2;
-    grid-column-end: 4;
-    grid-row-start: 2;
-    grid-row-end: 3;
-}
-
 .Light {
     background: pink;
     grid-column-start: 2;
@@ -99,9 +15,51 @@
 }
 
 .Message {
-    background: purple;
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start: 4;
     grid-row-end: 9;
+    position: relative;
+}
+
+.MessageContent {
+    position: absolute;
+    top: 24px;
+    bottom: 24px;
+    left: 20px;
+    right: 20px;
+    z-index: 10;
+    margin: 48px 36px 48px 48px;
+    overflow-y: auto;
+    --sb-track-color: #091a2d;
+    --sb-thumb-color: #165369;
+    --sb-size: 14px;
+}
+
+.MessageContent::-webkit-scrollbar {
+    width: var(--sb-size);
+}
+
+.MessageContent::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 3px;
+}
+
+.MessageContent::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 3px;
+}
+
+.IndividualMessage {
+    padding-bottom: 24px;
+}
+
+.MessageBG {
+    position: absolute;
+    top: 24px;
+    bottom: 24px;
+    left: 20px;
+    right: 20px;
+    height: 95%;
+    width: 95%;
 }
