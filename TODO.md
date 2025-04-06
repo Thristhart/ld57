@@ -1,9 +1,9 @@
--   [ ] Grabber
+-   [x] Grabber
 -   [ ] Things to grab
     -   [ ] Fish
     -   [ ] Collectables
     -   [ ] Story things
--   [ ] Grabbed things go in inventory
+-   [x] Grabbed things go in inventory
     -   [ ] For upgrades
     -   [ ] For fuel
     -   [ ] For hull repair
