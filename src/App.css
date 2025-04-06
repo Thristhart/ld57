@@ -17,10 +17,22 @@ html,
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    overflow: auto;
+}
+
+.AppCtn {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .LeftUI {
     width: 600px;
+    min-width: 600px;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -30,7 +42,7 @@ html,
     color: white;
 }
 
-.DepthMeter {
+.MeterBG {
     grid-column-start: 1;
     grid-column-end: 1;
     grid-row-start: 1;
@@ -42,6 +54,7 @@ html,
 
 .RightUI {
     width: 600px;
+    min-width: 600px;
     height: 100%;
     display: flex;
     flex-direction: column;

@@ -2,32 +2,33 @@ import { gameManager } from "#src/GameManager.tsx";
 import { JSX } from "react";
 import "./components.css";
 import { Upgrade } from "#src/gametypes.ts";
+import React from "react";
 
-export const DepthMeter = () => {
-    const currentDepth = gameManager.getGameState("currentDepth");
-    const maxDepth = gameManager.getUpgradedMaxValue("depthUpgradeLevel") as number;
+export const DepthMeter = React.memo((props: { currentDepth: number; maxDepth: number }) => {
+    const { currentDepth, maxDepth } = props;
     const arrowPosition = (currentDepth / maxDepth) * 95;
     return (
         <div className="DepthMeter">
-            <div className="DepthHeader">{`CURRENT DEPTH`} </div>
-            <div className="DepthContent">
-                <div className="DepthCurrent">
+            <div className="MeterHeader">{`CURRENT DEPTH`} </div>
+            <div className="MeterContent">
+                <div className="MeterCurrent">
                     <div>{`${currentDepth} m`}</div>
                 </div>
-                <img className={"DepthMeterBG"} src={"./assets/ui_elements/DepthMarker.png"} />
-                <DepthArrow
-                    className={"DepthArrow"}
+                <img className={"MeterBGImage"} src={"./assets/ui_elements/DepthMarker.png"} />
+                <MeterArrow
+                    className={"MeterArrow"}
                     style={{ top: `calc(${arrowPosition}% - 30px)`, color: arrowPosition > 80 ? "red" : "#217B9C" }}
                 />
                 <div className="DepthMax">
-                    <div>{`MAX ${maxDepth} M`}</div>
+                    <div>{`${maxDepth} m`}</div>
                 </div>
             </div>
+            <div className="MaxMeterHeader">{`MAX DEPTH`} </div>
         </div>
     );
-};
+});
 
-export const DepthArrow = (props: { style: React.CSSProperties; className: string }) => {
+const MeterArrow = (props: { style: React.CSSProperties; className: string }) => {
     return (
         <svg width="65" height="61" viewBox="0 0 65 61" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
             <path d="M65 30.5L0 0V61L65 30.5Z" fill="currentColor" fill-opacity="0.7" />
@@ -35,19 +36,49 @@ export const DepthArrow = (props: { style: React.CSSProperties; className: strin
     );
 };
 
-export const HullIntegrity = () => {
-    const hullPoints = gameManager.getGameState("hullPoints");
-    const maxHullPoints = gameManager.getUpgradedMaxValue("hullUpgradeLevel");
+export const HullIntegrity = React.memo((props: { hullPoints: number; maxHullPoints: number }) => {
+    const { hullPoints, maxHullPoints } = props;
+    const percent = Math.floor((hullPoints / maxHullPoints) * 95);
+    return (
+        <div className="HullIntegrity">
+            <div className="MeterHeader">{`HULL INTEGRITY`} </div>
+            <div className="MeterContent">
+                <div className="MeterCurrent">
+                    <div>{`${hullPoints}/${maxHullPoints}`}</div>
+                </div>
+                <div className={"MeterFillCtn"}>
+                    <div
+                        className={"MeterFill"}
+                        style={{ height: `${percent}%`, backgroundColor: percent < 20 ? "red" : "#217B9C" }}
+                    />
+                </div>
+                <img className={"MeterBGImage"} src={"./assets/ui_elements/DepthMarker.png"} />
+            </div>
+        </div>
+    );
+});
 
-    return <div className="HullIntegrity">{`Hull Integrity: ${hullPoints}/${maxHullPoints}`}</div>;
-};
-
-export const Fuel = () => {
-    const fuelPoints = gameManager.getGameState("fuelPoints");
-    const maxFuelPoints = gameManager.getUpgradedMaxValue("fuelUpgradeLevel");
-
-    return <div className="Fuel">{`Current Fuel: ${fuelPoints}/${maxFuelPoints}`}</div>;
-};
+export const Fuel = React.memo((props: { fuelPoints: number; maxFuelPoints: number }) => {
+    const { fuelPoints, maxFuelPoints } = props;
+    const percent = Math.floor((fuelPoints / maxFuelPoints) * 95);
+    return (
+        <div className="Fuel">
+            <div className="MeterHeader">{`FUEL`} </div>
+            <div className="MeterContent">
+                <div className="MeterCurrent">
+                    <div>{`${fuelPoints}/${maxFuelPoints}`}</div>
+                </div>
+                <div className={"MeterFillCtn"}>
+                    <div
+                        className={"MeterFill"}
+                        style={{ height: `${percent}%`, backgroundColor: percent < 20 ? "red" : "#217B9C" }}
+                    />
+                </div>
+                <img className={"MeterBGImage"} src={"./assets/ui_elements/DepthMarker.png"} />
+            </div>
+        </div>
+    );
+});
 
 export const LightSwitch = () => {
     const isLightOn = gameManager.getGameState("lightOn");
@@ -65,8 +96,8 @@ export const Grabber = () => {
     return <div className="Grabber"></div>;
 };
 
-export const Message = () => {
-    const messageList = gameManager.messageList;
+export const Message = React.memo((props: { messageList: string[] }) => {
+    const { messageList } = props;
     return (
         <div className="Message">
             <div className="MessageContent">
@@ -77,7 +108,7 @@ export const Message = () => {
             <img className={"MessageBG"} src={"./assets/ui_elements/MessageBlock.png"} />
         </div>
     );
-};
+});
 
 export const Inventory = () => {
     const inventorySlots = gameManager.getGameState("inventory");

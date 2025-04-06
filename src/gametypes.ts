@@ -16,6 +16,7 @@ export interface GameState extends GameUpgradeLevels {
     inventory: string[];
 
     upgrades: { [type: string]: Upgrade[] };
+    messageList: string[];
 }
 
 export interface Upgrade {
