@@ -1,8 +1,10 @@
 import { gameManager, useGameStateValue, useUpgradedMaxValue } from "#src/GameManager.tsx";
-import { JSX } from "react";
+import { JSX, useRef } from "react";
 import "./components.css";
-import { Upgrade } from "#src/gametypes.ts";
+import { CollectableMetadata, Upgrade } from "#src/gametypes.ts";
 import React from "react";
+import { collectablesMetadata } from "#src/startstate.ts";
+import { ETooltipPosition, useTooltip } from "./Tooltip";
 
 export const DepthMeter = React.memo(() => {
     const currentDepth = useGameStateValue("currentDepth");
@@ -69,7 +71,7 @@ export const Fuel = React.memo(() => {
             <div className="MeterHeader">{`FUEL`} </div>
             <div className="MeterContent">
                 <div className="MeterCurrent">
-                    <div>{`${fuelPoints}/${maxFuelPoints}`}</div>
+                    <div>{`${Math.floor(fuelPoints)}/${maxFuelPoints}`}</div>
                 </div>
                 <div className={"MeterFillCtn"}>
                     <div
@@ -117,7 +119,17 @@ export const Inventory = () => {
     const inventorySlots = useGameStateValue("inventory");
     const maxInventory = gameManager.getUpgradedMaxValue("inventoryUpgradeLevel") as number;
     const nodes: JSX.Element[] = [];
+
     for (let i = 0; i < maxInventory; i++) {
+        const inventoryItemName = inventorySlots[i];
+        if (inventoryItemName) {
+            const metaData = collectablesMetadata[inventoryItemName];
+            if (metaData) {
+                nodes.push(<InventoryItem inventoryIndex={i} metadata={metaData} />);
+                continue;
+            }
+        }
+
         nodes.push(
             <div key={i} className={"inventorySlot"}>
                 {inventorySlots[i] ?? ""}
@@ -126,6 +138,63 @@ export const Inventory = () => {
     }
 
     return <div className={"inventoryCtn"}>{nodes}</div>;
+};
+
+const InventoryItem = (props: { inventoryIndex: number; metadata: CollectableMetadata }) => {
+    const { inventoryIndex, metadata } = props;
+    const { imageUrl, storyMessage, description, fuelPoints, hullPoints } = metadata;
+    const ref = useRef<HTMLDivElement>(null);
+    const tooltip = useTooltip(
+        <div className={"itemTooltip"}>
+            <div className={"itemDescription"}>{description}</div>
+            {!!fuelPoints && (
+                <div>
+                    <div className={"itemFuel"}>{`Add Fuel (${fuelPoints}) `}</div>
+                </div>
+            )}
+            {!!hullPoints && (
+                <div>
+                    <div className={"itemHull"}>{`Repair Hull (${hullPoints})`}</div>
+                </div>
+            )}
+            <div>
+                <div>{"Delete"}</div>
+            </div>
+        </div>,
+        ref,
+        ETooltipPosition.bottom
+    );
+
+    const fnShowTooltip = () => {
+        tooltip.setIsVisible(true);
+    };
+    const fnHideTooltip = () => {
+        tooltip.setIsVisible(false);
+    };
+
+    const onClick = () => {
+        if (hullPoints) {
+            const currentHullPoints = gameManager.getGameState("hullPoints");
+            const maxHullPoints = gameManager.getUpgradedMaxValue("hullUpgradeLevel");
+            const inventory = gameManager.getGameState("inventory");
+            inventory.splice(inventoryIndex, 1);
+            gameManager.setGameState("inventory", [...inventory]);
+            gameManager.setGameState("hullPoints", Math.min(currentHullPoints + hullPoints, maxHullPoints));
+        }
+    };
+    return (
+        <div className={"inventorySlot"}>
+            <div
+                onMouseEnter={fnShowTooltip}
+                onClick={onClick}
+                onMouseLeave={fnHideTooltip}
+                ref={ref}
+                className={"inventoryItem"}>
+                {tooltip.tooltipContent}
+                <img src={imageUrl} height={75} width={75} />
+            </div>
+        </div>
+    );
 };
 
 export const UpgradeGUI = () => {

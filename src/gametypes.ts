@@ -36,3 +36,12 @@ export interface CollectableConfig {
     height: number;
     image: HTMLImageElement;
 }
+
+export interface CollectableMetadata {
+    name: string;
+    imageUrl: string;
+    description: string;
+    fuelPoints: number;
+    hullPoints: number;
+    storyMessage: string;
+}

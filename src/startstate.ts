@@ -1,12 +1,12 @@
 import { exampleFlock } from "./entities/boids/constants";
 import { FlockSetting } from "./entities/boids/types";
-import { CollectableConfig, GameState, Upgrade } from "./gametypes";
+import { CollectableConfig, CollectableMetadata, GameState, Upgrade } from "./gametypes";
 import { redRectImage } from "./images";
 
 export const upgrades = {
     fuelUpgradeLevel: [
         { description: "increases max fuel to 100", upgradeValue: 100, materials: {}, isVisible: true },
-        { description: "increases max fuel to 200", upgradeValue: 200, materials: { sand: 1 }, isVisible: true },
+        { description: "increases max fuel to 200", upgradeValue: 200, materials: { cuteFish: 1 }, isVisible: true },
         {
             description: "increases max fuel to 300",
             upgradeValue: 300,
@@ -109,7 +109,7 @@ export const defaultGameState: GameState = {
     fuelUpgradeLevel: 0,
     hullUpgradeLevel: 0,
     depthUpgradeLevel: 0,
-    inventoryUpgradeLevel: 0,
+    inventoryUpgradeLevel: 2,
     grabberUpgradeLevel: 0,
     lightUpgradeLevel: 0,
     speedUpgradeLevel: 0,
@@ -117,7 +117,7 @@ export const defaultGameState: GameState = {
     hullPoints: 100,
     lightOn: true,
     currentDepth: 0,
-    inventory: [],
+    inventory: ["iron", "iron"],
     upgrades: upgrades,
     messageList: [
         "A scientist who had been a close and trusted colleague of yours for many years went on a solo deep sea exploration in a state of the art Neo Human Interface Submarine one year ago. Back in college, where you were roommates, the two of you dreamed about creating such a vessel. Building another one by yourself was a difficult endeavor. It was much easier to work alongside them. You have your own Neo Human Interface Submarine now. It's time to rescue your partner.",
@@ -137,3 +137,22 @@ export const collectablesList: CollectableConfig[] = [
 ];
 
 export const flockList: FlockSetting[] = [exampleFlock];
+
+export const collectablesMetadata: { [name: string]: CollectableMetadata } = {
+    iron: {
+        name: "iron",
+        imageUrl: "./assets/ocean_objects/minerals/iron_ore.png",
+        description: "a chunk of iron ore",
+        fuelPoints: 0,
+        hullPoints: 20,
+        storyMessage: "can fix or upgrade the sub",
+    },
+    cuteFish: {
+        name: "cuteFish",
+        imageUrl: "./assets/ocean_objects/fish/cute_fish_1.png",
+        description: "almost too cute to subsume",
+        fuelPoints: 0,
+        hullPoints: 20,
+        storyMessage: "fish are fuel not food",
+    },
+};

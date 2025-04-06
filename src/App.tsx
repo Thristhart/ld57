@@ -1,7 +1,9 @@
+import { useRef } from "react";
 import "./App.css";
 import { gameManager } from "./GameManager";
 import { onMouseMove } from "./input";
 import { Fuel, Grabber, HullIntegrity, Inventory, LightSwitch, Message, UpgradeGUI, DepthMeter } from "./ui/components";
+import { TooltipRootProvider } from "./ui/Tooltip";
 
 function App({ loading }: { loading: boolean }) {
     return (
@@ -19,14 +21,23 @@ function App({ loading }: { loading: boolean }) {
                 onPointerMove={onMouseMove}
                 onClick={() => gameManager.click()}
             />
-            <div className={"RightUI"}>
+            <RightUI />
+            {loading && <div className="LoadingSpinner">Loading...</div>}
+        </div>
+    );
+}
+
+function RightUI() {
+    const rootRef = useRef<HTMLDivElement>(null);
+    return (
+        <TooltipRootProvider rootRef={rootRef}>
+            <div ref={rootRef} className={"RightUI"}>
                 <LightSwitch />
                 <Grabber />
                 <Inventory />
                 <UpgradeGUI />
             </div>
-            {loading && <div className="LoadingSpinner">Loading...</div>}
-        </div>
+        </TooltipRootProvider>
     );
 }
 
