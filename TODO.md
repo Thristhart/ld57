@@ -4,9 +4,9 @@
     -   [ ] Collectables
     -   [ ] Story things
 -   [x] Grabbed things go in inventory
-    -   [ ] For upgrades
-    -   [ ] For fuel
-    -   [ ] For hull repair
+    -   [x] For upgrades
+    -   [x] For fuel
+    -   [x] For hull repair
 -   [x] Game over / retry / whatever
     -   [x] ... when your hull runs out
     -   [x] ... when your fuel runs out
@@ -20,3 +20,7 @@
     -   [ ] Grabber thing
     -   as appropriate
 -   [ ] Right hand panels design
+        [ ] Lights
+        [ ] Grabber Key
+        [ ] Mute music button
+-   [ ] Checkpointing
