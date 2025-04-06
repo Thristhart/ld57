@@ -1,19 +1,17 @@
 import { useRef } from "react";
 import "./App.css";
 import { gameManager } from "./GameManager";
-import { onMouseMove } from "./input";
-import { Fuel, Grabber, HullIntegrity, Inventory, LightSwitch, Message, UpgradeGUI, DepthMeter } from "./ui/components";
 import { TooltipRootProvider } from "./ui/Tooltip";
+import { Inventory } from "./ui/inventory";
+import { onMouseMove } from "./input";
+import { Message, LightSwitch, Grabber } from "./ui/components";
+import { DepthMeter, HullIntegrity, Fuel } from "./ui/meters";
+import { UpgradeGUI } from "./ui/upgrades";
 
 function App({ loading, gameOver }: { loading: boolean; gameOver: boolean }) {
     return (
         <div className={"AppCtn"}>
-            <div className={"LeftUI"}>
-                <DepthMeter />
-                <HullIntegrity />
-                <Fuel />
-                <Message />
-            </div>
+            <LeftUI />
             <canvas
                 className={"Center"}
                 width={1080}
@@ -29,6 +27,17 @@ function App({ loading, gameOver }: { loading: boolean; gameOver: boolean }) {
                     <button onClick={() => (location.href = location.href)}>Retry</button>
                 </div>
             )}
+        </div>
+    );
+}
+
+function LeftUI() {
+    return (
+        <div className={"LeftUI"}>
+            <DepthMeter />
+            <HullIntegrity />
+            <Fuel />
+            <Message />
         </div>
     );
 }

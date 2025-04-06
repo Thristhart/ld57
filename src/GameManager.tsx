@@ -18,7 +18,7 @@ import { Entity } from "./entities/entity";
 import { Player } from "./entities/player";
 import { GameState, GameUpgradeLevels } from "./gametypes";
 import { screenshakeKeyframes } from "./screenshake";
-import { defaultGameState, flockList, upgrades } from "./startstate";
+import { CollectableName, defaultGameState, flockList, upgrades } from "./startstate";
 import { Vector } from "./vector";
 
 const fuelScale = 10;
@@ -91,6 +91,20 @@ export class GameManager {
     public setGameState<K extends keyof GameState>(property: K, value: GameState[K]): void {
         this.gameState[property] = value;
         this.stateChangeSubscriptions.get(property)?.forEach((callback) => callback());
+    }
+
+    public addGameStateMessage(value: string): void {
+        const messages = this.gameState.messageList;
+        this.gameState.messageList = [...messages, value];
+        this.stateChangeSubscriptions.get("messageList")?.forEach((callback) => callback());
+    }
+
+    public addGameStateSeenMaterial(name: CollectableName): void {
+        const oldSet = this.gameState.seenMaterials;
+        const newSet = new Set(oldSet);
+        newSet.add(name);
+        this.gameState.seenMaterials = newSet;
+        this.stateChangeSubscriptions.get("seenMaterials")?.forEach((callback) => callback());
     }
 
     public getGameState<K extends keyof GameState>(property: K): GameState[K] {

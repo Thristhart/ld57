@@ -5,33 +5,30 @@ import { redRectImage } from "./images";
 
 export const upgrades = {
     depthUpgradeLevel: [
-        { description: "Max Depth 100", upgradeValue: 100, materials: {}, isVisible: true },
-        { description: "Max Depth 200", upgradeValue: 200, materials: { cuteFish: 1 }, isVisible: false },
+        { description: "Max Depth 100", upgradeValue: 100, materials: {} },
+        { description: "Max Depth 200", upgradeValue: 200, materials: { cuteFish: 1 } },
         {
             description: "Max Depth 300",
             upgradeValue: 300,
             materials: { cuteFish: 1, iron: 1 },
-            isVisible: false,
         },
         {
             description: "Max Depth 300",
             upgradeValue: 400,
             materials: { iron: 2, cuteFish: 2 },
-            isVisible: false,
         },
     ],
     inventoryUpgradeLevel: [
-        { description: "3 Inventory slots", upgradeValue: 3, materials: {}, isVisible: true },
-        { description: "5 Inventory slots", upgradeValue: 5, materials: { sand: 1 }, isVisible: false },
+        { description: "3 Inventory slots", upgradeValue: 3, materials: {} },
+        { description: "5 Inventory slots", upgradeValue: 5, materials: { sand: 1 } },
         {
             description: "10 Inventory slots",
             upgradeValue: 10,
             materials: { copper: 1, sand: 1 },
-            isVisible: false,
         },
     ],
-    fuelUpgradeLevel: [{ description: "", upgradeValue: 100, materials: {}, isVisible: true }],
-    hullUpgradeLevel: [{ description: "", upgradeValue: 100, materials: {}, isVisible: true }],
+    fuelUpgradeLevel: [{ description: "", upgradeValue: 100, materials: {} }],
+    hullUpgradeLevel: [{ description: "", upgradeValue: 100, materials: {} }],
 } as const satisfies { [type: string]: Upgrade[] };
 
 export const defaultGameState: GameState = {

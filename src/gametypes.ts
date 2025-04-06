@@ -1,4 +1,4 @@
-import { CollectableName, upgrades } from "./startstate";
+import { CollectableName, collectablesMetadata, upgrades } from "./startstate";
 
 export interface GameUpgradeLevels {
     depthUpgradeLevel: number;
@@ -9,6 +9,8 @@ export interface GameUpgradeLevels {
     // lightUpgradeLevel: number;
     // speedUpgradeLevel: number;
 }
+
+export type UpgradeType = keyof GameUpgradeLevels;
 
 export interface GameState extends GameUpgradeLevels {
     fuelPoints: number;
@@ -26,7 +28,6 @@ export interface GameState extends GameUpgradeLevels {
 export interface Upgrade {
     upgradeValue: number | string;
     materials: { [matType: string]: number };
-    isVisible: boolean;
     description: string;
 }
 

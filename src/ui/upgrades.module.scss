@@ -1,0 +1,128 @@
+.UpgradesCtn {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.UpgradeHeader {
+    padding-bottom: 12px;
+}
+.UpgradeGroup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    font-weight: 400;
+    padding: 8px;
+}
+
+.UpgradeList {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.UpgradeItem {
+    width: 100px;
+    min-width: 100px;
+}
+
+.UpgradePath {
+    height: 30px;
+    width: 4px;
+    border-radius: 2px;
+    background-color: #3b82b9;
+}
+
+.UpgradeItem {
+    width: 100px;
+    min-width: 100px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.LockedUpgradeItem {
+    width: 100px;
+    min-width: 100px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.UnlockedIcon {
+    position: absolute;
+    font-size: 42px;
+}
+
+.UpgradeCanUnlock {
+    position: absolute;
+    width: 100px;
+    min-width: 100px;
+    opacity: 0;
+}
+
+.UpgradeHasMaterials {
+    animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.PurchasedTooltip {
+    z-index: 12;
+    background-color: white;
+    padding: 4px;
+}
+
+.UpgradeTooltipCtn {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    gap: 4px;
+}
+
+.UpgradeTooltipDesc {
+}
+
+.UpgradeTooltipMats {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.MaterialCount {
+    display: flex;
+    gap: 4px;
+}
+
+.MaterialImage {
+    height: 25px;
+    width: 25px;
+}
+
+.UpgradeAction {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+}
+
+.Disabled {
+    opacity: 0.5;
+}
