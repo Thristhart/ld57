@@ -1,22 +1,16 @@
-import { bgmBiome2, switchBGM } from "#src/audio.ts";
-import { findClosestPoint, positionWallCollision } from "#src/collision.ts";
-import { gameManager, useUpgradedMaxValue } from "#src/GameManager.tsx";
+import { gameManager } from "#src/GameManager.tsx";
 import { playerImage1 } from "#src/images.ts";
 import { InputState, mousePosition } from "#src/input.ts";
 import {
-    add,
     addMut,
     angleBetweenPoints,
     angleDistance,
     copyMut,
-    getDirectionAngle,
     normalizeVector,
-    scaleMut,
-    Vector,
-    dot,
     scale,
+    scaleMut,
     subtract,
-    length,
+    Vector,
 } from "#src/vector.ts";
 import { Entity } from "./entity";
 import { Grabber } from "./grabber";
@@ -50,11 +44,6 @@ export class Player extends Entity {
             gameManager.setGameState("hullPoints", hp - 0.002 * dt);
         }
 
-        const depth = gameManager.getGameState("currentDepth");
-        if (depth > gameManager.getUpgradedMaxValue("depthUpgradeLevel")) {
-            const hp = gameManager.getGameState("hullPoints");
-            gameManager.setGameState("hullPoints", hp - 0.02 * dt);
-        }
         acceleration = normalizeVector(acceleration);
         scaleMut(acceleration, dt * 0.001);
         copyMut(this.acceleration, acceleration);

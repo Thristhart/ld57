@@ -12,7 +12,8 @@ import { DebugVector } from "./entities/debugvector";
 import { length } from "#src/vector.ts";
 import Boid from "./entities/boids/boid";
 import FlockingBoid from "./entities/boids/flockingboid";
-import { bgmBiome1, bgmBiome2, currentBgm, switchBGM } from "./audio";
+import { bgmBiome1, bgmBiome2, currentBgm, pressureDamageSFX1, switchBGM } from "./audio";
+import { screenshakeKeyframes } from "./screenshake";
 
 const fuelScale = 10;
 let nextEntId = 0;
@@ -159,11 +160,41 @@ export class GameManager {
             switchBGM(bgmBiome2);
         }
 
+        if (depth > gameManager.getUpgradedMaxValue("depthUpgradeLevel")) {
+            if (!pressureDamageSFX1.playing()) {
+                pressureDamageSFX1.play();
+            }
+            if (this.depthDamageTimer === undefined) {
+                this.depthDamageTimer = 300;
+            }
+            this.depthDamageTimer -= dt;
+            if (this.depthDamageTimer <= 0) {
+                this.hurtFromDepth();
+                this.depthDamageTimer = 1000;
+            }
+        } else {
+            this.depthDamageTimer = undefined;
+            if (pressureDamageSFX1.playing()) {
+                pressureDamageSFX1.stop();
+            }
+        }
+
         // TODO: check for game over conditions
         // max depth exceeded
         // no more hull points
         // no more fuel
     }
+
+    private hurtFromDepth() {
+        const hp = gameManager.getGameState("hullPoints");
+        gameManager.setGameState("hullPoints", hp - 12);
+        const screenshakeFrames = new KeyframeEffect(screenshakeKeyframes);
+        screenshakeFrames.target = document.querySelector(".Center");
+        const screenshakeAnim = new Animation(screenshakeFrames);
+        screenshakeAnim.play();
+    }
+
+    depthDamageTimer: number | undefined;
 
     public addDebugVector(start: Vector, end: Vector, color = "red") {
         this.addEntity(new DebugVector(start, end, color));
