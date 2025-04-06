@@ -146,7 +146,7 @@ export class GameManager {
         if (this.player.acceleration) {
             const fuel = this.gameState.fuelPoints;
             const fuelExpended = length(this.player.acceleration);
-            const fuelScaled = fuel - fuelExpended * fuelScale;
+            const fuelScaled = Math.max(fuel - fuelExpended * fuelScale, 0);
             this.setGameState("fuelPoints", fuelScaled);
         }
 

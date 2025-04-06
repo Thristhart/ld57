@@ -30,17 +30,20 @@ export class Player extends Entity {
     }
     tick(dt: number): void {
         let acceleration: Vector = { x: 0, y: 0 };
-        if (InputState.get("w")) {
-            acceleration.y += -1;
-        }
-        if (InputState.get("s")) {
-            acceleration.y += 1;
-        }
-        if (InputState.get("a")) {
-            acceleration.x -= 1;
-        }
-        if (InputState.get("d")) {
-            acceleration.x += 1;
+        let fuel = gameManager.getGameState("fuelPoints");
+        if (fuel > 0) {
+            if (InputState.get("w")) {
+                acceleration.y += -1;
+            }
+            if (InputState.get("s")) {
+                acceleration.y += 1;
+            }
+            if (InputState.get("a")) {
+                acceleration.x -= 1;
+            }
+            if (InputState.get("d")) {
+                acceleration.x += 1;
+            }
         }
         acceleration = normalizeVector(acceleration);
         scaleMut(acceleration, dt * 0.001);
