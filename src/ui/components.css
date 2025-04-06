@@ -41,19 +41,37 @@
     gap: 4px;
 }
 
+.UpgradesCtn {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .UpgradeGroup {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 24px;
+    font-weight: 400;
     padding: 8px;
 }
 
 .UpgradeList {
     display: flex;
-    gap: 24px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .UpgradeItem {
     width: 100px;
     min-width: 100px;
-    border: 2px solid navy;
+}
+
+.UpgradePath {
+    height: 30px;
+    width: 4px;
+    border-radius: 2px;
+    background-color: #3b82b9;
 }
 
 .MeterHeader {

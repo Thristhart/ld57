@@ -145,7 +145,8 @@ const InventoryItem = (props: { inventoryIndex: number; metadata: CollectableMet
         <div className={"itemTooltip"}>
             <div className={"itemDescription"}>{description}</div>
             {!!fuelPoints && (
-                <div>
+                <div className={"inventoryAction"}>
+                    <img height={20} width={16} src={"./assets/ui_elements/left_click.png"}></img>
                     <div className={"itemFuel"}>{`Add Fuel (${fuelPoints}) `}</div>
                 </div>
             )}
@@ -186,6 +187,11 @@ const InventoryItem = (props: { inventoryIndex: number; metadata: CollectableMet
             const maxHullPoints = gameManager.getUpgradedMaxValue("hullUpgradeLevel");
             gameManager.setGameState("hullPoints", Math.min(currentHullPoints + hullPoints, maxHullPoints));
             removeItem(ev);
+        } else if (fuelPoints) {
+            const currentFuelPoints = gameManager.getGameState("fuelPoints");
+            const maxFuelPoints = gameManager.getUpgradedMaxValue("fuelUpgradeLevel");
+            gameManager.setGameState("fuelPoints", Math.min(currentFuelPoints + fuelPoints, maxFuelPoints));
+            removeItem(ev);
         }
     };
     return (
@@ -207,14 +213,14 @@ const InventoryItem = (props: { inventoryIndex: number; metadata: CollectableMet
 export const UpgradeGUI = () => {
     const upgrades = useGameStateValue("upgrades");
     return (
-        <div>
-            <UpgradePath category="Fuel" upgrades={upgrades.fuelUpgradeLevel} />
-            <UpgradePath category="Hull" upgrades={upgrades.hullUpgradeLevel} />
+        <div className={"UpgradesCtn"}>
+            {/* <UpgradePath category="Fuel" upgrades={upgrades.fuelUpgradeLevel} />
+            <UpgradePath category="Hull" upgrades={upgrades.hullUpgradeLevel} /> */}
             <UpgradePath category="Depth" upgrades={upgrades.depthUpgradeLevel} />
             <UpgradePath category="Inventory" upgrades={upgrades.inventoryUpgradeLevel} />
-            <UpgradePath category="Grabber" upgrades={upgrades.grabberUpgradeLevel} />
+            {/* <UpgradePath category="Grabber" upgrades={upgrades.grabberUpgradeLevel} />
             <UpgradePath category="Light" upgrades={upgrades.lightUpgradeLevel} />
-            <UpgradePath category="Speed" upgrades={upgrades.speedUpgradeLevel} />
+            <UpgradePath category="Speed" upgrades={upgrades.speedUpgradeLevel} /> */}
         </div>
     );
 };
@@ -223,9 +229,9 @@ function UpgradePath(props: { category: string; upgrades: Upgrade[] }) {
     const { category, upgrades } = props;
     return (
         <div className={"UpgradeGroup"}>
-            <div>{category}</div>
+            <div className={"UpgradeHeader"}>{category}</div>
             <div className="UpgradeList">
-                {upgrades.map((upgrade) => {
+                {upgrades.map((upgrade, index) => {
                     if (upgrade.isVisible) {
                         return (
                             <div className={"UpgradeItem"}>
@@ -234,10 +240,23 @@ function UpgradePath(props: { category: string; upgrades: Upgrade[] }) {
                             </div>
                         );
                     } else {
-                        return <div className={"UpgradeItem"}>?</div>;
+                        return (
+                            <>
+                                <LockedUpgrade />
+                                {index !== upgrades.length - 1 && <div className={"UpgradePath"} />}
+                            </>
+                        );
                     }
                 })}
             </div>
+        </div>
+    );
+}
+
+function LockedUpgrade() {
+    return (
+        <div className={"UpgradeItem"}>
+            <img height={100} width={100} src={"./assets/ui_elements/skilltree_blocks/skilltree_block_locked.png"} />
         </div>
     );
 }

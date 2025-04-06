@@ -82,8 +82,8 @@ export const collectablesMetadata = {
         name: "cuteFish",
         imageUrl: "./assets/ocean_objects/fish/cute_fish_1.png",
         description: "almost too cute to subsume",
-        fuelPoints: 0,
-        hullPoints: 20,
+        fuelPoints: 20,
+        hullPoints: 0,
         storyMessage: "fish are fuel not food",
     },
 } as const satisfies { [name: string]: CollectableMetadata };
