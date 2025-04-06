@@ -1,12 +1,10 @@
-import FlockingBoid from "./flockingboid";
-import Predator from "./predator";
-import { move, mutableFilter } from "./utils";
-import { BoidVector, FlockInstances, FlockSetting, SpawnConfig } from "./types";
-import { mousePosition } from "#src/input.ts";
-import { accelerateFlockingBoids } from "./accelerate";
-import { Entity } from "../entity";
 import { gameManager } from "#src/GameManager.tsx";
 import { isPointOnScreen } from "#src/canvas.ts";
+import { Entity } from "../entity";
+import { accelerateFlockingBoids } from "./accelerate";
+import FlockingBoid from "./flockingboid";
+import { FlockInstances, FlockSetting, SpawnConfig } from "./types";
+import { move, mutableFilter } from "./utils";
 
 export const BOID_TYPES = {
     FLOCKING_BOIDS: "flockingBoids",

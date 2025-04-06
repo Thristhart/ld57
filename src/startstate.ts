@@ -1,4 +1,4 @@
-import { exampleFlock } from "./entities/boids/constants";
+import { baseFlock } from "./entities/boids/constants";
 import { FlockSetting } from "./entities/boids/types";
 import { CollectableConfig, CollectableMetadata, GameState, Upgrade } from "./gametypes";
 import { redRectImage } from "./images";
@@ -65,10 +65,25 @@ export const collectablesList: CollectableConfig[] = [
     },
 ];
 
-export const flockList: FlockSetting[] = [exampleFlock];
+function makeFlock(flockType: CollectableName, position: Vector): FlockSetting {
+    return {
+        ...baseFlock,
+        flockType,
+        characteristics: {
+            ...baseFlock.characteristics,
+            roost: {
+                ...baseFlock.characteristics.roost,
+                position,
+            },
+        },
+    };
+}
+
+export const flockList: FlockSetting[] = [makeFlock("cuteFish", { x: 2000, y: 600 })];
 
 import ironImageUrl from "#assets/ocean_objects/minerals/iron_ore.png";
 import cuteFishImageUrl from "#assets/ocean_objects/fish/cute_fish_1.png";
+import { Vector } from "./vector";
 
 export const collectablesMetadata = {
     iron: {

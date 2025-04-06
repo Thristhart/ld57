@@ -46,7 +46,7 @@ export class Entity {
         }
         const newPosition = add(this, this.velocity);
 
-        if (this.shouldCollideWithWall) {
+        if (this.shouldCollideWithWall && !localStorage.getItem("noclip")) {
             this.collisions = positionWallCollision(newPosition, this.radius);
             if (this.collisions.length === 0) {
                 copyMut(this, newPosition);
