@@ -1,11 +1,12 @@
-import { gameManager } from "#src/GameManager.tsx";
+import { gameManager, useGameStateValue, useUpgradedMaxValue } from "#src/GameManager.tsx";
 import { JSX } from "react";
 import "./components.css";
 import { Upgrade } from "#src/gametypes.ts";
 import React from "react";
 
-export const DepthMeter = React.memo((props: { currentDepth: number; maxDepth: number }) => {
-    const { currentDepth, maxDepth } = props;
+export const DepthMeter = React.memo(() => {
+    const currentDepth = useGameStateValue("currentDepth");
+    const maxDepth = useUpgradedMaxValue("depthUpgradeLevel");
     const arrowPosition = (currentDepth / maxDepth) * 95;
     return (
         <div className="DepthMeter">
@@ -36,8 +37,9 @@ const MeterArrow = (props: { style: React.CSSProperties; className: string }) =>
     );
 };
 
-export const HullIntegrity = React.memo((props: { hullPoints: number; maxHullPoints: number }) => {
-    const { hullPoints, maxHullPoints } = props;
+export const HullIntegrity = () => {
+    const hullPoints = useGameStateValue("hullPoints");
+    const maxHullPoints = useUpgradedMaxValue("hullUpgradeLevel");
     const percent = Math.floor((hullPoints / maxHullPoints) * 95);
     return (
         <div className="HullIntegrity">
@@ -56,10 +58,11 @@ export const HullIntegrity = React.memo((props: { hullPoints: number; maxHullPoi
             </div>
         </div>
     );
-});
+};
 
-export const Fuel = React.memo((props: { fuelPoints: number; maxFuelPoints: number }) => {
-    const { fuelPoints, maxFuelPoints } = props;
+export const Fuel = React.memo(() => {
+    const fuelPoints = useGameStateValue("fuelPoints");
+    const maxFuelPoints = useUpgradedMaxValue("fuelUpgradeLevel");
     const percent = Math.floor((fuelPoints / maxFuelPoints) * 95);
     return (
         <div className="Fuel">
@@ -81,7 +84,7 @@ export const Fuel = React.memo((props: { fuelPoints: number; maxFuelPoints: numb
 });
 
 export const LightSwitch = () => {
-    const isLightOn = gameManager.getGameState("lightOn");
+    const isLightOn = useGameStateValue("lightOn");
     const onChange = () => {
         gameManager.setGameState("lightOn", !isLightOn);
     };
@@ -96,8 +99,8 @@ export const Grabber = () => {
     return <div className="Grabber"></div>;
 };
 
-export const Message = React.memo((props: { messageList: string[] }) => {
-    const { messageList } = props;
+export const Message = () => {
+    const messageList = useGameStateValue("messageList");
     return (
         <div className="Message">
             <div className="MessageContent">
@@ -108,10 +111,10 @@ export const Message = React.memo((props: { messageList: string[] }) => {
             <img className={"MessageBG"} src={"./assets/ui_elements/MessageBlock.png"} />
         </div>
     );
-});
+};
 
 export const Inventory = () => {
-    const inventorySlots = gameManager.getGameState("inventory");
+    const inventorySlots = useGameStateValue("inventory");
     const maxInventory = gameManager.getUpgradedMaxValue("inventoryUpgradeLevel") as number;
     const nodes: JSX.Element[] = [];
     for (let i = 0; i < maxInventory; i++) {
@@ -126,7 +129,7 @@ export const Inventory = () => {
 };
 
 export const UpgradeGUI = () => {
-    const upgrades = gameManager.getGameState("upgrades");
+    const upgrades = useGameStateValue("upgrades");
     return (
         <div>
             <UpgradePath category="Fuel" upgrades={upgrades.fuelUpgradeLevel} />

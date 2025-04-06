@@ -3,7 +3,7 @@ import { FlockSetting } from "./entities/boids/types";
 import { CollectableConfig, GameState, Upgrade } from "./gametypes";
 import { redRectImage } from "./images";
 
-export const upgrades: { [type: string]: Upgrade[] } = {
+export const upgrades = {
     fuelUpgradeLevel: [
         { description: "increases max fuel to 100", upgradeValue: 100, materials: {}, isVisible: true },
         { description: "increases max fuel to 200", upgradeValue: 200, materials: { sand: 1 }, isVisible: true },
@@ -103,7 +103,7 @@ export const upgrades: { [type: string]: Upgrade[] } = {
             isVisible: false,
         },
     ],
-};
+} as const satisfies { [type: string]: Upgrade[] };
 
 export const defaultGameState: GameState = {
     fuelUpgradeLevel: 0,

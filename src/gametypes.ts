@@ -1,3 +1,5 @@
+import { upgrades } from "./startstate";
+
 export interface GameUpgradeLevels {
     fuelUpgradeLevel: number;
     hullUpgradeLevel: number;
@@ -15,7 +17,7 @@ export interface GameState extends GameUpgradeLevels {
     currentDepth: number;
     inventory: string[];
 
-    upgrades: { [type: string]: Upgrade[] };
+    upgrades: { [type: string]: Array<(typeof upgrades)[keyof typeof upgrades][number]> };
     messageList: string[];
 }
 

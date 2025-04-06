@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useSyncExternalStore } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { Entity } from "./entities/entity";
 import { Player } from "./entities/player";
 import { GameState, GameUpgradeLevels } from "./gametypes";
-import { collectablesList, defaultGameState, flockList } from "./startstate";
+import { collectablesList, defaultGameState, flockList, upgrades } from "./startstate";
 import { Collectable } from "./entities/collectable";
 import Flock from "./entities/boids/flock";
 import { Vector } from "./vector";
@@ -13,6 +13,23 @@ import { length } from "#src/vector.ts";
 
 const fuelScale = 10;
 let nextEntId = 0;
+
+export function useGameStateValue<K extends keyof GameState>(key: K): GameState[K] {
+    return useSyncExternalStore(
+        (onStoreChange: () => void) => {
+            gameManager.subscribeToStateChange(key, onStoreChange);
+            return () => gameManager.unsubscribeFromStateChange(key, onStoreChange);
+        },
+        () => gameManager.getGameState(key)
+    );
+}
+
+export function useUpgradedMaxValue<K extends keyof GameUpgradeLevels>(
+    property: K
+): (typeof upgrades)[K][number]["upgradeValue"] {
+    useGameStateValue("upgrades"); // makes us re-render when upgrades changes
+    return gameManager.getUpgradedMaxValue(property);
+}
 
 export class GameManager {
     private rerenderUI: () => void = () => {};
@@ -43,6 +60,16 @@ export class GameManager {
         });
     }
 
+    stateChangeSubscriptions = new Map<string, Set<() => void>>();
+    public subscribeToStateChange<K extends keyof GameState>(property: K, onStoreChange: () => void) {
+        const setSubscriptions = this.stateChangeSubscriptions.get(property) ?? new Set();
+        setSubscriptions.add(onStoreChange);
+        this.stateChangeSubscriptions.set(property, setSubscriptions);
+    }
+    public unsubscribeFromStateChange<K extends keyof GameState>(property: K, onStoreChange: () => void) {
+        this.stateChangeSubscriptions.get(property)?.delete(onStoreChange);
+    }
+
     public setMaxPixelHeight(height: number) {
         this.maxPixelHeight = height;
     }
@@ -52,14 +79,16 @@ export class GameManager {
 
     public setGameState<K extends keyof GameState>(property: K, value: GameState[K]): void {
         this.gameState[property] = value;
-        this.rerenderUI();
+        this.stateChangeSubscriptions.get(property)?.forEach((callback) => callback());
     }
 
     public getGameState<K extends keyof GameState>(property: K): GameState[K] {
         return this.gameState[property];
     }
 
-    public getUpgradedMaxValue<K extends keyof GameUpgradeLevels>(property: K): number | string {
+    public getUpgradedMaxValue<K extends keyof GameUpgradeLevels>(
+        property: K
+    ): (typeof upgrades)[K][number]["upgradeValue"] {
         const level = this.gameState[property];
         const value = this.gameState.upgrades[property][level].upgradeValue;
         return value;
