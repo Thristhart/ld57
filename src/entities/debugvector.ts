@@ -12,6 +12,9 @@ export class DebugVector extends Entity {
         this.color = color;
     }
     draw(context: CanvasRenderingContext2D): void {
+        if (!localStorage.getItem("debug")) {
+            return;
+        }
         context.strokeStyle = this.color;
         context.lineWidth = 1;
         context.beginPath();

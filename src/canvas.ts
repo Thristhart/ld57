@@ -89,24 +89,26 @@ export function drawFrame() {
 
     context.drawImage(wallsImage.bitmap, 0, 0, wallsImage.width, wallsImage.height);
 
-    context.lineWidth = 20;
-    for (const line of wallLines) {
-        context.strokeStyle = line.color;
-        context.beginPath();
-        context.moveTo(line.start.x, line.start.y);
-        context.lineTo(line.end.x, line.end.y);
-        context.closePath();
-        context.stroke();
+    if (localStorage.getItem("debug")) {
+        context.lineWidth = 20;
+        for (const line of wallLines) {
+            context.strokeStyle = line.color;
+            context.beginPath();
+            context.moveTo(line.start.x, line.start.y);
+            context.lineTo(line.end.x, line.end.y);
+            context.closePath();
+            context.stroke();
 
-        context.strokeStyle = "pink";
-        context.beginPath();
-        const diff = subtract(line.end, line.start);
-        const center = add(line.start, scale(normalizeVector(diff), length(diff) / 2));
-        const normalDisplay = scale(line.normal, 50);
-        context.moveTo(center.x, center.y);
-        context.lineTo(center.x + normalDisplay.x, center.y + normalDisplay.y);
-        context.closePath();
-        context.stroke();
+            context.strokeStyle = "pink";
+            context.beginPath();
+            const diff = subtract(line.end, line.start);
+            const center = add(line.start, scale(normalizeVector(diff), length(diff) / 2));
+            const normalDisplay = scale(line.normal, 50);
+            context.moveTo(center.x, center.y);
+            context.lineTo(center.x + normalDisplay.x, center.y + normalDisplay.y);
+            context.closePath();
+            context.stroke();
+        }
     }
 
     for (const ent of gameManager.getAllEntities()) {
