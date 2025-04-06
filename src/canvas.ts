@@ -7,9 +7,6 @@ import { add, length, normalizeVector, scale, subtract, Vector } from "./vector"
 let canvas: HTMLCanvasElement;
 let context: CanvasRenderingContext2D | null;
 
-let width = 1080;
-let height = 1920;
-
 const camera = { x: 0, y: 0, scale: 1 };
 
 function lockCameraBounds() {
@@ -157,7 +154,10 @@ export function drawFrame(avgFrameLength: number) {
     context.fill();
 
     context.restore();
-    context.strokeStyle = "white";
-    context.font = "24px arial";
-    context.strokeText(`FPS: ${1 / (avgFrameLength / 1000)}`, 100, 100);
+
+    if (localStorage.getItem("debug")) {
+        context.strokeStyle = "white";
+        context.font = "24px arial";
+        context.strokeText(`FPS: ${Math.floor(1 / (avgFrameLength / 1000))}`, 100, 100);
+    }
 }
