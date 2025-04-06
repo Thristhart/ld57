@@ -15,7 +15,13 @@ let nextEntId = 0;
 export class GameManager {
     private rerenderUI: () => void = () => {};
     private gameState: GameState = defaultGameState;
+    public maxPixelHeight: number = 0;
+    public maxDepth = 500;
     private mapEntities = new Map<number, Entity>();
+    public messageList: string[] = [
+        "A scientist who had been a close and trusted colleague of yours for many years went on a solo deep sea exploration in a state of the art Neo Human Interface Submarine one year ago. Back in college, where you were roommates, the two of you dreamed about creating such a vessel. Building another one by yourself was a difficult endeavor. It was much easier to work alongside them. You have your own Neo Human Interface Submarine now. It's time to rescue your partner.",
+        "The Neo Human Interface Submarine is a state of the art vessel capable of adapting to hostile environments by subsuming local resources for the purpose of self modification. It's also finally done! I couldn't resist taking it for a quick little dive. I'm sure my colleague will understand. Now let's get to cataloging what sorts of materials are available to me down here.",
+    ];
 
     public player: Player;
 
@@ -38,6 +44,15 @@ export class GameManager {
         flockList.forEach((flock) => {
             this.addEntity(new Flock(flock));
         });
+    }
+
+    public setMaxPixelHeight(height: number) {
+        this.maxPixelHeight = height;
+    }
+
+    public addMessage(message: string) {
+        this.messageList.push(message);
+        this.forceUpdate();
     }
 
     public setGameState<K extends keyof GameState>(property: K, value: GameState[K]): void {
@@ -84,6 +99,10 @@ export class GameManager {
         for (const ent of this.getAllEntities()) {
             ent.tick(dt);
         }
+
+        const playerY = this.player.y;
+        const depth = Math.floor((playerY * this.maxDepth) / this.maxPixelHeight);
+        this.setGameState("currentDepth", depth);
     }
 
     public addDebugVector(start: Vector, end: Vector, color = "red") {

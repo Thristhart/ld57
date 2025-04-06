@@ -47,6 +47,7 @@
 .DepthCurrent {
     position: absolute;
     z-index: 12;
+    top: 8px;
     width: 100%;
     text-align: center;
 }
@@ -64,6 +65,14 @@
     left: 11px;
     z-index: 11;
     color: green;
+}
+
+.DepthMax {
+    position: absolute;
+    bottom: 24px;
+    z-index: 12;
+    width: 100%;
+    text-align: center;
 }
 
 .HullIntegrity {
@@ -99,9 +108,50 @@
 }
 
 .Message {
-    background: purple;
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start: 4;
     grid-row-end: 9;
+    position: relative;
+}
+
+.MessageContent {
+    position: absolute;
+    top: 24px;
+    bottom: 24px;
+    left: 20px;
+    right: 20px;
+    z-index: 10;
+    margin: 48px 36px 48px 48px;
+    overflow-y: auto;
+    --sb-track-color: #091a2d;
+    --sb-thumb-color: #165369;
+    --sb-size: 14px;
+}
+
+.MessageContent::-webkit-scrollbar {
+    width: var(--sb-size);
+}
+
+.MessageContent::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 3px;
+}
+
+.MessageContent::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 3px;
+}
+
+.IndividualMessage {
+    padding-bottom: 24px;
+}
+
+.MessageBG {
+    position: absolute;
+    top: 24px;
+    bottom: 24px;
+    left: 20px;
+    right: 20px;
+    object-fit: contain;
 }

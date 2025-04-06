@@ -17,8 +17,11 @@ export const DepthMeter = () => {
                 <img className={"DepthMeterBG"} src={"./assets/ui_elements/DepthMarker.png"} />
                 <DepthArrow
                     className={"DepthArrow"}
-                    style={{ top: `calc(${arrowPosition}% - 30px)`, color: arrowPosition > 80 ? "darkred" : "green" }}
+                    style={{ top: `calc(${arrowPosition}% - 30px)`, color: arrowPosition > 80 ? "red" : "#217B9C" }}
                 />
+                <div className="DepthMax">
+                    <div>{`MAX ${maxDepth} M`}</div>
+                </div>
             </div>
         </div>
     );
@@ -63,7 +66,17 @@ export const Grabber = () => {
 };
 
 export const Message = () => {
-    return <div className="Message"></div>;
+    const messageList = gameManager.messageList;
+    return (
+        <div className="Message">
+            <div className="MessageContent">
+                {messageList.map((message) => {
+                    return <div className={"IndividualMessage"}>{message}</div>;
+                })}
+            </div>
+            <img className={"MessageBG"} src={"./assets/ui_elements/MessageBlock.png"} />
+        </div>
+    );
 };
 
 export const Inventory = () => {
