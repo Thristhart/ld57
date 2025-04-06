@@ -8,6 +8,9 @@ export const bgmBiome2 = new Howl({ src: bgmBiome2Url, loop: true });
 export let currentBgm: Howl | undefined = undefined;
 
 export function switchBGM(newBGM: Howl) {
+    if (newBGM == currentBgm) {
+        return;
+    }
     currentBgm?.fade(1, 0, 500);
     newBGM.fade(0, 1, 500);
     const currentTimestamp = currentBgm?.seek();
@@ -15,4 +18,5 @@ export function switchBGM(newBGM: Howl) {
         newBGM.seek(currentTimestamp);
     }
     newBGM.play();
+    currentBgm = newBGM;
 }

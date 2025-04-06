@@ -12,6 +12,7 @@ import { DebugVector } from "./entities/debugvector";
 import { length } from "#src/vector.ts";
 import Boid from "./entities/boids/boid";
 import FlockingBoid from "./entities/boids/flockingboid";
+import { bgmBiome1, bgmBiome2, currentBgm, switchBGM } from "./audio";
 
 const fuelScale = 10;
 let nextEntId = 0;
@@ -148,6 +149,14 @@ export class GameManager {
             const fuelExpended = length(this.player.acceleration);
             const fuelScaled = Math.max(fuel - fuelExpended * fuelScale, 0);
             this.setGameState("fuelPoints", fuelScaled);
+        }
+
+        // choose correct bgm for depth
+        // beware: arbitrary numbers, change these to match actual biome differences
+        if (depth < 60) {
+            switchBGM(bgmBiome1);
+        } else if (depth < 200) {
+            switchBGM(bgmBiome2);
         }
 
         // TODO: check for game over conditions
