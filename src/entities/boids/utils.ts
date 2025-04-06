@@ -115,8 +115,8 @@ function randomSpotPosition(): BoidVector {
 export function move(boids: Boid[], settings: FlockSetting) {
     const speedRatio = settings.characteristics.flockingBoids.speedRatio;
     for (let i = 0; i < boids.length; i += 1) {
-        boids[i].position.x = Math.min(boids[i].position.x + speedRatio * boids[i].speed.x, 1);
-        boids[i].position.y = Math.min(boids[i].position.y + speedRatio * boids[i].speed.y, 1);
+        boids[i].position.x = boids[i].position.x + speedRatio * boids[i].speed.x;
+        boids[i].position.y = boids[i].position.y + speedRatio * boids[i].speed.y;
         boids[i].sway();
     }
 }
