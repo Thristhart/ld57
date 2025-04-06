@@ -85,7 +85,7 @@ export function drawFrame() {
 
     context.lineWidth = 20;
     for (const line of wallLines) {
-        context.strokeStyle = "purple";
+        context.strokeStyle = line.color;
         context.beginPath();
         context.moveTo(line.start.x, line.start.y);
         context.lineTo(line.end.x, line.end.y);

@@ -1,7 +1,13 @@
 import { wallsImage, wallsVectors } from "./images";
 import { add, dot, isEqual, length, lengthSquared, normalizeVector, roundMut, scale, subtract, Vector } from "./vector";
 
-export const wallLines: { start: Vector; end: Vector; normal: Vector }[] = [];
+export const wallLines: { start: Vector; end: Vector; normal: Vector; color: string }[] = [];
+
+function randomColor() {
+    return `rgb(${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(
+        Math.random() * 255
+    )})`;
+}
 
 export function prepareWallData() {
     for (const vector of wallsVectors) {
@@ -10,17 +16,23 @@ export function prepareWallData() {
         for (const point of vector.curveshapes[0].points) {
             const segment = subtract(point.main, lastPoint.main);
             const normal = normalizeVector({ x: segment.y, y: -segment.x });
-            vectorLines.push({ start: point.main, end: lastPoint.main, normal });
+            vectorLines.push({ start: point.main, end: lastPoint.main, normal, color: randomColor() });
             lastPoint = point;
         }
         vectorLines[0].end = lastPoint.main;
         wallLines.push(...vectorLines);
     }
-    wallLines.push({ start: { x: 0, y: 0 }, end: { x: wallsImage.width, y: 0 }, normal: { x: 0, y: 1 } });
+    wallLines.push({
+        start: { x: 0, y: 0 },
+        end: { x: wallsImage.width, y: 0 },
+        normal: { x: 0, y: 1 },
+        color: randomColor(),
+    });
     wallLines.push({
         start: { x: 0, y: wallsImage.height },
         end: { x: wallsImage.width, y: wallsImage.height },
         normal: { x: 0, y: -1 },
+        color: randomColor(),
     });
 }
 

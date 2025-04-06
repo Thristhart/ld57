@@ -1,4 +1,5 @@
-import { positionWallCollision } from "#src/collision.ts";
+import { findClosestPoint, positionWallCollision } from "#src/collision.ts";
+import { gameManager } from "#src/GameManager.tsx";
 import { playerImage1 } from "#src/images.ts";
 import { InputState, mousePosition } from "#src/input.ts";
 import {
@@ -28,7 +29,7 @@ export class Player extends Entity {
         super(x, y);
     }
 
-    collisions: Array<{ start: Vector; end: Vector; normal: Vector }> = [];
+    collisions: Array<{ start: Vector; end: Vector; normal: Vector; color: string }> = [];
     tick(dt: number): void {
         let acceleration: Vector = { x: 0, y: 0 };
         if (InputState.get("w")) {
@@ -72,9 +73,16 @@ export class Player extends Entity {
             copyMut(this, newPosition);
         } else {
             for (const col of this.collisions) {
+                const closestPoint = findClosestPoint(col.start, col.end, this);
+                const vectorToClosestPoint = subtract(closestPoint, this);
+                const minimumDistanceVector = normalizeVector(vectorToClosestPoint);
+                scaleMut(minimumDistanceVector, -this.radius);
+                const newPosition = add(closestPoint, minimumDistanceVector);
+                copyMut(this, newPosition);
+
                 this.velocity = subtract(this.velocity, scale(col.normal, dot(this.velocity, col.normal) * 2));
                 if (length(this.velocity) < 4) {
-                    scaleMut(this.velocity, 2);
+                    scaleMut(this.velocity, 1.2);
                 }
             }
         }
@@ -99,15 +107,5 @@ export class Player extends Entity {
             context.fillRect(this.radius, 0, this.currentPokeLength, 10);
         }
         context.restore();
-
-        context.strokeStyle = "green";
-        context.lineWidth = 20;
-        for (const line of this.collisions) {
-            context.beginPath();
-            context.moveTo(line.start.x, line.start.y);
-            context.lineTo(line.end.x, line.end.y);
-            context.closePath();
-            context.stroke();
-        }
     }
 }

@@ -7,6 +7,8 @@ import { GameState, GameUpgradeLevels } from "./gametypes";
 import { collectablesList, defaultGameState, flockList } from "./startstate";
 import { Collectable } from "./entities/collectable";
 import Flock from "./entities/boids/flock";
+import { Vector } from "./vector";
+import { DebugVector } from "./entities/debugvector";
 
 let nextEntId = 0;
 
@@ -62,6 +64,14 @@ export class GameManager {
         return ent;
     }
 
+    public deleteEntity<Ent extends Entity>(ent: number | Ent) {
+        if (typeof ent === "number") {
+            this.mapEntities.delete(ent);
+        } else {
+            this.mapEntities.delete(ent.id);
+        }
+    }
+
     public getEntity(id: number) {
         return this.mapEntities.get(id);
     }
@@ -74,6 +84,10 @@ export class GameManager {
         for (const ent of this.getAllEntities()) {
             ent.tick(dt);
         }
+    }
+
+    public addDebugVector(start: Vector, end: Vector, color = "red") {
+        this.addEntity(new DebugVector(start, end, color));
     }
 
     public click() {}
