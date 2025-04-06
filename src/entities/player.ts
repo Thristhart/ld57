@@ -45,15 +45,6 @@ export class Player extends Entity {
             if (InputState.get("d")) {
                 acceleration.x += 1;
             }
-        } else {
-            const hp = gameManager.getGameState("hullPoints");
-            gameManager.setGameState("hullPoints", hp - 0.002 * dt);
-        }
-
-        const depth = gameManager.getGameState("currentDepth");
-        if (depth > gameManager.getUpgradedMaxValue("depthUpgradeLevel")) {
-            const hp = gameManager.getGameState("hullPoints");
-            gameManager.setGameState("hullPoints", hp - 0.02 * dt);
         }
         acceleration = normalizeVector(acceleration);
         scaleMut(acceleration, dt * 0.001);

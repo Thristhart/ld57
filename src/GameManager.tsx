@@ -143,9 +143,9 @@ export class GameManager {
             this.setGameState("hullPoints", newHullPoints);
         }
 
+        const fuel = this.gameState.fuelPoints;
         // set fuel spent
         if (this.player.acceleration) {
-            const fuel = this.gameState.fuelPoints;
             const fuelExpended = length(this.player.acceleration);
             const fuelScaled = Math.max(fuel - fuelExpended * fuelScale, 0);
             this.setGameState("fuelPoints", fuelScaled);
@@ -160,9 +160,15 @@ export class GameManager {
         }
 
         // TODO: check for game over conditions
-        // max depth exceeded
+        if (depth > gameManager.getUpgradedMaxValue("depthUpgradeLevel")) {
+            const hp = gameManager.getGameState("hullPoints");
+            gameManager.setGameState("hullPoints", hp - 0.02 * dt);
+        }
         // no more hull points
-        // no more fuel
+        if (fuel <= 0) {
+            const hp = gameManager.getGameState("hullPoints");
+            gameManager.setGameState("hullPoints", hp - 0.002 * dt);
+        }
     }
 
     public addDebugVector(start: Vector, end: Vector, color = "red") {
