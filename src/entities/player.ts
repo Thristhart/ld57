@@ -68,6 +68,7 @@ export class Player extends Entity {
         }
 
         const newPosition = add(this, this.velocity);
+
         this.collisions = positionWallCollision(newPosition, this.radius);
         if (this.collisions.length === 0) {
             copyMut(this, newPosition);

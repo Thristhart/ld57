@@ -9,7 +9,9 @@ import { Collectable } from "./entities/collectable";
 import Flock from "./entities/boids/flock";
 import { Vector } from "./vector";
 import { DebugVector } from "./entities/debugvector";
+import { length } from "#src/vector.ts";
 
+const fuelScale = 10;
 let nextEntId = 0;
 
 export class GameManager {
@@ -50,7 +52,7 @@ export class GameManager {
 
     public setGameState<K extends keyof GameState>(property: K, value: GameState[K]): void {
         this.gameState[property] = value;
-        // this.rerenderUI();
+        this.rerenderUI();
     }
 
     public getGameState<K extends keyof GameState>(property: K): GameState[K] {
@@ -93,9 +95,31 @@ export class GameManager {
             ent.tick(dt);
         }
 
+        // set the player depth
         const playerY = this.player.y;
         const depth = Math.floor((playerY * this.maxDepth) / this.maxPixelHeight);
         this.setGameState("currentDepth", depth);
+
+        // set the hull damage
+        if (this.player.collisions.length > 0) {
+            const hullPoints = this.gameState.hullPoints;
+            const damage = length(this.player.velocity);
+            const newHullPoints = hullPoints - Math.floor(damage);
+            this.setGameState("hullPoints", newHullPoints);
+        }
+
+        // set fuel spent
+        if (this.player.acceleration) {
+            const fuel = this.gameState.fuelPoints;
+            const fuelExpended = length(this.player.acceleration);
+            const fuelScaled = fuel - fuelExpended * fuelScale;
+            this.setGameState("fuelPoints", fuelScaled);
+        }
+
+        // TODO: check for game over conditions
+        // max depth exceeded
+        // no more hull points
+        // no more fuel
     }
 
     public addDebugVector(start: Vector, end: Vector, color = "red") {

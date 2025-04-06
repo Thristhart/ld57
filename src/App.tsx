@@ -16,7 +16,7 @@ function App({ loading }: { loading: boolean }) {
             <div className={"LeftUI"}>
                 <DepthMeter currentDepth={currentDepth} maxDepth={maxDepth as number} />
                 <HullIntegrity hullPoints={hullPoints} maxHullPoints={maxHullPoints as number} />
-                <Fuel fuelPoints={fuelPoints} maxFuelPoints={maxFuelPoints as number} />
+                <Fuel fuelPoints={Math.floor(fuelPoints)} maxFuelPoints={maxFuelPoints as number} />
                 <Message messageList={messageList} />
             </div>
             <canvas
