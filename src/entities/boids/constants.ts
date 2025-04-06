@@ -1,6 +1,7 @@
 import { FlockSetting, SpawnSpeedPattern, SpawnSpotPattern } from "./types";
 
-export const exampleFlock = {
+export const baseFlock = {
+    flockType: "cuteFish",
     forces: {
         alignment: {
             distance: 300,
@@ -44,4 +45,4 @@ export const exampleFlock = {
             speedRatio: 1,
         },
     },
-} as FlockSetting;
+} as const as FlockSetting;

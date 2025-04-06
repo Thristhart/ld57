@@ -177,7 +177,7 @@ export class GameManager {
             this.setGameState("warning", "FUEL DEPLETED");
         }
 
-        if (depth > gameManager.getUpgradedMaxValue("depthUpgradeLevel")) {
+        if (depth > gameManager.getUpgradedMaxValue("depthUpgradeLevel") && !localStorage.getItem("noclip")) {
             this.setGameState("warning", "MAXIMUM DEPTH EXCEEDED");
             if (!pressureDamageSFX1.playing()) {
                 pressureDamageSFX1.play();

@@ -26,7 +26,7 @@ export class Player extends Entity {
     tick(dt: number): void {
         let acceleration: Vector = { x: 0, y: 0 };
         const fuel = gameManager.getGameState("fuelPoints");
-        if (fuel > 0) {
+        if (fuel > 0 || localStorage.getItem("noclip")) {
             if (InputState.get("w")) {
                 acceleration.y += -1;
             }
@@ -44,6 +44,9 @@ export class Player extends Entity {
         }
         acceleration = normalizeVector(acceleration);
         scaleMut(acceleration, dt * 0.001);
+        if (localStorage.getItem("noclip")) {
+            scaleMut(acceleration, 4);
+        }
         copyMut(this.acceleration, acceleration);
 
         this.kinematics(dt);

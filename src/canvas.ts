@@ -13,13 +13,13 @@ const camera = { x: 0, y: 0, scale: 1 };
 function lockCameraBounds() {
     const visibleWidth = canvas.width / camera.scale;
     const visibleHeight = canvas.height / camera.scale;
-    // left
-    if (camera.x - visibleWidth / 2 < 0) {
-        camera.x = visibleWidth / 2;
-    }
     // right
     if (camera.x + visibleWidth / 2 > wallsImage.width) {
         camera.x = wallsImage.width - visibleWidth / 2;
+    }
+    // left
+    if (camera.x - visibleWidth / 2 < 0) {
+        camera.x = visibleWidth / 2;
     }
     // top
     if (camera.y - visibleHeight / 2 < 0) {
@@ -117,7 +117,7 @@ export function drawFrame(avgFrameLength: number) {
         ent.draw(context);
     }
 
-    let maskOpacity = Math.min(1, camera.y / (wallsImage.height / 2));
+    let maskOpacity = Math.min(1, gameManager.player.y / (wallsImage.height / 2));
 
     let flashlightSize = 0.1;
     if (gameManager.gameOverTimestamp) {
@@ -179,8 +179,12 @@ export function drawFrame(avgFrameLength: number) {
     context.restore();
 
     if (localStorage.getItem("debug")) {
-        context.strokeStyle = "white";
+        context.fillStyle = "white";
         context.font = "24px arial";
-        context.strokeText(`FPS: ${Math.floor(1 / (avgFrameLength / 1000))}`, 100, 100);
+        context.fillText(`FPS: ${Math.floor(1 / (avgFrameLength / 1000))}`, 100, 100);
+
+        context.fillStyle = "pink";
+
+        context.fillText(`${Math.floor(mousePosition.x)}, ${Math.floor(mousePosition.y)}`, 100, 300);
     }
 }
