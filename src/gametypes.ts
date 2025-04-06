@@ -20,6 +20,7 @@ export interface GameState extends GameUpgradeLevels {
 
     upgrades: { [type: string]: Array<(typeof upgrades)[keyof typeof upgrades][number]> };
     messageList: string[];
+    warning: string;
 }
 
 export interface Upgrade {

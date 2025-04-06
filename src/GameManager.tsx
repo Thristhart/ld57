@@ -131,6 +131,8 @@ export class GameManager {
             ent.tick(dt);
         }
 
+        gameManager.setGameState("warning", "");
+
         // set the player depth
         const playerY = this.player.y;
         const depth = Math.floor((playerY * this.maxDepth) / this.maxPixelHeight);
@@ -161,6 +163,7 @@ export class GameManager {
         }
 
         if (depth > gameManager.getUpgradedMaxValue("depthUpgradeLevel")) {
+            this.setGameState("warning", "MAXIMUM DEPTH EXCEEDED");
             if (!pressureDamageSFX1.playing()) {
                 pressureDamageSFX1.play();
             }
@@ -182,8 +185,9 @@ export class GameManager {
         // TODO: check for game over conditions
         // no more hull points
         if (fuel <= 0) {
-            const hp = gameManager.getGameState("hullPoints");
-            gameManager.setGameState("hullPoints", hp - 0.002 * dt);
+            const hp = this.getGameState("hullPoints");
+            this.setGameState("hullPoints", hp - 0.002 * dt);
+            this.setGameState("warning", "FUEL DEPLETED");
             if (!pressureDamageSFX2.playing()) {
                 pressureDamageSFX2.play();
             }

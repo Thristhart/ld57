@@ -153,6 +153,20 @@ export function drawFrame(avgFrameLength: number) {
     context.closePath();
     context.fill();
 
+    let warning = gameManager.getGameState("warning");
+    if (warning) {
+        let x = gameManager.player.x;
+        let y = gameManager.player.y - gameManager.player.radius - 10;
+
+        context.strokeStyle = "red";
+        context.font = `bold 36pt "Jersey 25"`;
+
+        x -= context.measureText(warning).width / 2;
+
+        context.fillStyle = "red";
+        context.fillText(warning, x, y);
+    }
+
     context.restore();
 
     if (localStorage.getItem("debug")) {
