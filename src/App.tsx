@@ -1,7 +1,7 @@
 import "./App.css";
 import { gameManager } from "./GameManager";
 import { onMouseMove } from "./input";
-import { DepthMeter, Fuel, HullIntegrity, Inventory, LightSwitch, UpgradeGUI } from "./ui/components";
+import { DepthMeter, Fuel, Grabber, HullIntegrity, Inventory, LightSwitch, Message, UpgradeGUI } from "./ui/components";
 
 function App({ loading }: { loading: boolean }) {
     return (
@@ -11,6 +11,8 @@ function App({ loading }: { loading: boolean }) {
                 <HullIntegrity />
                 <Fuel />
                 <LightSwitch />
+                <Grabber />
+                <Message />
             </div>
             <canvas
                 className={"Center"}
