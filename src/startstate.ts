@@ -5,24 +5,24 @@ import { redRectImage } from "./images";
 
 export const upgrades = {
     depthUpgradeLevel: [
-        { description: "Max Depth 100", upgradeValue: 100, materials: {} },
-        { description: "Max Depth 200", upgradeValue: 200, materials: { cuteFish: 1 } },
+        { description: "Max Depth 100m", upgradeValue: 100, materials: {} },
+        { description: "Max Depth 200m", upgradeValue: 200, materials: { cuteFish: 1 } },
         {
-            description: "Max Depth 300",
+            description: "Max Depth 300m",
             upgradeValue: 300,
             materials: { cuteFish: 1, iron: 1 },
         },
         {
-            description: "Max Depth 300",
+            description: "Max Depth 300m",
             upgradeValue: 400,
             materials: { iron: 2, cuteFish: 2 },
         },
     ],
     inventoryUpgradeLevel: [
-        { description: "3 Inventory slots", upgradeValue: 3, materials: {} },
-        { description: "5 Inventory slots", upgradeValue: 5, materials: { sand: 1 } },
+        { description: "3 slots", upgradeValue: 3, materials: {} },
+        { description: "5 slots", upgradeValue: 5, materials: { sand: 1 } },
         {
-            description: "10 Inventory slots",
+            description: "10 slots",
             upgradeValue: 10,
             materials: { copper: 1, sand: 1 },
         },

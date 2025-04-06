@@ -13,21 +13,26 @@ import leftClickImageUrl from "#assets/ui_elements/left_click.png";
 
 import { ETooltipPosition, useTooltip } from "./Tooltip";
 
+const upgradeSize = 80;
+
 export const UpgradeGUI = () => {
     const upgrades = useGameStateValue("upgrades");
     return (
-        <div className={styles.UpgradesCtn}>
-            {/* <UpgradePath category="Fuel" upgrades={upgrades.fuelUpgradeLevel} />
+        <div className={styles.Upgrades}>
+            <div className={styles.UpgradeHeader}>Subsumable Upgrades</div>
+            <div className={styles.UpgradesCtn}>
+                {/* <UpgradePath category="Fuel" upgrades={upgrades.fuelUpgradeLevel} />
             <UpgradePath category="Hull" upgrades={upgrades.hullUpgradeLevel} /> */}
-            <UpgradePath category="Depth" upgrades={upgrades.depthUpgradeLevel} upgradeKey={"depthUpgradeLevel"} />
-            <UpgradePath
-                category="Inventory"
-                upgrades={upgrades.inventoryUpgradeLevel}
-                upgradeKey={"inventoryUpgradeLevel"}
-            />
-            {/* <UpgradePath category="Grabber" upgrades={upgrades.grabberUpgradeLevel} />
+                <UpgradePath category="Depth" upgrades={upgrades.depthUpgradeLevel} upgradeKey={"depthUpgradeLevel"} />
+                <UpgradePath
+                    category="Inventory"
+                    upgrades={upgrades.inventoryUpgradeLevel}
+                    upgradeKey={"inventoryUpgradeLevel"}
+                />
+                {/* <UpgradePath category="Grabber" upgrades={upgrades.grabberUpgradeLevel} />
             <UpgradePath category="Light" upgrades={upgrades.lightUpgradeLevel} />
             <UpgradePath category="Speed" upgrades={upgrades.speedUpgradeLevel} /> */}
+            </div>
         </div>
     );
 };
@@ -36,7 +41,7 @@ function UpgradePath(props: { category: string; upgrades: Upgrade[]; upgradeKey:
     const { category, upgrades, upgradeKey } = props;
     return (
         <div className={styles.UpgradeGroup}>
-            <div className={styles.UpgradeHeader}>{category}</div>
+            <div className={styles.UpgradeSectionHeader}>{category}</div>
             <div className={styles.UpgradeList}>
                 {upgrades.map((upgrade, index) => (
                     <UpgradeItem
@@ -91,7 +96,7 @@ function UpgradeItem(props: { upgrade: Upgrade; upgradeKey: UpgradeType; index: 
 function PurchasedUpgrade(props: { upgradeMetadata: Upgrade; index: number }) {
     const { upgradeMetadata, index } = props;
     const ref = useRef<HTMLDivElement>(null);
-    const tooltip = useTooltip(<PurchasedTooltip upgradeMetadata={upgradeMetadata} />, ref, ETooltipPosition.bottom);
+    const tooltip = useTooltip(<PurchasedTooltip upgradeMetadata={upgradeMetadata} />, ref, ETooltipPosition.top);
     const fnShowTooltip = () => {
         tooltip.setIsVisible(true);
     };
@@ -102,7 +107,7 @@ function PurchasedUpgrade(props: { upgradeMetadata: Upgrade; index: number }) {
         <div onMouseEnter={fnShowTooltip} onMouseLeave={fnHideTooltip} ref={ref} className={styles.UpgradeItem}>
             {tooltip.tooltipContent}
             <div className={styles.UnlockedIcon}>{index + 1}</div>
-            <img height={100} width={100} src={ownedImageUrl} />
+            <img height={upgradeSize} width={upgradeSize} src={ownedImageUrl} />
         </div>
     );
 }
@@ -143,7 +148,7 @@ function UnlockedUpgrade(props: { upgradeMetadata: Upgrade; index: number; upgra
     const tooltip = useTooltip(
         <UpgradeTooltip upgradeMetadata={upgradeMetadata} hasMaterials={hasMaterials} />,
         ref,
-        ETooltipPosition.bottom
+        ETooltipPosition.top
     );
     const fnShowTooltip = () => {
         tooltip.setIsVisible(true);
@@ -164,7 +169,12 @@ function UnlockedUpgrade(props: { upgradeMetadata: Upgrade; index: number; upgra
                 className={classNames(styles.UpgradeCanUnlock, hasMaterials && styles.UpgradeHasMaterials)}
                 src={unlockableImageUrl}
             />
-            <img className={styles.UpgradeNeedsMaterials} height={100} width={100} src={needsMaterialsImageUrl} />
+            <img
+                className={styles.UpgradeNeedsMaterials}
+                height={upgradeSize}
+                width={upgradeSize}
+                src={needsMaterialsImageUrl}
+            />
         </div>
     );
 }
@@ -172,7 +182,7 @@ function UnlockedUpgrade(props: { upgradeMetadata: Upgrade; index: number; upgra
 function LockedUpgrade() {
     return (
         <div className={styles.LockedUpgradeItem}>
-            <img height={100} width={100} src={lockedImageUrl} />
+            <img height={upgradeSize} width={upgradeSize} src={lockedImageUrl} />
         </div>
     );
 }

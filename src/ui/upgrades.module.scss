@@ -1,10 +1,22 @@
+.Upgrades {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+.UpgradeHeader {
+    color: white;
+    font-size: 32px;
+}
+
 .UpgradesCtn {
     display: flex;
     justify-content: space-evenly;
     align-items: flex-start;
 }
 
-.UpgradeHeader {
+.UpgradeSectionHeader {
     padding-bottom: 12px;
 }
 .UpgradeGroup {
@@ -26,8 +38,8 @@
 }
 
 .UpgradeItem {
-    width: 100px;
-    min-width: 100px;
+    width: 80px;
+    min-width: 80px;
 }
 
 .UpgradePath {
@@ -38,8 +50,8 @@
 }
 
 .UpgradeItem {
-    width: 100px;
-    min-width: 100px;
+    width: 80px;
+    min-width: 80px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -48,8 +60,8 @@
 }
 
 .LockedUpgradeItem {
-    width: 100px;
-    min-width: 100px;
+    width: 80px;
+    min-width: 80px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -63,8 +75,8 @@
 
 .UpgradeCanUnlock {
     position: absolute;
-    width: 100px;
-    min-width: 100px;
+    width: 80px;
+    min-width: 80px;
     opacity: 0;
 }
 

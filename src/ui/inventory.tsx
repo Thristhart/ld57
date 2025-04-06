@@ -31,7 +31,12 @@ export const Inventory = () => {
         );
     }
 
-    return <div className={styles.inventoryCtn}>{nodes}</div>;
+    return (
+        <div className={styles.InventorySection}>
+            <div className={styles.InventoryHeader}>Inventory</div>
+            <div className={styles.inventoryCtn}>{nodes}</div>
+        </div>
+    );
 };
 
 const InventoryItem = (props: { inventoryIndex: number; metadata: CollectableMetadata }) => {
