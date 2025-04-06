@@ -39,11 +39,7 @@ export class Player extends Entity {
             if (InputState.get("d")) {
                 acceleration.x += 1;
             }
-        } else {
-            const hp = gameManager.getGameState("hullPoints");
-            gameManager.setGameState("hullPoints", hp - 0.002 * dt);
         }
-
         acceleration = normalizeVector(acceleration);
         scaleMut(acceleration, dt * 0.001);
         copyMut(this.acceleration, acceleration);
