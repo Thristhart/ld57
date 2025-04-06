@@ -2,18 +2,28 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
+    padding: 20px;
 }
 
-.inventorySlot {
+.unlockedInventory {
     height: 100px;
-    width: 100%;
-    border: 2px solid blue;
-    background: grey;
+    width: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-image: url("./assets/ui_elements/inventory_box2.png");
+    background-size: 100px;
 }
 
+.lockedInventory {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../../assets/ui_elements/inventory_box1.png");
+    background-size: 100px;
+}
 .inventoryItem {
     cursor: pointer;
 }
@@ -22,6 +32,11 @@
     padding: 8px;
     font-size: 20px;
     background: white;
+}
+
+.inventoryAction {
+    display: flex;
+    gap: 4px;
 }
 
 .UpgradeGroup {

@@ -3,7 +3,7 @@ import { JSX, useRef } from "react";
 import "./components.css";
 import { CollectableMetadata, Upgrade } from "#src/gametypes.ts";
 import React from "react";
-import { collectablesMetadata } from "#src/startstate.ts";
+import { collectablesMetadata, upgrades } from "#src/startstate.ts";
 import { ETooltipPosition, useTooltip } from "./Tooltip";
 
 export const DepthMeter = React.memo(() => {
@@ -115,13 +115,14 @@ export const Message = () => {
     );
 };
 
+const maxInventoryAmount = upgrades.inventoryUpgradeLevel[upgrades.inventoryUpgradeLevel.length - 1].upgradeValue;
 export const Inventory = () => {
-    const inventorySlots = useGameStateValue("inventory");
-    const maxInventory = gameManager.getUpgradedMaxValue("inventoryUpgradeLevel") as number;
+    const filledInventorySlot = useGameStateValue("inventory");
+    const maxUpgradedInventory = gameManager.getUpgradedMaxValue("inventoryUpgradeLevel") as number;
     const nodes: JSX.Element[] = [];
 
-    for (let i = 0; i < maxInventory; i++) {
-        const inventoryItemName = inventorySlots[i];
+    for (let i = 0; i < maxInventoryAmount; i++) {
+        const inventoryItemName = filledInventorySlot[i];
         if (inventoryItemName) {
             const metaData = collectablesMetadata[inventoryItemName];
             if (metaData) {
@@ -130,11 +131,7 @@ export const Inventory = () => {
             }
         }
 
-        nodes.push(
-            <div key={i} className={"inventorySlot"}>
-                {inventorySlots[i] ?? ""}
-            </div>
-        );
+        nodes.push(<div className={i < maxUpgradedInventory ? "unlockedInventory" : "lockedInventory"}></div>);
     }
 
     return <div className={"inventoryCtn"}>{nodes}</div>;
@@ -153,12 +150,16 @@ const InventoryItem = (props: { inventoryIndex: number; metadata: CollectableMet
                 </div>
             )}
             {!!hullPoints && (
-                <div>
+                <div className={"inventoryAction"}>
+                    <img height={20} width={16} src={"./assets/ui_elements/left_click.png"}></img>
                     <div className={"itemHull"}>{`Repair Hull (${hullPoints})`}</div>
                 </div>
             )}
             <div>
-                <div>{"Delete"}</div>
+                <div className={"inventoryAction"}>
+                    <img height={20} width={16} src={"./assets/ui_elements/right_click.png"}></img>
+                    <div>{`Delete`}</div>
+                </div>
             </div>
         </div>,
         ref,
@@ -172,19 +173,25 @@ const InventoryItem = (props: { inventoryIndex: number; metadata: CollectableMet
         tooltip.setIsVisible(false);
     };
 
-    const onClick = () => {
+    const removeItem = (ev: React.MouseEvent) => {
+        const inventory = gameManager.getGameState("inventory");
+        inventory.splice(inventoryIndex, 1);
+        gameManager.setGameState("inventory", [...inventory]);
+        ev.preventDefault();
+    };
+
+    const onClick = (ev: React.MouseEvent) => {
         if (hullPoints) {
             const currentHullPoints = gameManager.getGameState("hullPoints");
             const maxHullPoints = gameManager.getUpgradedMaxValue("hullUpgradeLevel");
-            const inventory = gameManager.getGameState("inventory");
-            inventory.splice(inventoryIndex, 1);
-            gameManager.setGameState("inventory", [...inventory]);
             gameManager.setGameState("hullPoints", Math.min(currentHullPoints + hullPoints, maxHullPoints));
+            removeItem(ev);
         }
     };
     return (
-        <div className={"inventorySlot"}>
+        <div className={"unlockedInventory"}>
             <div
+                onContextMenu={removeItem}
                 onMouseEnter={fnShowTooltip}
                 onClick={onClick}
                 onMouseLeave={fnHideTooltip}
