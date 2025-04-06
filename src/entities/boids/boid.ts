@@ -4,6 +4,7 @@ import { spawnPosition, spawnSpeed } from "./utils";
 import { BoidVector, Factor, SpawnConfig, SpawnSpotPattern } from "./types";
 import Flock from "./flock";
 import { redRectImage } from "#src/images.ts";
+import { getDirectionAngle } from "#src/vector.ts";
 
 const RAD = Math.PI / 180;
 const SWAY_DIRECTION = { CLOCKWISE: -1, COUNTERCLOCKWISE: 1 };
@@ -23,13 +24,14 @@ export default class Boid {
     constructor(config: SpawnConfig, flock: Flock) {
         this.flock = flock;
         this.position = spawnPosition(config, this.flock.instances.flockingBoids);
+        vectorMutable.add(this.position, flock.settings.characteristics.roost.position);
         this.speed = spawnSpeed(this.position, config);
         this.swayAngle = Math.floor(Math.random() * 30) - 15;
         this.swayDirection = Math.random() > 0.5 ? SWAY_DIRECTION.CLOCKWISE : SWAY_DIRECTION.COUNTERCLOCKWISE;
     }
 
     sway() {
-        this.swayAngle += (this.swayDirection * this.swayFlapAngle) / 2;
+        this.swayAngle += (this.swayDirection * this.swayFlapAngle) / 100;
         if (this.swayAngle > this.swayFlapAngle) {
             this.swayDirection = SWAY_DIRECTION.CLOCKWISE;
         } else if (this.swayAngle < -this.swayFlapAngle) {
@@ -51,13 +53,24 @@ export default class Boid {
 
     draw(context: CanvasRenderingContext2D) {
         context.save();
-        context.translate(
-            this.position.x * this.flock.settings.width + this.flock.x,
-            this.position.y * this.flock.settings.height + this.flock.y
+        context.translate(this.position.x, this.position.y);
+        const directionAngleRad = getDirectionAngle(this.speed);
+        context.rotate(directionAngleRad + Math.PI / 2 + this.swayAngle * RAD);
+        const gradient = context.createLinearGradient(
+            this.width / 2,
+            -this.height / 2,
+            this.width / 2,
+            this.height / 2
         );
-        const directionAngleRad = (Math.PI / 2 - Math.acos(this.speed.x)) / 1.5;
-        context.rotate(Math.PI / 2 - directionAngleRad + this.swayAngle * RAD);
-        context.drawImage(redRectImage, -this.width / 2, -this.height / 2);
+        gradient.addColorStop(0, "red");
+        gradient.addColorStop(1, "black");
+        context.fillStyle = gradient;
+        context.beginPath();
+        context.moveTo(this.width / 2, this.height / 2);
+        context.lineTo(0, -this.height / 2);
+        context.lineTo(-this.width / 2, this.height / 2);
+        context.closePath();
+        context.fill();
         context.restore();
     }
 }

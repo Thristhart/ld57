@@ -1,39 +1,35 @@
-import { SpawnSpeedPattern, SpawnSpotPattern } from "./types";
+import { FlockSetting, SpawnSpeedPattern, SpawnSpotPattern } from "./types";
 
 export const exampleFlock = {
-    x: 2000,
-    y: 200,
-    height: 100,
-    width: 100,
     forces: {
         alignment: {
-            distance: 0.01,
-            strength: 0.3,
+            distance: 300,
+            strength: 30,
         },
         avoidance: {
-            distance: 0.0001,
-            strength: 0.05,
+            distance: 250,
+            strength: 9,
         },
         cohesion: {
-            distance: 0.02,
-            strength: 0.15,
+            distance: 300,
+            strength: 5,
         },
         predatorAvoidance: {
-            distance: 0.5,
-            strength: 1,
+            distance: 300,
+            strength: 2,
         },
         boundaryAvoidance: {
-            distance: 0.00001,
-            strength: 0.1,
+            distance: 2,
+            strength: 100,
         },
         roosting: {
-            distance: 0.2,
-            strength: 0.1,
+            distance: 20,
+            strength: 0.01,
         },
     },
     characteristics: {
         roost: {
-            position: { x: 0.5, y: 0.5 },
+            position: { x: 2000, y: 300 },
         },
         flockingBoids: {
             spawnPattern: {
@@ -45,7 +41,7 @@ export const exampleFlock = {
                 maxGrowthPerTick: Infinity,
             },
             count: 10,
-            speedRatio: 0.004,
+            speedRatio: 1,
         },
     },
-};
+} as FlockSetting;

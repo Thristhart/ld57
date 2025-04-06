@@ -50,7 +50,7 @@ export class GameManager {
 
     public setGameState<K extends keyof GameState>(property: K, value: GameState[K]): void {
         this.gameState[property] = value;
-        this.rerenderUI();
+        // this.rerenderUI();
     }
 
     public getGameState<K extends keyof GameState>(property: K): GameState[K] {

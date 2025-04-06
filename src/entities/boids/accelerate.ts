@@ -1,4 +1,7 @@
 /* eslint-disable */
+import { findClosestPoint, wallLines } from "#src/collision.ts";
+import { gameManager } from "#src/GameManager.tsx";
+import { normalizeVector, scale, scaleMut, subtract } from "#src/vector.ts";
 import Boid from "./boid";
 import FlockingBoid from "./flockingboid";
 import { BoidVector, Factor, FlockSetting } from "./types";
@@ -45,13 +48,11 @@ export function calcAvoidHumanForceFactor(flockingBoid: FlockingBoid, mouse: Boi
         return null;
     }
 
-    const mouseNormalized = getNormalizedMousePosition(mouse, flockingBoid.flock.settings);
-
     if (
-        !mouseNormalized ||
+        !mouse ||
         !checkIsCloseEnough(
             flockingBoid.position,
-            mouseNormalized,
+            mouse,
             flockingBoid.flock.settings.forces.predatorAvoidance.distance / carelessnessRatio ** 2
         )
     ) {
@@ -59,20 +60,15 @@ export function calcAvoidHumanForceFactor(flockingBoid: FlockingBoid, mouse: Boi
     }
 
     return {
-        force: vectorImmutable.subtract(flockingBoid.position, mouseNormalized),
+        force: vectorImmutable.subtract(flockingBoid.position, mouse),
         strength: flockingBoid.flock.settings.forces.predatorAvoidance.strength / carelessnessRatio,
     };
 }
 
 export function calcBoundaryForceFactor(flockingBoid: FlockingBoid) {
-    const boundaries = [
-        { x: 0, y: 0 },
-        { x: 0, y: 1 },
-        { x: 1, y: 0 },
-        { x: 1, y: 1 },
-    ];
     const boundaryAvoidances: Factor[] = [];
-    boundaries.forEach((boundary) => {
+    wallLines.forEach((wallLine) => {
+        const boundary = findClosestPoint(wallLine.start, wallLine.end, flockingBoid.position);
         if (
             checkIsCloseEnough(
                 flockingBoid.position,
@@ -80,8 +76,10 @@ export function calcBoundaryForceFactor(flockingBoid: FlockingBoid) {
                 flockingBoid.flock.settings.forces.boundaryAvoidance.distance
             )
         ) {
+            gameManager.addDebugVector(flockingBoid.position, boundary, wallLine.color);
+            const force = normalizeVector(subtract(flockingBoid.position, boundary));
             boundaryAvoidances.push({
-                force: boundary,
+                force,
                 strength: flockingBoid.flock.settings.forces.boundaryAvoidance.strength,
             });
         }
@@ -90,14 +88,5 @@ export function calcBoundaryForceFactor(flockingBoid: FlockingBoid) {
 }
 
 function checkIsCloseEnough(pointA: BoidVector, pointB: BoidVector, distance: number) {
-    return vectorImmutable.squareDistance(pointA, pointB) < distance;
-}
-
-function getNormalizedMousePosition(mouse: BoidVector, settings: FlockSetting) {
-    if (mouse.x < settings.x || mouse.x > settings.x + settings.width) return null;
-    if (mouse.y < settings.y || mouse.y > settings.y + settings.height) return null;
-
-    const mouseX = (mouse.x - settings.x) / settings.width;
-    const mouseY = (mouse.y - settings.y) / settings.height;
-    return { x: mouseX, y: mouseY };
+    return vectorImmutable.squareDistance(pointA, pointB) < distance * distance;
 }

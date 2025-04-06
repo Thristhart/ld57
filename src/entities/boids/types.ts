@@ -51,10 +51,6 @@ export interface FlockInstances {
 }
 
 export interface FlockSetting {
-    x: number;
-    y: number;
-    height: number;
-    width: number;
     forces: {
         alignment: {
             distance: number;

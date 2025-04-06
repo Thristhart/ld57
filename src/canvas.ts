@@ -75,14 +75,6 @@ export function drawFrame() {
 
     context.drawImage(wallsImage.bitmap, 0, 0, wallsImage.width, wallsImage.height);
 
-    for (const ent of gameManager.getAllEntities()) {
-        if (ent === gameManager.player) {
-            // skip so we can draw later with the flashlight
-            continue;
-        }
-        ent.draw(context);
-    }
-
     context.lineWidth = 20;
     for (const line of wallLines) {
         context.strokeStyle = line.color;
@@ -101,6 +93,14 @@ export function drawFrame() {
         context.lineTo(center.x + normalDisplay.x, center.y + normalDisplay.y);
         context.closePath();
         context.stroke();
+    }
+
+    for (const ent of gameManager.getAllEntities()) {
+        if (ent === gameManager.player) {
+            // skip so we can draw later with the flashlight
+            continue;
+        }
+        ent.draw(context);
     }
 
     const maskOpacity = Math.min(1, camera.y / (wallsImage.height / 2));

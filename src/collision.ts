@@ -1,7 +1,15 @@
+import { gameManager } from "./GameManager";
 import { wallsImage, wallsVectors } from "./images";
 import { add, dot, isEqual, length, lengthSquared, normalizeVector, roundMut, scale, subtract, Vector } from "./vector";
 
-export const wallLines: { start: Vector; end: Vector; normal: Vector; color: string }[] = [];
+interface WallLine {
+    start: Vector;
+    end: Vector;
+    normal: Vector;
+    length: number;
+    color: string;
+}
+export const wallLines: WallLine[] = [];
 
 function randomColor() {
     return `rgb(${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(
@@ -11,12 +19,18 @@ function randomColor() {
 
 export function prepareWallData() {
     for (const vector of wallsVectors) {
-        let vectorLines = [];
+        let vectorLines: WallLine[] = [];
         let lastPoint = { main: { x: 0, y: 0 } };
         for (const point of vector.curveshapes[0].points) {
             const segment = subtract(point.main, lastPoint.main);
             const normal = normalizeVector({ x: segment.y, y: -segment.x });
-            vectorLines.push({ start: point.main, end: lastPoint.main, normal, color: randomColor() });
+            vectorLines.push({
+                start: point.main,
+                end: lastPoint.main,
+                normal,
+                color: randomColor(),
+                length: length(segment),
+            });
             lastPoint = point;
         }
         vectorLines[0].end = lastPoint.main;
@@ -27,12 +41,14 @@ export function prepareWallData() {
         end: { x: wallsImage.width, y: 0 },
         normal: { x: 0, y: 1 },
         color: randomColor(),
+        length: wallsImage.width,
     });
     wallLines.push({
         start: { x: 0, y: wallsImage.height },
         end: { x: wallsImage.width, y: wallsImage.height },
         normal: { x: 0, y: -1 },
         color: randomColor(),
+        length: wallsImage.width,
     });
 }
 
@@ -40,6 +56,16 @@ function pointIntersectsCircle(x: number, y: number, circleCenter: Vector, radiu
     const dx = circleCenter.x - x;
     const dy = circleCenter.y - y;
     return Math.sqrt(dx * dx + dy * dy) < radius;
+}
+
+function clamp(n: number, min: number, max: number) {
+    if (n < min) {
+        return min;
+    }
+    if (n > max) {
+        return max;
+    }
+    return n;
 }
 
 export function findClosestPoint(a: Vector, b: Vector, p: Vector) {
@@ -50,7 +76,7 @@ export function findClosestPoint(a: Vector, b: Vector, p: Vector) {
 
     const magAtBSq: number = lengthSquared(subtract(a, b));
 
-    const dotAtBwAtP = dot(AtP, AtB);
+    const dotAtBwAtP = clamp(dot(AtP, AtB), 0, magAtBSq);
 
     const distanceAtoCP = dotAtBwAtP / magAtBSq;
 
@@ -58,17 +84,14 @@ export function findClosestPoint(a: Vector, b: Vector, p: Vector) {
 }
 
 function isCircleCollidingWithOrOutsideLinesegment(position: Vector, radius: number, a: Vector, b: Vector) {
-    //P
-    const p: Vector = position;
-
-    const CP = findClosestPoint(a, b, p);
+    const CP = findClosestPoint(a, b, position);
 
     const smallerX = Math.min(a.x, b.x);
     const biggerX = Math.max(a.x, b.x);
     const smallerY = Math.min(a.y, b.y);
     const biggerY = Math.max(a.y, b.y);
 
-    const closestDistance = length(subtract(CP, p));
+    const closestDistance = length(subtract(CP, position));
 
     if (CP.x >= smallerX && CP.x <= biggerX && CP.y >= smallerY && CP.y <= biggerY && closestDistance < radius) {
         return CP;

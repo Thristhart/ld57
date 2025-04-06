@@ -5,6 +5,7 @@ import { BoidVector, FlockInstances, FlockSetting, SpawnConfig } from "./types";
 import { mousePosition } from "#src/input.ts";
 import { accelerateFlockingBoids } from "./accelerate";
 import { Entity } from "../entity";
+import { gameManager } from "#src/GameManager.tsx";
 
 export const BOID_TYPES = {
     FLOCKING_BOIDS: "flockingBoids",
@@ -13,24 +14,21 @@ export const BOID_TYPES = {
 
 export default class Flock extends Entity {
     public instances: FlockInstances;
-    public mouse: BoidVector;
     public settings: FlockSetting;
 
     constructor(settings: FlockSetting) {
-        super(settings.x, settings.y);
+        super(settings.characteristics.roost.position.x, settings.characteristics.roost.position.y);
         this.instances = {
             flockingBoids: [],
         };
-        this.mouse = mousePosition;
         this.settings = settings;
     }
 
     tick() {
         const flockingBoids = this.instances.flockingBoids;
 
-        this.mouse = mousePosition;
         this.populateFlock();
-        accelerateFlockingBoids(this.settings, flockingBoids, this.mouse);
+        accelerateFlockingBoids(this.settings, flockingBoids, gameManager.player);
         move(flockingBoids, this.settings);
     }
 
