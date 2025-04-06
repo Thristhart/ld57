@@ -1,3 +1,4 @@
+import { bgmBiome2, switchBGM } from "#src/audio.ts";
 import { findClosestPoint, positionWallCollision } from "#src/collision.ts";
 import { gameManager, useUpgradedMaxValue } from "#src/GameManager.tsx";
 import { playerImage1 } from "#src/images.ts";
