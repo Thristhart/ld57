@@ -49,6 +49,9 @@ export const redRectImage = loadImage(redRectImageUrl);
 import backgroundImageUrl from "../assets/ocean_background.png";
 export const backgroundImage = loadImage(backgroundImageUrl);
 
+import cuteFish1ImageUrl from "../assets/ocean_objects/fish/cute_fish_1.png";
+export const cuteFish1Image = loadImage(cuteFish1ImageUrl);
+
 let resolveImageLoad: () => void;
 export const imageLoadPromise = new Promise<void>((resolve) => {
     resolveImageLoad = resolve;

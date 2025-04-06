@@ -1,4 +1,5 @@
 import { positionWallCollision, findClosestPoint } from "#src/collision.ts";
+import { CollectableName } from "#src/startstate.ts";
 import { add, addMut, copyMut, dot, length, normalizeVector, scale, scaleMut, subtract, Vector } from "#src/vector.ts";
 
 export class Entity {
@@ -9,7 +10,7 @@ export class Entity {
     public bounceFactor: number = 1;
     public grabbable = false;
 
-    public inventoryType: string | undefined;
+    public inventoryType: CollectableName | undefined;
 
     public get children(): Entity[] {
         return [];

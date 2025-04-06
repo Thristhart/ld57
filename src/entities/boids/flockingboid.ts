@@ -3,6 +3,7 @@ import * as vectorMutable from "./vectorMutable";
 import { FlockingForce, FlockSetting, SpawnConfig } from "./types";
 import Boid from "./boid";
 import Flock from "./flock";
+import { CollectableName } from "#src/startstate.ts";
 
 export default class FlockingBoid extends Boid {
     public flockingForces: FlockingForce = {
@@ -12,7 +13,7 @@ export default class FlockingBoid extends Boid {
     };
     public carelessnessRatio: number = 0;
     public grabbable = true;
-    public inventoryType = "fish";
+    public inventoryType: CollectableName = "cuteFish";
 
     static calcFlockingForces(settings: FlockSetting, boids: FlockingBoid[], callback: (boids: FlockingBoid) => void) {
         const actualBoids = boids.sort(({ x: aX }, { x: bX }) => {

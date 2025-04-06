@@ -138,7 +138,7 @@ export const collectablesList: CollectableConfig[] = [
 
 export const flockList: FlockSetting[] = [exampleFlock];
 
-export const collectablesMetadata: { [name: string]: CollectableMetadata } = {
+export const collectablesMetadata = {
     iron: {
         name: "iron",
         imageUrl: "./assets/ocean_objects/minerals/iron_ore.png",
@@ -155,4 +155,6 @@ export const collectablesMetadata: { [name: string]: CollectableMetadata } = {
         hullPoints: 20,
         storyMessage: "fish are fuel not food",
     },
-};
+} as const satisfies { [name: string]: CollectableMetadata };
+
+export type CollectableName = keyof typeof collectablesMetadata;

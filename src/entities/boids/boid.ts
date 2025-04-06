@@ -3,7 +3,7 @@ import * as vectorMutable from "./vectorMutable";
 import { spawnPosition, spawnSpeed } from "./utils";
 import { BoidVector, Factor, SpawnConfig, SpawnSpotPattern } from "./types";
 import Flock from "./flock";
-import { redRectImage } from "#src/images.ts";
+import { cuteFish1Image, redRectImage } from "#src/images.ts";
 import { getDirectionAngle } from "#src/vector.ts";
 import { Entity } from "../entity";
 
@@ -11,9 +11,7 @@ const RAD = Math.PI / 180;
 const SWAY_DIRECTION = { CLOCKWISE: -1, COUNTERCLOCKWISE: 1 };
 
 export default class Boid extends Entity {
-    public width = 20;
-    public height = 20;
-    public color = "red";
+    radius = 30;
     public swayFlapAngle = 0;
 
     public flock: Flock;
@@ -58,22 +56,17 @@ export default class Boid extends Entity {
         context.save();
         context.translate(this.x, this.y);
         const directionAngleRad = getDirectionAngle(this.speed);
-        context.rotate(directionAngleRad + Math.PI / 2 + this.swayAngle * RAD);
-        const gradient = context.createLinearGradient(
-            this.width / 2,
-            -this.height / 2,
-            this.width / 2,
-            this.height / 2
-        );
-        gradient.addColorStop(0, "red");
-        gradient.addColorStop(1, "black");
-        context.fillStyle = gradient;
-        context.beginPath();
-        context.moveTo(this.width / 2, this.height / 2);
-        context.lineTo(0, -this.height / 2);
-        context.lineTo(-this.width / 2, this.height / 2);
-        context.closePath();
-        context.fill();
+        let flip = false;
+        if (directionAngleRad > Math.PI / 2 && directionAngleRad < Math.PI * 1.5) {
+            flip = true;
+        }
+        context.rotate(directionAngleRad - Math.PI + this.swayAngle * RAD);
+        if (flip) {
+            context.scale(1, -1);
+        }
+
+        context.drawImage(cuteFish1Image, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
+
         context.restore();
     }
 }
