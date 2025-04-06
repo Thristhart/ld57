@@ -10,6 +10,8 @@ import Flock from "./entities/boids/flock";
 import { Vector } from "./vector";
 import { DebugVector } from "./entities/debugvector";
 import { length } from "#src/vector.ts";
+import Boid from "./entities/boids/boid";
+import FlockingBoid from "./entities/boids/flockingboid";
 
 const fuelScale = 10;
 let nextEntId = 0;
@@ -108,6 +110,9 @@ export class GameManager {
             this.mapEntities.delete(ent);
         } else {
             this.mapEntities.delete(ent.id);
+            if (ent instanceof FlockingBoid) {
+                ent.flock.instances.flockingBoids.splice(ent.flock.instances.flockingBoids.indexOf(ent), 1);
+            }
         }
     }
 
@@ -155,7 +160,13 @@ export class GameManager {
         this.addEntity(new DebugVector(start, end, color));
     }
 
-    public click() {}
+    public click() {
+        if (this.player.grabber) {
+            this.player.retractGrabber();
+        } else {
+            this.player.emitGrabber();
+        }
+    }
 }
 
 export const gameManager = new GameManager();

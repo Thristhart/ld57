@@ -58,6 +58,12 @@ function pointIntersectsCircle(x: number, y: number, circleCenter: Vector, radiu
     return Math.sqrt(dx * dx + dy * dy) < radius;
 }
 
+export function circleVsCircleCollision(a: Vector, aRadius: number, b: Vector, bRadius: number) {
+    const distance = length(subtract(b, a));
+    const totalRadius = aRadius + bRadius;
+    return totalRadius > distance;
+}
+
 function clamp(n: number, min: number, max: number) {
     if (n < min) {
         return min;

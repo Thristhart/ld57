@@ -6,6 +6,7 @@ export class Collectable extends Entity {
     public height: number;
     public width: number;
     public image: HTMLImageElement;
+    public grabbable = true;
 
     constructor(collectable: CollectableConfig) {
         const { x, y, width, height, image, resource } = collectable;
