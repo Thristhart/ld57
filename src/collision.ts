@@ -1,7 +1,19 @@
 import { gameManager } from "./GameManager";
 import { wallsImage, wallsVectors } from "./images";
 import { clamp } from "./util";
-import { add, dot, isEqual, length, lengthSquared, normalizeVector, roundMut, scale, subtract, Vector } from "./vector";
+import {
+    add,
+    crossProduct,
+    dot,
+    isEqual,
+    length,
+    lengthSquared,
+    normalizeVector,
+    roundMut,
+    scale,
+    subtract,
+    Vector,
+} from "./vector";
 
 interface WallLine {
     start: Vector;
@@ -106,4 +118,22 @@ export function positionWallCollision(point: Vector, radius: number) {
         }
     }
     return collisions;
+}
+
+// https://stackoverflow.com/a/1968345, based on Andre LeMothe's "Tricks of the Windows Game Programming Gurus"
+export function lineSegmentIntersection(lineAStart: Vector, lineAEnd: Vector, lineBStart: Vector, lineBEnd: Vector) {
+    const s1: Vector = { x: lineAEnd.x - lineAStart.x, y: lineAEnd.y - lineAStart.y };
+    const s2: Vector = { x: lineBEnd.x - lineBStart.x, y: lineBEnd.y - lineBStart.y };
+
+    const s =
+        (-s1.y * (lineAStart.x - lineBStart.x) + s1.x * (lineAStart.y - lineBStart.y)) / (-s2.x * s1.y + s1.x * s2.y);
+    const t =
+        (s2.x * (lineAStart.y - lineBStart.y) - s2.y * (lineAStart.x - lineBStart.x)) / (-s2.x * s1.y + s1.x * s2.y);
+
+    if (s >= 0 && s <= 1 && t >= 0 && t <= 1) {
+        // Collision detected
+        return { x: lineAStart.x + t * s1.x, y: lineAStart.y + t * s1.y };
+    }
+
+    return undefined;
 }

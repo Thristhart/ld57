@@ -1,8 +1,8 @@
 import { gameManager } from "./GameManager";
 import { backgroundImage, wallsImage } from "./images";
 import { mousePosition, mousePositionGlobal } from "./input";
-import { wallLines } from "./collision";
-import { add, length, normalizeVector, scale, subtract, Vector } from "./vector";
+import { findClosestPoint, lineSegmentIntersection, wallLines } from "./collision";
+import { add, length, lengthSquared, normalizeVector, scale, scaleMut, subtract, Vector } from "./vector";
 import { clamp } from "./util";
 
 let canvas: HTMLCanvasElement;
@@ -11,24 +11,26 @@ let context: CanvasRenderingContext2D | null;
 const camera = { x: 0, y: 0, scale: 1 };
 
 function lockCameraBounds() {
-    const visibleWidth = canvas.width / camera.scale;
-    const visibleHeight = canvas.height / camera.scale;
+    const halfVisibleWidth = canvas.width / camera.scale / 2;
+    const halfVisibleHeight = canvas.height / camera.scale / 2;
     // right
-    if (camera.x + visibleWidth / 2 > wallsImage.width) {
-        camera.x = wallsImage.width - visibleWidth / 2;
+    if (camera.x + halfVisibleWidth > wallsImage.width) {
+        camera.x = wallsImage.width - halfVisibleWidth;
     }
     // left
-    if (camera.x - visibleWidth / 2 < 0) {
-        camera.x = visibleWidth / 2;
+    if (camera.x - halfVisibleWidth < 0) {
+        camera.x = halfVisibleWidth;
     }
     // top
-    if (camera.y - visibleHeight / 2 < 0) {
-        camera.y = visibleHeight / 2;
+    if (camera.y - halfVisibleHeight < 0) {
+        camera.y = halfVisibleHeight;
     }
     // bottom
-    if (camera.y + visibleHeight / 2 > wallsImage.height) {
-        camera.y = wallsImage.height - visibleHeight / 2;
+    if (camera.y + halfVisibleHeight > wallsImage.height) {
+        camera.y = wallsImage.height - halfVisibleHeight;
     }
+
+    return { halfVisibleWidth, halfVisibleHeight };
 }
 
 export function isPointOnScreen(point: Vector) {
@@ -68,7 +70,7 @@ export function drawFrame(avgFrameLength: number) {
     camera.x = gameManager.player.x;
     camera.y = gameManager.player.y;
 
-    lockCameraBounds();
+    const { halfVisibleWidth, halfVisibleHeight } = lockCameraBounds();
 
     mapMousePosition();
 
@@ -119,31 +121,19 @@ export function drawFrame(avgFrameLength: number) {
 
     let maskOpacity = Math.min(1, gameManager.player.y / (wallsImage.height / 2));
 
-    let flashlightSize = 0.1;
+    let flashlightSize = 0.2;
     if (gameManager.gameOverTimestamp) {
         flashlightSize *= 1 - clamp((performance.now() - gameManager.gameOverTimestamp) / 400, 0, 1);
         maskOpacity = clamp((performance.now() - gameManager.gameOverTimestamp) / 400, maskOpacity, 1);
     }
 
+    const flashlightSizeAngle = Math.PI * 2 * flashlightSize;
+    const flashlightStartAngle = gameManager.player.angle - flashlightSizeAngle / 2;
+
+    const flashlightLength = 1000;
+
     const darknessMaskColor = `rgba(0,0,0,${maskOpacity})`;
     const playerMaskColor = `rgba(0,0,0,${Math.min(maskOpacity - 0.5, 0.7)})`;
-    const flashlightGradient = context.createConicGradient(
-        gameManager.player.angle,
-        gameManager.player.x,
-        gameManager.player.y
-    );
-    if (gameManager.getGameState("lightOn") && flashlightSize) {
-        flashlightGradient.addColorStop(0, "transparent");
-        flashlightGradient.addColorStop(flashlightSize / 2, "transparent");
-        flashlightGradient.addColorStop(1 - flashlightSize / 2, "transparent");
-        flashlightGradient.addColorStop(1, "transparent");
-    }
-
-    flashlightGradient.addColorStop(flashlightSize, darknessMaskColor);
-    flashlightGradient.addColorStop(1 - flashlightSize, darknessMaskColor);
-
-    context.fillStyle = flashlightGradient;
-    context.fillRect(0, 0, wallsImage.width, wallsImage.height);
     if (!gameManager.gameOverTimestamp) {
         gameManager.player.draw(context);
     }
@@ -175,6 +165,69 @@ export function drawFrame(avgFrameLength: number) {
         context.fillStyle = "red";
         context.fillText(warning, x, y);
     }
+    const rays: Vector[] = [];
+
+    const rayCount = 64;
+    const rayAngle = flashlightSizeAngle / rayCount;
+    for (let i = rayCount; i >= 0; i--) {
+        rays.push({
+            x: gameManager.player.x + Math.cos(flashlightStartAngle + i * rayAngle) * flashlightLength,
+            y: gameManager.player.y + Math.sin(flashlightStartAngle + i * rayAngle) * flashlightLength,
+        });
+    }
+    for (const wallLine of wallLines) {
+        for (let i = 0; i < rays.length; i++) {
+            const ray = rays[i];
+            const intersection = lineSegmentIntersection(gameManager.player, ray, wallLine.start, wallLine.end);
+            if (intersection) {
+                const playerToIntersection = subtract(intersection, gameManager.player);
+                const playerToRay = subtract(ray, gameManager.player);
+                if (lengthSquared(playerToIntersection) < lengthSquared(playerToRay)) {
+                    rays[i] = intersection;
+                }
+            }
+        }
+    }
+    context.save();
+    context.strokeStyle = "green";
+    context.lineWidth = 2;
+    context.beginPath();
+    context.moveTo(
+        gameManager.player.x + Math.cos(flashlightStartAngle + flashlightSizeAngle) * 2000,
+        gameManager.player.y + Math.sin(flashlightStartAngle + flashlightSizeAngle) * 2000
+    );
+    for (const ray of rays) {
+        const playerToRay = normalizeVector(subtract(ray, gameManager.player));
+        context.lineTo(ray.x + playerToRay.x * 40, ray.y + playerToRay.y * 40);
+        context.fillStyle = "orange";
+        context.fillRect(ray.x + playerToRay.x - 3, ray.y + playerToRay.y - 3, 3, 3);
+    }
+    context.lineTo(
+        gameManager.player.x + Math.cos(flashlightStartAngle) * 2000,
+        gameManager.player.y + Math.sin(flashlightStartAngle) * 2000
+    );
+    context.fillStyle = darknessMaskColor;
+    context.fill();
+
+    const flashlightGradient = context.createConicGradient(
+        gameManager.player.angle,
+        gameManager.player.x,
+        gameManager.player.y
+    );
+    if (gameManager.getGameState("lightOn") && flashlightSize) {
+        flashlightGradient.addColorStop(0, "transparent");
+        flashlightGradient.addColorStop(flashlightSize / 4, "transparent");
+        flashlightGradient.addColorStop(1 - flashlightSize / 4, "transparent");
+        flashlightGradient.addColorStop(1, "transparent");
+    }
+
+    flashlightGradient.addColorStop(flashlightSize / 2, darknessMaskColor);
+    flashlightGradient.addColorStop(1 - flashlightSize / 2, darknessMaskColor);
+
+    context.fillStyle = flashlightGradient;
+    context.fillRect(0, 0, wallsImage.width, wallsImage.height);
+
+    context.restore();
 
     context.restore();
 

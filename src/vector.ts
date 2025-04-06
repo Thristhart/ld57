@@ -75,6 +75,10 @@ export function dot(a: Vector, b: Vector) {
     return a.x * b.x + a.y * b.y;
 }
 
+export function crossProduct(a: Vector, b: Vector) {
+    return a.x * b.y - a.y * b.x;
+}
+
 export function angleBetweenPoints(a: Vector, b: Vector) {
     return getDirectionAngle(subtract(a, b));
 }
