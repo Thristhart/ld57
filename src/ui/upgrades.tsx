@@ -106,7 +106,6 @@ function PurchasedUpgrade(props: { upgradeMetadata: Upgrade; index: number }) {
     return (
         <div onMouseEnter={fnShowTooltip} onMouseLeave={fnHideTooltip} ref={ref} className={styles.UpgradeItem}>
             {tooltip.tooltipContent}
-            <div className={styles.UnlockedIcon}>{index + 1}</div>
             <img height={upgradeSize} width={upgradeSize} src={ownedImageUrl} />
         </div>
     );

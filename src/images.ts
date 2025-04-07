@@ -55,8 +55,8 @@ export const ironOreImage = loadImage(ironOreUrl);
 import fancyOreUrl from "../assets/ocean_objects/minerals/fancy_ore.png";
 export const fancyOreImage = loadImage(fancyOreUrl);
 
-import fancyOre2Url from "../assets/ocean_objects/minerals/fancy_ore2.png";
-export const fancyOre2Image = loadImage(fancyOre2Url);
+import cobaltOreUrl from "../assets/ocean_objects/minerals/cobalt_ore.png";
+export const cobaltOreImage = loadImage(cobaltOreUrl);
 
 // fish
 import cuteFish1ImageUrl from "../assets/ocean_objects/fish/cute_fish_1.png";

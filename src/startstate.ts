@@ -1,16 +1,17 @@
 import { baseFlock } from "./entities/boids/constants";
-import { FlockSetting } from "./entities/boids/types";
+import { FlockSetting, PartialFlockSetting } from "./entities/boids/types";
 import { CollectableConfig, CollectableMetadata, GameState, Upgrade } from "./gametypes";
 import {
     creepyFish3Image,
     creepyFish4Image,
     cuteFish1Image,
-    fancyOre2Image,
+    cobaltOreImage,
     fancyOreImage,
     ironOreImage,
-    redRectImage,
+    fleshMoteImage,
+    eyeBallImage,
 } from "./images";
-import { Vector } from "./vector";
+import merge from "lodash.merge";
 
 export const introParagraph =
     "You have been assigned by the Organization for Deep Exploration and Protection of Terrestrial and Hydrospatial Systems to investigate the mysterious disappearance of one of their lead ecologists. Equipped with the state-of-the-art Submersible for Underwater Mapping and Exploration—identical to the one used by the missing researcher—you’ll venture into uncharted waters. This advanced vessel is capable of adapting to hostile environments by integrating local resources for self-repair and modification. Now, it’s up to you: delve into the unknown, uncover the truth behind the disappearance, and, if possible, bring the researcher back to safety. The clock is ticking—are you ready to face the depths?";
@@ -36,7 +37,7 @@ export const upgrades = {
         {
             description: "10 slots",
             upgradeValue: 10,
-            materials: { copper: 1, sand: 1 },
+            materials: { eyeball: 3, sand: 1 },
         },
     ],
     fuelUpgradeLevel: [
@@ -75,34 +76,55 @@ export const defaultGameState: GameState = {
     alert: null,
 };
 
-function makeFlock(flockType: CollectableName, image: HTMLImageElement, position: Vector): FlockSetting {
-    return {
-        ...baseFlock,
-        image,
-        flockType,
-        characteristics: {
-            ...baseFlock.characteristics,
-            roost: {
-                ...baseFlock.characteristics.roost,
-                position,
-            },
-        },
-    };
+function makeFlock(partialSettings: PartialFlockSetting): FlockSetting {
+    return merge({}, baseFlock, partialSettings);
 }
 
 export const flockList: FlockSetting[] = [
-    makeFlock("cuteFish", cuteFish1Image, { x: 2000, y: 600 }),
-    makeFlock("creepyFish3", creepyFish3Image, { x: 2300, y: 600 }),
-    makeFlock("creepyFish4", creepyFish4Image, { x: 2600, y: 600 }),
+    makeFlock({
+        image: cuteFish1Image,
+        flockType: "cuteFish",
+        characteristics: {
+            roost: { position: { x: 2000, y: 600 } },
+            flockingBoids: {
+                speedRatio: 0.2,
+            },
+        },
+    }),
+    makeFlock({
+        image: creepyFish3Image,
+        flockType: "creepyFish3",
+        characteristics: {
+            roost: { position: { x: 2300, y: 600 } },
+            flockingBoids: {
+                count: 5,
+                speedRatio: 0.5,
+            },
+        },
+    }),
+    makeFlock({
+        image: creepyFish4Image,
+        flockType: "creepyFish4",
+        characteristics: {
+            roost: { position: { x: 2600, y: 600 } },
+            flockingBoids: {
+                count: 3,
+                speedRatio: 0.7,
+            },
+        },
+    }),
 ];
 
 import ironImageUrl from "#assets/ocean_objects/minerals/iron_ore.png";
-import cobaltOreUrl from "#assets/ocean_objects/minerals/fancy_ore2.png";
+import cobaltOreUrl from "#assets/ocean_objects/minerals/cobalt_ore.png";
 import crystalOreUrl from "#assets/ocean_objects/minerals/fancy_ore.png";
 
 import cuteFishImageUrl from "#assets/ocean_objects/fish/cute_fish_1.png";
 import creepyFish3Url from "#assets/ocean_objects/fish/creepy_fish_3.png";
 import creepyFish4Url from "#assets/ocean_objects/fish/creepy_fish_4.png";
+
+import eyeballImageUrl from "#assets/ocean_objects/eldritch/eyeball1.png";
+import fleshMoteImageUrl from "#assets/ocean_objects/eldritch/flesh_mote1.png";
 
 export const collectablesList: CollectableConfig[] = [
     {
@@ -119,7 +141,7 @@ export const collectablesList: CollectableConfig[] = [
         y: 400,
         height: 50,
         width: 50,
-        image: fancyOre2Image,
+        image: cobaltOreImage,
     },
     {
         resource: "crystal",
@@ -128,6 +150,22 @@ export const collectablesList: CollectableConfig[] = [
         height: 50,
         width: 50,
         image: fancyOreImage,
+    },
+    {
+        resource: "fleshMote",
+        x: 1900,
+        y: 400,
+        height: 50,
+        width: 50,
+        image: fleshMoteImage,
+    },
+    {
+        resource: "eyeball",
+        x: 1800,
+        y: 400,
+        height: 50,
+        width: 50,
+        image: eyeBallImage,
     },
 ];
 
@@ -168,7 +206,7 @@ export const collectablesMetadata = {
         name: "creepyFish3",
         imageUrl: creepyFish3Url,
         description: "this one is kind of weird",
-        fuelPoints: 20,
+        fuelPoints: 40,
         hullPoints: 0,
         storyMessage: "Discovered a creepyfish3, what do we even do with this",
     },
@@ -176,9 +214,25 @@ export const collectablesMetadata = {
         name: "creepyFish4",
         imageUrl: creepyFish4Url,
         description: "this one is even weirder",
-        fuelPoints: 20,
+        fuelPoints: 60,
         hullPoints: 0,
         storyMessage: "Discovered a creepyfish4, this is even weirder",
+    },
+    eyeball: {
+        name: "eyeball",
+        imageUrl: eyeballImageUrl,
+        description: "its stares",
+        fuelPoints: 150,
+        hullPoints: 0,
+        storyMessage: "Discovered an eyeball, it is helping you see bigger and greater things",
+    },
+    fleshMote: {
+        name: "fleshMote",
+        imageUrl: fleshMoteImageUrl,
+        description: "the machine hums in excitement",
+        fuelPoints: 150,
+        hullPoints: 0,
+        storyMessage: "Discovered a flesh mote, im not even sure what a flesh mote is tbh",
     },
 } as const satisfies { [name: string]: CollectableMetadata };
 
