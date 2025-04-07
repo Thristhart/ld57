@@ -56,9 +56,9 @@ function Intro() {
                     <div className={"IntroParagraph"}>
                         Back in college, you two were roommates, the two of you dreamed about creating such a vessel.
                         After graduation, the two of you worked together for years in order to make those dreams into
-                        reality. However, their impulsive nature led them to take the first working prototype on a joy
-                        ride. That was a year ago. Building another one by yourself was a monumental endeavor, fueled by
-                        rage and betrayal. You have your own EvoAdaptive SymbioSub now.
+                        reality. However, their impulsive nature led them to take the first working prototype on a
+                        joyride. That was a year ago. Building another one by yourself was a monumental endeavor, fueled
+                        by rage and betrayal. You have your own EvoAdaptive SymbioSub now.
                     </div>
                     <div className={"IntroParagraph"}>
                         It is time to discover the fate of your partner and your shared dream.

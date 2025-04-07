@@ -73,7 +73,7 @@ export class GameManager {
 
     public checkpoints: Checkpoint[] = [];
     public isIntro = true;
-    public isDatingSim = false;
+    public isDatingSim = true;
 
     constructor() {
         const root = ReactDOM.createRoot(document.getElementById("root")!);
