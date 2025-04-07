@@ -77,7 +77,7 @@ export class Entity {
         addMut(this, this.velocity);
     }
 
-    draw(context: CanvasRenderingContext2D) {
+    draw(context: CanvasRenderingContext2D, image?: HTMLImageElement) {
         context.fillStyle = "cornflowerblue";
         context.beginPath();
         context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);

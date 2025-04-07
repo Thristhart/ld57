@@ -52,6 +52,7 @@ export interface FlockInstances {
 }
 
 export interface FlockSetting {
+    image: HTMLImageElement;
     flockType: CollectableName;
     forces: {
         alignment: {

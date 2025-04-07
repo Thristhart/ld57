@@ -52,7 +52,7 @@ export default class Boid extends Entity {
         );
     }
 
-    draw(context: CanvasRenderingContext2D) {
+    draw(context: CanvasRenderingContext2D, image: HTMLImageElement) {
         context.save();
         context.translate(this.x, this.y);
         const directionAngleRad = getDirectionAngle(this.speed);
@@ -64,8 +64,7 @@ export default class Boid extends Entity {
         if (flip) {
             context.scale(1, -1);
         }
-
-        context.drawImage(cuteFish1Image, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
+        context.drawImage(image, -this.radius, -this.radius, this.radius * 2, this.radius * 2);
 
         context.restore();
     }

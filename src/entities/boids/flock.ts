@@ -65,7 +65,7 @@ export default class Flock extends Entity {
     draw(virtualContext: CanvasRenderingContext2D) {
         const { flockingBoids } = this.instances;
         for (let i = 0; i < flockingBoids.length; i += 1) {
-            flockingBoids[i].draw(virtualContext);
+            flockingBoids[i].draw(virtualContext, this.settings.image);
         }
     }
 }

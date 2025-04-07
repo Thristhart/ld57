@@ -20,10 +20,11 @@ import { Entity } from "./entities/entity";
 import { Player } from "./entities/player";
 import { Checkpoint, GameState, GameUpgradeLevels, Message } from "./gametypes";
 import { screenshakeKeyframes } from "./screenshake";
-import { CollectableName, defaultGameState, flockList, upgrades } from "./startstate";
+import { CollectableName, collectablesList, defaultGameState, flockList, upgrades } from "./startstate";
 import { Vector } from "./vector";
 import merge from "lodash.merge";
 import { MessageEntity } from "./entities/messageentity";
+import { Collectable } from "./entities/collectable";
 
 const fuelScale = 10;
 let nextEntId = 0;
@@ -59,6 +60,7 @@ export class GameManager {
     public gameOverTimestamp: number | undefined;
 
     public checkpoints: Checkpoint[] = [];
+    public isIntro = true;
 
     constructor() {
         const root = ReactDOM.createRoot(document.getElementById("root")!);
@@ -66,6 +68,7 @@ export class GameManager {
             root.render(
                 <React.StrictMode>
                     <App
+                        isIntro={this.isIntro}
                         loading={this.loading}
                         gameOver={this.gameOverTimestamp !== undefined}
                         hasCheckpoint={this.checkpoints.length > 0}
@@ -75,9 +78,11 @@ export class GameManager {
         this.rerenderUI = rootRender;
 
         this.player = this.addEntity(new Player(2000, 200));
-        // collectablesList.forEach((collectable) => {
-        //     this.addEntity(new Collectable(collectable));
-        // });
+
+        collectablesList.forEach((collectable) => {
+            this.addEntity(new Collectable(collectable));
+        });
+
         flockList.forEach((flock) => {
             this.addEntity(new Flock(flock));
         });
@@ -130,6 +135,11 @@ export class GameManager {
         const value = this.gameState.upgrades[property][level].upgradeValue;
         return value;
     }
+
+    public startGame = () => {
+        this.isIntro = false;
+        this.forceUpdate();
+    };
 
     public forceUpdate = () => this.rerenderUI();
 

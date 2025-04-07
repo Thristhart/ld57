@@ -21,14 +21,14 @@ export const UpgradeGUI = () => {
         <div className={styles.Upgrades}>
             <div className={styles.UpgradeHeader}>Subsumable Upgrades</div>
             <div className={styles.UpgradesCtn}>
-                {/* <UpgradePath category="Fuel" upgrades={upgrades.fuelUpgradeLevel} />
-            <UpgradePath category="Hull" upgrades={upgrades.hullUpgradeLevel} /> */}
                 <UpgradePath category="Depth" upgrades={upgrades.depthUpgradeLevel} upgradeKey={"depthUpgradeLevel"} />
                 <UpgradePath
                     category="Inventory"
                     upgrades={upgrades.inventoryUpgradeLevel}
                     upgradeKey={"inventoryUpgradeLevel"}
                 />
+                <UpgradePath category="Fuel" upgrades={upgrades.fuelUpgradeLevel} upgradeKey={"fuelUpgradeLevel"} />
+                <UpgradePath category="Hull" upgrades={upgrades.hullUpgradeLevel} upgradeKey={"hullUpgradeLevel"} />
                 {/* <UpgradePath category="Grabber" upgrades={upgrades.grabberUpgradeLevel} />
             <UpgradePath category="Light" upgrades={upgrades.lightUpgradeLevel} />
             <UpgradePath category="Speed" upgrades={upgrades.speedUpgradeLevel} /> */}

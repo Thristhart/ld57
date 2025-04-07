@@ -54,6 +54,7 @@ export default class FlockingBoid extends Boid {
         this.resetFlockingForces();
         this.carelessnessRatio = 1 + Math.random();
         this.swayFlapAngle = 30;
+        this.inventoryType = flock.settings.flockType;
     }
 
     resetFlockingForces() {

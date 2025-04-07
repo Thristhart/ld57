@@ -48,8 +48,32 @@ export const redRectImage = loadImage(redRectImageUrl);
 import backgroundImageUrl from "../assets/ocean_background.png";
 export const backgroundImage = loadImage(backgroundImageUrl);
 
+// minerals
+import ironOreUrl from "../assets/ocean_objects/minerals/iron_ore.png";
+export const ironOreImage = loadImage(ironOreUrl);
+
+import fancyOreUrl from "../assets/ocean_objects/minerals/fancy_ore.png";
+export const fancyOreImage = loadImage(fancyOreUrl);
+
+import fancyOre2Url from "../assets/ocean_objects/minerals/fancy_ore2.png";
+export const fancyOre2Image = loadImage(fancyOre2Url);
+
+// fish
 import cuteFish1ImageUrl from "../assets/ocean_objects/fish/cute_fish_1.png";
 export const cuteFish1Image = loadImage(cuteFish1ImageUrl);
+
+import creepyFish3Url from "../assets/ocean_objects/fish/creepy_fish_3.png";
+export const creepyFish3Image = loadImage(creepyFish3Url);
+
+import creepyFish4Url from "../assets/ocean_objects/fish/creepy_fish_4.png";
+export const creepyFish4Image = loadImage(creepyFish4Url);
+
+//eldritch
+import eyeballUrl from "../assets/ocean_objects/eldritch/eyeball1.png";
+export const eyeBallImage = loadImage(eyeballUrl);
+
+import fleshMoteUrl from "../assets/ocean_objects/eldritch/flesh_mote1.png";
+export const fleshMoteImage = loadImage(fleshMoteUrl);
 
 let resolveImageLoad: () => void;
 export const imageLoadPromise = new Promise<void>((resolve) => {

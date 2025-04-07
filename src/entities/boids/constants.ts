@@ -1,6 +1,8 @@
+import { cuteFish1Image } from "#src/images.ts";
 import { FlockSetting, SpawnSpeedPattern, SpawnSpotPattern } from "./types";
 
 export const baseFlock = {
+    image: cuteFish1Image,
     flockType: "cuteFish",
     forces: {
         alignment: {

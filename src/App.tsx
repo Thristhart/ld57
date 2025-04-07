@@ -7,8 +7,19 @@ import { onMouseMove } from "./input";
 import { Message, LightSwitch, Grabber } from "./ui/components";
 import { DepthMeter, HullIntegrity, Fuel } from "./ui/meters";
 import { UpgradeGUI } from "./ui/upgrades";
+import { introParagraph } from "./startstate";
 
-function App({ loading, gameOver, hasCheckpoint }: { loading: boolean; gameOver: boolean; hasCheckpoint: boolean }) {
+function App({
+    isIntro,
+    loading,
+    gameOver,
+    hasCheckpoint,
+}: {
+    isIntro: boolean;
+    loading: boolean;
+    gameOver: boolean;
+    hasCheckpoint: boolean;
+}) {
     return (
         <div className={"AppCtn"}>
             <LeftUI />
@@ -20,15 +31,27 @@ function App({ loading, gameOver, hasCheckpoint }: { loading: boolean; gameOver:
                 onClick={() => gameManager.click()}
             />
             <RightUI />
+            {isIntro && <Intro />}
             {loading && <div className="LoadingSpinner Overlay">Loading...</div>}
             {gameOver && <GameOver hasCheckpoint={hasCheckpoint} />}
         </div>
     );
 }
 
+function Intro() {
+    return (
+        <div className={"Intro Overlay"}>
+            <div className={"IntroTitle"}>SUBSUME</div>
+            <div className={"IntroParagraph"}>{introParagraph}</div>
+            <button className={"PlayButton"} style={{ cursor: "pointer" }} onClick={gameManager.startGame}>
+                Play
+            </button>
+        </div>
+    );
+}
 function GameOver(props: { hasCheckpoint: boolean }) {
     return (
-        <div className="LoadingSpinner Overlay">
+        <div className="GameOver Overlay">
             GAME OVER
             {props.hasCheckpoint && (
                 <button style={{ cursor: "pointer" }} onClick={() => gameManager.loadCheckpoint()}>
