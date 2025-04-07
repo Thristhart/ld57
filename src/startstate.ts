@@ -282,6 +282,7 @@ function addCollectable(
         ...options,
     });
 }
+addCollectable("cobalt", { x: 2480, y: 9291 });
 
 export const collectablesMetadata = {
     iron: {
