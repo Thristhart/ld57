@@ -10,7 +10,7 @@ import classNames from "classnames";
 export const DepthMeter = React.memo(() => {
     const currentDepth = useGameStateValue("currentDepth");
     const maxDepth = useUpgradedMaxValue("depthUpgradeLevel");
-    const arrowPosition = (currentDepth / maxDepth) * 95;
+    const arrowPosition = Math.min(1, currentDepth / maxDepth) * 100;
     return (
         <div className={styles.DepthMeter}>
             <div className={classNames(styles.MeterHeader, styles.VerticalHeader)}>{`CURRENT DEPTH`} </div>
@@ -41,7 +41,7 @@ export const DepthMeter = React.memo(() => {
                             <div className={styles.DepthCell3}></div>
                         </div>
                     </div>
-                    <div className={styles.DepthMax}>
+                    <div className={styles.DepthMax} data-warning={arrowPosition >= 100}>
                         <div className={styles.MaxMeterHeader}>{`MAX DEPTH`} </div>
                         <div>{`${maxDepth} m`}</div>
                     </div>

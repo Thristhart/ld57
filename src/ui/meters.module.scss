@@ -112,6 +112,22 @@
     background-color: #ee69a9;
     justify-self: flex-end;
 }
+.DepthMax[data-warning="true"] {
+    animation: flashingWarning linear infinite 600ms;
+}
+@keyframes flashingWarning {
+    0%,
+    33% {
+        background-color: #ee69a9;
+    }
+    50%,
+    88% {
+        background-color: red;
+    }
+    100% {
+        background-color: #ee69a9;
+    }
+}
 
 .MaxMeterHeader {
     z-index: 12;
