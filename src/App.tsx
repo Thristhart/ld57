@@ -8,6 +8,7 @@ import { Message, LightSwitch, Grabber } from "./ui/components";
 import { DepthMeter, HullIntegrity, Fuel } from "./ui/meters";
 import { UpgradeGUI } from "./ui/upgrades";
 import { introParagraph } from "./startstate";
+import { MuteButton } from "./ui/mutebutton";
 
 function App({
     isIntro,
@@ -71,6 +72,7 @@ function LeftUI() {
             <DepthMeter />
             <HullIntegrity />
             <Fuel />
+            <MuteButton />
             <Message />
         </div>
     );
