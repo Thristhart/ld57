@@ -201,23 +201,63 @@ function addCollectable(
         ...options,
     });
 }
-addCollectable("iron", { x: 2298, y: 778 });
-addCollectable("iron", { x: 1515, y: 2127 });
-addCollectable("iron", { x: 2851, y: 5897 });
-addCollectable("iron", { x: 3205, y: 5644 });
-addCollectable("iron", { x: 1178, y: 7428 });
-addCollectable("iron", { x: 1034, y: 7329 });
-addCollectable("iron", { x: 904, y: 7127 });
-addCollectable("iron", { x: 1900, y: 9445 });
-addCollectable("iron", { x: 2644, y: 9302 });
-addCollectable("iron", { x: 771, y: 12450 });
-addCollectable("iron", { x: 1015, y: 12624 });
-addCollectable("iron", { x: 3055, y: 13555 });
-addCollectable("iron", { x: 1035, y: 15335 });
-addCollectable("iron", { x: 1402, y: 14605 });
-
-addCollectable("cobalt", { x: 2480, y: 9291 });
-
+//iron
+addCollectable("iron", { x: 1427, y: 1807 });
+addCollectable("iron", { x: 2866, y: 5594 });
+addCollectable("iron", { x: 3065, y: 5572 });
+addCollectable("iron", { x: 1061, y: 7056 });
+addCollectable("iron", { x: 1133, y: 7157 });
+addCollectable("iron", { x: 1199, y: 7224 });
+addCollectable("iron", { x: 1327, y: 7264 });
+addCollectable("iron", { x: 3157, y: 9043 });
+addCollectable("iron", { x: 735, y: 12664 });
+addCollectable("iron", { x: 2920, y: 9978 });
+addCollectable("iron", { x: 3024, y: 13725 });
+addCollectable("iron", { x: 818, y: 15222 });
+//cobalt_ore
+addCollectable("cobalt", { x: 2929, y: 8828 });
+addCollectable("cobalt", { x: 2983, y: 9162 });
+addCollectable("cobalt", { x: 701, y: 12434 });
+addCollectable("cobalt", { x: 733, y: 12234 });
+addCollectable("cobalt", { x: 1024, y: 12506 });
+addCollectable("cobalt", { x: 2784, y: 10192 });
+addCollectable("cobalt", { x: 3060, y: 10395 });
+addCollectable("cobalt", { x: 3167, y: 13289 });
+addCollectable("cobalt", { x: 2705, y: 13442 });
+addCollectable("cobalt", { x: 3104, y: 13469 });
+addCollectable("cobalt", { x: 959, y: 15423 });
+addCollectable("cobalt", { x: 929, y: 15045 });
+addCollectable("cobalt", { x: 2670, y: 17756 });
+addCollectable("cobalt", { x: 3069, y: 18087 });
+addCollectable("cobalt", { x: 3119, y: 17930 });
+addCollectable("cobalt", { x: 3032, y: 17844 });
+addCollectable("cobalt", { x: 2827, y: 17925 });
+addCollectable("cobalt", { x: 2620, y: 19260 });
+addCollectable("cobalt", { x: 2824, y: 20431 });
+addCollectable("cobalt", { x: 3062, y: 23061 });
+addCollectable("cobalt", { x: 3495, y: 23001 });
+addCollectable("cobalt", { x: 2424, y: 23166 });
+//crystal in biome3
+addCollectable("crystal", { x: 2844, y: 22820 });
+addCollectable("crystal", { x: 2126, y: 23008 });
+addCollectable("crystal", { x: 2629, y: 21892 });
+addCollectable("crystal", { x: 2449, y: 22102 });
+addCollectable("crystal", { x: 2064, y: 21883 });
+addCollectable("crystal", { x: 2423, y: 16924 });
+addCollectable("crystal", { x: 2521, y: 17156 });
+addCollectable("crystal", { x: 2396, y: 18088 });
+addCollectable("crystal", { x: 2554, y: 18317 });
+addCollectable("crystal", { x: 1817, y: 19649 });
+addCollectable("crystal", { x: 2512, y: 20286 });
+addCollectable("crystal", { x: 1080, y: 21981 });
+addCollectable("crystal", { x: 572, y: 22310 });
+addCollectable("crystal", { x: 482, y: 23266 });
+//cutefish2
+addCollectable("cuteFish2", { x: 1709, y: 15105 });
+addCollectable("cuteFish2", { x: 1670, y: 11142 }); 
+addCollectable("cuteFish2", { x: 1869, y: 20850 });
+//cutefish1
+addCollectable("cuteFish", { x: 2878, y: 12597 });
 export const collectablesMetadata = {
     iron: {
         name: "iron",
