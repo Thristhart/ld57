@@ -34,26 +34,30 @@ export function DatingSimOverlay() {
         );
     }
     return (
-        <div className={styles.DatingSimOverlay}>
-            <div className={styles.DatingPromptCtn}>
-                <img height={80} width={80} src={finalBossImage} />
-                <div className={styles.DatingPrompt}>{`The Creature: ${chuthuluText[currentPrompt].text}`}</div>
-            </div>
-            {answers && <div className={styles.DatingAnswerInstructions}>{`Choose an answer:`}</div>}
-            <div>
-                {answers &&
-                    answers.map((ans) => {
-                        if (ans.subReq !== undefined && playerUpgrade !== ans.subReq) {
-                            return null;
-                        }
-                        const answer = answerText[ans.answerKey];
+        <div className={styles.DatingSimCtn}>
+            <div className={styles.DatingSimOverlay}>
+                <img className={styles.FinalBossImage} height={500} width={500} src={finalBossImage} />
+                <div className={styles.TextContainer}>
+                    <div className={styles.DatingPromptCtn}>
+                        <div className={styles.DatingPrompt}>{`The Creature: ${chuthuluText[currentPrompt].text}`}</div>
+                    </div>
+                    {answers && <div className={styles.DatingAnswerInstructions}>{`Choose an answer:`}</div>}
+                    <div>
+                        {answers &&
+                            answers.map((ans) => {
+                                if (ans.subReq !== undefined && playerUpgrade !== ans.subReq) {
+                                    return null;
+                                }
+                                const answer = answerText[ans.answerKey];
 
-                        return (
-                            <div className={styles.DatingAnswer} onClick={() => setPrompt(ans.continues)}>
-                                {answer.text}
-                            </div>
-                        );
-                    })}
+                                return (
+                                    <div className={styles.DatingAnswer} onClick={() => setPrompt(ans.continues)}>
+                                        {answer.text}
+                                    </div>
+                                );
+                            })}
+                    </div>
+                </div>
             </div>
         </div>
     );
