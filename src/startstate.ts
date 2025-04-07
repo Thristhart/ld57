@@ -53,7 +53,7 @@ export const upgrades = {
     ],
     hullUpgradeLevel: [
         { description: "Max Hull Integrity 100 centiTitans", upgradeValue: 100, 
-			aterials: {} },
+			materials: {} },
         { description: "Max Hull Integrity 200 centiTitans", upgradeValue: 200,
 			materials: {iron:2,cobalt:2} },
         { description: "Max Hull Integrity 300 centiTitans", upgradeValue: 300,
