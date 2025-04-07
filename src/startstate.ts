@@ -160,54 +160,6 @@ import { Vector } from "./vector";
 
 export const collectablesList: CollectableConfig[] = [
     {
-        resource: "iron",
-        x: 1424,
-        y: 1846,
-        height: 100,
-        width: 100,
-        image: ironOreImage,
-    },
-    {
-        resource: "iron",
-        x: 2905,
-        y: 5631,
-        height: 100,
-        width: 100,
-        image: ironOreImage,
-    },
-    {
-        resource: "iron",
-        x: 3015,
-        y: 5628,
-        height: 100,
-        width: 100,
-        image: ironOreImage,
-    },
-    {
-        resource: "iron",
-        x: 1107,
-        y: 7184,
-        height: 100,
-        width: 100,
-        image: ironOreImage,
-    },
-    {
-        resource: "iron",
-        x: 1187,
-        y: 7258,
-        height: 100,
-        width: 100,
-        image: ironOreImage,
-    },
-    {
-        resource: "iron",
-        x: 1298,
-        y: 7272,
-        height: 100,
-        width: 100,
-        image: ironOreImage,
-    },
-    {
         resource: "cassette1",
         x: 1394,
         y: 2743,
@@ -223,40 +175,7 @@ export const collectablesList: CollectableConfig[] = [
         width: 100,
         image: cassetteImage,
     },
-    // {
-    //     resource: "cobalt",
-    //     x: 2100,
-    //     y: 400,
-    //     height: 50,
-    //     width: 50,
-    //     image: cobaltOreImage,
-    // },
-    // {
-    //     resource: "crystal",
-    //     x: 2200,
-    //     y: 400,
-    //     height: 50,
-    //     width: 50,
-    //     image: fancyOreImage,
-    // },
-    // {
-    //     resource: "fleshMote",
-    //     x: 1900,
-    //     y: 400,
-    //     height: 50,
-    //     width: 50,
-    //     image: fleshMoteImage,
-    // },
-    // {
-    //     resource: "eyeball",
-    //     x: 1800,
-    //     y: 400,
-    //     height: 50,
-    //     width: 50,
-    //     image: eyeBallImage,
-    // },
 ];
-
 const collectableImages = {
     iron: ironOreImage,
     cobalt: cobaltOreImage,
@@ -282,6 +201,21 @@ function addCollectable(
         ...options,
     });
 }
+addCollectable("iron", { x: 2298, y: 778 });
+addCollectable("iron", { x: 1515, y: 2127 });
+addCollectable("iron", { x: 2851, y: 5897 });
+addCollectable("iron", { x: 3205, y: 5644 });
+addCollectable("iron", { x: 1178, y: 7428 });
+addCollectable("iron", { x: 1034, y: 7329 });
+addCollectable("iron", { x: 904, y: 7127 });
+addCollectable("iron", { x: 1900, y: 9445 });
+addCollectable("iron", { x: 2644, y: 9302 });
+addCollectable("iron", { x: 771, y: 12450 });
+addCollectable("iron", { x: 1015, y: 12624 });
+addCollectable("iron", { x: 3055, y: 13555 });
+addCollectable("iron", { x: 1035, y: 15335 });
+addCollectable("iron", { x: 1402, y: 14605 });
+
 addCollectable("cobalt", { x: 2480, y: 9291 });
 
 export const collectablesMetadata = {

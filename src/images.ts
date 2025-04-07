@@ -98,6 +98,13 @@ export const fleshMoteImage = loadImage(fleshMoteUrl);
 import cassetteUrl from "../assets/ocean_objects/story/cassette_1.png";
 export const cassetteImage = loadImage(cassetteUrl);
 
+import claw1Url from "../assets/sub/sub_claw_level1.png";
+export const claw1Image = loadImage(claw1Url);
+import claw2Url from "../assets/sub/sub_claw_level2.png";
+export const claw2Image = loadImage(claw2Url);
+import claw3Url from "../assets/sub/sub_claw_level3.png";
+export const claw3Image = loadImage(claw3Url);
+
 let resolveImageLoad: () => void;
 export const imageLoadPromise = new Promise<void>((resolve) => {
     resolveImageLoad = resolve;
