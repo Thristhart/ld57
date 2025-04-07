@@ -56,7 +56,7 @@ export function useUpgradedMaxValue<K extends keyof GameUpgradeLevels>(
 const bossBoundsTopLeft = { x: 2360, y: 32772 };
 const bossBoundsBottomRight = { x: 3902, y: 35880 };
 const bossBoundsCameraPosition = { x: 3133, y: 33616 };
-const bossBoundsCameraScale = 0.7;
+const bossBoundsCameraScale = 1.1;
 const bossBoundsPlayerPos = { x: 2660, y: 33661 };
 const bossBoundsPlayerAngle = 5.88195;
 
@@ -338,6 +338,10 @@ export class GameManager {
             const distance = length(cameraDiff);
             const playerStart = { x: gameManager.player.x, y: gameManager.player.y, angle: gameManager.player.angle };
             const angleDiff = angleDistance(playerStart.angle, bossBoundsPlayerAngle);
+            const leftUI = document.querySelector(".LeftUI") as HTMLDivElement;
+            const rightUI = document.querySelector(".RightUI") as HTMLDivElement;
+            const canvas = document.querySelector("canvas") as HTMLCanvasElement;
+            (document.querySelector(".AppCtn") as HTMLElement).style.overflow = "hidden";
             animate({
                 apply(t) {
                     camera.scale = lerp(t, startCamera.scale, bossBoundsCameraScale);
@@ -347,14 +351,18 @@ export class GameManager {
                     gameManager.player.angle = playerStart.angle + lerp(t, 0, angleDiff);
                     gameManager.player.x = lerp(t, playerStart.x, bossBoundsPlayerPos.x);
                     gameManager.player.y = lerp(t, playerStart.y, bossBoundsPlayerPos.y);
+                    leftUI.style.transform = `scaleX(${1 - t})`;
+                    rightUI.style.transform = `scaleX(${1 - t})`;
+                    canvas.width = lerp(t, 1080, 1920);
+                    canvas.height = lerp(t, 1920, 1080);
                 },
-                duration: 1200,
+                duration: 1800,
             }).then(() => {
                 setTimeout(() => {
                     this.isAnimatingDatingSim = false;
                     this.isDatingSim = true;
                     this.forceUpdate();
-                }, 2000);
+                }, 3000);
             });
             this.forceUpdate();
         }

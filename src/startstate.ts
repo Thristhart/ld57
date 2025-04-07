@@ -457,6 +457,15 @@ addCollectable("tentaclePlant", { x: 2083, y: 31966 });
 addCollectable("tentaclePlant", { x: 2873, y: 32393 });
 addCollectable("tentaclePlant", { x: 1019, y: 33692 });
 
+
+//eyeBall
+addCollectable("eyeball", { x: 1555, y: 31658 });
+addCollectable("eyeball", { x: 2401, y: 31581 });
+addCollectable("eyeball", { x: 2357, y: 32473 });
+addCollectable("eyeball", { x: 1735, y: 34476 });
+addCollectable("eyeball", { x: 957, y: 34826 });
+addCollectable("eyeball", { x: 1071, y: 34233 });
+
 //cREEPY4
 
 flockList.push(

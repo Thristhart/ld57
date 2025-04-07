@@ -77,6 +77,9 @@ export const backgroundImageLoop2 = loadImage(backgroundImageLoop2Url);
 import backgroundImageBossUrl from "../assets/ocean_backgrounds/oceanbg_bottombossbase.png";
 export const backgroundImageBoss = loadImage(backgroundImageBossUrl);
 
+import warningBgUrl from "../assets/ui_elements/fuel_depleted_tooltipbg.png";
+export const warningBgImage = loadImage(warningBgUrl);
+
 // minerals
 import ironOreUrl from "../assets/ocean_objects/minerals/iron_ore.png";
 export const ironOreImage = loadImage(ironOreUrl);
