@@ -1,9 +1,16 @@
 import { Howl } from "howler";
 
-import bgmBiome1Url from "#assets/fakesound_workspace/bgm near surface maybe.mp3";
+import bgmBiome1StartUrl from "#assets/bgm/Stage 1 BGM Start.mp3";
+export const bgmBiome1Start = new Howl({ src: bgmBiome1StartUrl, loop: true });
+
+import bgmBiome1Url from "#assets/bgm/Stage 1 BGM Loop.mp3";
 export const bgmBiome1 = new Howl({ src: bgmBiome1Url, loop: true });
-import bgmBiome2Url from "#assets/fakesound_workspace/bgm corrupted maybe.mp3";
+import bgmBiome2Url from "#assets/bgm/Stage 2 BGM Loop.mp3";
 export const bgmBiome2 = new Howl({ src: bgmBiome2Url, loop: true });
+import bgmBiome3Url from "#assets/bgm/Stage 3 BGM Loop.mp3";
+export const bgmBiome3 = new Howl({ src: bgmBiome3Url, loop: true });
+import bgmBiome4Url from "#assets/bgm/Stage 4 BGM Loop.mp3";
+export const bgmBiome4 = new Howl({ src: bgmBiome4Url, loop: true });
 
 export let currentBgm: Howl | undefined = undefined;
 

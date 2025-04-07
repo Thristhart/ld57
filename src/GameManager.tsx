@@ -5,6 +5,8 @@ import App from "./App";
 import {
     bgmBiome1,
     bgmBiome2,
+    bgmBiome3,
+    bgmBiome4,
     playCollisionSound,
     pressureDamageSFX1,
     pressureDamageSFX2,
@@ -183,8 +185,12 @@ export class GameManager {
         // beware: arbitrary numbers, change these to match actual biome differences
         if (depth < 60) {
             switchBGM(bgmBiome1);
-        } else if (depth < 200) {
+        } else if (depth < 100) {
             switchBGM(bgmBiome2);
+        } else if (depth < 130) {
+            switchBGM(bgmBiome3);
+        } else if (depth < 160) {
+            switchBGM(bgmBiome4);
         }
 
         if (fuel <= 0) {
