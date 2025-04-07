@@ -185,6 +185,23 @@ export const flockList: FlockSetting[] = [
     }),
 ];
 
+// THEYFLOWER USE THISS!!!!!
+// makeFlock({
+//     image: cuteFish1Image, //change this
+//     flockType: "cuteFish2", // change this
+//     forces: {
+//         roosting: {
+//             distance: 300,
+//         },
+//     },
+//     characteristics: {
+//         roost: { position: { x: 1670, y: 11142 } },  // change this
+//         flockingBoids: {
+//             speedRatio: 0.2,
+//         },
+//     },
+// }),
+
 import ironImageUrl from "#assets/ocean_objects/minerals/iron_ore.png";
 import cobaltOreUrl from "#assets/ocean_objects/minerals/cobalt_ore.png";
 import crystalOreUrl from "#assets/ocean_objects/minerals/fancy_ore.png";
