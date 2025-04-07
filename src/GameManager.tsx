@@ -208,7 +208,7 @@ export class GameManager {
         // set the hull damage
         const hullPoints = this.gameState.hullPoints;
         if (this.player.collisions.length > 0 && length(this.player.velocity) > 6) {
-            const damage = length(this.player.velocity) / 2;
+            const damage = length(this.player.velocity) * 2;
             const newHullPoints = hullPoints - Math.floor(damage);
             this.setGameState("hullPoints", newHullPoints);
             playCollisionSound();

@@ -4,6 +4,7 @@ import styles from "./meters.module.scss";
 
 import depthMarkerImageUrl from "#assets/ui_elements/depthmarkeroutline.png";
 import batteryImageUrl from "#assets/ui_elements/Battery.png";
+import hullImageUrl from "#assets/ui_elements/hull_outline.png";
 import classNames from "classnames";
 
 export const DepthMeter = React.memo(() => {
@@ -64,18 +65,29 @@ export const HullIntegrity = () => {
     const percent = Math.floor((hullPoints / maxHullPoints) * 95);
     return (
         <div className={styles.HullIntegrity}>
-            <div className={classNames(styles.MeterHeader, styles.HorizontalHeader)}>{`HULL INTEGRITY`} </div>
-            <div className={styles.MeterContent}>
-                <div className={styles.MeterCurrent}>
-                    <div>{`${Math.floor(hullPoints)}/${maxHullPoints}`}</div>
+            <div className={styles.HullHeader}>
+                <div className={classNames(styles.MeterHeader, styles.HorizontalHeader)}>{`HULL INTEGRITY`} </div>
+                <div className={styles.HullCount}>{`${Math.floor(hullPoints)}/${maxHullPoints}`}</div>
+            </div>
+            <div className={styles.HullContent}>
+                <img className={styles.HullBG} src={hullImageUrl} />
+                <div className={styles.HullFill}>
+                    <div className={styles.HullFillAnchor}>
+                        <div
+                            className={classNames(
+                                styles.HullFillInner,
+                                percent > 70
+                                    ? styles.HullInnerFill1
+                                    : percent > 30
+                                    ? styles.HullInnerFill2
+                                    : styles.HullInnerFill3
+                            )}
+                            style={{
+                                width: `${percent}%`,
+                            }}
+                        />
+                    </div>
                 </div>
-                <div className={styles.MeterFillCtn}>
-                    <div
-                        className={styles.MeterFill}
-                        style={{ height: `${percent}%`, backgroundColor: percent < 20 ? "red" : "#217B9C" }}
-                    />
-                </div>
-                <img className={styles.MeterBGImage} src={depthMarkerImageUrl} />
             </div>
         </div>
     );
