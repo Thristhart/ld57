@@ -89,10 +89,10 @@ import creepyFish4Url from "../assets/ocean_objects/fish/creepy_fish_4.png";
 export const creepyFish4Image = loadImage(creepyFish4Url);
 
 //eldritch
-import eyeballUrl from "../assets/ocean_objects/eldritch/eyeball1.png";
+import eyeballUrl from "../assets/ocean_objects/eldritch/eyeball.png";
 export const eyeBallImage = loadImage(eyeballUrl);
 
-import fleshMoteUrl from "../assets/ocean_objects/eldritch/flesh_mote1.png";
+import fleshMoteUrl from "../assets/ocean_objects/eldritch/flesh_mote.png";
 export const fleshMoteImage = loadImage(fleshMoteUrl);
 
 import cassetteUrl from "../assets/ocean_objects/story/cassette_1.png";

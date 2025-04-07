@@ -86,6 +86,7 @@ function makeFlock(partialSettings: PartialFlockSetting): FlockSetting {
 }
 
 export const flockList: FlockSetting[] = [
+    // cute Fish
     makeFlock({
         image: cuteFish1Image,
         flockType: "cuteFish",
@@ -121,28 +122,67 @@ export const flockList: FlockSetting[] = [
             },
         },
     }),
-    // makeFlock({
-    //     image: creepyFish3Image,
-    //     flockType: "creepyFish3",
-    //     characteristics: {
-    //         roost: { position: { x: 2300, y: 600 } },
-    //         flockingBoids: {
-    //             count: 5,
-    //             speedRatio: 0.5,
-    //         },
-    //     },
-    // }),
-    // makeFlock({
-    //     image: creepyFish4Image,
-    //     flockType: "creepyFish4",
-    //     characteristics: {
-    //         roost: { position: { x: 2600, y: 600 } },
-    //         flockingBoids: {
-    //             count: 3,
-    //             speedRatio: 0.7,
-    //         },
-    //     },
-    // }),
+    makeFlock({
+        image: cuteFish1Image,
+        flockType: "cuteFish",
+        forces: {
+            roosting: {
+                distance: 300,
+            },
+        },
+        characteristics: {
+            roost: { position: { x: 2878, y: 12597 } },
+            flockingBoids: {
+                speedRatio: 0.2,
+            },
+        },
+    }),
+    // Cute Fish 2
+    makeFlock({
+        image: cuteFish1Image,
+        flockType: "cuteFish2",
+        forces: {
+            roosting: {
+                distance: 300,
+            },
+        },
+        characteristics: {
+            roost: { position: { x: 1869, y: 20850 } },
+            flockingBoids: {
+                speedRatio: 0.2,
+            },
+        },
+    }),
+    makeFlock({
+        image: cuteFish1Image,
+        flockType: "cuteFish2",
+        forces: {
+            roosting: {
+                distance: 300,
+            },
+        },
+        characteristics: {
+            roost: { position: { x: 1709, y: 15105 } },
+            flockingBoids: {
+                speedRatio: 0.2,
+            },
+        },
+    }),
+    makeFlock({
+        image: cuteFish1Image,
+        flockType: "cuteFish2",
+        forces: {
+            roosting: {
+                distance: 300,
+            },
+        },
+        characteristics: {
+            roost: { position: { x: 1670, y: 11142 } },
+            flockingBoids: {
+                speedRatio: 0.2,
+            },
+        },
+    }),
 ];
 
 import ironImageUrl from "#assets/ocean_objects/minerals/iron_ore.png";
@@ -153,8 +193,8 @@ import cuteFishImageUrl from "#assets/ocean_objects/fish/cute_fish_1.png";
 import creepyFish3Url from "#assets/ocean_objects/fish/creepy_fish_3.png";
 import creepyFish4Url from "#assets/ocean_objects/fish/creepy_fish_4.png";
 
-import eyeballImageUrl from "#assets/ocean_objects/eldritch/eyeball1.png";
-import fleshMoteImageUrl from "#assets/ocean_objects/eldritch/flesh_mote1.png";
+import eyeballImageUrl from "#assets/ocean_objects/eldritch/eyeball.png";
+import fleshMoteImageUrl from "#assets/ocean_objects/eldritch/flesh_mote.png";
 import cassetteUrl from "../assets/ocean_objects/story/cassette_1.png";
 import { Vector } from "./vector";
 
@@ -213,21 +253,21 @@ addCollectable("iron", { x: 3157, y: 9043 });
 addCollectable("iron", { x: 735, y: 12664 });
 addCollectable("iron", { x: 2920, y: 9978 });
 addCollectable("iron", { x: 3024, y: 13725 });
-addCollectable("iron", { x: 818, y: 15222 });
+addCollectable("iron", { x: 880, y: 15222 });
 //cobalt_ore
-addCollectable("cobalt", { x: 2929, y: 8828 });
+addCollectable("cobalt", { x: 2929, y: 8895 });
 addCollectable("cobalt", { x: 2983, y: 9162 });
-addCollectable("cobalt", { x: 701, y: 12434 });
-addCollectable("cobalt", { x: 733, y: 12234 });
+addCollectable("cobalt", { x: 760, y: 12434 });
+addCollectable("cobalt", { x: 750, y: 12234 });
 addCollectable("cobalt", { x: 1024, y: 12506 });
-addCollectable("cobalt", { x: 2784, y: 10192 });
-addCollectable("cobalt", { x: 3060, y: 10395 });
-addCollectable("cobalt", { x: 3167, y: 13289 });
-addCollectable("cobalt", { x: 2705, y: 13442 });
+addCollectable("cobalt", { x: 2800, y: 10192 });
+addCollectable("cobalt", { x: 3000, y: 10395 });
+addCollectable("cobalt", { x: 3100, y: 13289 });
+addCollectable("cobalt", { x: 2725, y: 13442 });
 addCollectable("cobalt", { x: 3104, y: 13469 });
-addCollectable("cobalt", { x: 959, y: 15423 });
-addCollectable("cobalt", { x: 929, y: 15045 });
-addCollectable("cobalt", { x: 2670, y: 17756 });
+addCollectable("cobalt", { x: 1000, y: 15423 });
+addCollectable("cobalt", { x: 1000, y: 15045 });
+addCollectable("cobalt", { x: 2650, y: 17756 });
 addCollectable("cobalt", { x: 3069, y: 18087 });
 addCollectable("cobalt", { x: 3119, y: 17930 });
 addCollectable("cobalt", { x: 3032, y: 17844 });
@@ -238,26 +278,21 @@ addCollectable("cobalt", { x: 3062, y: 23061 });
 addCollectable("cobalt", { x: 3495, y: 23001 });
 addCollectable("cobalt", { x: 2424, y: 23166 });
 //crystal in biome3
-addCollectable("crystal", { x: 2844, y: 22820 });
-addCollectable("crystal", { x: 2126, y: 23008 });
-addCollectable("crystal", { x: 2629, y: 21892 });
+addCollectable("crystal", { x: 2844, y: 22700 });
+addCollectable("crystal", { x: 2126, y: 22950 });
+addCollectable("crystal", { x: 2700, y: 21892 });
 addCollectable("crystal", { x: 2449, y: 22102 });
-addCollectable("crystal", { x: 2064, y: 21883 });
-addCollectable("crystal", { x: 2423, y: 16924 });
+addCollectable("crystal", { x: 2050, y: 21800 });
+addCollectable("crystal", { x: 2400, y: 16924 });
 addCollectable("crystal", { x: 2521, y: 17156 });
 addCollectable("crystal", { x: 2396, y: 18088 });
-addCollectable("crystal", { x: 2554, y: 18317 });
+addCollectable("crystal", { x: 2500, y: 18317 });
 addCollectable("crystal", { x: 1817, y: 19649 });
 addCollectable("crystal", { x: 2512, y: 20286 });
 addCollectable("crystal", { x: 1080, y: 21981 });
 addCollectable("crystal", { x: 572, y: 22310 });
 addCollectable("crystal", { x: 482, y: 23266 });
-//cutefish2
-addCollectable("cuteFish2", { x: 1709, y: 15105 });
-addCollectable("cuteFish2", { x: 1670, y: 11142 }); 
-addCollectable("cuteFish2", { x: 1869, y: 20850 });
-//cutefish1
-addCollectable("cuteFish", { x: 2878, y: 12597 });
+
 export const collectablesMetadata = {
     iron: {
         name: "iron",
@@ -284,7 +319,6 @@ export const collectablesMetadata = {
         storyMessage: "Discovered a mysterious glowing crystal, it contains previously undiscovered isotopes.",
     },
     cuteFish: {
-		
         name: "cuteFish",
         imageUrl: cuteFishImageUrl,
         description: "Almost too cute to subsume!",
@@ -292,9 +326,9 @@ export const collectablesMetadata = {
         hullPoints: 0,
         storyMessage: "Discovered a cute fish, fish are fuel not food",
     },
-        cuteFish2: {
+    cuteFish2: {
         name: "cuteFish2",
-        imageUrl: cuteFishImageUrl,//REMEMBER TO CHANGE THIS
+        imageUrl: cuteFishImageUrl, //REMEMBER TO CHANGE THIS
         description: "REMEMBER TO CHANGE THIS",
         fuelPoints: 40,
         hullPoints: 0,
