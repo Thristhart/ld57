@@ -18,6 +18,7 @@ import {
     eyeBallImage,
     cassetteImage,
     tentacleImage,
+    cuteFish2Image,
 } from "./images";
 import merge from "lodash.merge";
 
@@ -159,7 +160,7 @@ export const flockList: FlockSetting[] = [
     // Cute Fish 2
     makeFlock(
         {
-            image: cuteFish1Image,
+            image: cuteFish2Image,
             flockType: "cuteFish2",
             forces: {
                 roosting: {
@@ -177,7 +178,7 @@ export const flockList: FlockSetting[] = [
     ),
     makeFlock(
         {
-            image: cuteFish1Image,
+            image: cuteFish2Image,
             flockType: "cuteFish2",
             forces: {
                 roosting: {
@@ -195,7 +196,7 @@ export const flockList: FlockSetting[] = [
     ),
     makeFlock(
         {
-            image: cuteFish1Image,
+            image: cuteFish2Image,
             flockType: "cuteFish2",
             forces: {
                 roosting: {
@@ -234,7 +235,8 @@ import ironImageUrl from "#assets/ocean_objects/minerals/iron_ore.png";
 import cobaltOreUrl from "#assets/ocean_objects/minerals/cobalt_ore.png";
 import crystalOreUrl from "#assets/ocean_objects/minerals/fancy_ore.png";
 
-import cuteFishImageUrl from "#assets/ocean_objects/fish/cute_fish_1.png";
+import cuteFishImageUrl from "#assets/ocean_objects/fish/cute_fish_violet.png";
+import cuteFish2ImageUrl from "#assets/ocean_objects/fish/cute_fish_orange.png";
 import creepyFish3Url from "#assets/ocean_objects/fish/creepy_fish_3.png";
 import creepyFish4Url from "#assets/ocean_objects/fish/creepy_fish_4.png";
 
@@ -457,7 +459,6 @@ addCollectable("tentaclePlant", { x: 2083, y: 31966 });
 addCollectable("tentaclePlant", { x: 2873, y: 32393 });
 addCollectable("tentaclePlant", { x: 1019, y: 33692 });
 
-
 //eyeBall
 addCollectable("eyeball", { x: 1555, y: 31658 });
 addCollectable("eyeball", { x: 2401, y: 31581 });
@@ -566,7 +567,7 @@ export const collectablesMetadata = {
     },
     cuteFish2: {
         name: "cuteFish2",
-        imageUrl: cuteFishImageUrl, //REMEMBER TO CHANGE THIS
+        imageUrl: cuteFish2ImageUrl, //REMEMBER TO CHANGE THIS
         description: "Even cuter and fishier!",
         fuelPoints: 20,
         hullPoints: 0,

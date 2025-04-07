@@ -91,8 +91,11 @@ import cobaltOreUrl from "../assets/ocean_objects/minerals/cobalt_ore.png";
 export const cobaltOreImage = loadImage(cobaltOreUrl);
 
 // fish
-import cuteFish1ImageUrl from "../assets/ocean_objects/fish/cute_fish_1.png";
+import cuteFish1ImageUrl from "../assets/ocean_objects/fish/cute_fish_violet.png";
 export const cuteFish1Image = loadImage(cuteFish1ImageUrl);
+
+import cuteFish2ImageUrl from "../assets/ocean_objects/fish/cute_fish_orange.png";
+export const cuteFish2Image = loadImage(cuteFish2ImageUrl);
 
 import creepyFish3Url from "../assets/ocean_objects/fish/creepy_fish_3.png";
 export const creepyFish3Image = loadImage(creepyFish3Url);
