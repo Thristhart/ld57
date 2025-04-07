@@ -39,15 +39,16 @@ export const UpgradeGUI = () => {
 
 function UpgradePath(props: { category: string; upgrades: Upgrade[]; upgradeKey: UpgradeType }) {
     const { category, upgrades, upgradeKey } = props;
+    const upgradesExceptFirst = upgrades.slice(1);
     return (
         <div className={styles.UpgradeGroup}>
             <div className={styles.UpgradeSectionHeader}>{category}</div>
             <div className={styles.UpgradeList}>
-                {upgrades.map((upgrade, index) => (
+                {upgradesExceptFirst.map((upgrade, index) => (
                     <UpgradeItem
                         upgrade={upgrade}
-                        index={index}
-                        isLastUpgrade={index === upgrades.length - 1}
+                        index={index + 1}
+                        isLastUpgrade={index === upgradesExceptFirst.length - 1}
                         upgradeKey={upgradeKey}
                     />
                 ))}
