@@ -587,7 +587,7 @@ export const collectablesMetadata = {
         fuelPoints: 0,
         hullPoints: 0,
         storyMessage:
-            "The EvoAdaptive SymbioSub is a state of the art vessel capable of adapting to hostile environments by subsuming local resources for the purpose of self modification. It's also finally done! I couldn't resist taking it for a quick little dive. I'm sure my colleague will understand. Now let's get to cataloging what sorts of materials are available to me down here.",
+            "Discovered a research log from your collegue: The EvoAdaptive SymbioSub is a state of the art vessel capable of adapting to hostile environments by subsuming local resources for the purpose of self modification. It's also finally done! I couldn't resist taking it for a quick little dive. I'm sure my colleague will understand. Now let's get to cataloging what sorts of materials are available to me down here.",
     },
     cassette2: {
         //1-2
@@ -597,7 +597,7 @@ export const collectablesMetadata = {
         fuelPoints: 0,
         hullPoints: 0,
         storyMessage:
-            "By subsuming local minerals and wildlife I've managed to improve the EvoAdaptive SymbioSub's hull while also refilling the fuel reserves with some fish based biofuel. Analysis of upgraded hull integrity signifies a new maximum safe depth. How could I resist going just a little bit deeper? My research partner won't mind as long as I'm back in the morning.",
+            "Discovered a research log from your collegue: By subsuming local minerals and wildlife I've managed to improve the EvoAdaptive SymbioSub's hull while also refilling the fuel reserves with some fish based biofuel. Analysis of upgraded hull integrity signifies a new maximum safe depth. How could I resist going just a little bit deeper? My research partner won't mind as long as I'm back in the morning.",
     },
     cassette3: {
         //2-1
@@ -607,7 +607,7 @@ export const collectablesMetadata = {
         fuelPoints: 0,
         hullPoints: 0,
         storyMessage:
-            "This new technology is amazing! Before today a solo exploration mission would require so much arduous planning, but now such undertakings can happen on a whim. If I go any deeper my colleague might need some explaining about where I've been, but surely they will understand if I bring back data on some big new discovery. Just a little bit further down and surely there will be something new for me to find.",
+            "Discovered a research log from your colleague: This new technology is amazing! Before today a solo exploration mission would require so much arduous planning, but now such undertakings can happen on a whim. If I go any deeper my colleague might need some explaining about where I've been, but surely they will understand if I bring back data on some big new discovery. Just a little bit further down and surely there will be something new for me to find.",
     },
     cassette4: {
         //2-2
@@ -617,7 +617,7 @@ export const collectablesMetadata = {
         fuelPoints: 0,
         hullPoints: 0,
         storyMessage:
-            "With materials gathered down here I've manage to further reinforce my hull to allow further diving. There is a certain closeness I now feel with the EvoAdaptive SymbioSub. At times it's easy to forget where my body ends and the vessel begins. After I return to the surface in a couple of days with an new discovery my partner in science will forgive me for venturing down here alone. I'm sure they're worried sick by now.",
+            "Discovered a research log from your colleague: With materials gathered down here I've manage to further reinforce my hull to allow further diving. There is a certain closeness I now feel with the EvoAdaptive SymbioSub. At times it's easy to forget where my body ends and the vessel begins. After I return to the surface in a couple of days with an new discovery my partner in science will forgive me for venturing down here alone. I'm sure they're worried sick by now.",
     },
     cassette5: {
         //3-1
@@ -627,7 +627,7 @@ export const collectablesMetadata = {
         fuelPoints: 0,
         hullPoints: 0,
         storyMessage:
-            "Some of the materials down here are unlike anything I've seen before. These strange fleshy motes are chemically ideal as a source of biofuel. There's also a mineral containing stable isotopes of elements previously only observed very briefly under laboratory conditions. How could I not stay down here and continue to study these materials? This is important work, my partner will understand when I bring back these findings.",
+            "Discovered a research log from your colleague: Some of the materials down here are unlike anything I've seen before. These strange fleshy motes are chemically ideal as a source of biofuel. There's also a mineral containing stable isotopes of elements previously only observed very briefly under laboratory conditions. How could I not stay down here and continue to study these materials? This is important work, my partner will understand when I bring back these findings.",
     },
     cassette6: {
         //3-2
@@ -637,7 +637,7 @@ export const collectablesMetadata = {
         fuelPoints: 0,
         hullPoints: 0,
         storyMessage:
-            "Using the fleshy motes to form an alloy with the new mineral I've just created a material which should theoretically allow my hull to withstand infinite pressure! I must go deeper and discover more. There are secrets below and they call to me. If I do not find something truly amazing to bring back after a week down here how could my colleague forgive me?",
+            "Discovered a research log from your colleague: Using the fleshy motes to form an alloy with the new mineral I've just created a material which should theoretically allow my hull to withstand infinite pressure! I must go deeper and discover more. There are secrets below and they call to me. If I do not find something truly amazing to bring back after a week down here how could my colleague forgive me?",
     },
     cassette7: {
         //4-1
@@ -647,7 +647,7 @@ export const collectablesMetadata = {
         fuelPoints: 0,
         hullPoints: 0,
         storyMessage:
-            "This meat alloy is exceeding any reasonable expectations. The hull holds steady under the immense water pressure. If my readings are correct then the previous calculations indicating this meat alloy's capability to withstand infinite pressure are completely true. With such a great opportunity for futher new discoveries it's completely justified for me to stay down here for a couple more weeks.",
+            "Discovered a research log from your colleague: This meat alloy is exceeding any reasonable expectations. The hull holds steady under the immense water pressure. If my readings are correct then the previous calculations indicating this meat alloy's capability to withstand infinite pressure are completely true. With such a great opportunity for futher new discoveries it's completely justified for me to stay down here for a couple more weeks.",
     },
     cassette8: {
         //4-2
@@ -657,7 +657,7 @@ export const collectablesMetadata = {
         fuelPoints: 0,
         hullPoints: 0,
         storyMessage:
-            "The control panels of the EvoAdaptive SymbioSub are morphing slightly as the meat alloy is further integrated into the systems. With each change it makes to itself I'm finding it both easier and more efficient to operate this vessel. When I return to the surface in a couple of months my research partner will be head over heels for the upgrades the EvoAdaptive SymbioSub has made for itself.",
+            "Discovered a research log from your colleague: The control panels of the EvoAdaptive SymbioSub are morphing slightly as the meat alloy is further integrated into the systems. With each change it makes to itself I'm finding it both easier and more efficient to operate this vessel. When I return to the surface in a couple of months my research partner will be head over heels for the upgrades the EvoAdaptive SymbioSub has made for itself.",
     },
     cassette9: {
         //4-3
@@ -667,8 +667,10 @@ export const collectablesMetadata = {
         fuelPoints: 0,
         hullPoints: 0,
         storyMessage:
-            "The meat alloy has fused with my flesh. I am the EvoAdaptive SymbioSub. It is unlikely that I'll ever be able to return to the surface. Down here is where I belong now. It is almost perfect here in the dark, if only my love was with me.",
+            "Discovered a research log from your colleague: The meat alloy has fused with my flesh. I am the EvoAdaptive SymbioSub. It is unlikely that I'll ever be able to return to the surface. Down here is where I belong now. It is almost perfect here in the dark, if only my love was with me.",
     },
 } as const satisfies { [name: string]: CollectableMetadata };
 
 export type CollectableName = keyof typeof collectablesMetadata;
+
+//2350 33333

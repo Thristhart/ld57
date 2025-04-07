@@ -143,6 +143,20 @@ function UnlockedUpgrade(props: { upgradeMetadata: Upgrade; index: number; upgra
                 materialsCopy[item] = materialsCopy[item] - 1;
             }
         });
+        if (upgradeKey === "fuelUpgradeLevel") {
+            const currentMaxValue = gameManager.getUpgradedMaxValue("fuelUpgradeLevel");
+            const newMaxValue = upgradeMetadata.upgradeValue as number;
+            const refillValue = newMaxValue - currentMaxValue;
+            const currentFuelPoints = gameManager.getGameState("fuelPoints");
+            gameManager.setGameState("fuelPoints", currentFuelPoints + refillValue);
+        }
+        if (upgradeKey === "hullUpgradeLevel") {
+            const currentMaxValue = gameManager.getUpgradedMaxValue("hullUpgradeLevel");
+            const newMaxValue = upgradeMetadata.upgradeValue as number;
+            const refillValue = newMaxValue - currentMaxValue;
+            const currentHullPoints = gameManager.getGameState("hullPoints");
+            gameManager.setGameState("hullPoints", currentHullPoints + refillValue);
+        }
         gameManager.setGameState("inventory", newInventory);
         gameManager.setGameState(upgradeKey, index);
     };
