@@ -216,7 +216,7 @@ export class GameManager {
 
         // set the player depth
         const playerY = this.player.y;
-        const depth = Math.floor((playerY * this.maxDepth) / this.maxPixelHeight);
+        const depth = Math.floor((playerY * this.maxDepth) / (this.maxPixelHeight + 4000));
         this.setGameState("currentDepth", depth);
 
         // set the hull damage
