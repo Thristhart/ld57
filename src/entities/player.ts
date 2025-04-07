@@ -130,7 +130,7 @@ export class Player extends Entity {
         this.calcGrabberEmitPoint();
         const emitVector = normalizeVector(subtract(mousePosition, this.grabberEmitPoint!));
         this.grabber = gameManager.addEntity(new Grabber(this.grabberEmitPoint!.x, this.grabberEmitPoint!.y));
-        this.grabber.velocity = scale(emitVector, 2);
+        this.grabber.velocity = scale(emitVector, 8);
         addMut(this.grabber.velocity, this.velocity);
     }
     retractGrabber() {

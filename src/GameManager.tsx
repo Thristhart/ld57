@@ -25,7 +25,7 @@ import { Vector } from "./vector";
 import cloneDeep from "lodash.clonedeep";
 import { MessageEntity } from "./entities/messageentity";
 
-const fuelScale = 0.625;
+const fuelScale = 0.325;
 let nextEntId = 0;
 const checkpointFuelPoints = 20;
 const checkpointHullPoints = 20;

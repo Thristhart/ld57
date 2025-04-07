@@ -4,6 +4,8 @@ import { gameManager } from "./GameManager";
 let last5FrameLength = [0, 0, 0, 0, 0];
 
 let lastFrameTime = performance.now();
+let timeSinceLastFrame = 100;
+const millisecondsPerFrame = 1000 / 60;
 export function tick(timestamp: number) {
     const dt = timestamp - lastFrameTime;
     lastFrameTime = timestamp;
@@ -11,7 +13,12 @@ export function tick(timestamp: number) {
     last5FrameLength.splice(0, 1);
     requestAnimationFrame(tick);
 
-    gameManager.tick(dt);
+    timeSinceLastFrame += dt;
+
+    while (timeSinceLastFrame >= millisecondsPerFrame) {
+        gameManager.tick(millisecondsPerFrame);
+        timeSinceLastFrame -= millisecondsPerFrame;
+    }
 
     const avgFrameLength =
         last5FrameLength.reduce((last, curr) => {
