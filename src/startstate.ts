@@ -39,7 +39,7 @@ export const upgrades = {
         {
             description: "10 slots",
             upgradeValue: 10,
-            materials: { cobalt: 3, crystal: 2, fleshMote: 1 },
+            materials: { cobalt: 2, crystal: 2, fleshMote: 1 },
         },
     ],
     fuelUpgradeLevel: [
