@@ -269,11 +269,77 @@ export const collectablesMetadata = {
     cassette1: {
         name: "cassette1",
         imageUrl: cassetteUrl,
-        description: "a lost messsage",
+        description: "if you see this message it's a bug",
         fuelPoints: 0,
         hullPoints: 0,
-        storyMessage: "hi world",
+        storyMessage: "The Neo Human Interface Submarine is a state of the art vessel capable of adapting to hostile environments by subsuming local resources for the purpose of self modification. It's also finally done! I couldn't resist taking it for a quick little dive. I'm sure my colleague will understand. Now let's get to cataloging what sorts of materials are available to me down here.",
     },
+    cassette2: {
+        name: "cassette2",
+        imageUrl: cassetteUrl,
+        description: "if you see this message it's a bug",
+        fuelPoints: 0,
+        hullPoints: 0,
+        storyMessage: "By subsuming local minerals and wildlife I've managed to improve the Neo Human Interface Submarine's hull while also refilling the fuel reserves with some fish based biofuel. Analysis of upgraded hull integrity signifies a new maximum safe depth. How could I resist going just a little bit deeper? My research partner won't mind as long as I'm back in the morning.",
+    },
+    cassette3: {
+        name: "cassette3",
+        imageUrl: cassetteUrl,
+        description: "if you see this message it's a bug",
+        fuelPoints: 0,
+        hullPoints: 0,
+        storyMessage: "This new technology is amazing! Before today a solo exploration mission would require so much arduous planning, but now such undertakings can happen on a whim. If I go any deeper my colleague might need some explaining about where I've been, but surely they will understand if I bring back data on some big new discovery. Just a little bit further down and surely there will be something new for me to find.",
+    },
+    cassette4: {
+        name: "cassette4",
+        imageUrl: cassetteUrl,
+        description: "if you see this message it's a bug",
+        fuelPoints: 0,
+        hullPoints: 0,
+        storyMessage: "With materials gathered down here I've manage to further reinforce my hull to allow further diving. There is a certain closeness I now feel with the New Human Interface Submarine. At times it's easy to forget where my body ends and the vessel begins. After I return to the surface in a couple of days with an new discovery my partner in science will forgive me for venturing down here alone. I'm sure they're worried sick by now.",
+    },
+    cassette5: {
+        name: "cassette5",
+        imageUrl: cassetteUrl,
+        description: "if you see this message it's a bug",
+        fuelPoints: 0,
+        hullPoints: 0,
+        storyMessage: "Some of the materials down here are unlike anything I've seen before. These strange fleshy motes are chemically ideal as a source of biofuel. There's also a mineral containing stable isotopes of elements previously only observed very briefly under laboratory conditions. How could I not stay down here and continue to study these materials? This is important work, my partner will understand when I bring back these findings.",
+    },
+    cassette6: {
+        name: "cassette6",
+        imageUrl: cassetteUrl,
+        description: "if you see this message it's a bug",
+        fuelPoints: 0,
+        hullPoints: 0,
+        storyMessage: "Using the fleshy motes to form an alloy with the new mineral I've just created a material which should theoretically allow my hull to withstand infinite pressure! I must go deeper and discover more. There are secrets below and they call to me. If I do not find something truly amazing to bring back after a week down here how could my colleague forgive me?",
+    },
+    cassette7: {
+        name: "cassette7",
+        imageUrl: cassetteUrl,
+        description: "if you see this message it's a bug",
+        fuelPoints: 0,
+        hullPoints: 0,
+        storyMessage: "TODO: write this",
+    },
+    cassette8: {
+        name: "cassette8",
+        imageUrl: cassetteUrl,
+        description: "if you see this message it's a bug",
+        fuelPoints: 0,
+        hullPoints: 0,
+        storyMessage: "TODO: write this",
+    },
+    cassette9: {
+        name: "cassette9",
+        imageUrl: cassetteUrl,
+        description: "if you see this message it's a bug",
+        fuelPoints: 0,
+        hullPoints: 0,
+        storyMessage: "The meat alloy has fused with my flesh. I am the New Human Interface Submarine. It is unlikely that I'll ever be able to return to the surface. Much of my eager curiosity is now gone, only to be replaced by guilt and sorrow. It is unlikely I will ever see my beloved lab partner again. Down here is where I belong now. I'm sorry.",
+    }
+ 
+
 } as const satisfies { [name: string]: CollectableMetadata };
 
 export type CollectableName = keyof typeof collectablesMetadata;
