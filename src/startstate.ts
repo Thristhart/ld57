@@ -19,16 +19,18 @@ export const introParagraph =
 export const upgrades = {
     depthUpgradeLevel: [
         { description: "Max Depth 1000m", upgradeValue: 1000, materials: {} },
-        { description: "Max Depth 2000m", upgradeValue: 2000, materials: { cuteFish: 1 } },
+        { description: "Max Depth 2000m", upgradeValue: 2000,
+			materials: { iron: 3 } 
+		},
         {
             description: "Max Depth 3000m",
             upgradeValue: 3000,
-            materials: { cuteFish: 1, iron: 1 },
+            materials: { cobalt: 5 },
         },
         {
-            description: "Max Depth 5000m",
+            description: "Max Depth ????m",
             upgradeValue: 4000,
-            materials: { iron: 2, cuteFish: 2 },
+            materials: { fleshMote: 4, crystal: 4 },
         },
     ],
     inventoryUpgradeLevel: [
