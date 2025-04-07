@@ -309,12 +309,36 @@ addCollectable("crystal", { x: 2512, y: 20286 });
 addCollectable("crystal", { x: 1080, y: 21981 });
 addCollectable("crystal", { x: 572, y: 22310 });
 addCollectable("crystal", { x: 482, y: 23266 });
+addCollectable("crystal", { x: 1240, y: 25658 });
+addCollectable("crystal", { x: 2426, y: 25283 });
+addCollectable("crystal", { x: 1785, y: 26386 });
+addCollectable("crystal", { x: 1414, y: 25875 });
+addCollectable("crystal", { x: 951, y: 27253 });
+addCollectable("crystal", { x: 646, y: 26661 });
+addCollectable("crystal", { x: 2906, y: 26569 });
+addCollectable("crystal", { x: 2770, y: 27714 });
+addCollectable("crystal", { x: 2229, y: 28704 });
+addCollectable("crystal", { x: 931, y: 29710 });
+addCollectable("crystal", { x: 1758, y: 29410 });
+addCollectable("crystal", { x: 1432, y: 30971 });
+addCollectable("crystal", { x: 2535, y: 32017 });
+addCollectable("crystal", { x: 2625, y: 31017 });
+addCollectable("crystal", { x: 3047, y: 31341 });
+
 //cutefish2
 addCollectable("cuteFish2", { x: 1709, y: 15105 });
 addCollectable("cuteFish2", { x: 1670, y: 11142 });
 addCollectable("cuteFish2", { x: 1869, y: 20850 });
 //cutefish1
 addCollectable("cuteFish", { x: 2878, y: 12597 });
+
+
+
+//creepy fish1
+addCollectable("creepyFish", { x: 2095, y: 17638 });
+
+//creepy fish 2
+
 
 //flhes motes
 addCollectable("fleshMote", { x: 2130, y: 18010 });
@@ -385,6 +409,8 @@ export const collectablesMetadata = {
         storyMessage: "Discovered a mysterious glowing crystal, it contains previously undiscovered isotopes.",
     },
     cuteFish: {
+
+
         name: "cuteFish",
         imageUrl: cuteFishImageUrl,
         description: "Almost too cute to subsume!",
