@@ -14,7 +14,7 @@ import {
 import merge from "lodash.merge";
 
 export const introParagraph =
-    "You have been assigned by the Organization for Deep Exploration and Protection of Terrestrial and Hydrospatial Systems to investigate the mysterious disappearance of one of their lead ecologists. Equipped with the state-of-the-art Submersible for Underwater Mapping and Exploration—identical to the one used by the missing researcher—you’ll venture into uncharted waters. This advanced vessel is capable of adapting to hostile environments by integrating local resources for self-repair and modification. Now, it’s up to you: delve into the unknown, uncover the truth behind the disappearance, and, if possible, bring the researcher back to safety. The clock is ticking—are you ready to face the depths?";
+    "A scientist who had been a close and trusted colleague of yours for many years went on a solo deep sea exploration in a state of the art Neo Human Interface Submarine one year ago. Back in college, where you were roommates, the two of you dreamed about creating such a vessel. Building another one by yourself was a difficult endeavor. It was much easier to work alongside them. You have your own Neo Human Interface Submarine now. It's time to rescue your partner.";
 
 export const upgrades = {
     depthUpgradeLevel: [
