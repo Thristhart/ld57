@@ -87,7 +87,6 @@ function RightUI() {
     return (
         <TooltipRootProvider rootRef={rootRef}>
             <div ref={rootRef} className={"RightUI"}>
-                <LightSwitch />
                 <Grabber />
                 <Inventory />
                 <UpgradeGUI />

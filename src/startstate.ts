@@ -15,7 +15,7 @@ import {
 import merge from "lodash.merge";
 
 export const introParagraph =
-    "A scientist who had been a close and trusted colleague of yours for many years went on a solo deep sea exploration in a state of the art Neo Human Interface Submarine one year ago. Back in college, where you were roommates, the two of you dreamed about creating such a vessel. Building another one by yourself was a difficult endeavor. It was much easier to work alongside them. You have your own Neo Human Interface Submarine now. It's time to rescue your partner.";
+    "Your trusted collegue, a brilliant scientist, had taken your joint project, the state of the art EvoAdaptive SymbioSub, on a solo, deep sea, exploration trip. Back in college, you two were roommates, the two of you dreamed about creating such a vessel. After graduation, the two of you worked together for years in order to make those dreams into reality. However, their impulsive nature led them to take the first working prototype on a joy ride. That was a year ago. Building another one by yourself was a monumental endeavor, fueled by rage and betrayal. You have your own EvoAdaptive SymbioSub now. It is time to discover the fate of your partner and your shared dream.";
 
 export const upgrades = {
     depthUpgradeLevel: [
@@ -198,7 +198,7 @@ export const flockList: FlockSetting[] = [
 //         roost: { position: { x: 1670, y: 11142 } },  // change this
 //         flockingBoids: {
 //             speedRatio: 0.2,
-//         },
+//         },s
 //     },
 // }),
 
@@ -393,7 +393,7 @@ export const collectablesMetadata = {
         fuelPoints: 0,
         hullPoints: 0,
         storyMessage:
-            "The Neo Human Interface Submarine is a state of the art vessel capable of adapting to hostile environments by subsuming local resources for the purpose of self modification. It's also finally done! I couldn't resist taking it for a quick little dive. I'm sure my colleague will understand. Now let's get to cataloging what sorts of materials are available to me down here.",
+            "The EvoAdaptive SymbioSub is a state of the art vessel capable of adapting to hostile environments by subsuming local resources for the purpose of self modification. It's also finally done! I couldn't resist taking it for a quick little dive. I'm sure my colleague will understand. Now let's get to cataloging what sorts of materials are available to me down here.",
     },
     cassette2: {
         //1-2
@@ -403,7 +403,7 @@ export const collectablesMetadata = {
         fuelPoints: 0,
         hullPoints: 0,
         storyMessage:
-            "By subsuming local minerals and wildlife I've managed to improve the Neo Human Interface Submarine's hull while also refilling the fuel reserves with some fish based biofuel. Analysis of upgraded hull integrity signifies a new maximum safe depth. How could I resist going just a little bit deeper? My research partner won't mind as long as I'm back in the morning.",
+            "By subsuming local minerals and wildlife I've managed to improve the EvoAdaptive SymbioSub 's hull while also refilling the fuel reserves with some fish based biofuel. Analysis of upgraded hull integrity signifies a new maximum safe depth. How could I resist going just a little bit deeper? My research partner won't mind as long as I'm back in the morning.",
     },
     cassette3: {
         //2-1
@@ -423,7 +423,7 @@ export const collectablesMetadata = {
         fuelPoints: 0,
         hullPoints: 0,
         storyMessage:
-            "With materials gathered down here I've manage to further reinforce my hull to allow further diving. There is a certain closeness I now feel with the Neo Human Interface Submarine. At times it's easy to forget where my body ends and the vessel begins. After I return to the surface in a couple of days with an new discovery my partner in science will forgive me for venturing down here alone. I'm sure they're worried sick by now.",
+            "With materials gathered down here I've manage to further reinforce my hull to allow further diving. There is a certain closeness I now feel with the EvoAdaptive SymbioSub . At times it's easy to forget where my body ends and the vessel begins. After I return to the surface in a couple of days with an new discovery my partner in science will forgive me for venturing down here alone. I'm sure they're worried sick by now.",
     },
     cassette5: {
         //3-1
@@ -463,7 +463,7 @@ export const collectablesMetadata = {
         fuelPoints: 0,
         hullPoints: 0,
         storyMessage:
-            "The control panels of the Neo Human Interface Submarine are morphing slightly as the meat alloy is further integrated into the systems. With each change it makes to itself I'm finding it both easier and more efficient to operate this vessel. When I return to the surface in a couple of months my research partner will be head over heels for the upgrades the Neo Human Interface Submarine has made for itself.",
+            "The control panels of the EvoAdaptive SymbioSub are morphing slightly as the meat alloy is further integrated into the systems. With each change it makes to itself I'm finding it both easier and more efficient to operate this vessel. When I return to the surface in a couple of months my research partner will be head over heels for the upgrades theEvoAdaptive SymbioSub has made for itself.",
     },
     cassette9: {
         //4-3
@@ -473,7 +473,7 @@ export const collectablesMetadata = {
         fuelPoints: 0,
         hullPoints: 0,
         storyMessage:
-            "The meat alloy has fused with my flesh. I am the Neo Human Interface Submarine. It is unlikely that I'll ever be able to return to the surface. Much of my eager curiosity is now gone, only to be replaced by guilt and sorrow. It is unlikely I will ever see my beloved lab partner again. Down here is where I belong now. I'm sorry.",
+            "The meat alloy has fused with my flesh. I am the EvoAdaptive SymbioSub. It is unlikely that I'll ever be able to return to the surface. Much of my eager curiosity is now gone, only to be replaced by guilt and sorrow. It is unlikely I will ever see my beloved lab partner again. Down here is where I belong now. I'm sorry.",
     },
 } as const satisfies { [name: string]: CollectableMetadata };
 
