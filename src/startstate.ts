@@ -1,4 +1,4 @@
-import { baseFlock } from "./entities/boids/constants";
+import { baseFlock, creepyFish3Flock, creepyFish4Flock } from "./entities/boids/constants";
 import { FlockSetting, PartialFlockSetting } from "./entities/boids/types";
 import { CollectableConfig, CollectableMetadata, GameState, Upgrade } from "./gametypes";
 import {
@@ -11,6 +11,7 @@ import {
     fleshMoteImage,
     eyeBallImage,
     cassetteImage,
+    tentacleImage,
 } from "./images";
 import merge from "lodash.merge";
 
@@ -38,7 +39,7 @@ export const upgrades = {
         {
             description: "10 slots",
             upgradeValue: 10,
-            materials: { cobalt: 3, crystal: 2, fleshMote: 1 },
+            materials: { cobalt: 2, crystal: 2, fleshMote: 1 },
         },
     ],
     fuelUpgradeLevel: [
@@ -81,8 +82,8 @@ export const defaultGameState: GameState = {
     alert: null,
 };
 
-function makeFlock(partialSettings: PartialFlockSetting): FlockSetting {
-    return merge({}, baseFlock, partialSettings);
+function makeFlock(partialSettings: PartialFlockSetting, base = baseFlock): FlockSetting {
+    return merge({}, base, partialSettings);
 }
 
 export const flockList: FlockSetting[] = [
@@ -213,6 +214,8 @@ import creepyFish4Url from "#assets/ocean_objects/fish/creepy_fish_4.png";
 import eyeballImageUrl from "#assets/ocean_objects/eldritch/eyeball.png";
 import fleshMoteImageUrl from "#assets/ocean_objects/eldritch/flesh_mote.png";
 import cassetteUrl from "../assets/ocean_objects/story/cassette_1.png";
+import tentaclePlantImageUrl from "#assets/ocean_objects/eldritch/alienbiome_tentacle_plant.png";
+
 import { Vector } from "./vector";
 
 export const collectablesList: CollectableConfig[] = [
@@ -239,7 +242,21 @@ const collectableImages = {
     crystal: fancyOreImage,
     fleshMote: fleshMoteImage,
     eyeball: eyeBallImage,
-} as const;
+    cassette1: cassetteImage,
+    cassette2: cassetteImage,
+    cassette3: cassetteImage,
+    cassette4: cassetteImage,
+    cassette5: cassetteImage,
+    cassette6: cassetteImage,
+    cassette7: cassetteImage,
+    cassette8: cassetteImage,
+    cassette9: cassetteImage,
+    cuteFish: cuteFish1Image,
+    cuteFish2: cuteFish1Image,
+    creepyFish3: cuteFish1Image,
+    creepyFish4: cuteFish1Image,
+    tentaclePlant: tentacleImage,
+} as const satisfies Record<keyof typeof collectablesMetadata, HTMLImageElement>;
 
 function addCollectable(
     resource: keyof typeof collectablesMetadata,
@@ -325,15 +342,16 @@ addCollectable("crystal", { x: 2535, y: 32017 });
 addCollectable("crystal", { x: 2625, y: 31017 });
 addCollectable("crystal", { x: 3047, y: 31341 });
 
-//cutefish2
-addCollectable("cuteFish2", { x: 1709, y: 15105 });
-addCollectable("cuteFish2", { x: 1670, y: 11142 });
-addCollectable("cuteFish2", { x: 1869, y: 20850 });
-//cutefish1
-addCollectable("cuteFish", { x: 2878, y: 12597 });
-
-//creepy fish1
-addCollectable("creepyFish3", { x: 2095, y: 17638 });
+flockList.push(
+    makeFlock(
+        {
+            characteristics: {
+                roost: { position: { x: 2095, y: 17638 } },
+            },
+        },
+        creepyFish3Flock
+    )
+);
 
 //creepy fish 2
 
@@ -414,11 +432,47 @@ addCollectable("tentaclePlant", { x: 1019, y: 33692 });
 
 //cREEPY4
 
-addCollectable("creepyFish4", { x: 1412, y: 30174 });
-addCollectable("creepyFish4", { x: 2542, y: 31544 });
+flockList.push(
+    makeFlock(
+        {
+            characteristics: {
+                roost: { position: { x: 1412, y: 30174 } },
+            },
+        },
+        creepyFish4Flock
+    )
+);
+flockList.push(
+    makeFlock(
+        {
+            characteristics: {
+                roost: { position: { x: 2542, y: 31544 } },
+            },
+        },
+        creepyFish4Flock
+    )
+);
 //creep3
-addCollectable("creepyFish3", { x: 799, y: 25289 });
-addCollectable("creepyFish3", { x: 1555, y: 22554 });
+flockList.push(
+    makeFlock(
+        {
+            characteristics: {
+                roost: { position: { x: 799, y: 25289 } },
+            },
+        },
+        creepyFish3Flock
+    )
+);
+flockList.push(
+    makeFlock(
+        {
+            characteristics: {
+                roost: { position: { x: 1555, y: 22554 } },
+            },
+        },
+        creepyFish3Flock
+    )
+);
 
 //CASSETE3
 addCollectable("cassette3", { x: 1120, y: 9396 });
@@ -515,6 +569,15 @@ export const collectablesMetadata = {
         hullPoints: 0,
         storyMessage:
             "Discovered a flesh mote. This mysterious ball of meat seems compatible with the strange glowing mineral.",
+    },
+    tentaclePlant: {
+        name: "tentaclePlant",
+        imageUrl: tentaclePlantImageUrl,
+        description: "THEYFLOWER WRITE THIS",
+        fuelPoints: 150,
+        hullPoints: 0,
+        storyMessage:
+            "THEYFLOWER WRITE THISDiscovered a flesh mote. This mysterious ball of meat seems compatible with the strange glowing mineral.",
     },
     cassette1: {
         //1-1
