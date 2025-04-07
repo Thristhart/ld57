@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import { gameManager } from "./GameManager";
 import { TooltipRootProvider } from "./ui/Tooltip";
@@ -10,17 +10,21 @@ import { UpgradeGUI } from "./ui/upgrades";
 import { introParagraph } from "./startstate";
 import { MuteButton } from "./ui/mutebutton";
 import { ScuttleButton } from "./ui/scuttlebutton";
+import { chuthuluText, DatingPromptKey, datingSim } from "./datingtext";
+import { DatingSimOverlay } from "./ui/datingsim";
 
 function App({
     isIntro,
     loading,
     gameOver,
     hasCheckpoint,
+    isDatingSim,
 }: {
     isIntro: boolean;
     loading: boolean;
     gameOver: boolean;
     hasCheckpoint: boolean;
+    isDatingSim: boolean;
 }) {
     return (
         <div className={"AppCtn"}>
@@ -36,6 +40,7 @@ function App({
             {isIntro && <Intro />}
             {loading && <div className="LoadingSpinner Overlay">Loading...</div>}
             {gameOver && <GameOver hasCheckpoint={hasCheckpoint} />}
+            {isDatingSim && <DatingSimOverlay />}
         </div>
     );
 }

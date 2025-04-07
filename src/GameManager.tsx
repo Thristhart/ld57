@@ -64,6 +64,7 @@ export class GameManager {
 
     public checkpoints: Checkpoint[] = [];
     public isIntro = true;
+    public isDatingSim = false;
 
     constructor() {
         const root = ReactDOM.createRoot(document.getElementById("root")!);
@@ -75,6 +76,7 @@ export class GameManager {
                         loading={this.loading}
                         gameOver={this.gameOverTimestamp !== undefined}
                         hasCheckpoint={this.checkpoints.length > 0}
+                        isDatingSim={this.isDatingSim}
                     />
                 </React.StrictMode>
             );
