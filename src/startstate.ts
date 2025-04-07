@@ -203,7 +203,7 @@ export const collectablesMetadata = {
     iron: {
         name: "iron",
         imageUrl: ironImageUrl,
-        description: "a chunk of iron ore",
+        description: "It will be easy to refine such high purity iron ore.",
         fuelPoints: 0,
         hullPoints: 25,
         storyMessage: "Discovered iron, it can patch small dents in hull or be used for upgrades.",
@@ -211,7 +211,7 @@ export const collectablesMetadata = {
     cobalt: {
         name: "cobalt",
         imageUrl: cobaltOreUrl,
-        description: "a hefty lump of cobalt ore",
+        description: "This lump of cobalt ore has some heft to it.",
         fuelPoints: 0,
         hullPoints: 50,
         storyMessage: "Discovered cobalt, it can repair moderate damage to the hull or be used for upgrades.",
@@ -219,7 +219,7 @@ export const collectablesMetadata = {
     crystal: {
         name: "crystal",
         imageUrl: crystalOreUrl,
-        description: "a glowing crystal of indeterminate nature",
+        description: "It contains undiscovered isotopes.",
         fuelPoints: 0,
         hullPoints: 100,
         storyMessage: "Discovered a mysterious glowing crystal, it contains previously undiscovered isotopes.",
@@ -227,7 +227,7 @@ export const collectablesMetadata = {
     cuteFish: {
         name: "cuteFish",
         imageUrl: cuteFishImageUrl,
-        description: "almost too cute to subsume",
+        description: "Almost too cute to subsume!",
         fuelPoints: 20,
         hullPoints: 0,
         storyMessage: "Discovered a cute fish, fish are fuel not food",
@@ -235,7 +235,7 @@ export const collectablesMetadata = {
     creepyFish3: {
         name: "creepyFish3",
         imageUrl: creepyFish3Url,
-        description: "this one is kind of weird",
+        description: "This fish is strange.",
         fuelPoints: 40,
         hullPoints: 0,
         storyMessage: "Discovered a weird fish, it appears to be an efficient fuel source.",
@@ -243,7 +243,7 @@ export const collectablesMetadata = {
     creepyFish4: {
         name: "creepyFish4",
         imageUrl: creepyFish4Url,
-        description: "this one is even weirder",
+        description: "What a creepy fish.",
         fuelPoints: 60,
         hullPoints: 0,
         storyMessage:
