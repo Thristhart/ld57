@@ -108,6 +108,20 @@ export class GameManager {
     public setGameState<K extends keyof GameState>(property: K, value: GameState[K]): void {
         this.gameState[property] = value;
         this.stateChangeSubscriptions.get(property)?.forEach((callback) => callback());
+        if (this.countUpgrades() > 5) {
+            this.player.upgradeLevel = 3;
+        } else if (this.countUpgrades() > 3) {
+            this.player.upgradeLevel = 2;
+        }
+    }
+
+    public countUpgrades() {
+        return (
+            this.gameState.depthUpgradeLevel +
+            this.gameState.inventoryUpgradeLevel +
+            this.gameState.fuelUpgradeLevel +
+            this.gameState.hullUpgradeLevel
+        );
     }
 
     public addGameStateMessage(value: Message): void {
@@ -202,7 +216,7 @@ export class GameManager {
 
         // set the player depth
         const playerY = this.player.y;
-        const depth = Math.floor((playerY * this.maxDepth) / this.maxPixelHeight);
+        const depth = Math.floor((playerY * this.maxDepth) / (this.maxPixelHeight + 4000));
         this.setGameState("currentDepth", depth);
 
         // set the hull damage
@@ -255,7 +269,7 @@ export class GameManager {
             switchBGM(bgmBiome4);
         }
 
-        if (depth > maxDepth && !localStorage.getItem("noclip")) {
+        if (depth > maxDepth && !localStorage.getItem("noclip") && !localStorage.getItem("god")) {
             this.setGameState("alert", { text: "MAXIMUM DEPTH EXCEEDED", type: "error" });
             if (!pressureDamageSFX1.playing()) {
                 pressureDamageSFX1.play();

@@ -62,7 +62,7 @@ const MeterArrow = (props: { style: React.CSSProperties; className: string }) =>
 export const HullIntegrity = () => {
     const hullPoints = useGameStateValue("hullPoints");
     const maxHullPoints = useUpgradedMaxValue("hullUpgradeLevel");
-    const percent = Math.floor((hullPoints / maxHullPoints) * 95);
+    const percent = Math.floor((hullPoints / maxHullPoints) * 100);
     return (
         <div className={styles.HullIntegrity}>
             <div className={styles.HullHeader}>

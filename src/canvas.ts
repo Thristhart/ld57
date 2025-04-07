@@ -115,15 +115,6 @@ export function drawFrame(avgFrameLength: number) {
         loopBgHeight
     );
 
-    context.drawImage(biome1WallsImage.bitmap, 0, 0);
-    context.drawImage(biome2WallsImage.bitmap, 0, biome1WallsImage.height);
-    context.drawImage(biome3WallsImage.bitmap, 0, biome1WallsImage.height + biome2WallsImage.height);
-    context.drawImage(
-        biome4WallsImage.bitmap,
-        0,
-        biome1WallsImage.height + biome2WallsImage.height + biome3WallsImage.height
-    );
-
     if (localStorage.getItem("debug")) {
         context.lineWidth = 20;
         for (const line of wallLines) {
@@ -221,6 +212,15 @@ export function drawFrame(avgFrameLength: number) {
         context.fillStyle = alert.type === "error" ? "red" : "green";
         context.fillText(alert.text, x, y);
     }
+
+    context.drawImage(biome1WallsImage.bitmap, 0, 0);
+    context.drawImage(biome2WallsImage.bitmap, 0, biome1WallsImage.height);
+    context.drawImage(biome3WallsImage.bitmap, 0, biome1WallsImage.height + biome2WallsImage.height);
+    context.drawImage(
+        biome4WallsImage.bitmap,
+        0,
+        biome1WallsImage.height + biome2WallsImage.height + biome3WallsImage.height
+    );
 
     for (const ent of drawOnTop) {
         ent.draw(context);

@@ -309,7 +309,147 @@ addCollectable("crystal", { x: 2512, y: 20286 });
 addCollectable("crystal", { x: 1080, y: 21981 });
 addCollectable("crystal", { x: 572, y: 22310 });
 addCollectable("crystal", { x: 482, y: 23266 });
+addCollectable("crystal", { x: 1240, y: 25658 });
+addCollectable("crystal", { x: 2426, y: 25283 });
+addCollectable("crystal", { x: 1785, y: 26386 });
+addCollectable("crystal", { x: 1414, y: 25875 });
+addCollectable("crystal", { x: 951, y: 27253 });
+addCollectable("crystal", { x: 646, y: 26661 });
+addCollectable("crystal", { x: 2906, y: 26569 });
+addCollectable("crystal", { x: 2770, y: 27714 });
+addCollectable("crystal", { x: 2229, y: 28704 });
+addCollectable("crystal", { x: 931, y: 29710 });
+addCollectable("crystal", { x: 1758, y: 29410 });
+addCollectable("crystal", { x: 1432, y: 30971 });
+addCollectable("crystal", { x: 2535, y: 32017 });
+addCollectable("crystal", { x: 2625, y: 31017 });
+addCollectable("crystal", { x: 3047, y: 31341 });
 
+//cutefish2
+addCollectable("cuteFish2", { x: 1709, y: 15105 });
+addCollectable("cuteFish2", { x: 1670, y: 11142 });
+addCollectable("cuteFish2", { x: 1869, y: 20850 });
+//cutefish1
+addCollectable("cuteFish", { x: 2878, y: 12597 });
+
+
+
+//creepy fish1
+addCollectable("creepyFish3", { x: 2095, y: 17638 });
+
+//creepy fish 2
+
+
+//flhes motes
+addCollectable("fleshMote", { x: 2130, y: 18010 });
+addCollectable("fleshMote", { x: 2175, y: 18293 });
+addCollectable("fleshMote", { x: 2456, y: 18539 });
+addCollectable("fleshMote", { x: 1981, y: 19476 });
+addCollectable("fleshMote", { x: 1955, y: 19899 });
+addCollectable("fleshMote", { x: 2184, y: 20275 });
+addCollectable("fleshMote", { x: 2399, y: 20506 });
+addCollectable("fleshMote", { x: 1170, y: 22279 });
+addCollectable("fleshMote", { x: 1320, y: 21974 });
+addCollectable("fleshMote", { x: 1879, y: 21738 });
+addCollectable("fleshMote", { x: 1907, y: 22004 });
+addCollectable("fleshMote", { x: 2011, y: 22795 });
+addCollectable("fleshMote", { x: 2177, y: 22744 });
+addCollectable("fleshMote", { x: 648, y: 23109 });
+addCollectable("fleshMote", { x: 680, y: 23247 });
+addCollectable("fleshMote", { x: 2545, y: 18351 })
+addCollectable("fleshMote", { x: 1965, y: 20833 })
+addCollectable("fleshMote", { x: 1811, y: 21314 })
+addCollectable("fleshMote", { x: 2974, y: 31181 })
+addCollectable("fleshMote", { x: 795, y: 29631 })
+addCollectable("fleshMote", { x: 983, y: 29607 })
+addCollectable("fleshMote", { x: 1428, y: 30890 })
+addCollectable("fleshMote", { x: 1307, y: 30972 })
+addCollectable("fleshMote", { x: 1690, y: 29522 })
+addCollectable("fleshMote", { x: 1656, y: 29367 })
+addCollectable("fleshMote", { x: 2164, y: 28837 })
+addCollectable("fleshMote", { x: 2289, y: 28823 })
+addCollectable("fleshMote", { x: 2870, y: 27623 })
+addCollectable("fleshMote", { x: 2863, y: 27766 })
+addCollectable("fleshMote", { x: 2956, y: 26421 })
+addCollectable("fleshMote", { x: 3050, y: 26546 })
+addCollectable("fleshMote", { x: 2492, y: 25237 })
+addCollectable("fleshMote", { x: 2412, y: 25165 })
+addCollectable("fleshMote", { x: 2272, y: 25242 })
+addCollectable("fleshMote", { x: 1766, y: 26553 })
+addCollectable("fleshMote", { x: 1632, y: 26488 })
+addCollectable("fleshMote", { x: 1207, y: 25760 })
+addCollectable("fleshMote", { x: 1268, y: 25868 })
+addCollectable("fleshMote", { x: 1323, y: 25935 })
+addCollectable("fleshMote", { x: 1408, y: 25968 })
+addCollectable("fleshMote", { x: 1166, y: 25602 })
+addCollectable("fleshMote", { x: 739, y: 26562 })
+addCollectable("fleshMote", { x: 794, y: 26628 })
+addCollectable("fleshMote", { x: 736, y: 26735 })
+addCollectable("fleshMote", { x: 850, y: 27155 })
+addCollectable("fleshMote", { x: 939, y: 27098 })
+addCollectable("fleshMote", { x: 1073, y: 27145 })
+addCollectable("fleshMote", { x: 579, y: 22449 })
+addCollectable("fleshMote", { x: 675, y: 22391 });
+
+
+
+
+//tentacle plants
+addCollectable("tentaclePlant", { x: 1817, y: 26987 });
+addCollectable("tentaclePlant", { x: 1957, y: 27316 });
+addCollectable("tentaclePlant", { x: 1338, y: 27588 }); 
+addCollectable("tentaclePlant", { x: 466, y: 25936 });
+addCollectable("tentaclePlant", { x: 375, y: 25330 });
+addCollectable("tentaclePlant", { x: 498, y: 24311 });
+addCollectable("tentaclePlant", { x: 1347, y: 24394 });
+addCollectable("tentaclePlant", { x: 1375, y: 25270 });
+addCollectable("tentaclePlant", { x: 1631, y: 23513 });
+addCollectable("tentaclePlant", { x: 2788, y: 27105 });
+addCollectable("tentaclePlant", { x: 3018, y: 28273 });
+addCollectable("tentaclePlant", { x: 2731, y: 29421 });
+addCollectable("tentaclePlant", { x: 1338, y: 28672 });
+addCollectable("tentaclePlant", { x: 923, y: 29042 });
+addCollectable("tentaclePlant", { x: 449, y: 29330 });
+addCollectable("tentaclePlant", { x: 1859, y: 30400 });
+addCollectable("tentaclePlant", { x: 1350, y: 32147 });
+addCollectable("tentaclePlant", { x: 3236, y: 30823 });
+addCollectable("tentaclePlant", { x: 2439, y: 31166 });
+addCollectable("tentaclePlant", { x: 2083, y: 31966 });
+addCollectable("tentaclePlant", { x: 2873, y: 32393 });
+addCollectable("tentaclePlant", { x: 1019, y: 33692 });
+
+//cREEPY4
+
+addCollectable("creepyFish4", { x: 1412, y: 30174 });
+addCollectable("creepyFish4", { x: 2542, y: 31544 });
+//creep3
+addCollectable("creepyFish3", { x: 799, y: 25289 });
+addCollectable("creepyFish3", { x: 1555, y: 22554 });
+
+
+//CASSETE3
+addCollectable("cassette3", { x: 1120, y: 9396 });
+
+//REAL CASSETE 4
+addCollectable("cassette4", { x: 2171, y: 14094 });
+
+//5
+addCollectable("cassette5", { x: 1391, y: 17485 });
+
+//6
+addCollectable("cassette6", { x: 1466, y: 21675 });
+
+//7
+addCollectable("cassette7", { x: 1908, y: 27582 });
+
+
+//8
+
+addCollectable("cassette8", { x: 3577, y: 31080 });
+
+
+//9
+addCollectable("cassette9", { x: 580, y: 34798 });
 export const collectablesMetadata = {
     iron: {
         name: "iron",
@@ -336,6 +476,8 @@ export const collectablesMetadata = {
         storyMessage: "Discovered a mysterious glowing crystal, it contains previously undiscovered isotopes.",
     },
     cuteFish: {
+
+
         name: "cuteFish",
         imageUrl: cuteFishImageUrl,
         description: "Almost too cute to subsume!",

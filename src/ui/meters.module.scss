@@ -199,7 +199,7 @@
 
 .FuelCell {
     width: 20%;
-    height: 80px;
+    height: 90%;
     border-radius: 16px;
 }
 
@@ -236,9 +236,9 @@
 
 .HullFill {
     position: absolute;
-    height: 80%;
     width: 90%;
     left: 16px;
+    top: 8px;
     bottom: 14px;
     padding: 8px;
     box-sizing: border-box;
@@ -250,6 +250,9 @@
     position: relative;
     height: 100%;
     width: 100%;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    overflow: hidden;
 }
 
 .HullFillInner {
