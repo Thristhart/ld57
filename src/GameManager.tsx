@@ -22,7 +22,7 @@ import { Checkpoint, GameState, GameUpgradeLevels, Message } from "./gametypes";
 import { screenshakeKeyframes } from "./screenshake";
 import { CollectableName, defaultGameState, flockList, upgrades } from "./startstate";
 import { Vector } from "./vector";
-import merge from "lodash.merge";
+import cloneDeep from "lodash.clonedeep";
 import { MessageEntity } from "./entities/messageentity";
 
 const fuelScale = 0.625;
@@ -160,10 +160,11 @@ export class GameManager {
     }
 
     public setCheckPoint() {
+        const newState = cloneDeep(this.gameState);
         this.checkpoints.push({
             playerX: this.player.x,
             playerY: this.player.y,
-            gameState: merge({}, this.gameState),
+            gameState: newState,
         });
     }
 
@@ -171,7 +172,7 @@ export class GameManager {
         if (this.checkpoints.length > 0) {
             const lastCheckpoint = this.checkpoints[this.checkpoints.length - 1];
 
-            this.gameState = merge({}, lastCheckpoint.gameState);
+            this.gameState = cloneDeep(lastCheckpoint.gameState);
             this.player.x = lastCheckpoint.playerX;
             this.player.y = lastCheckpoint.playerY;
             this.gameOverTimestamp = undefined;

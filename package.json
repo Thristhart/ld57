@@ -15,7 +15,7 @@
     "description": "",
     "devDependencies": {
         "@types/howler": "^2.2.12",
-        "@types/lodash.merge": "^4.6.9",
+        "@types/lodash.clonedeep": "^4.5.9",
         "@types/node": "^22.13.14",
         "@types/react": "^19.1.0",
         "@types/react-dom": "^19.1.1",
@@ -29,7 +29,7 @@
         "classnames": "^2.5.1",
         "howler": "^2.2.4",
         "js-svg-path": "^1.1.0",
-        "lodash.merge": "^4.6.2",
+        "lodash.clonedeep": "^4.5.0",
         "react": "^19.1.0",
         "react-dom": "^19.1.0"
     }
