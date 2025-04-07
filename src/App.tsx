@@ -1,17 +1,19 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import "./App.css";
 import { gameManager } from "./GameManager";
 import { TooltipRootProvider } from "./ui/Tooltip";
 import { Inventory } from "./ui/inventory";
 import { onMouseMove } from "./input";
-import { Message, LightSwitch, Grabber } from "./ui/components";
+import { Message, Grabber } from "./ui/components";
 import { DepthMeter, HullIntegrity, Fuel } from "./ui/meters";
 import { UpgradeGUI } from "./ui/upgrades";
 import { introParagraph } from "./startstate";
 import { MuteButton } from "./ui/mutebutton";
 import { ScuttleButton } from "./ui/scuttlebutton";
-import { chuthuluText, DatingPromptKey, datingSim } from "./datingtext";
 import { DatingSimOverlay } from "./ui/datingsim";
+
+import IntroBG from "#assets/IntroBG.png";
+import DiveIn from "#assets/DiveInbutton.png";
 
 function App({
     isIntro,
@@ -48,11 +50,25 @@ function App({
 function Intro() {
     return (
         <div className={"Intro Overlay"}>
-            <div className={"IntroTitle"}>SUBSUME</div>
-            <div className={"IntroParagraph"}>{introParagraph}</div>
-            <button className={"PlayButton"} style={{ cursor: "pointer" }} onClick={gameManager.startGame}>
-                Play
-            </button>
+            <div className={"IntroContent"}>
+                <div className={"IntroText"}>
+                    <div className={"IntroParagraph"}>
+                        Your trusted collegue, a brilliant scientist, had taken your joint project, the state of the art
+                        EvoAdaptive SymbioSub, on a solo, deep sea, exploration trip.
+                    </div>
+                    <div className={"IntroParagraph"}>
+                        Back in college, you two were roommates, the two of you dreamed about creating such a vessel.
+                        After graduation, the two of you worked together for years in order to make those dreams into
+                        reality. However, their impulsive nature led them to take the first working prototype on a joy
+                        ride. That was a year ago. Building another one by yourself was a monumental endeavor, fueled by
+                        rage and betrayal. You have your own EvoAdaptive SymbioSub now.
+                    </div>
+                    <div className={"IntroParagraph"}>
+                        It is time to discover the fate of your partner and your shared dream.
+                    </div>
+                </div>
+                <button className={"PlayButton"} style={{ cursor: "pointer" }} onClick={gameManager.startGame}></button>
+            </div>
         </div>
     );
 }

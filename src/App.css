@@ -41,6 +41,7 @@ html,
     background-image: url("../assets/ui_elements/leftUi.png");
     background-size: cover;
     color: white;
+    user-select: none;
 }
 
 .LeftButtons {
@@ -69,6 +70,7 @@ html,
     flex-direction: column;
     background-image: url("../assets/ui_elements/rightUi.png");
     background-size: cover;
+    user-select: none;
 }
 
 .Overlay {
@@ -114,8 +116,11 @@ html,
 }
 
 .Intro {
-    background-color: white;
     gap: 24px;
+    background-image: url("../assets/IntroBG.png");
+    user-select: none;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .IntroTitle {
@@ -126,17 +131,32 @@ html,
 
 .IntroParagraph {
     font-size: 24px;
-    color: darkblue;
+    font-family: "Inter", sans-serif;
+    color: white;
     width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 16px;
 }
 
 .Overlay .PlayButton {
-    font-size: 5rem;
-    font-family: "Jersey 25", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 3rem;
-    color: darkblue;
-    background: transparent;
-    border: 4px solid darkblue;
+    background-image: url("../assets/DiveInbutton.png");
+    height: 130px;
+    width: 513px;
+    background-repeat: no-repeat;
+    border: none;
+}
+
+.IntroText {
+    width: fit-content;
+}
+
+.IntroContent {
+    padding: 48px;
+    height: 100%;
+    gap: 24px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
 }
