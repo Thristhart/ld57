@@ -399,7 +399,7 @@ export const collectablesMetadata = {
         description: "if you see this message it's a bug",
         fuelPoints: 0,
         hullPoints: 0,
-        storyMessage: "TODO: write this",
+        storyMessage: "This meat alloy is exceeding any reasonable expectations. The hull holds steady under the immense water pressure. If my readings are correct then the previous calculations indicating this meat alloy's capability to withstand infinite pressure are completely true. With such a great opportunity for futher new discoveries it's completely justified for me to stay down here for a couple more weeks.",
     },
     cassette8: {//4-2
         name: "cassette8",
@@ -407,7 +407,7 @@ export const collectablesMetadata = {
         description: "if you see this message it's a bug",
         fuelPoints: 0,
         hullPoints: 0,
-        storyMessage: "TODO: write this",
+        storyMessage: "The control panels of the Neo Human Interface Submarine are morphing slightly as the meat alloy is further integrated into the systems. With each change it makes to itself I'm finding it both easier and more efficient to operate this vessel. When I return to the surface in a couple of months my research partner will be head over heels for the upgrades the Neo Human Interface Submarine has made for itself.",
     },
     cassette9: {//4-3
         name: "cassette9",
