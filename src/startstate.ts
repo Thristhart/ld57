@@ -10,45 +10,55 @@ import {
     ironOreImage,
     fleshMoteImage,
     eyeBallImage,
+    cassetteImage,
 } from "./images";
 import merge from "lodash.merge";
 
 export const introParagraph =
-    "You have been assigned by the Organization for Deep Exploration and Protection of Terrestrial and Hydrospatial Systems to investigate the mysterious disappearance of one of their lead ecologists. Equipped with the state-of-the-art Submersible for Underwater Mapping and Exploration—identical to the one used by the missing researcher—you’ll venture into uncharted waters. This advanced vessel is capable of adapting to hostile environments by integrating local resources for self-repair and modification. Now, it’s up to you: delve into the unknown, uncover the truth behind the disappearance, and, if possible, bring the researcher back to safety. The clock is ticking—are you ready to face the depths?";
+    "A scientist who had been a close and trusted colleague of yours for many years went on a solo deep sea exploration in a state of the art Neo Human Interface Submarine one year ago. Back in college, where you were roommates, the two of you dreamed about creating such a vessel. Building another one by yourself was a difficult endeavor. It was much easier to work alongside them. You have your own Neo Human Interface Submarine now. It's time to rescue your partner.";
 
 export const upgrades = {
     depthUpgradeLevel: [
         { description: "Max Depth 1000m", upgradeValue: 1000, materials: {} },
-        { description: "Max Depth 2000m", upgradeValue: 2000, materials: { cuteFish: 1 } },
+        { description: "Max Depth 2000m", upgradeValue: 2000,
+			materials: { iron: 3 } 
+		},
         {
             description: "Max Depth 3000m",
             upgradeValue: 3000,
-            materials: { cuteFish: 1, iron: 1 },
+            materials: { cobalt: 5 },
         },
         {
-            description: "Max Depth 5000m",
+            description: "Max Depth ????m",
             upgradeValue: 4000,
-            materials: { iron: 2, cuteFish: 2 },
+            materials: { fleshMote: 4, crystal: 4 },
         },
     ],
     inventoryUpgradeLevel: [
-        { description: "3 slots", upgradeValue: 3, materials: {} },
-        { description: "5 slots", upgradeValue: 5, materials: { sand: 1 } },
+        { description: "3 slots", upgradeValue: 3, materials: {}},
+        { description: "5 slots", upgradeValue: 5,
+			materials: { cobalt:2, iron:1 } },
         {
             description: "10 slots",
             upgradeValue: 10,
-            materials: { eyeball: 3, sand: 1 },
+            materials: { cobalt: 3, crystal:2 ,fleshMote:1 },
         },
     ],
     fuelUpgradeLevel: [
-        { description: "Max Fuel 100 units", upgradeValue: 100, materials: {} },
-        { description: "Max Fuel 200 units", upgradeValue: 200, materials: {} },
-        { description: "Max Fuel 300 units", upgradeValue: 300, materials: {} },
+        { description: "Max Fuel 100 units", upgradeValue: 100,
+			materials: {} },
+        { description: "Max Fuel 200 units", upgradeValue: 200,
+			materials: { iron:1, cuteFish: 1 } },
+        { description: "Max Fuel 300 units", upgradeValue: 300,
+			materials: { cobalt:2, cuteFish2: 2} },
     ],
     hullUpgradeLevel: [
-        { description: "Max Defense 100 units", upgradeValue: 100, materials: {} },
-        { description: "Max Defense 200 units", upgradeValue: 200, materials: {} },
-        { description: "Max Defense 300 units", upgradeValue: 300, materials: {} },
+        { description: "Max Hull Integrity 100 centiTitans", upgradeValue: 100, 
+			materials: {} },
+        { description: "Max Hull Integrity 200 centiTitans", upgradeValue: 200,
+			materials: {iron:2,cobalt:2} },
+        { description: "Max Hull Integrity 300 centiTitans", upgradeValue: 300,
+			materials: {crystal:3,fleshMote:3} },
     ],
 } as const satisfies { [type: string]: Upgrade[] };
 
@@ -125,39 +135,40 @@ import creepyFish4Url from "#assets/ocean_objects/fish/creepy_fish_4.png";
 
 import eyeballImageUrl from "#assets/ocean_objects/eldritch/eyeball1.png";
 import fleshMoteImageUrl from "#assets/ocean_objects/eldritch/flesh_mote1.png";
+import cassetteUrl from "../assets/ocean_objects/story/cassette_1.png";
 
 export const collectablesList: CollectableConfig[] = [
     {
         resource: "iron",
         x: 1227,
         y: 1628,
-        height: 50,
-        width: 50,
+        height: 100,
+        width: 100,
         image: ironOreImage,
     },
     {
         resource: "iron",
         x: 1424,
         y: 1846,
-        height: 50,
-        width: 50,
+        height: 100,
+        width: 100,
         image: ironOreImage,
     },
     {
         resource: "iron",
         x: 1259,
         y: 1679,
-        height: 50,
-        width: 50,
+        height: 100,
+        width: 100,
         image: ironOreImage,
     },
     {
-        resource: "iron",
+        resource: "cassette1",
         x: 1394,
         y: 2743,
-        height: 50,
-        width: 50,
-        image: ironOreImage,
+        height: 100,
+        width: 100,
+        image: cassetteImage,
     },
     // {
     //     resource: "cobalt",
@@ -200,7 +211,7 @@ export const collectablesMetadata = {
         description: "a chunk of iron ore",
         fuelPoints: 0,
         hullPoints: 25,
-        storyMessage: "Discovered iron, can fix a bit of damage to the hull or be used for upgrades",
+        storyMessage: "Discovered iron, it can patch small dents in hull or be used for upgrades.",
     },
     cobalt: {
         name: "cobalt",
@@ -208,7 +219,7 @@ export const collectablesMetadata = {
         description: "a hefty lump of cobalt ore",
         fuelPoints: 0,
         hullPoints: 50,
-        storyMessage: "Discovered cobalt, can fix moderate damage to the hull or be used for upgrades",
+        storyMessage: "Discovered cobalt, it can repair moderate damage to the hull or be used for upgrades.",
     },
     crystal: {
         name: "crystal",
@@ -216,7 +227,7 @@ export const collectablesMetadata = {
         description: "a glowing crystal of indeterminate nature",
         fuelPoints: 0,
         hullPoints: 100,
-        storyMessage: "Discovered a mysterious crystal, the machine is eager to devour it",
+        storyMessage: "Discovered a mysterious glowing crystal, it contains previously undiscovered isotopes.",
     },
     cuteFish: {
         name: "cuteFish",
@@ -232,7 +243,7 @@ export const collectablesMetadata = {
         description: "this one is kind of weird",
         fuelPoints: 40,
         hullPoints: 0,
-        storyMessage: "Discovered a creepyfish3, what do we even do with this",
+        storyMessage: "Discovered a weird fish, it appears to be an efficient fuel source.",
     },
     creepyFish4: {
         name: "creepyFish4",
@@ -240,7 +251,7 @@ export const collectablesMetadata = {
         description: "this one is even weirder",
         fuelPoints: 60,
         hullPoints: 0,
-        storyMessage: "Discovered a creepyfish4, this is even weirder",
+        storyMessage: "Discovered a very strange fish. Its biomass is dense and should be a more efficient fuel source.",
     },
     eyeball: {
         name: "eyeball",
@@ -248,7 +259,7 @@ export const collectablesMetadata = {
         description: "its stares",
         fuelPoints: 150,
         hullPoints: 0,
-        storyMessage: "Discovered an eyeball, it is helping you see bigger and greater things",
+        storyMessage: "Discovered an eyeball. I see. You see. We all see.",
     },
     fleshMote: {
         name: "fleshMote",
@@ -256,7 +267,15 @@ export const collectablesMetadata = {
         description: "the machine hums in excitement",
         fuelPoints: 150,
         hullPoints: 0,
-        storyMessage: "Discovered a flesh mote, im not even sure what a flesh mote is tbh",
+        storyMessage: "Discovered a flesh mote. This mysterious ball of meat seems compatible with the strange glowing mineral.",
+    },
+    cassette1: {
+        name: "cassette1",
+        imageUrl: cassetteUrl,
+        description: "a lost messsage",
+        fuelPoints: 0,
+        hullPoints: 0,
+        storyMessage: "hi world",
     },
 } as const satisfies { [name: string]: CollectableMetadata };
 

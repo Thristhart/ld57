@@ -1,5 +1,6 @@
 import { circleVsCircleCollision } from "#src/collision.ts";
 import { gameManager } from "#src/GameManager.tsx";
+import { collectablesMetadata } from "#src/startstate.ts";
 import { addMut, copyMut, length, normalizeVector, scale, scaleMut, subtract } from "#src/vector.ts";
 import { Entity } from "./entity";
 
@@ -44,8 +45,17 @@ export class Grabber extends Entity {
             // get collected
             gameManager.player.grabber = undefined;
             gameManager.deleteEntity(this);
-            if (this.grabbedTarget) {
-                if (this.grabbedTarget.inventoryType) {
+            if (this.grabbedTarget?.inventoryType) {
+                if (this.grabbedTarget.inventoryType.startsWith("cassette")) {
+                    gameManager.deleteEntity(this.grabbedTarget);
+                    const metadata = collectablesMetadata[this.grabbedTarget.inventoryType];
+                    const seenMaterials = gameManager.getGameState("seenMaterials");
+                    if (!seenMaterials.has(this.grabbedTarget.inventoryType)) {
+                        seenMaterials.add(this.grabbedTarget.inventoryType);
+                        gameManager.addGameStateMessage({ text: metadata.storyMessage, image: metadata.imageUrl });
+                        gameManager.addGameStateSeenMaterial(this.grabbedTarget.inventoryType);
+                    }
+                } else {
                     const existingInventory = gameManager.getGameState("inventory");
                     const maxSize = gameManager.getUpgradedMaxValue("inventoryUpgradeLevel");
                     if (existingInventory.length >= maxSize) {

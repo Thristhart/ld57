@@ -34,7 +34,7 @@ export class Collectable extends Entity {
                 const distance = length(diff);
                 if (distance < 30) {
                     this.angle = getDirectionAngle(diff) - Math.PI / 2;
-                    addMut(boundary, scaleMut(normalizeVector(diff), -this.radius / 2));
+                    addMut(boundary, scaleMut(normalizeVector(diff), -this.height / 2));
                     copyMut(this, boundary);
                     break;
                 }
