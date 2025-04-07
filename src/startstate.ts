@@ -356,7 +356,40 @@ addCollectable("fleshMote", { x: 2011, y: 22795 });
 addCollectable("fleshMote", { x: 2177, y: 22744 });
 addCollectable("fleshMote", { x: 648, y: 23109 });
 addCollectable("fleshMote", { x: 680, y: 23247 });
-
+addCollectable("fleshMote", { x: 2545, y: 18351 })
+addCollectable("fleshMote", { x: 1965, y: 20833 })
+addCollectable("fleshMote", { x: 1811, y: 21314 })
+addCollectable("fleshMote", { x: 2974, y: 31181 })
+addCollectable("fleshMote", { x: 795, y: 29631 })
+addCollectable("fleshMote", { x: 983, y: 29607 })
+addCollectable("fleshMote", { x: 1428, y: 30890 })
+addCollectable("fleshMote", { x: 1307, y: 30972 })
+addCollectable("fleshMote", { x: 1690, y: 29522 })
+addCollectable("fleshMote", { x: 1656, y: 29367 })
+addCollectable("fleshMote", { x: 2164, y: 28837 })
+addCollectable("fleshMote", { x: 2289, y: 28823 })
+addCollectable("fleshMote", { x: 2870, y: 27623 })
+addCollectable("fleshMote", { x: 2863, y: 27766 })
+addCollectable("fleshMote", { x: 2956, y: 26421 })
+addCollectable("fleshMote", { x: 3050, y: 26546 })
+addCollectable("fleshMote", { x: 2492, y: 25237 })
+addCollectable("fleshMote", { x: 2412, y: 25165 })
+addCollectable("fleshMote", { x: 2272, y: 25242 })
+addCollectable("fleshMote", { x: 1766, y: 26553 })
+addCollectable("fleshMote", { x: 1632, y: 26488 })
+addCollectable("fleshMote", { x: 1207, y: 25760 })
+addCollectable("fleshMote", { x: 1268, y: 25868 })
+addCollectable("fleshMote", { x: 1323, y: 25935 })
+addCollectable("fleshMote", { x: 1408, y: 25968 })
+addCollectable("fleshMote", { x: 1166, y: 25602 })
+addCollectable("fleshMote", { x: 739, y: 26562 })
+addCollectable("fleshMote", { x: 794, y: 26628 })
+addCollectable("fleshMote", { x: 736, y: 26735 })
+addCollectable("fleshMote", { x: 850, y: 27155 })
+addCollectable("fleshMote", { x: 939, y: 27098 })
+addCollectable("fleshMote", { x: 1073, y: 27145 })
+addCollectable("fleshMote", { x: 579, y: 22449 })
+addCollectable("fleshMote", { x: 675, y: 22391 });
 
 
 
