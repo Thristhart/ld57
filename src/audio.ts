@@ -47,3 +47,6 @@ export function playCollisionSound() {
 
 import youDiedUrl from "#assets/fakesound_workspace/you_died.mp3";
 export const youDied = new Howl({ src: youDiedUrl });
+
+import propulsionUrl from "#assets/fakesound_workspace/propulsion.mp3";
+export const propulsionSFX = new Howl({ src: propulsionUrl, volume: 0.3 });

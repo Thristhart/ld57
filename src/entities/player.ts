@@ -1,3 +1,4 @@
+import { propulsionSFX } from "#src/audio.ts";
 import { gameManager } from "#src/GameManager.tsx";
 import { playerImage1 } from "#src/images.ts";
 import { InputState, mousePosition } from "#src/input.ts";
@@ -12,6 +13,7 @@ import {
     subtract,
     Vector,
 } from "#src/vector.ts";
+import { Bubble } from "./bubble";
 import { Entity } from "./entity";
 import { Grabber } from "./grabber";
 
@@ -24,20 +26,25 @@ export class Player extends Entity {
         super(x, y);
     }
     tick(dt: number): void {
+        this.timeSincePropulsionSound += dt;
         let acceleration: Vector = { x: 0, y: 0 };
         const fuel = gameManager.getGameState("fuelPoints");
         if (fuel > 0 || localStorage.getItem("noclip")) {
             if (InputState.get("w")) {
                 acceleration.y += -1;
+                this.propulseEffects();
             }
             if (InputState.get("s")) {
                 acceleration.y += 1;
+                this.propulseEffects();
             }
             if (InputState.get("a")) {
                 acceleration.x -= 1;
+                this.propulseEffects();
             }
             if (InputState.get("d")) {
                 acceleration.x += 1;
+                this.propulseEffects();
             }
         } else {
             acceleration.y += 0.2;
@@ -68,6 +75,16 @@ export class Player extends Entity {
             this.angle -= angleTick;
         }
     }
+    public timeSincePropulsionSound = 0;
+    public timePerPropulsionSound = 100;
+    propulseEffects() {
+        if (this.timeSincePropulsionSound > this.timePerPropulsionSound) {
+            propulsionSFX.play();
+            this.timeSincePropulsionSound = 0;
+            this.emitBubble();
+        }
+    }
+
     draw(context: CanvasRenderingContext2D) {
         let flip = false;
         if (this.angle > Math.PI / 2 && this.angle < Math.PI * 1.5) {
@@ -111,14 +128,18 @@ export class Player extends Entity {
     grabberEmitPoint: Vector | undefined;
     emitGrabber() {
         this.calcGrabberEmitPoint();
-        const emitVector = normalizeVector(subtract(mousePosition, this));
+        const emitVector = normalizeVector(subtract(mousePosition, this.grabberEmitPoint!));
         this.grabber = gameManager.addEntity(new Grabber(this.grabberEmitPoint!.x, this.grabberEmitPoint!.y));
-        this.grabber.velocity = scale(emitVector, 2);
+        this.grabber.velocity = scale(emitVector, 8);
         addMut(this.grabber.velocity, this.velocity);
     }
     retractGrabber() {
         if (this.grabber) {
             this.grabber.retracting = true;
         }
+    }
+    emitBubble() {
+        const bubble = gameManager.addEntity(new Bubble(this.x, this.y));
+        bubble.velocity = scale(this.velocity, -0.5);
     }
 }

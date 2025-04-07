@@ -40,14 +40,14 @@ export default class Boid extends Entity {
         }
     }
 
-    accelerate(factors: Factor[]) {
+    accelerate(factors: Factor[], dt: number) {
         this.speed = vectorMutable.normalize(
             factors.reduce((acc: BoidVector, factor: Factor) => {
                 if (!factor) {
                     return acc;
                 }
                 const { force, strength } = factor;
-                return vectorMutable.add(acc, vectorMutable.multiply(vectorImmutable.normalize(force), strength));
+                return vectorMutable.add(acc, vectorMutable.multiply(vectorImmutable.normalize(force), strength * dt));
             }, this.speed)
         );
     }

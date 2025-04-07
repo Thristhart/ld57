@@ -59,7 +59,7 @@ function GameOver(props: { hasCheckpoint: boolean }) {
                 </button>
             )}
             <button style={{ cursor: "pointer" }} onClick={() => (location.href = location.href)}>
-                Retry
+                Restart
             </button>
         </div>
     );

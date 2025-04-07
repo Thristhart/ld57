@@ -22,11 +22,11 @@ import { Checkpoint, GameState, GameUpgradeLevels, Message } from "./gametypes";
 import { screenshakeKeyframes } from "./screenshake";
 import { CollectableName, collectablesList, defaultGameState, flockList, upgrades } from "./startstate";
 import { Vector } from "./vector";
-import merge from "lodash.merge";
+import cloneDeep from "lodash.clonedeep";
 import { MessageEntity } from "./entities/messageentity";
 import { Collectable } from "./entities/collectable";
 
-const fuelScale = 10;
+const fuelScale = 0.325;
 let nextEntId = 0;
 const checkpointFuelPoints = 20;
 const checkpointHullPoints = 20;
@@ -170,10 +170,11 @@ export class GameManager {
     }
 
     public setCheckPoint() {
+        const newState = cloneDeep(this.gameState);
         this.checkpoints.push({
             playerX: this.player.x,
             playerY: this.player.y,
-            gameState: merge({}, this.gameState),
+            gameState: newState,
         });
     }
 
@@ -181,7 +182,7 @@ export class GameManager {
         if (this.checkpoints.length > 0) {
             const lastCheckpoint = this.checkpoints[this.checkpoints.length - 1];
 
-            this.gameState = merge({}, lastCheckpoint.gameState);
+            this.gameState = cloneDeep(lastCheckpoint.gameState);
             this.player.x = lastCheckpoint.playerX;
             this.player.y = lastCheckpoint.playerY;
             this.gameOverTimestamp = undefined;
@@ -217,7 +218,7 @@ export class GameManager {
         // set fuel spent
         if (this.player.acceleration) {
             const fuelExpended = length(this.player.acceleration);
-            const fuelScaled = Math.max(fuel - fuelExpended * fuelScale, 0);
+            const fuelScaled = Math.max(fuel - fuelExpended * (fuelScale * dt), 0);
             this.setGameState("fuelPoints", fuelScaled);
         }
 

@@ -7,27 +7,27 @@ export const baseFlock = {
     forces: {
         alignment: {
             distance: 300,
-            strength: 30,
+            strength: 20,
         },
         avoidance: {
             distance: 250,
-            strength: 9,
+            strength: 2,
         },
         cohesion: {
             distance: 300,
-            strength: 5,
+            strength: 4,
         },
         predatorAvoidance: {
-            distance: 300,
+            distance: 500,
             strength: 2,
         },
         boundaryAvoidance: {
             distance: 2,
-            strength: 100,
+            strength: 25,
         },
         roosting: {
-            distance: 20,
-            strength: 0.01,
+            distance: 100,
+            strength: 0.005,
         },
     },
     characteristics: {
@@ -43,8 +43,8 @@ export const baseFlock = {
                 maxShrinkPerTick: 5,
                 maxGrowthPerTick: Infinity,
             },
-            count: 10,
-            speedRatio: 1,
+            count: 16,
+            speedRatio: 0.25,
         },
     },
 } as const as FlockSetting;
