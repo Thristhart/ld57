@@ -8,7 +8,7 @@ import { clamp } from "./util";
 let canvas: HTMLCanvasElement;
 let context: CanvasRenderingContext2D | null;
 
-const camera = { x: 0, y: 0, scale: 1 };
+const camera = { x: 0, y: 0, scale: parseFloat(localStorage.getItem("scale") ?? "1") };
 
 function lockCameraBounds() {
     const visibleWidth = canvas.width / camera.scale;
@@ -35,8 +35,8 @@ export function isPointOnScreen(point: Vector) {
     if (!canvas) {
         return false;
     }
-    const halfVisibleWidth = canvas.width / camera.scale / 2;
-    const halfVisibleHeight = canvas.height / camera.scale / 2;
+    const halfVisibleWidth = (canvas.width / camera.scale) * 0.75;
+    const halfVisibleHeight = (canvas.height / camera.scale) * 0.75;
     return (
         camera.x - halfVisibleWidth < point.x &&
         camera.x + halfVisibleWidth > point.x &&

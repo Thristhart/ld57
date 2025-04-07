@@ -43,6 +43,14 @@ html,
     color: white;
 }
 
+.LeftButtons {
+    grid-column: 2/4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .MeterBG {
     grid-column-start: 1;
     grid-column-end: 1;

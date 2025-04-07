@@ -25,6 +25,8 @@ import { Vector } from "./vector";
 import cloneDeep from "lodash.clonedeep";
 import { MessageEntity } from "./entities/messageentity";
 import { Collectable } from "./entities/collectable";
+import { isPointOnScreen } from "./canvas";
+import { mousePosition } from "./input";
 
 const fuelScale = 0.325;
 let nextEntId = 0;
@@ -52,7 +54,7 @@ export class GameManager {
     private rerenderUI: () => void = () => {};
     private gameState: GameState = defaultGameState;
     public maxPixelWidth: number = 4000;
-    public maxPixelHeight: number = 24000;
+    public maxPixelHeight: number = 40000;
     public maxDepth = 5000;
     private mapEntities = new Map<number, Entity>();
     public player: Player;
@@ -81,7 +83,7 @@ export class GameManager {
         this.player = this.addEntity(new Player(2000, 200));
 
         collectablesList.forEach((collectable) => {
-            this.addEntity(new Collectable(collectable));
+            collectable.entityId = this.addEntity(new Collectable(collectable)).id;
         });
 
         flockList.forEach((flock) => {
@@ -205,8 +207,8 @@ export class GameManager {
 
         // set the hull damage
         const hullPoints = this.gameState.hullPoints;
-        if (this.player.collisions.length > 0 && length(this.player.velocity) > 1) {
-            const damage = length(this.player.velocity);
+        if (this.player.collisions.length > 0 && length(this.player.velocity) > 6) {
+            const damage = length(this.player.velocity) / 2;
             const newHullPoints = hullPoints - Math.floor(damage);
             this.setGameState("hullPoints", newHullPoints);
             playCollisionSound();
@@ -281,6 +283,23 @@ export class GameManager {
             youDied.play();
             setTimeout(() => this.forceUpdate(), 1000);
         }
+
+        // respawn collectables if offscreen
+        for (const collectable of collectablesList) {
+            if (!collectable.entityId) {
+                continue;
+            }
+            if (this.getEntity(collectable.entityId)) {
+                continue;
+            }
+            if (collectable.resource.startsWith("cassette")) {
+                continue;
+            }
+            if (isPointOnScreen(collectable)) {
+                continue;
+            }
+            collectable.entityId = this.addEntity(new Collectable(collectable)).id;
+        }
     }
 
     private hurtFromDepth() {
@@ -299,6 +318,13 @@ export class GameManager {
     }
 
     public click() {
+        if (localStorage.getItem("editor")) {
+            const line = `addCollectable("iron", { x: ${Math.floor(mousePosition.x)}, y: ${Math.floor(
+                mousePosition.y
+            )} });`;
+            console.log(line);
+            navigator.clipboard.writeText(line);
+        }
         if (this.player.grabber) {
             this.player.retractGrabber();
         } else {

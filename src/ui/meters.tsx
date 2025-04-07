@@ -2,7 +2,7 @@ import { useGameStateValue, useUpgradedMaxValue } from "#src/GameManager.tsx";
 import React from "react";
 import styles from "./meters.module.scss";
 
-import depthMarkerImageUrl from "#assets/ui_elements/DepthMarker.png";
+import depthMarkerImageUrl from "#assets/ui_elements/depthmarkeroutline.png";
 import batteryImageUrl from "#assets/ui_elements/Battery.png";
 import classNames from "classnames";
 
@@ -14,19 +14,38 @@ export const DepthMeter = React.memo(() => {
         <div className={styles.DepthMeter}>
             <div className={classNames(styles.MeterHeader, styles.VerticalHeader)}>{`CURRENT DEPTH`} </div>
             <div className={styles.MeterContent}>
+                <img className={styles.MeterBGImage} src={depthMarkerImageUrl} />
                 <div className={styles.MeterCurrent}>
                     <div>{`${currentDepth} m`}</div>
                 </div>
-                <img className={styles.MeterBGImage} src={depthMarkerImageUrl} />
-                <MeterArrow
-                    className={styles.MeterArrow}
-                    style={{ top: `calc(${arrowPosition}% - 30px)`, color: arrowPosition > 80 ? "red" : "#217B9C" }}
-                />
-                <div className={styles.DepthMax}>
-                    <div>{`${maxDepth} m`}</div>
+                <div className={styles.MeterInner}>
+                    <div className={styles.MeterInnerPlace}>
+                        <MeterArrow
+                            className={styles.DepthArrow}
+                            style={{
+                                top: `calc(${arrowPosition}% - 30px)`,
+                                color: arrowPosition > 70 ? "#ee69a9" : arrowPosition > 30 ? "#dfcb82" : "#68F8F8",
+                            }}
+                        />
+                        <div className={styles.DepthCells}>
+                            <div className={styles.DepthCell1}></div>
+                            <div className={styles.DepthCell1}></div>
+                            <div className={styles.DepthCell1}></div>
+                            <div className={styles.DepthCell2}></div>
+                            <div className={styles.DepthCell2}></div>
+                            <div className={styles.DepthCell2}></div>
+                            <div className={styles.DepthCell2}></div>
+                            <div className={styles.DepthCell3}></div>
+                            <div className={styles.DepthCell3}></div>
+                            <div className={styles.DepthCell3}></div>
+                        </div>
+                    </div>
+                    <div className={styles.DepthMax}>
+                        <div className={styles.MaxMeterHeader}>{`MAX DEPTH`} </div>
+                        <div>{`${maxDepth} m`}</div>
+                    </div>
                 </div>
             </div>
-            <div className={styles.MaxMeterHeader}>{`MAX DEPTH`} </div>
         </div>
     );
 });
@@ -34,7 +53,7 @@ export const DepthMeter = React.memo(() => {
 const MeterArrow = (props: { style: React.CSSProperties; className: string }) => {
     return (
         <svg width="65" height="61" viewBox="0 0 65 61" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-            <path d="M65 30.5L0 0V61L65 30.5Z" fill="currentColor" fill-opacity="0.7" />
+            <path d="M65 30.5L0 0V61L65 30.5Z" fill="currentColor" fill-opacity="1" />
         </svg>
     );
 };

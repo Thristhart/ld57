@@ -42,6 +42,7 @@ export interface CollectableConfig {
     width: number;
     height: number;
     image: HTMLImageElement;
+    entityId?: number;
 }
 
 export interface CollectableMetadata {

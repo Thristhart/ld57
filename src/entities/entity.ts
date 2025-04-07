@@ -55,13 +55,13 @@ export class Entity {
                     const closestPoint = findClosestPoint(col.start, col.end, this);
                     const vectorToClosestPoint = subtract(closestPoint, this);
                     const minimumDistanceVector = normalizeVector(vectorToClosestPoint);
-                    scaleMut(minimumDistanceVector, -(this.radius + 1));
+                    scaleMut(minimumDistanceVector, -(this.radius + 3));
                     const newPosition = add(closestPoint, minimumDistanceVector);
                     copyMut(this, newPosition);
 
                     const bounceAmount = scale(col.normal, dot(this.velocity, col.normal) * 2);
                     this.velocity = subtract(this.velocity, bounceAmount);
-                    if (length(this.velocity) < 0.3) {
+                    if (length(this.velocity) < 0.7) {
                         this.velocity = { x: 0, y: 0 };
                     }
                     scaleMut(this.velocity, this.bounceFactor);
