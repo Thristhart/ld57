@@ -39,8 +39,14 @@ export const wallsImage = loadImage(wallsImageUrl);
 import wallsVectorUrl from "../assets/Walls - Spiky Stuff.svg?raw";
 export const wallsVectors = loadVectorPaths(wallsVectorUrl);
 
-import playerImage1Url from "../assets/sub/level1.png";
+import playerImage1Url from "../assets/sub/sub_level1.png";
 export const playerImage1 = loadImage(playerImage1Url);
+
+import playerImage2Url from "../assets/sub/sub_level2.png";
+export const playerImage2 = loadImage(playerImage2Url);
+
+import playerImage3Url from "../assets/sub/sub_level3.png";
+export const playerImage3 = loadImage(playerImage3Url);
 
 import redRectImageUrl from "../assets/collectable/red_rect.png";
 export const redRectImage = loadImage(redRectImageUrl);
