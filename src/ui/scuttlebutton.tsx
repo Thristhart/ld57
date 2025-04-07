@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./scuttlebutton.module.css";
+import styles from "./scuttlebutton.module.scss";
 import { gameManager } from "#src/GameManager.tsx";
 
 export function ScuttleButton() {

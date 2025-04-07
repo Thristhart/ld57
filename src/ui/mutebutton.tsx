@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Howler } from "howler";
-import styles from "./mutebutton.module.css";
+import styles from "./mutebutton.module.scss";
 
 import muteButtonImageUrl from "#assets/ui_elements/buttons/Mute button - click to mute.png";
 import unmuteButtonImageUrl from "#assets/ui_elements/buttons/Mute button - click to unmute.png";
