@@ -22,8 +22,8 @@ export const baseFlock = {
             strength: 2,
         },
         boundaryAvoidance: {
-            distance: 2,
-            strength: 25,
+            distance: 30,
+            strength: 100,
         },
         roosting: {
             distance: 100,
