@@ -1,7 +1,7 @@
 import { gameManager, useGameStateValue } from "#src/GameManager.tsx";
 import "./components.css";
 import messageBoxImageUrl from "#assets/ui_elements/MessageBlock.png";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 
 export const LightSwitch = () => {
     const isLightOn = useGameStateValue("lightOn");
@@ -23,7 +23,7 @@ export const Message = () => {
     const messageList = useGameStateValue("messageList");
     const scrollRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (scrollRef && scrollRef.current) {
             scrollRef.current.scrollTo(0, scrollRef.current.scrollHeight);
         }
