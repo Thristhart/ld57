@@ -335,7 +335,7 @@ addCollectable("cuteFish", { x: 2878, y: 12597 });
 
 
 //creepy fish1
-addCollectable("creepyFish", { x: 2095, y: 17638 });
+addCollectable("creepyFish3", { x: 2095, y: 17638 });
 
 //creepy fish 2
 
