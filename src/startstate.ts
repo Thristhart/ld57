@@ -29,7 +29,7 @@ export const upgrades = {
         },
         {
             description: "Max Depth ????m",
-            upgradeValue: 4000,
+            upgradeValue: 9000,
             materials: { fleshMote: 4, crystal: 4 },
         },
     ],

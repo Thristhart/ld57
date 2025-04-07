@@ -43,7 +43,7 @@ export const DepthMeter = React.memo(() => {
                     </div>
                     <div className={styles.DepthMax} data-warning={arrowPosition >= 100}>
                         <div className={styles.MaxMeterHeader}>{`MAX DEPTH`} </div>
-                        <div>{`${maxDepth} m`}</div>
+                        <div>{`${maxDepth === 9000 ? "????" : maxDepth} m`}</div>
                     </div>
                 </div>
             </div>
