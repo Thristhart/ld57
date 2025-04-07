@@ -25,7 +25,7 @@ import { Vector } from "./vector";
 import merge from "lodash.merge";
 import { MessageEntity } from "./entities/messageentity";
 
-const fuelScale = 10;
+const fuelScale = 0.625;
 let nextEntId = 0;
 const checkpointFuelPoints = 20;
 const checkpointHullPoints = 20;
@@ -207,7 +207,7 @@ export class GameManager {
         // set fuel spent
         if (this.player.acceleration) {
             const fuelExpended = length(this.player.acceleration);
-            const fuelScaled = Math.max(fuel - fuelExpended * fuelScale, 0);
+            const fuelScaled = Math.max(fuel - fuelExpended * (fuelScale * dt), 0);
             this.setGameState("fuelPoints", fuelScaled);
         }
 
