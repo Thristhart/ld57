@@ -34,7 +34,7 @@ export const upgrades = {
         },
     ],
     inventoryUpgradeLevel: [
-        { description: "3 slots", upgradeValue: 3, materials: {},
+        { description: "3 slots", upgradeValue: 3, materials: {}},
         { description: "5 slots", upgradeValue: 5,
 			materials: { cobalt:2, iron:1 } },
         {
