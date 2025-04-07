@@ -10,6 +10,7 @@ import {
     ironOreImage,
     fleshMoteImage,
     eyeBallImage,
+    cassetteImage,
 } from "./images";
 import merge from "lodash.merge";
 
@@ -134,39 +135,40 @@ import creepyFish4Url from "#assets/ocean_objects/fish/creepy_fish_4.png";
 
 import eyeballImageUrl from "#assets/ocean_objects/eldritch/eyeball1.png";
 import fleshMoteImageUrl from "#assets/ocean_objects/eldritch/flesh_mote1.png";
+import cassetteUrl from "../assets/ocean_objects/story/cassette_1.png";
 
 export const collectablesList: CollectableConfig[] = [
     {
         resource: "iron",
         x: 1227,
         y: 1628,
-        height: 50,
-        width: 50,
+        height: 100,
+        width: 100,
         image: ironOreImage,
     },
     {
         resource: "iron",
         x: 1424,
         y: 1846,
-        height: 50,
-        width: 50,
+        height: 100,
+        width: 100,
         image: ironOreImage,
     },
     {
         resource: "iron",
         x: 1259,
         y: 1679,
-        height: 50,
-        width: 50,
+        height: 100,
+        width: 100,
         image: ironOreImage,
     },
     {
-        resource: "iron",
+        resource: "cassette1",
         x: 1394,
         y: 2743,
-        height: 50,
-        width: 50,
-        image: ironOreImage,
+        height: 100,
+        width: 100,
+        image: cassetteImage,
     },
     // {
     //     resource: "cobalt",
@@ -266,6 +268,14 @@ export const collectablesMetadata = {
         fuelPoints: 150,
         hullPoints: 0,
         storyMessage: "Discovered a flesh mote. This mysterious ball of meat seems compatible with the strange glowing mineral.",
+    },
+    cassette1: {
+        name: "cassette1",
+        imageUrl: cassetteUrl,
+        description: "a lost messsage",
+        fuelPoints: 0,
+        hullPoints: 0,
+        storyMessage: "hi world",
     },
 } as const satisfies { [name: string]: CollectableMetadata };
 

@@ -77,6 +77,9 @@ export const eyeBallImage = loadImage(eyeballUrl);
 import fleshMoteUrl from "../assets/ocean_objects/eldritch/flesh_mote1.png";
 export const fleshMoteImage = loadImage(fleshMoteUrl);
 
+import cassetteUrl from "../assets/ocean_objects/story/cassette_1.png";
+export const cassetteImage = loadImage(cassetteUrl);
+
 let resolveImageLoad: () => void;
 export const imageLoadPromise = new Promise<void>((resolve) => {
     resolveImageLoad = resolve;
