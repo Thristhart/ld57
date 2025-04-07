@@ -54,7 +54,7 @@ export const DepthMeter = React.memo(() => {
 const MeterArrow = (props: { style: React.CSSProperties; className: string }) => {
     return (
         <svg width="65" height="61" viewBox="0 0 65 61" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-            <path d="M65 30.5L0 0V61L65 30.5Z" fill="currentColor" fill-opacity="1" />
+            <path d="M65 30.5L0 0V61L65 30.5Z" fill="currentColor" fillOpacity="1" />
         </svg>
     );
 };

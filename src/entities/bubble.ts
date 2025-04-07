@@ -16,7 +16,7 @@ export class Bubble extends Entity {
         context.closePath();
     }
     tick(dt: number): void {
-        this.acceleration.y = -0.001;
+        this.acceleration.y = -0.005;
         super.tick(dt);
         this.ttl -= dt;
         if (this.ttl <= 0) {

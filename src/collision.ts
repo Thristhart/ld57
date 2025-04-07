@@ -124,6 +124,9 @@ export function positionWallCollision(point: Vector, radius: number) {
     const pixel = { x: Math.round(point.x), y: Math.round(point.y) };
 
     for (const line of wallLines) {
+        if (lengthSquared(subtract(line.start, point)) > line.length * line.length) {
+            continue;
+        }
         if (isCircleCollidingWithOrOutsideLinesegment(pixel, radius, line.start, line.end)) {
             collisions.push(line);
         }

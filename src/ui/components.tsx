@@ -34,7 +34,7 @@ export const Message = () => {
             <div ref={scrollRef} className="MessageContent">
                 {messageList.map((message) => {
                     return (
-                        <div className={"IndividualMessage"}>
+                        <div className={"IndividualMessage"} key={message.text}>
                             {message.image && <img className={"MessageImage"} src={message.image} />}
                             <div className={"MessageText"}>{message.text}</div>
                         </div>
