@@ -1,6 +1,6 @@
 .ScuttleButton {
     background: transparent;
-    background-image: url("./assets/ui_elements/buttons/Empty\ button.png");
+    background-image: url("../../assets/ui_elements/buttons/Empty\ button.png");
     border: none;
     width: 256px;
     height: 66px;
@@ -9,4 +9,5 @@
     font-style: normal;
     font-size: 24px;
     color: white;
+    cursor: pointer;
 }

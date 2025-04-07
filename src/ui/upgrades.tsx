@@ -196,8 +196,18 @@ function UnlockedUpgrade(props: { upgradeMetadata: Upgrade; index: number; upgra
 }
 
 function LockedUpgrade() {
+    const ref = useRef<HTMLDivElement>(null);
+    const tooltip = useTooltip(<LockedTooltip />, ref, ETooltipPosition.top);
+    const fnShowTooltip = () => {
+        tooltip.setIsVisible(true);
+    };
+    const fnHideTooltip = () => {
+        tooltip.setIsVisible(false);
+    };
+
     return (
-        <div className={styles.LockedUpgradeItem}>
+        <div onMouseEnter={fnShowTooltip} onMouseLeave={fnHideTooltip} ref={ref} className={styles.LockedUpgradeItem}>
+            {tooltip.tooltipContent}
             <img height={upgradeSize} width={upgradeSize} src={lockedImageUrl} />
         </div>
     );
@@ -206,6 +216,10 @@ function LockedUpgrade() {
 function PurchasedTooltip(props: { upgradeMetadata: Upgrade }) {
     const { upgradeMetadata } = props;
     return <div className={styles.PurchasedTooltip}>{upgradeMetadata.description}</div>;
+}
+
+function LockedTooltip() {
+    return <div className={styles.PurchasedTooltip}>Undiscovered Upgrade</div>;
 }
 
 function UpgradeTooltip(props: { upgradeMetadata: Upgrade; hasMaterials: boolean }) {

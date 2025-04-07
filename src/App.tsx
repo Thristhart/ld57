@@ -12,9 +12,6 @@ import { MuteButton } from "./ui/mutebutton";
 import { ScuttleButton } from "./ui/scuttlebutton";
 import { DatingSimOverlay } from "./ui/datingsim";
 
-import IntroBG from "#assets/IntroBG.png";
-import DiveIn from "#assets/DiveInbutton.png";
-
 function App({
     isIntro,
     loading,

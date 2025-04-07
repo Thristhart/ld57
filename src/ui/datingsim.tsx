@@ -2,16 +2,26 @@ import { datingSim, chuthuluText, answerText } from "#src/datingtext.ts";
 import { useState } from "react";
 import styles from "./datingsim.module.scss";
 import { gameManager } from "#src/GameManager.tsx";
+import classNames from "classnames";
 
 export function DatingSimOverlay() {
     const [currentPrompt, setPrompt] = useState<string>("chuWhoDares");
     const answers = datingSim[currentPrompt];
     const playerUpgrade = gameManager.player.upgradeLevel;
+    const hasCheckpoint = gameManager.checkpoints.length > 0;
 
     if (currentPrompt === "neutral" || currentPrompt === "bad" || currentPrompt === "good") {
         return (
-            <div className={styles.DatingSimEnding}>
-                <div className={styles.DatingPrompt}>{`The Creature: ${chuthuluText[currentPrompt].text}`}</div>
+            <div className={classNames(styles.DatingSimEnding, styles[currentPrompt])}>
+                <div
+                    className={classNames(
+                        styles.DatingPrompt
+                    )}>{`The Creature: ${chuthuluText[currentPrompt].text}`}</div>
+                {hasCheckpoint && (
+                    <button className={styles.ReplayButton} onClick={() => gameManager.loadCheckpoint()}>
+                        Load Checkpoint
+                    </button>
+                )}
                 <button
                     className={styles.ReplayButton}
                     onClick={() => {
