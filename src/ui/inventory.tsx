@@ -21,13 +21,15 @@ export const Inventory = () => {
         if (inventoryItemName) {
             const metaData = collectablesMetadata[inventoryItemName];
             if (metaData) {
-                nodes.push(<InventoryItem inventoryIndex={i} metadata={metaData} />);
+                nodes.push(<InventoryItem inventoryIndex={i} metadata={metaData} key={i} />);
                 continue;
             }
         }
 
         nodes.push(
-            <div className={i < maxUpgradedInventory ? styles.unlockedInventory : styles.lockedInventory}></div>
+            <div
+                key={i + "bg"}
+                className={i < maxUpgradedInventory ? styles.unlockedInventory : styles.lockedInventory}></div>
         );
     }
 

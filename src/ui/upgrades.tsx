@@ -47,6 +47,7 @@ function UpgradePath(props: { category: string; upgrades: Upgrade[]; upgradeKey:
             <div className={styles.UpgradeList}>
                 {upgradesExceptFirst.map((upgrade, index) => (
                     <UpgradeItem
+                        key={index}
                         upgrade={upgrade}
                         index={index + 1}
                         isLastUpgrade={index === upgradesExceptFirst.length - 1}
