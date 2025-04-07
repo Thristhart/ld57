@@ -11,6 +11,7 @@ import { mousePosition, mousePositionGlobal } from "./input";
 import { wallLines } from "./collision";
 import { add, length, normalizeVector, scale, subtract, Vector } from "./vector";
 import { clamp } from "./util";
+import { MessageEntity } from "./entities/messageentity";
 
 let canvas: HTMLCanvasElement;
 let context: CanvasRenderingContext2D | null;
@@ -145,9 +146,14 @@ export function drawFrame(avgFrameLength: number) {
         }
     }
 
+    const drawOnTop = [];
     for (const ent of gameManager.getAllEntities()) {
         if (ent === gameManager.player) {
             // skip so we can draw later with the flashlight
+            continue;
+        }
+        if (ent instanceof MessageEntity) {
+            drawOnTop.push(ent);
             continue;
         }
         if (isPointOnScreen(ent)) {
@@ -155,7 +161,9 @@ export function drawFrame(avgFrameLength: number) {
         }
     }
 
-    let maskOpacity = Math.min(1, gameManager.player.y / (gameManager.maxPixelHeight / 2));
+    let maskOpacity = localStorage.getItem("fullbright")
+        ? 1
+        : Math.min(1, gameManager.player.y / (gameManager.maxPixelHeight / 2));
 
     let flashlightSize = 0.1;
     if (gameManager.gameOverTimestamp) {
@@ -212,6 +220,10 @@ export function drawFrame(avgFrameLength: number) {
 
         context.fillStyle = alert.type === "error" ? "red" : "green";
         context.fillText(alert.text, x, y);
+    }
+
+    for (const ent of drawOnTop) {
+        ent.draw(context);
     }
 
     context.restore();
