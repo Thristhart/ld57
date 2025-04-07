@@ -1,6 +1,6 @@
 import { propulsionSFX } from "#src/audio.ts";
 import { gameManager } from "#src/GameManager.tsx";
-import { playerImage1 } from "#src/images.ts";
+import { playerImage1, playerImage2, playerImage3 } from "#src/images.ts";
 import { InputState, mousePosition } from "#src/input.ts";
 import {
     addMut,
@@ -17,11 +17,34 @@ import { Bubble } from "./bubble";
 import { Entity } from "./entity";
 import { Grabber } from "./grabber";
 
+const subConfigs = {
+    1: {
+        image: playerImage1,
+        emitterAngle: 0.28,
+        emitterDistanceMod: -2,
+        radiusMod: 18,
+    },
+    2: {
+        image: playerImage2,
+        emitterAngle: 0.28,
+        emitterDistanceMod: -2,
+        radiusMod: 18,
+    },
+    3: {
+        image: playerImage3,
+        emitterAngle: 0.28,
+        emitterDistanceMod: -2,
+        radiusMod: 18,
+    },
+} as const;
+
 export class Player extends Entity {
     public radius = 50;
     public angle = 0;
     public rotationSpeed = 0.01;
     public shouldCollideWithWall = true;
+    public upgradeLevel: keyof typeof subConfigs = 1;
+
     constructor(x: number, y: number) {
         super(x, y);
     }
@@ -96,7 +119,8 @@ export class Player extends Entity {
         if (flip) {
             context.scale(1, -1);
         }
-        context.drawImage(playerImage1.bitmap, -this.radius, -this.radius);
+        const radius = this.radius + subConfigs[this.upgradeLevel].radiusMod;
+        context.drawImage(subConfigs[this.upgradeLevel].image.bitmap, -radius, -radius, radius * 2, radius * 2);
 
         context.restore();
 
@@ -117,8 +141,8 @@ export class Player extends Entity {
         if (this.angle > Math.PI / 2 && this.angle < Math.PI * 1.5) {
             flip = true;
         }
-        let emitPointAngleAdjustment = 0.35 * (flip ? -1 : 1);
-        const emitPointDistance = this.radius - 1;
+        let emitPointAngleAdjustment = subConfigs[this.upgradeLevel].emitterAngle * (flip ? -1 : 1);
+        const emitPointDistance = this.radius - subConfigs[this.upgradeLevel].emitterDistanceMod;
         this.grabberEmitPoint = {
             x: this.x + Math.cos(this.angle + emitPointAngleAdjustment) * emitPointDistance,
             y: this.y + Math.sin(this.angle + emitPointAngleAdjustment) * emitPointDistance,

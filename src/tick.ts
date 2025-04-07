@@ -13,6 +13,10 @@ export function tick(timestamp: number) {
     last5FrameLength.splice(0, 1);
     requestAnimationFrame(tick);
 
+    if (dt > 600) {
+        // too long since last frame, just drop frames and get back on schedule
+        return;
+    }
     timeSinceLastFrame += dt;
 
     while (timeSinceLastFrame >= millisecondsPerFrame) {

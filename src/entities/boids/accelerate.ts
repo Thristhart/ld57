@@ -76,7 +76,7 @@ export function calcBoundaryForceFactor(flockingBoid: FlockingBoid) {
         const boundary = findClosestPoint(wallLine.start, wallLine.end, flockingBoid);
         if (checkIsCloseEnough(flockingBoid, boundary, flockingBoid.flock.settings.forces.boundaryAvoidance.distance)) {
             gameManager.addDebugVector(flockingBoid, boundary, wallLine.color);
-            const force = normalizeVector(subtract(flockingBoid, boundary));
+            const force = subtract(flockingBoid, boundary);
             boundaryAvoidances.push({
                 force,
                 strength: flockingBoid.flock.settings.forces.boundaryAvoidance.strength,

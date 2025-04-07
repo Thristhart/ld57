@@ -239,15 +239,15 @@ export class GameManager {
             this.addEntity(new MessageEntity(this.player.x, this.player.y, "CHECKPOINT SAVED"));
         }
 
-        if (depth < 60) {
+        if (depth < 250) {
             // choose correct bgm for depth
             // beware: arbitrary numbers, change these to match actual biome differences
             switchBGM(bgmBiome1);
-        } else if (depth < 100) {
+        } else if (depth < 500) {
             switchBGM(bgmBiome2);
-        } else if (depth < 130) {
+        } else if (depth < 750) {
             switchBGM(bgmBiome3);
-        } else if (depth < 160) {
+        } else if (depth < 1000) {
             switchBGM(bgmBiome4);
         }
 
