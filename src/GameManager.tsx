@@ -30,7 +30,8 @@ import { mousePosition } from "./input";
 import { isWithinBounds, lerp } from "./util";
 import { animate, tickAnimations } from "./animation";
 
-const fuelScale = 0.325;
+const fuelScale = 0.125;
+const hullScale = 1.5;
 let nextEntId = 0;
 const checkpointFuelPoints = 20;
 const checkpointHullPoints = 20;
@@ -236,7 +237,7 @@ export class GameManager {
         // set the hull damage
         const hullPoints = this.gameState.hullPoints;
         if (this.player.collisions.length > 0 && length(this.player.velocity) > 6) {
-            const damage = length(this.player.velocity);
+            const damage = length(this.player.velocity) * hullScale;
             const newHullPoints = hullPoints - Math.floor(damage);
             this.setGameState("hullPoints", newHullPoints);
             playCollisionSound();

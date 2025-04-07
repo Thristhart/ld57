@@ -1,4 +1,10 @@
-import { baseFlock, creepyFish3Flock, creepyFish4Flock } from "./entities/boids/constants";
+import {
+    baseFlock,
+    creepyFish3Flock,
+    creepyFish4Flock,
+    cuteFish2Flock,
+    cuteFishFlock,
+} from "./entities/boids/constants";
 import { FlockSetting, PartialFlockSetting } from "./entities/boids/types";
 import { CollectableConfig, CollectableMetadata, GameState, Upgrade } from "./gametypes";
 import {
@@ -88,102 +94,123 @@ function makeFlock(partialSettings: PartialFlockSetting, base = baseFlock): Floc
 
 export const flockList: FlockSetting[] = [
     // cute Fish
-    makeFlock({
-        image: cuteFish1Image,
-        flockType: "cuteFish",
-        characteristics: {
-            roost: { position: { x: 2000, y: 600 } },
-            flockingBoids: {
-                speedRatio: 0.2,
+    makeFlock(
+        {
+            image: cuteFish1Image,
+            flockType: "cuteFish",
+            characteristics: {
+                roost: { position: { x: 2000, y: 600 } },
+                flockingBoids: {
+                    speedRatio: 0.2,
+                },
             },
         },
-    }),
-    makeFlock({
-        image: cuteFish1Image,
-        flockType: "cuteFish",
-        characteristics: {
-            roost: { position: { x: 1292, y: 5185 } },
-            flockingBoids: {
-                speedRatio: 0.2,
+        cuteFishFlock
+    ),
+    makeFlock(
+        {
+            image: cuteFish1Image,
+            flockType: "cuteFish",
+            characteristics: {
+                roost: { position: { x: 1292, y: 5185 } },
+                flockingBoids: {
+                    speedRatio: 0.2,
+                },
             },
         },
-    }),
-    makeFlock({
-        image: cuteFish1Image,
-        flockType: "cuteFish",
-        forces: {
-            roosting: {
-                distance: 300,
+        cuteFishFlock
+    ),
+    makeFlock(
+        {
+            image: cuteFish1Image,
+            flockType: "cuteFish",
+            forces: {
+                roosting: {
+                    distance: 300,
+                },
+            },
+            characteristics: {
+                roost: { position: { x: 2102, y: 6793 } },
+                flockingBoids: {
+                    speedRatio: 0.2,
+                },
             },
         },
-        characteristics: {
-            roost: { position: { x: 2102, y: 6793 } },
-            flockingBoids: {
-                speedRatio: 0.2,
+        cuteFishFlock
+    ),
+    makeFlock(
+        {
+            image: cuteFish1Image,
+            flockType: "cuteFish",
+            forces: {
+                roosting: {
+                    distance: 300,
+                },
+            },
+            characteristics: {
+                roost: { position: { x: 2878, y: 12597 } },
+                flockingBoids: {
+                    speedRatio: 0.2,
+                },
             },
         },
-    }),
-    makeFlock({
-        image: cuteFish1Image,
-        flockType: "cuteFish",
-        forces: {
-            roosting: {
-                distance: 300,
-            },
-        },
-        characteristics: {
-            roost: { position: { x: 2878, y: 12597 } },
-            flockingBoids: {
-                speedRatio: 0.2,
-            },
-        },
-    }),
+        cuteFishFlock
+    ),
     // Cute Fish 2
-    makeFlock({
-        image: cuteFish1Image,
-        flockType: "cuteFish2",
-        forces: {
-            roosting: {
-                distance: 300,
+    makeFlock(
+        {
+            image: cuteFish1Image,
+            flockType: "cuteFish2",
+            forces: {
+                roosting: {
+                    distance: 300,
+                },
+            },
+            characteristics: {
+                roost: { position: { x: 1869, y: 20850 } },
+                flockingBoids: {
+                    speedRatio: 0.2,
+                },
             },
         },
-        characteristics: {
-            roost: { position: { x: 1869, y: 20850 } },
-            flockingBoids: {
-                speedRatio: 0.2,
+        cuteFish2Flock
+    ),
+    makeFlock(
+        {
+            image: cuteFish1Image,
+            flockType: "cuteFish2",
+            forces: {
+                roosting: {
+                    distance: 300,
+                },
+            },
+            characteristics: {
+                roost: { position: { x: 1709, y: 15105 } },
+                flockingBoids: {
+                    speedRatio: 0.2,
+                },
             },
         },
-    }),
-    makeFlock({
-        image: cuteFish1Image,
-        flockType: "cuteFish2",
-        forces: {
-            roosting: {
-                distance: 300,
+        cuteFish2Flock
+    ),
+    makeFlock(
+        {
+            image: cuteFish1Image,
+            flockType: "cuteFish2",
+            forces: {
+                roosting: {
+                    distance: 300,
+                },
+            },
+            characteristics: {
+                roost: { position: { x: 1670, y: 11142 } },
+                flockingBoids: {
+                    speedRatio: 0.2,
+                },
             },
         },
-        characteristics: {
-            roost: { position: { x: 1709, y: 15105 } },
-            flockingBoids: {
-                speedRatio: 0.2,
-            },
-        },
-    }),
-    makeFlock({
-        image: cuteFish1Image,
-        flockType: "cuteFish2",
-        forces: {
-            roosting: {
-                distance: 300,
-            },
-        },
-        characteristics: {
-            roost: { position: { x: 1670, y: 11142 } },
-            flockingBoids: {
-                speedRatio: 0.2,
-            },
-        },
-    }),
+        cuteFish2Flock
+    ),
 ];
 
 // THEYFLOWER USE THISS!!!!!
@@ -524,7 +551,7 @@ export const collectablesMetadata = {
         name: "cuteFish",
         imageUrl: cuteFishImageUrl,
         description: "Almost too cute to subsume!",
-        fuelPoints: 20,
+        fuelPoints: 10,
         hullPoints: 0,
         storyMessage: "Discovered a cute fish, fish are fuel not food",
     },
@@ -532,7 +559,7 @@ export const collectablesMetadata = {
         name: "cuteFish2",
         imageUrl: cuteFishImageUrl, //REMEMBER TO CHANGE THIS
         description: "Even cuter and fishier!",
-        fuelPoints: 40,
+        fuelPoints: 20,
         hullPoints: 0,
         storyMessage: "Discovered an even cuter fish! It's fuel, not food. If only it could be a friend.",
     },
@@ -540,7 +567,7 @@ export const collectablesMetadata = {
         name: "creepyFish3",
         imageUrl: creepyFish3Url,
         description: "This fish is strange.",
-        fuelPoints: 60,
+        fuelPoints: 30,
         hullPoints: 0,
         storyMessage: "Discovered a weird fish, it appears to be an efficient fuel source.",
     },
@@ -548,7 +575,7 @@ export const collectablesMetadata = {
         name: "creepyFish4",
         imageUrl: creepyFish4Url,
         description: "What a creepy fish.",
-        fuelPoints: 80,
+        fuelPoints: 40,
         hullPoints: 0,
         storyMessage:
             "Discovered a very strange fish. Its biomass is dense and should be a more efficient fuel source.",
@@ -557,7 +584,7 @@ export const collectablesMetadata = {
         name: "eyeball",
         imageUrl: eyeballImageUrl,
         description: "Its stares.",
-        fuelPoints: 150,
+        fuelPoints: 50,
         hullPoints: 0,
         storyMessage: "Discovered an eyeball. I see. You see. We all see.",
     },
@@ -565,7 +592,7 @@ export const collectablesMetadata = {
         name: "fleshMote",
         imageUrl: fleshMoteImageUrl,
         description: "The machine hums in excitement.",
-        fuelPoints: 150,
+        fuelPoints: 50,
         hullPoints: 0,
         storyMessage:
             "Discovered a flesh mote. This mysterious ball of meat seems compatible with the strange glowing mineral.",
@@ -574,10 +601,9 @@ export const collectablesMetadata = {
         name: "tentaclePlant",
         imageUrl: tentaclePlantImageUrl,
         description: "The Tentacle Polyp writhes and undulates.",
-        fuelPoints: 150,
+        fuelPoints: 50,
         hullPoints: 0,
-        storyMessage:
-            "This animal-like polyp could be easily mistaken for a plant.",
+        storyMessage: "This animal-like polyp could be easily mistaken for a plant.",
     },
     cassette1: {
         //1-1

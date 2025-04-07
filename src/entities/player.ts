@@ -55,6 +55,7 @@ export class Player extends Entity {
     public radius = 50;
     public angle = 0;
     public rotationSpeed = 0.01;
+    public frictionRate: number = -0.001;
     public shouldCollideWithWall = true;
     public upgradeLevel: keyof typeof subConfigs = 1;
 
@@ -86,7 +87,7 @@ export class Player extends Entity {
             acceleration.y += 0.2;
         }
         acceleration = normalizeVector(acceleration);
-        scaleMut(acceleration, dt * 0.001);
+        scaleMut(acceleration, dt * 0.003);
         if (localStorage.getItem("noclip")) {
             scaleMut(acceleration, 4);
         }
