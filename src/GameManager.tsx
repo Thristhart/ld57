@@ -347,11 +347,13 @@ export class GameManager {
                     gameManager.player.x = lerp(t, playerStart.x, bossBoundsPlayerPos.x);
                     gameManager.player.y = lerp(t, playerStart.y, bossBoundsPlayerPos.y);
                 },
-                duration: 1800,
+                duration: 1200,
             }).then(() => {
-                this.isAnimatingDatingSim = false;
-                this.isDatingSim = true;
-                this.forceUpdate();
+                setTimeout(() => {
+                    this.isAnimatingDatingSim = false;
+                    this.isDatingSim = true;
+                    this.forceUpdate();
+                }, 2000);
             });
             this.forceUpdate();
         }
