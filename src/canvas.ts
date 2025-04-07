@@ -12,11 +12,12 @@ import { wallLines } from "./collision";
 import { add, copyMut, length, normalizeVector, scale, subtract, Vector } from "./vector";
 import { clamp } from "./util";
 import { MessageEntity } from "./entities/messageentity";
+import { tickAnimations } from "./animation";
 
 let canvas: HTMLCanvasElement;
 let context: CanvasRenderingContext2D | null;
 
-const camera = { x: 0, y: 0, scale: parseFloat(localStorage.getItem("scale") ?? "1") };
+export const camera = { x: 0, y: 0, scale: parseFloat(localStorage.getItem("scale") ?? "1") };
 
 function lockCameraBounds() {
     const visibleWidth = canvas.width / camera.scale;
@@ -62,15 +63,6 @@ export function mapMousePosition() {
     mousePosition.y = ((mousePositionGlobal.y - rect.top) / rect.height) * visibleHeight + camera.y - visibleHeight / 2;
 }
 
-const bossBoundsTopLeft = { x: 2360, y: 32772 };
-const bossBoundsBottomRight = { x: 3902, y: 35880 };
-
-const bossBoundsCameraPosition = { x: 3133, y: 33616 };
-
-function isWithinBounds(point: Vector, topLeft: Vector, bottomRight: Vector) {
-    return point.x > topLeft.x && point.x < bottomRight.x && point.y > topLeft.y && point.y < bottomRight.y;
-}
-
 // @ts-ignore
 window.DEV_camera = camera;
 
@@ -84,14 +76,11 @@ export function drawFrame(avgFrameLength: number) {
         return;
     }
 
-    // point camera at player
-    camera.x = gameManager.player.x;
-    camera.y = gameManager.player.y;
+    if (!gameManager.isDatingSim && !gameManager.isAnimatingDatingSim) {
+        // point camera at player
+        camera.x = gameManager.player.x;
+        camera.y = gameManager.player.y;
 
-    if (isWithinBounds(gameManager.player, bossBoundsTopLeft, bossBoundsBottomRight)) {
-        copyMut(camera, bossBoundsCameraPosition);
-        camera.scale = 0.7;
-    } else {
         if (gameManager.player.y > 27000) {
             camera.scale = 1 + (1 - clamp((34800 - gameManager.player.y) / 8000, 0, 1)) * 0.4;
         } else {
