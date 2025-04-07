@@ -162,7 +162,7 @@ export function drawFrame(avgFrameLength: number) {
     }
 
     let maskOpacity = localStorage.getItem("fullbright")
-        ? 1
+        ? 0
         : Math.min(1, gameManager.player.y / (gameManager.maxPixelHeight / 2));
 
     let flashlightSize = 0.1;
