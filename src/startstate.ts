@@ -200,7 +200,7 @@ export const collectablesMetadata = {
         description: "a chunk of iron ore",
         fuelPoints: 0,
         hullPoints: 25,
-        storyMessage: "Discovered iron, can fix a bit of damage to the hull or be used for upgrades",
+        storyMessage: "Discovered iron, it can patch small dents in hull or be used for upgrades.",
     },
     cobalt: {
         name: "cobalt",
@@ -208,7 +208,7 @@ export const collectablesMetadata = {
         description: "a hefty lump of cobalt ore",
         fuelPoints: 0,
         hullPoints: 50,
-        storyMessage: "Discovered cobalt, can fix moderate damage to the hull or be used for upgrades",
+        storyMessage: "Discovered cobalt, it can repair moderate damage to the hull or be used for upgrades.",
     },
     crystal: {
         name: "crystal",
@@ -216,7 +216,7 @@ export const collectablesMetadata = {
         description: "a glowing crystal of indeterminate nature",
         fuelPoints: 0,
         hullPoints: 100,
-        storyMessage: "Discovered a mysterious crystal, the machine is eager to devour it",
+        storyMessage: "Discovered a mysterious glowing crystal, it contains previously undiscovered isotopes.",
     },
     cuteFish: {
         name: "cuteFish",
@@ -232,7 +232,7 @@ export const collectablesMetadata = {
         description: "this one is kind of weird",
         fuelPoints: 40,
         hullPoints: 0,
-        storyMessage: "Discovered a creepyfish3, what do we even do with this",
+        storyMessage: "Discovered a weird fish, it appears to be an efficient fuel source.",
     },
     creepyFish4: {
         name: "creepyFish4",
@@ -240,7 +240,7 @@ export const collectablesMetadata = {
         description: "this one is even weirder",
         fuelPoints: 60,
         hullPoints: 0,
-        storyMessage: "Discovered a creepyfish4, this is even weirder",
+        storyMessage: "Discovered a very strange fish. Its biomass is dense and should be a more efficient fuel source.",
     },
     eyeball: {
         name: "eyeball",
@@ -248,7 +248,7 @@ export const collectablesMetadata = {
         description: "its stares",
         fuelPoints: 150,
         hullPoints: 0,
-        storyMessage: "Discovered an eyeball, it is helping you see bigger and greater things",
+        storyMessage: "Discovered an eyeball. I see. You see. We all see.",
     },
     fleshMote: {
         name: "fleshMote",
@@ -256,7 +256,7 @@ export const collectablesMetadata = {
         description: "the machine hums in excitement",
         fuelPoints: 150,
         hullPoints: 0,
-        storyMessage: "Discovered a flesh mote, im not even sure what a flesh mote is tbh",
+        storyMessage: "Discovered a flesh mote. This mysterious ball of meat seems compatible with the strange glowing mineral.",
     },
 } as const satisfies { [name: string]: CollectableMetadata };
 
