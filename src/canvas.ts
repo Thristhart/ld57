@@ -8,7 +8,7 @@ import { clamp } from "./util";
 let canvas: HTMLCanvasElement;
 let context: CanvasRenderingContext2D | null;
 
-const camera = { x: 0, y: 0, scale: parseInt(localStorage.getItem("scale") ?? "1") };
+const camera = { x: 0, y: 0, scale: parseFloat(localStorage.getItem("scale") ?? "1") };
 
 function lockCameraBounds() {
     const visibleWidth = canvas.width / camera.scale;
