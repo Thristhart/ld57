@@ -531,10 +531,10 @@ export const collectablesMetadata = {
     cuteFish2: {
         name: "cuteFish2",
         imageUrl: cuteFishImageUrl, //REMEMBER TO CHANGE THIS
-        description: "REMEMBER TO CHANGE THIS",
+        description: "Even cuter and fishier!",
         fuelPoints: 40,
         hullPoints: 0,
-        storyMessage: "REMEMBER TO CHANGE THIS",
+        storyMessage: "Discovered an even cuter fish! It's fuel, not food. If only it could be a friend.",
     },
     creepyFish3: {
         name: "creepyFish3",
@@ -556,7 +556,7 @@ export const collectablesMetadata = {
     eyeball: {
         name: "eyeball",
         imageUrl: eyeballImageUrl,
-        description: "its stares",
+        description: "Its stares.",
         fuelPoints: 150,
         hullPoints: 0,
         storyMessage: "Discovered an eyeball. I see. You see. We all see.",
@@ -564,7 +564,7 @@ export const collectablesMetadata = {
     fleshMote: {
         name: "fleshMote",
         imageUrl: fleshMoteImageUrl,
-        description: "the machine hums in excitement",
+        description: "The machine hums in excitement.",
         fuelPoints: 150,
         hullPoints: 0,
         storyMessage:
@@ -573,11 +573,11 @@ export const collectablesMetadata = {
     tentaclePlant: {
         name: "tentaclePlant",
         imageUrl: tentaclePlantImageUrl,
-        description: "THEYFLOWER WRITE THIS",
+        description: "The Tentacle Polyp writhes and undulates.",
         fuelPoints: 150,
         hullPoints: 0,
         storyMessage:
-            "THEYFLOWER WRITE THISDiscovered a flesh mote. This mysterious ball of meat seems compatible with the strange glowing mineral.",
+            "This animal-like polyp could be easily mistaken for a plant.",
     },
     cassette1: {
         //1-1
