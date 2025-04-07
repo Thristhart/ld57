@@ -26,7 +26,7 @@ export interface GameState extends GameUpgradeLevels {
 
     upgrades: { [type: string]: Array<(typeof upgrades)[keyof typeof upgrades][number]> };
     messageList: Message[];
-    warning: string;
+    alert: { text: string; type: "error" | "success" } | null;
 }
 
 export interface Upgrade {
@@ -51,4 +51,10 @@ export interface CollectableMetadata {
     fuelPoints: number;
     hullPoints: number;
     storyMessage: string;
+}
+
+export interface Checkpoint {
+    gameState: GameState;
+    playerX: number;
+    playerY: number;
 }

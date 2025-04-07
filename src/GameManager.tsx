@@ -16,13 +16,17 @@ import FlockingBoid from "./entities/boids/flockingboid";
 import { DebugVector } from "./entities/debugvector";
 import { Entity } from "./entities/entity";
 import { Player } from "./entities/player";
-import { GameState, GameUpgradeLevels, Message } from "./gametypes";
+import { Checkpoint, GameState, GameUpgradeLevels, Message } from "./gametypes";
 import { screenshakeKeyframes } from "./screenshake";
 import { CollectableName, defaultGameState, flockList, upgrades } from "./startstate";
 import { Vector } from "./vector";
+import merge from "lodash.merge";
+import { MessageEntity } from "./entities/messageentity";
 
 const fuelScale = 10;
 let nextEntId = 0;
+const checkpointFuelPoints = 20;
+const checkpointHullPoints = 20;
 
 export function useGameStateValue<K extends keyof GameState>(key: K): GameState[K] {
     return useSyncExternalStore(
@@ -45,19 +49,25 @@ export class GameManager {
     private rerenderUI: () => void = () => {};
     private gameState: GameState = defaultGameState;
     public maxPixelHeight: number = 0;
-    public maxDepth = 200;
+    public maxDepth = 5000;
     private mapEntities = new Map<number, Entity>();
     public player: Player;
 
     public loading = true;
     public gameOverTimestamp: number | undefined;
 
+    public checkpoints: Checkpoint[] = [];
+
     constructor() {
         const root = ReactDOM.createRoot(document.getElementById("root")!);
         const rootRender = () =>
             root.render(
                 <React.StrictMode>
-                    <App loading={this.loading} gameOver={this.gameOverTimestamp !== undefined} />
+                    <App
+                        loading={this.loading}
+                        gameOver={this.gameOverTimestamp !== undefined}
+                        hasCheckpoint={this.checkpoints.length > 0}
+                    />
                 </React.StrictMode>
             );
         this.rerenderUI = rootRender;
@@ -147,6 +157,26 @@ export class GameManager {
         return this.mapEntities.values();
     }
 
+    public setCheckPoint() {
+        this.checkpoints.push({
+            playerX: this.player.x,
+            playerY: this.player.y,
+            gameState: merge({}, this.gameState),
+        });
+    }
+
+    public loadCheckpoint() {
+        if (this.checkpoints.length > 0) {
+            const lastCheckpoint = this.checkpoints[this.checkpoints.length - 1];
+
+            this.gameState = merge({}, lastCheckpoint.gameState);
+            this.player.x = lastCheckpoint.playerX;
+            this.player.y = lastCheckpoint.playerY;
+            this.gameOverTimestamp = undefined;
+            this.forceUpdate();
+        }
+    }
+
     public tick(dt: number) {
         if (this.gameOverTimestamp) {
             return;
@@ -155,7 +185,7 @@ export class GameManager {
             ent.tick(dt);
         }
 
-        gameManager.setGameState("warning", "");
+        gameManager.setGameState("alert", null);
 
         // set the player depth
         const playerY = this.player.y;
@@ -163,8 +193,8 @@ export class GameManager {
         this.setGameState("currentDepth", depth);
 
         // set the hull damage
+        const hullPoints = this.gameState.hullPoints;
         if (this.player.collisions.length > 0 && length(this.player.velocity) > 1) {
-            const hullPoints = this.gameState.hullPoints;
             const damage = length(this.player.velocity);
             const newHullPoints = hullPoints - Math.floor(damage);
             this.setGameState("hullPoints", newHullPoints);
@@ -179,20 +209,33 @@ export class GameManager {
             this.setGameState("fuelPoints", fuelScaled);
         }
 
-        // choose correct bgm for depth
-        // beware: arbitrary numbers, change these to match actual biome differences
+        if (fuel <= 0) {
+            this.setGameState("alert", { text: "FUEL DEPLETED", type: "error" });
+        }
+
+        const maxDepth = gameManager.getUpgradedMaxValue("depthUpgradeLevel");
+
+        // add a checkpoint if conditions match
+        if (
+            depth > (this.checkpoints.length + 1) * 1000 &&
+            depth < maxDepth &&
+            fuel > checkpointFuelPoints &&
+            hullPoints > checkpointHullPoints
+        ) {
+            this.setCheckPoint();
+            this.addEntity(new MessageEntity(this.player.x, this.player.y, "CHECKPOINT SAVED"));
+        }
+
         if (depth < 60) {
+            // choose correct bgm for depth
+            // beware: arbitrary numbers, change these to match actual biome differences
             switchBGM(bgmBiome1);
         } else if (depth < 200) {
             switchBGM(bgmBiome2);
         }
 
-        if (fuel <= 0) {
-            this.setGameState("warning", "FUEL DEPLETED");
-        }
-
-        if (depth > gameManager.getUpgradedMaxValue("depthUpgradeLevel") && !localStorage.getItem("noclip")) {
-            this.setGameState("warning", "MAXIMUM DEPTH EXCEEDED");
+        if (depth > maxDepth && !localStorage.getItem("noclip")) {
+            this.setGameState("alert", { text: "MAXIMUM DEPTH EXCEEDED", type: "error" });
             if (!pressureDamageSFX1.playing()) {
                 pressureDamageSFX1.play();
             }

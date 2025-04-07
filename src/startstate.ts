@@ -5,16 +5,16 @@ import { redRectImage } from "./images";
 
 export const upgrades = {
     depthUpgradeLevel: [
-        { description: "Max Depth 100m", upgradeValue: 100, materials: {} },
-        { description: "Max Depth 200m", upgradeValue: 200, materials: { cuteFish: 1 } },
+        { description: "Max Depth 1000m", upgradeValue: 1000, materials: {} },
+        { description: "Max Depth 2000m", upgradeValue: 2000, materials: { cuteFish: 1 } },
         {
-            description: "Max Depth 300m",
-            upgradeValue: 300,
+            description: "Max Depth 3000m",
+            upgradeValue: 3000,
             materials: { cuteFish: 1, iron: 1 },
         },
         {
-            description: "Max Depth 300m",
-            upgradeValue: 400,
+            description: "Max Depth 5000m",
+            upgradeValue: 4000,
             materials: { iron: 2, cuteFish: 2 },
         },
     ],
@@ -32,8 +32,8 @@ export const upgrades = {
 } as const satisfies { [type: string]: Upgrade[] };
 
 export const defaultGameState: GameState = {
-    depthUpgradeLevel: 0,
-    inventoryUpgradeLevel: 1,
+    depthUpgradeLevel: 1,
+    inventoryUpgradeLevel: 0,
     fuelUpgradeLevel: 0,
     hullUpgradeLevel: 0,
 
@@ -44,7 +44,7 @@ export const defaultGameState: GameState = {
     hullPoints: 100,
     lightOn: true,
     currentDepth: 0,
-    inventory: ["iron", "iron"],
+    inventory: [],
     upgrades: upgrades,
     seenMaterials: new Set(),
     messageList: [
@@ -55,7 +55,7 @@ export const defaultGameState: GameState = {
             text: "The Neo Human Interface Submarine is a state of the art vessel capable of adapting to hostile environments by subsuming local resources for the purpose of self modification. It's also finally done! I couldn't resist taking it for a quick little dive. I'm sure my colleague will understand. Now let's get to cataloging what sorts of materials are available to me down here.",
         },
     ],
-    warning: "",
+    alert: null,
 };
 
 export const collectablesList: CollectableConfig[] = [

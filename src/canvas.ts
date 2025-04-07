@@ -162,18 +162,18 @@ export function drawFrame(avgFrameLength: number) {
     context.closePath();
     context.fill();
 
-    let warning = gameManager.getGameState("warning");
-    if (warning) {
+    let alert = gameManager.getGameState("alert");
+    if (alert) {
         let x = gameManager.player.x;
         let y = gameManager.player.y - gameManager.player.radius - 10;
 
-        context.strokeStyle = "red";
+        context.strokeStyle = alert.type === "error" ? "red" : "green";
         context.font = `bold 36pt "Jersey 25"`;
 
-        x -= context.measureText(warning).width / 2;
+        x -= context.measureText(alert.text).width / 2;
 
-        context.fillStyle = "red";
-        context.fillText(warning, x, y);
+        context.fillStyle = alert.type === "error" ? "red" : "green";
+        context.fillText(alert.text, x, y);
     }
 
     context.restore();

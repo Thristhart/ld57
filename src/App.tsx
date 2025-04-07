@@ -8,7 +8,7 @@ import { Message, LightSwitch, Grabber } from "./ui/components";
 import { DepthMeter, HullIntegrity, Fuel } from "./ui/meters";
 import { UpgradeGUI } from "./ui/upgrades";
 
-function App({ loading, gameOver }: { loading: boolean; gameOver: boolean }) {
+function App({ loading, gameOver, hasCheckpoint }: { loading: boolean; gameOver: boolean; hasCheckpoint: boolean }) {
     return (
         <div className={"AppCtn"}>
             <LeftUI />
@@ -21,12 +21,23 @@ function App({ loading, gameOver }: { loading: boolean; gameOver: boolean }) {
             />
             <RightUI />
             {loading && <div className="LoadingSpinner Overlay">Loading...</div>}
-            {gameOver && (
-                <div className="LoadingSpinner Overlay">
-                    GAME OVER
-                    <button onClick={() => (location.href = location.href)}>Retry</button>
-                </div>
+            {gameOver && <GameOver hasCheckpoint={hasCheckpoint} />}
+        </div>
+    );
+}
+
+function GameOver(props: { hasCheckpoint: boolean }) {
+    return (
+        <div className="LoadingSpinner Overlay">
+            GAME OVER
+            {props.hasCheckpoint && (
+                <button style={{ cursor: "pointer" }} onClick={() => gameManager.loadCheckpoint()}>
+                    Load Checkpoint
+                </button>
             )}
+            <button style={{ cursor: "pointer" }} onClick={() => (location.href = location.href)}>
+                Retry
+            </button>
         </div>
     );
 }
