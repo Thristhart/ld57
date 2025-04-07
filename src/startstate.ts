@@ -281,7 +281,11 @@ const collectableImages = {
     eyeball: eyeBallImage,
 } as const;
 
-function addCollectable(resource: keyof typeof collectablesMetadata, position: Vector) {
+function addCollectable(
+    resource: keyof typeof collectablesMetadata,
+    position: Vector,
+    options?: Partial<CollectableConfig>
+) {
     collectablesList.push({
         resource,
         ...position,
@@ -291,6 +295,7 @@ function addCollectable(resource: keyof typeof collectablesMetadata, position: V
             resource in collectableImages
                 ? collectableImages[resource as keyof typeof collectableImages]
                 : collectableImages["iron"],
+        ...options,
     });
 }
 
