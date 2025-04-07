@@ -7,7 +7,12 @@ import FlockingBoid from "./flockingboid";
 import { BoidVector, Factor, FlockSetting } from "./types";
 import * as vectorImmutable from "./vectorImmutable";
 
-export function accelerateFlockingBoids(settings: FlockSetting, flockingBoids: FlockingBoid[], mouse: BoidVector) {
+export function accelerateFlockingBoids(
+    settings: FlockSetting,
+    flockingBoids: FlockingBoid[],
+    mouse: BoidVector,
+    dt: number
+) {
     FlockingBoid.calcFlockingForces(settings, flockingBoids, function applyForces(flockingBoid) {
         const forces = [
             ...flockingBoid.resolveFlockingForceFactors(settings),
@@ -16,7 +21,7 @@ export function accelerateFlockingBoids(settings: FlockSetting, flockingBoids: F
             ...calcBoundaryForceFactor(flockingBoid),
         ].filter((x) => x !== null);
 
-        flockingBoid.accelerate(forces);
+        flockingBoid.accelerate(forces, dt);
     });
 }
 

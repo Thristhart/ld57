@@ -27,12 +27,12 @@ export default class Flock extends Entity {
         this.settings = settings;
     }
 
-    tick() {
+    tick(dt: number) {
         const flockingBoids = this.instances.flockingBoids;
 
         this.populateFlock();
-        accelerateFlockingBoids(this.settings, flockingBoids, gameManager.player);
-        move(flockingBoids, this.settings);
+        accelerateFlockingBoids(this.settings, flockingBoids, gameManager.player, dt);
+        move(flockingBoids, this.settings, dt);
     }
 
     populateFlock() {

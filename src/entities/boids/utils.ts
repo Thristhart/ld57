@@ -112,8 +112,8 @@ function randomSpotPosition(): BoidVector {
     };
 }
 
-export function move(boids: Boid[], settings: FlockSetting) {
-    const speedRatio = settings.characteristics.flockingBoids.speedRatio;
+export function move(boids: Boid[], settings: FlockSetting, dt: number) {
+    const speedRatio = settings.characteristics.flockingBoids.speedRatio * dt;
     for (let i = 0; i < boids.length; i += 1) {
         boids[i].x = boids[i].x + speedRatio * boids[i].speed.x;
         boids[i].y = boids[i].y + speedRatio * boids[i].speed.y;
