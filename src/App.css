@@ -77,6 +77,13 @@ html,
     color: white;
     background-color: darkblue;
 }
+.GameOver {
+    font-size: 5rem;
+    color: white;
+    background-image: url("../assets/ui_elements/gameover_background.png");
+    background-size: cover;
+    background-position: center;
+}
 
 .Overlay button {
     font-size: 5rem;
@@ -87,4 +94,6 @@ html,
     color: white;
     background: transparent;
     border: 4px solid white;
+
+    margin-bottom: 0.6rem;
 }

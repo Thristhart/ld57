@@ -28,7 +28,7 @@ function App({ loading, gameOver, hasCheckpoint }: { loading: boolean; gameOver:
 
 function GameOver(props: { hasCheckpoint: boolean }) {
     return (
-        <div className="LoadingSpinner Overlay">
+        <div className="GameOver Overlay">
             GAME OVER
             {props.hasCheckpoint && (
                 <button style={{ cursor: "pointer" }} onClick={() => gameManager.loadCheckpoint()}>
