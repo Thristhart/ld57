@@ -13,14 +13,14 @@
     -   [x] ... when you go too deep
 -   [ ] Intro screen
 -   [ ] Different region art assets (wall image?)
--   [ ] Music
+-   [x] Music
 -   [ ] Sound effects
     -   [x] Bump into wall
-    -   [ ] Maybe propulsion?
+    -   [x] Maybe propulsion?
     -   [ ] Grabber thing
     -   as appropriate
 -   [ ] Right hand panels design
         [ ] Lights
         [ ] Grabber Key
         [ ] Mute music button
--   [ ] Checkpointing
+-   [x] Checkpointing
