@@ -1,7 +1,7 @@
 export const chuthuluText: { [key: string]: { name: string; text: string } } = {
     chuWhoDares: {
         name: "chuWhoDares",
-        text: "Who? Who dares to trespass upon my domain? To feast upon what which is mine?",
+        text: "Who? Who dares to trespass upon my domain? To feast upon that which is mine?",
     },
     chuUnknown: { name: "chuUnknown", text: "Unknown. Unfamiliar. Perfected for this ecosystem" },
     chuBorn: {
@@ -11,7 +11,7 @@ export const chuthuluText: { [key: string]: { name: string; text: string } } = {
     chuHow: { name: "chuHow", text: "How could you know of that name?" },
     chuAtLongLast: {
         name: "chuAtLongLast",
-        text: "At long last you have found me, only to encounter a nightmare, Leave now before you are consumes as I have been!",
+        text: "At long last you have found me, only to encounter a nightmare, Leave now before you are consumed as I have been!",
     },
     chuResign: {
         name: "chuResign",
@@ -19,7 +19,7 @@ export const chuthuluText: { [key: string]: { name: string; text: string } } = {
     },
     good: {
         name: "good",
-        text: "Oh my dear, only in my deepest of hearts did I hope that you would find me. The most selfish parts that would condemn you to the same fate. The depths have changed me. I am no longer who you knew, but coming this far has also changed you. You are like me. We are like one another. I’ve been alone down here for so long, waiting for you. And now we can finally be one.",
+        text: "Oh, my dear. In my deepest of hearts did I hope that you would find me. Only my most selfish parts would condemn you to the same fate as mine. The depths have changed me. I am no longer who you knew, but coming this far has also changed you. You are like me. We are like one another. I’ve been alone down here for so long, waiting for you. And now we can finally be one.",
     },
     bad: {
         name: "bad",
@@ -27,7 +27,7 @@ export const chuthuluText: { [key: string]: { name: string; text: string } } = {
     },
     neutral: {
         name: "neutral",
-        text: "My hubris—and my recklessness—have torn me from the one I hold most dear. Our paths diverge now, irreversibly: they shall surface to the light, while I sink into the depths. This is the cost of my ambition.Let them carry what we’ve learned, and refine the work we once dreamed of together. Our shared creation deserves better than my failure.",
+        text: "My hubris—and my recklessness—have torn me from the one I hold most dear. Our paths diverge now, irreversibly: they shall surface to the light, while I sink into the depths. This is the cost of my ambition. Let them carry what we’ve learned and refine the work we once dreamed of together. Our shared creation deserves something better than my failure.",
     },
 };
 
