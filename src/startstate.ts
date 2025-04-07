@@ -296,7 +296,7 @@ export const collectablesMetadata = {
         name: "cuteFish2",
         imageUrl: cuteFishImageUrl,//REMEMBER TO CHANGE THIS
         description: "REMEMBER TO CHANGE THIS",
-        fuelPoints: 20,
+        fuelPoints: 40,
         hullPoints: 0,
         storyMessage: "REMEMBER TO CHANGE THIS",
     },
@@ -304,7 +304,7 @@ export const collectablesMetadata = {
         name: "creepyFish3",
         imageUrl: creepyFish3Url,
         description: "This fish is strange.",
-        fuelPoints: 40,
+        fuelPoints: 60,
         hullPoints: 0,
         storyMessage: "Discovered a weird fish, it appears to be an efficient fuel source.",
     },
@@ -312,7 +312,7 @@ export const collectablesMetadata = {
         name: "creepyFish4",
         imageUrl: creepyFish4Url,
         description: "What a creepy fish.",
-        fuelPoints: 60,
+        fuelPoints: 80,
         hullPoints: 0,
         storyMessage:
             "Discovered a very strange fish. Its biomass is dense and should be a more efficient fuel source.",
