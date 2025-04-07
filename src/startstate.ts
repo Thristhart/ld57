@@ -156,6 +156,7 @@ import creepyFish4Url from "#assets/ocean_objects/fish/creepy_fish_4.png";
 import eyeballImageUrl from "#assets/ocean_objects/eldritch/eyeball1.png";
 import fleshMoteImageUrl from "#assets/ocean_objects/eldritch/flesh_mote1.png";
 import cassetteUrl from "../assets/ocean_objects/story/cassette_1.png";
+import { Vector } from "./vector";
 
 export const collectablesList: CollectableConfig[] = [
     {
@@ -272,6 +273,27 @@ export const collectablesList: CollectableConfig[] = [
     // },
 ];
 
+const collectableImages = {
+    iron: ironOreImage,
+    cobalt: cobaltOreImage,
+    crystal: fancyOreImage,
+    fleshMote: fleshMoteImage,
+    eyeball: eyeBallImage,
+} as const;
+
+function addCollectable(resource: keyof typeof collectablesMetadata, position: Vector) {
+    collectablesList.push({
+        resource,
+        ...position,
+        height: 100,
+        width: 100,
+        image:
+            resource in collectableImages
+                ? collectableImages[resource as keyof typeof collectableImages]
+                : collectableImages["iron"],
+    });
+}
+
 export const collectablesMetadata = {
     iron: {
         name: "iron",
@@ -339,7 +361,8 @@ export const collectablesMetadata = {
         storyMessage:
             "Discovered a flesh mote. This mysterious ball of meat seems compatible with the strange glowing mineral.",
     },
-    cassette1: { //1-1
+    cassette1: {
+        //1-1
         name: "cassette1",
         imageUrl: cassetteUrl,
         description: "if you see this message it's a bug",
@@ -348,7 +371,8 @@ export const collectablesMetadata = {
         storyMessage:
             "The Neo Human Interface Submarine is a state of the art vessel capable of adapting to hostile environments by subsuming local resources for the purpose of self modification. It's also finally done! I couldn't resist taking it for a quick little dive. I'm sure my colleague will understand. Now let's get to cataloging what sorts of materials are available to me down here.",
     },
-    cassette2: { //1-2
+    cassette2: {
+        //1-2
         name: "cassette2",
         imageUrl: cassetteUrl,
         description: "if you see this message it's a bug",
@@ -357,7 +381,8 @@ export const collectablesMetadata = {
         storyMessage:
             "By subsuming local minerals and wildlife I've managed to improve the Neo Human Interface Submarine's hull while also refilling the fuel reserves with some fish based biofuel. Analysis of upgraded hull integrity signifies a new maximum safe depth. How could I resist going just a little bit deeper? My research partner won't mind as long as I'm back in the morning.",
     },
-    cassette3: {//2-1
+    cassette3: {
+        //2-1
         name: "cassette3",
         imageUrl: cassetteUrl,
         description: "if you see this message it's a bug",
@@ -366,7 +391,8 @@ export const collectablesMetadata = {
         storyMessage:
             "This new technology is amazing! Before today a solo exploration mission would require so much arduous planning, but now such undertakings can happen on a whim. If I go any deeper my colleague might need some explaining about where I've been, but surely they will understand if I bring back data on some big new discovery. Just a little bit further down and surely there will be something new for me to find.",
     },
-    cassette4: {//2-2
+    cassette4: {
+        //2-2
         name: "cassette4",
         imageUrl: cassetteUrl,
         description: "if you see this message it's a bug",
@@ -375,7 +401,8 @@ export const collectablesMetadata = {
         storyMessage:
             "With materials gathered down here I've manage to further reinforce my hull to allow further diving. There is a certain closeness I now feel with the Neo Human Interface Submarine. At times it's easy to forget where my body ends and the vessel begins. After I return to the surface in a couple of days with an new discovery my partner in science will forgive me for venturing down here alone. I'm sure they're worried sick by now.",
     },
-    cassette5: {//3-1
+    cassette5: {
+        //3-1
         name: "cassette5",
         imageUrl: cassetteUrl,
         description: "if you see this message it's a bug",
@@ -384,7 +411,8 @@ export const collectablesMetadata = {
         storyMessage:
             "Some of the materials down here are unlike anything I've seen before. These strange fleshy motes are chemically ideal as a source of biofuel. There's also a mineral containing stable isotopes of elements previously only observed very briefly under laboratory conditions. How could I not stay down here and continue to study these materials? This is important work, my partner will understand when I bring back these findings.",
     },
-    cassette6: {//3-2
+    cassette6: {
+        //3-2
         name: "cassette6",
         imageUrl: cassetteUrl,
         description: "if you see this message it's a bug",
@@ -393,23 +421,28 @@ export const collectablesMetadata = {
         storyMessage:
             "Using the fleshy motes to form an alloy with the new mineral I've just created a material which should theoretically allow my hull to withstand infinite pressure! I must go deeper and discover more. There are secrets below and they call to me. If I do not find something truly amazing to bring back after a week down here how could my colleague forgive me?",
     },
-    cassette7: {//4-1
+    cassette7: {
+        //4-1
         name: "cassette7",
         imageUrl: cassetteUrl,
         description: "if you see this message it's a bug",
         fuelPoints: 0,
         hullPoints: 0,
-        storyMessage: "This meat alloy is exceeding any reasonable expectations. The hull holds steady under the immense water pressure. If my readings are correct then the previous calculations indicating this meat alloy's capability to withstand infinite pressure are completely true. With such a great opportunity for futher new discoveries it's completely justified for me to stay down here for a couple more weeks.",
+        storyMessage:
+            "This meat alloy is exceeding any reasonable expectations. The hull holds steady under the immense water pressure. If my readings are correct then the previous calculations indicating this meat alloy's capability to withstand infinite pressure are completely true. With such a great opportunity for futher new discoveries it's completely justified for me to stay down here for a couple more weeks.",
     },
-    cassette8: {//4-2
+    cassette8: {
+        //4-2
         name: "cassette8",
         imageUrl: cassetteUrl,
         description: "if you see this message it's a bug",
         fuelPoints: 0,
         hullPoints: 0,
-        storyMessage: "The control panels of the Neo Human Interface Submarine are morphing slightly as the meat alloy is further integrated into the systems. With each change it makes to itself I'm finding it both easier and more efficient to operate this vessel. When I return to the surface in a couple of months my research partner will be head over heels for the upgrades the Neo Human Interface Submarine has made for itself.",
+        storyMessage:
+            "The control panels of the Neo Human Interface Submarine are morphing slightly as the meat alloy is further integrated into the systems. With each change it makes to itself I'm finding it both easier and more efficient to operate this vessel. When I return to the surface in a couple of months my research partner will be head over heels for the upgrades the Neo Human Interface Submarine has made for itself.",
     },
-    cassette9: {//4-3
+    cassette9: {
+        //4-3
         name: "cassette9",
         imageUrl: cassetteUrl,
         description: "if you see this message it's a bug",

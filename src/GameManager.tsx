@@ -26,6 +26,7 @@ import cloneDeep from "lodash.clonedeep";
 import { MessageEntity } from "./entities/messageentity";
 import { Collectable } from "./entities/collectable";
 import { isPointOnScreen } from "./canvas";
+import { mousePosition } from "./input";
 
 const fuelScale = 0.325;
 let nextEntId = 0;
@@ -313,6 +314,11 @@ export class GameManager {
     }
 
     public click() {
+        if (localStorage.getItem("editor")) {
+            console.log(
+                `addCollectable("iron", { x: ${Math.floor(mousePosition.x)}, y: ${Math.floor(mousePosition.y)} });`
+            );
+        }
         if (this.player.grabber) {
             this.player.retractGrabber();
         } else {
