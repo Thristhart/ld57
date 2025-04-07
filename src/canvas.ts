@@ -150,7 +150,9 @@ export function drawFrame(avgFrameLength: number) {
             // skip so we can draw later with the flashlight
             continue;
         }
-        ent.draw(context);
+        if (isPointOnScreen(ent)) {
+            ent.draw(context);
+        }
     }
 
     let maskOpacity = Math.min(1, gameManager.player.y / (gameManager.maxPixelHeight / 2));
