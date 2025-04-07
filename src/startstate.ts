@@ -393,6 +393,40 @@ addCollectable("fleshMote", { x: 675, y: 22391 });
 
 
 
+
+//tentacle plants
+addCollectable("tentaclePlant", { x: 1817, y: 26987 });
+addCollectable("tentaclePlant", { x: 1957, y: 27316 });
+addCollectable("tentaclePlant", { x: 1338, y: 27588 }); 
+addCollectable("tentaclePlant", { x: 466, y: 25936 });
+addCollectable("tentaclePlant", { x: 375, y: 25330 });
+addCollectable("tentaclePlant", { x: 498, y: 24311 });
+addCollectable("tentaclePlant", { x: 1347, y: 24394 });
+addCollectable("tentaclePlant", { x: 1375, y: 25270 });
+addCollectable("tentaclePlant", { x: 1631, y: 23513 });
+addCollectable("tentaclePlant", { x: 2788, y: 27105 });
+addCollectable("tentaclePlant", { x: 3018, y: 28273 });
+addCollectable("tentaclePlant", { x: 2731, y: 29421 });
+addCollectable("tentaclePlant", { x: 1338, y: 28672 });
+addCollectable("tentaclePlant", { x: 923, y: 29042 });
+addCollectable("tentaclePlant", { x: 449, y: 29330 });
+addCollectable("tentaclePlant", { x: 1859, y: 30400 });
+addCollectable("tentaclePlant", { x: 1350, y: 32147 });
+addCollectable("tentaclePlant", { x: 3236, y: 30823 });
+addCollectable("tentaclePlant", { x: 2439, y: 31166 });
+addCollectable("tentaclePlant", { x: 2083, y: 31966 });
+addCollectable("tentaclePlant", { x: 2873, y: 32393 });
+addCollectable("tentaclePlant", { x: 1019, y: 33692 });
+
+//cREEPY4
+
+addCollectable("creepyFish4", { x: 1412, y: 30174 });
+addCollectable("creepyFish4", { x: 2542, y: 31544 });
+//creep3
+addCollectable("creepyFish3", { x: 799, y: 25289 });
+addCollectable("creepyFish3", { x: 1555, y: 22554 });
+
+
 //CASSETE3
 addCollectable("cassette3", { x: 1120, y: 9396 });
 
