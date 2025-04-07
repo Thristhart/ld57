@@ -8,6 +8,7 @@ import {
     biome2WallsImage,
     biome3WallsImage,
     biome4WallsImage,
+    bossImage,
 } from "./images";
 import { mousePosition, mousePositionGlobal } from "./input";
 import { wallLines } from "./collision";
@@ -175,6 +176,8 @@ export function drawFrame(avgFrameLength: number) {
         }
     }
 
+    context.drawImage(bossImage, bossPos.x, bossPos.y, bossPos.width, bossPos.height);
+
     let maskOpacity = localStorage.getItem("fullbright")
         ? 0
         : Math.min(1, gameManager.player.y / (gameManager.maxPixelHeight / 2));
@@ -261,3 +264,7 @@ export function drawFrame(avgFrameLength: number) {
         context.fillText(`${Math.floor(mousePosition.x)}, ${Math.floor(mousePosition.y)}`, 100, 300);
     }
 }
+
+const bossPos = { x: 3547, y: 33213, width: 500, height: 500 };
+//@ts-ignore
+window.bossPos = bossPos;
