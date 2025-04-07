@@ -47,10 +47,10 @@ export const biome3WallsImage = loadImage(biome3WallsImageUrl);
 import biome3WallVectorsUrl from "../assets/level walls/Biome 3 - Straight Hit Walls.svg?raw";
 export const biome3WallVectors = loadVectorPaths(biome3WallVectorsUrl);
 
-import biome4WallsImageUrl from "../assets/Biome 1 - Curvy Walls.svg";
+import biome4WallsImageUrl from "../assets/level walls/Biome 4 - Straight Hit Walls.svg";
 export const biome4WallsImage = loadImage(biome4WallsImageUrl);
 
-import biome4WallVectorsUrl from "../assets/Biome 1 - Straight Hit Walls.svg?raw";
+import biome4WallVectorsUrl from "../assets/level walls/Biome 4 - Straight Hit Walls.svg?raw";
 export const biome4WallVectors = loadVectorPaths(biome4WallVectorsUrl);
 
 import playerImage1Url from "../assets/sub/sub_level1.png";
@@ -67,6 +67,9 @@ export const redRectImage = loadImage(redRectImageUrl);
 
 import backgroundImageUrl from "../assets/ocean_background.png";
 export const backgroundImage = loadImage(backgroundImageUrl);
+
+import backgroundImageLoopUrl from "../assets/ocean_background_loop.png";
+export const backgroundImageLoop = loadImage(backgroundImageLoopUrl);
 
 // minerals
 import ironOreUrl from "../assets/ocean_objects/minerals/iron_ore.png";
