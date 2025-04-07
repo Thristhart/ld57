@@ -1,4 +1,4 @@
-import library from "js-svg-path";
+import library, { Outline } from "js-svg-path";
 
 const unloadedImages = new Set<HTMLImageElement>();
 
@@ -19,25 +19,21 @@ function loadImage(url: string) {
     return image;
 }
 
-function loadVectorPaths(vectorURL: string) {
-    let paths = [];
-    const step1 = vectorURL.split("path");
-    step1.splice(0, 1);
-    for (const string of step1) {
-        paths.push(string.split('"')[1]);
-    }
-    let vectorPaths = [];
-    for (const path of paths) {
-        vectorPaths.push(library.parse(path));
-    }
+function loadVectorPaths(svgContents: string) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(svgContents, "image/svg+xml");
+    const vectorPaths: Outline[] = [];
+    doc.querySelectorAll("path").forEach((path) => {
+        vectorPaths.push(library.parse(path.getAttribute("d")!));
+    });
     return vectorPaths;
 }
 
-import wallsImageUrl from "../assets/walls.png";
-export const wallsImage = loadImage(wallsImageUrl);
+import biome1WallsImageUrl from "../assets/Biome 1 - Curvy Walls.svg";
+export const biome1WallsImage = loadImage(biome1WallsImageUrl);
 
-import wallsVectorUrl from "../assets/Walls - Spiky Stuff.svg?raw";
-export const wallsVectors = loadVectorPaths(wallsVectorUrl);
+import biome1WallVectorsUrl from "../assets/Biome 1 - Straight Hit Walls.svg?raw";
+export const biome1WallVectors = loadVectorPaths(biome1WallVectorsUrl);
 
 import playerImage1Url from "../assets/sub/sub_level1.png";
 export const playerImage1 = loadImage(playerImage1Url);

@@ -1,5 +1,5 @@
 import { gameManager } from "./GameManager";
-import { wallsImage, wallsVectors } from "./images";
+import { biome1WallsImage, biome1WallVectors } from "./images";
 import { clamp } from "./util";
 import { add, dot, isEqual, length, lengthSquared, normalizeVector, roundMut, scale, subtract, Vector } from "./vector";
 
@@ -19,37 +19,39 @@ function randomColor() {
 }
 
 export function prepareWallData() {
-    for (const vector of wallsVectors) {
+    for (const vector of biome1WallVectors) {
         let vectorLines: WallLine[] = [];
         let lastPoint = { main: { x: 0, y: 0 } };
-        for (const point of vector.curveshapes[0].points) {
-            const segment = subtract(point.main, lastPoint.main);
-            const normal = normalizeVector({ x: segment.y, y: -segment.x });
-            vectorLines.push({
-                start: point.main,
-                end: lastPoint.main,
-                normal,
-                color: randomColor(),
-                length: length(segment),
-            });
-            lastPoint = point;
+        for (const shape of vector.curveshapes) {
+            for (const point of shape?.points ?? []) {
+                const segment = subtract(point.main, lastPoint.main);
+                const normal = normalizeVector({ x: segment.y, y: -segment.x });
+                vectorLines.push({
+                    start: point.main,
+                    end: lastPoint.main,
+                    normal,
+                    color: randomColor(),
+                    length: length(segment),
+                });
+                lastPoint = point;
+            }
         }
         vectorLines[0].end = lastPoint.main;
         wallLines.push(...vectorLines);
     }
     wallLines.push({
         start: { x: 0, y: 0 },
-        end: { x: wallsImage.width, y: 0 },
+        end: { x: gameManager.maxPixelWidth, y: 0 },
         normal: { x: 0, y: 1 },
         color: randomColor(),
-        length: wallsImage.width,
+        length: gameManager.maxPixelWidth,
     });
     wallLines.push({
-        start: { x: 0, y: wallsImage.height },
-        end: { x: wallsImage.width, y: wallsImage.height },
+        start: { x: 0, y: gameManager.maxPixelHeight },
+        end: { x: gameManager.maxPixelWidth, y: gameManager.maxPixelHeight },
         normal: { x: 0, y: -1 },
         color: randomColor(),
-        length: wallsImage.width,
+        length: gameManager.maxPixelWidth,
     });
 }
 

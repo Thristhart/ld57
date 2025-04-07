@@ -51,7 +51,8 @@ export function useUpgradedMaxValue<K extends keyof GameUpgradeLevels>(
 export class GameManager {
     private rerenderUI: () => void = () => {};
     private gameState: GameState = defaultGameState;
-    public maxPixelHeight: number = 0;
+    public maxPixelWidth: number = 4000;
+    public maxPixelHeight: number = 12000;
     public maxDepth = 5000;
     private mapEntities = new Map<number, Entity>();
     public player: Player;
@@ -98,9 +99,6 @@ export class GameManager {
         this.stateChangeSubscriptions.get(property)?.delete(onStoreChange);
     }
 
-    public setMaxPixelHeight(height: number) {
-        this.maxPixelHeight = height;
-    }
     public getAllGameState() {
         return this.gameState;
     }

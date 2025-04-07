@@ -1,5 +1,5 @@
 import { gameManager } from "./GameManager";
-import { backgroundImage, wallsImage } from "./images";
+import { backgroundImage, biome1WallsImage } from "./images";
 import { mousePosition, mousePositionGlobal } from "./input";
 import { wallLines } from "./collision";
 import { add, length, normalizeVector, scale, subtract, Vector } from "./vector";
@@ -14,8 +14,8 @@ function lockCameraBounds() {
     const visibleWidth = canvas.width / camera.scale;
     const visibleHeight = canvas.height / camera.scale;
     // right
-    if (camera.x + visibleWidth / 2 > wallsImage.width) {
-        camera.x = wallsImage.width - visibleWidth / 2;
+    if (camera.x + visibleWidth / 2 > gameManager.maxPixelWidth) {
+        camera.x = gameManager.maxPixelWidth - visibleWidth / 2;
     }
     // left
     if (camera.x - visibleWidth / 2 < 0) {
@@ -26,8 +26,8 @@ function lockCameraBounds() {
         camera.y = visibleHeight / 2;
     }
     // bottom
-    if (camera.y + visibleHeight / 2 > wallsImage.height) {
-        camera.y = wallsImage.height - visibleHeight / 2;
+    if (camera.y + visibleHeight / 2 > gameManager.maxPixelHeight) {
+        camera.y = gameManager.maxPixelHeight - visibleHeight / 2;
     }
 }
 
@@ -79,13 +79,18 @@ export function drawFrame(avgFrameLength: number) {
     );
     context.scale(camera.scale, camera.scale);
 
-    const bgGradient = context.createLinearGradient(wallsImage.width / 2, 0, wallsImage.width / 2, wallsImage.height);
+    const bgGradient = context.createLinearGradient(
+        gameManager.maxPixelWidth / 2,
+        0,
+        gameManager.maxPixelWidth / 2,
+        gameManager.maxPixelHeight
+    );
     bgGradient.addColorStop(0, "darkblue");
     bgGradient.addColorStop(1, "black");
     context.fillStyle = bgGradient;
     context.drawImage(backgroundImage.bitmap, 0, 0, backgroundImage.width, backgroundImage.height);
 
-    context.drawImage(wallsImage.bitmap, 0, 0, wallsImage.width, wallsImage.height);
+    context.drawImage(biome1WallsImage.bitmap, 0, 0);
 
     if (localStorage.getItem("debug")) {
         context.lineWidth = 20;
@@ -117,7 +122,7 @@ export function drawFrame(avgFrameLength: number) {
         ent.draw(context);
     }
 
-    let maskOpacity = Math.min(1, gameManager.player.y / (wallsImage.height / 2));
+    let maskOpacity = Math.min(1, gameManager.player.y / (gameManager.maxPixelHeight / 2));
 
     let flashlightSize = 0.1;
     if (gameManager.gameOverTimestamp) {
@@ -143,7 +148,7 @@ export function drawFrame(avgFrameLength: number) {
     flashlightGradient.addColorStop(1 - flashlightSize, darknessMaskColor);
 
     context.fillStyle = flashlightGradient;
-    context.fillRect(0, 0, wallsImage.width, wallsImage.height);
+    context.fillRect(0, 0, gameManager.maxPixelWidth, gameManager.maxPixelHeight);
     if (!gameManager.gameOverTimestamp) {
         gameManager.player.draw(context);
     }
