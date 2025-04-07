@@ -98,6 +98,9 @@ export const eyeBallImage = loadImage(eyeballUrl);
 import fleshMoteUrl from "../assets/ocean_objects/eldritch/flesh_mote.png";
 export const fleshMoteImage = loadImage(fleshMoteUrl);
 
+import tentacleUrl from "../assets/ocean_objects/eldritch/alienbiome_tentacle_plant.png";
+export const tentacleImage = loadImage(tentacleUrl);
+
 import cassetteUrl from "../assets/ocean_objects/story/cassette_1.png";
 export const cassetteImage = loadImage(cassetteUrl);
 
