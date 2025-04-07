@@ -35,8 +35,8 @@ export function isPointOnScreen(point: Vector) {
     if (!canvas) {
         return false;
     }
-    const halfVisibleWidth = canvas.width / camera.scale / 2;
-    const halfVisibleHeight = canvas.height / camera.scale / 2;
+    const halfVisibleWidth = (canvas.width / camera.scale) * 0.75;
+    const halfVisibleHeight = (canvas.height / camera.scale) * 0.75;
     return (
         camera.x - halfVisibleWidth < point.x &&
         camera.x + halfVisibleWidth > point.x &&

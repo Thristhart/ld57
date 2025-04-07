@@ -25,6 +25,7 @@ import { Vector } from "./vector";
 import cloneDeep from "lodash.clonedeep";
 import { MessageEntity } from "./entities/messageentity";
 import { Collectable } from "./entities/collectable";
+import { isPointOnScreen } from "./canvas";
 
 const fuelScale = 0.325;
 let nextEntId = 0;
@@ -81,7 +82,7 @@ export class GameManager {
         this.player = this.addEntity(new Player(2000, 200));
 
         collectablesList.forEach((collectable) => {
-            this.addEntity(new Collectable(collectable));
+            collectable.entityId = this.addEntity(new Collectable(collectable)).id;
         });
 
         flockList.forEach((flock) => {
@@ -276,6 +277,23 @@ export class GameManager {
             pressureDamageSFX2.stop();
             youDied.play();
             setTimeout(() => this.forceUpdate(), 1000);
+        }
+
+        // respawn collectables if offscreen
+        for (const collectable of collectablesList) {
+            if (!collectable.entityId) {
+                continue;
+            }
+            if (this.getEntity(collectable.entityId)) {
+                continue;
+            }
+            if (collectable.resource.startsWith("cassette")) {
+                continue;
+            }
+            if (isPointOnScreen(collectable)) {
+                continue;
+            }
+            collectable.entityId = this.addEntity(new Collectable(collectable)).id;
         }
     }
 
