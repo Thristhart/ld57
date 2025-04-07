@@ -1,4 +1,4 @@
-import { baseFlock } from "./entities/boids/constants";
+import { baseFlock, creepyFish3Flock, creepyFish4Flock } from "./entities/boids/constants";
 import { FlockSetting, PartialFlockSetting } from "./entities/boids/types";
 import { CollectableConfig, CollectableMetadata, GameState, Upgrade } from "./gametypes";
 import {
@@ -82,8 +82,8 @@ export const defaultGameState: GameState = {
     alert: null,
 };
 
-function makeFlock(partialSettings: PartialFlockSetting): FlockSetting {
-    return merge({}, baseFlock, partialSettings);
+function makeFlock(partialSettings: PartialFlockSetting, base = baseFlock): FlockSetting {
+    return merge({}, base, partialSettings);
 }
 
 export const flockList: FlockSetting[] = [
@@ -342,15 +342,16 @@ addCollectable("crystal", { x: 2535, y: 32017 });
 addCollectable("crystal", { x: 2625, y: 31017 });
 addCollectable("crystal", { x: 3047, y: 31341 });
 
-//cutefish2
-addCollectable("cuteFish2", { x: 1709, y: 15105 });
-addCollectable("cuteFish2", { x: 1670, y: 11142 });
-addCollectable("cuteFish2", { x: 1869, y: 20850 });
-//cutefish1
-addCollectable("cuteFish", { x: 2878, y: 12597 });
-
-//creepy fish1
-addCollectable("creepyFish3", { x: 2095, y: 17638 });
+flockList.push(
+    makeFlock(
+        {
+            characteristics: {
+                roost: { position: { x: 2095, y: 17638 } },
+            },
+        },
+        creepyFish3Flock
+    )
+);
 
 //creepy fish 2
 
@@ -431,11 +432,47 @@ addCollectable("tentaclePlant", { x: 1019, y: 33692 });
 
 //cREEPY4
 
-addCollectable("creepyFish4", { x: 1412, y: 30174 });
-addCollectable("creepyFish4", { x: 2542, y: 31544 });
+flockList.push(
+    makeFlock(
+        {
+            characteristics: {
+                roost: { position: { x: 1412, y: 30174 } },
+            },
+        },
+        creepyFish4Flock
+    )
+);
+flockList.push(
+    makeFlock(
+        {
+            characteristics: {
+                roost: { position: { x: 2542, y: 31544 } },
+            },
+        },
+        creepyFish4Flock
+    )
+);
 //creep3
-addCollectable("creepyFish3", { x: 799, y: 25289 });
-addCollectable("creepyFish3", { x: 1555, y: 22554 });
+flockList.push(
+    makeFlock(
+        {
+            characteristics: {
+                roost: { position: { x: 799, y: 25289 } },
+            },
+        },
+        creepyFish3Flock
+    )
+);
+flockList.push(
+    makeFlock(
+        {
+            characteristics: {
+                roost: { position: { x: 1555, y: 22554 } },
+            },
+        },
+        creepyFish3Flock
+    )
+);
 
 //CASSETE3
 addCollectable("cassette3", { x: 1120, y: 9396 });
