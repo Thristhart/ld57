@@ -1,7 +1,9 @@
 import { gameManager } from "./GameManager";
 import {
     backgroundImage,
-    backgroundImageLoop,
+    backgroundImageBoss,
+    backgroundImageLoop1,
+    backgroundImageLoop2,
     biome1WallsImage,
     biome2WallsImage,
     biome3WallsImage,
@@ -108,23 +110,32 @@ export function drawFrame(avgFrameLength: number) {
     bgGradient.addColorStop(0, "darkblue");
     bgGradient.addColorStop(1, "black");
     context.fillStyle = bgGradient;
-    context.drawImage(backgroundImage.bitmap, 0, 0, backgroundImage.width, backgroundImage.height);
-    const loopBgAspectRatio = backgroundImageLoop.height / backgroundImageLoop.width;
-    const loopBgHeight = backgroundImage.width * loopBgAspectRatio;
-    context.drawImage(backgroundImageLoop.bitmap, 0, backgroundImage.height, backgroundImage.width, loopBgHeight);
+    const topBgAspectRatio = backgroundImage.height / backgroundImage.width;
+    const topBgHeight = topBgAspectRatio * gameManager.maxPixelWidth;
+    context.drawImage(backgroundImage.bitmap, 0, 0, gameManager.maxPixelWidth, topBgHeight);
+    const loopBgAspectRatio = backgroundImageLoop1.height / backgroundImageLoop1.width;
+    const loopBgHeight = gameManager.maxPixelWidth * loopBgAspectRatio;
+    context.drawImage(backgroundImageLoop1.bitmap, 0, topBgHeight, gameManager.maxPixelWidth, loopBgHeight);
     context.drawImage(
-        backgroundImageLoop.bitmap,
+        backgroundImageLoop2.bitmap,
         0,
-        backgroundImage.height + loopBgHeight,
-        backgroundImage.width,
+        topBgHeight + loopBgHeight,
+        gameManager.maxPixelWidth,
         loopBgHeight
     );
     context.drawImage(
-        backgroundImageLoop.bitmap,
+        backgroundImageLoop2.bitmap,
         0,
-        backgroundImage.height + loopBgHeight * 2,
-        backgroundImage.width,
+        topBgHeight + loopBgHeight * 2,
+        gameManager.maxPixelWidth,
         loopBgHeight
+    );
+    context.drawImage(
+        backgroundImageBoss.bitmap,
+        0,
+        topBgHeight + loopBgHeight * 3,
+        gameManager.maxPixelWidth,
+        (gameManager.maxPixelWidth * backgroundImageBoss.height) / backgroundImageBoss.width
     );
 
     if (localStorage.getItem("debug")) {
