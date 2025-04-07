@@ -211,6 +211,10 @@ export class GameManager {
             this.gameState = cloneDeep(lastCheckpoint.gameState);
             this.player.x = lastCheckpoint.playerX;
             this.player.y = lastCheckpoint.playerY;
+            this.player.velocity.x = 0;
+            this.player.velocity.y = 0;
+            this.player.acceleration.x = 0;
+            this.player.acceleration.y = 0;
             this.gameOverTimestamp = undefined;
             this.forceUpdate();
         }
