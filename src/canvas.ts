@@ -1,5 +1,12 @@
 import { gameManager } from "./GameManager";
-import { backgroundImage, biome1WallsImage, biome2WallsImage, biome3WallsImage, biome4WallsImage } from "./images";
+import {
+    backgroundImage,
+    backgroundImageLoop,
+    biome1WallsImage,
+    biome2WallsImage,
+    biome3WallsImage,
+    biome4WallsImage,
+} from "./images";
 import { mousePosition, mousePositionGlobal } from "./input";
 import { wallLines } from "./collision";
 import { add, length, normalizeVector, scale, subtract, Vector } from "./vector";
@@ -89,7 +96,23 @@ export function drawFrame(avgFrameLength: number) {
     bgGradient.addColorStop(1, "black");
     context.fillStyle = bgGradient;
     context.drawImage(backgroundImage.bitmap, 0, 0, backgroundImage.width, backgroundImage.height);
-    context.drawImage(backgroundImage.bitmap, 0, backgroundImage.height, backgroundImage.width, backgroundImage.height);
+    const loopBgAspectRatio = backgroundImageLoop.height / backgroundImageLoop.width;
+    const loopBgHeight = backgroundImage.width * loopBgAspectRatio;
+    context.drawImage(backgroundImageLoop.bitmap, 0, backgroundImage.height, backgroundImage.width, loopBgHeight);
+    context.drawImage(
+        backgroundImageLoop.bitmap,
+        0,
+        backgroundImage.height + loopBgHeight,
+        backgroundImage.width,
+        loopBgHeight
+    );
+    context.drawImage(
+        backgroundImageLoop.bitmap,
+        0,
+        backgroundImage.height + loopBgHeight * 2,
+        backgroundImage.width,
+        loopBgHeight
+    );
 
     context.drawImage(biome1WallsImage.bitmap, 0, 0);
     context.drawImage(biome2WallsImage.bitmap, 0, biome1WallsImage.height);
