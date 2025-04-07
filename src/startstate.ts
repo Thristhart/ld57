@@ -309,7 +309,56 @@ addCollectable("crystal", { x: 2512, y: 20286 });
 addCollectable("crystal", { x: 1080, y: 21981 });
 addCollectable("crystal", { x: 572, y: 22310 });
 addCollectable("crystal", { x: 482, y: 23266 });
+//cutefish2
+addCollectable("cuteFish2", { x: 1709, y: 15105 });
+addCollectable("cuteFish2", { x: 1670, y: 11142 });
+addCollectable("cuteFish2", { x: 1869, y: 20850 });
+//cutefish1
+addCollectable("cuteFish", { x: 2878, y: 12597 });
 
+//flhes motes
+addCollectable("fleshMote", { x: 2130, y: 18010 });
+addCollectable("fleshMote", { x: 2175, y: 18293 });
+addCollectable("fleshMote", { x: 2456, y: 18539 });
+addCollectable("fleshMote", { x: 1981, y: 19476 });
+addCollectable("fleshMote", { x: 1955, y: 19899 });
+addCollectable("fleshMote", { x: 2184, y: 20275 });
+addCollectable("fleshMote", { x: 2399, y: 20506 });
+addCollectable("fleshMote", { x: 1170, y: 22279 });
+addCollectable("fleshMote", { x: 1320, y: 21974 });
+addCollectable("fleshMote", { x: 1879, y: 21738 });
+addCollectable("fleshMote", { x: 1907, y: 22004 });
+addCollectable("fleshMote", { x: 2011, y: 22795 });
+addCollectable("fleshMote", { x: 2177, y: 22744 });
+addCollectable("fleshMote", { x: 648, y: 23109 });
+addCollectable("fleshMote", { x: 680, y: 23247 });
+
+
+
+
+//CASSETE3
+addCollectable("cassete3", { x: 1120, y: 9396 });
+
+//REAL CASSETE 4
+addCollectable("cassete4", { x: 2171, y: 14094 });
+
+//5
+addCollectable("cassete5", { x: 1391, y: 17485 });
+
+//6
+addCollectable("cassete6", { x: 1466, y: 21675 });
+
+//7
+addCollectable("cassete7", { x: 1908, y: 27582 });
+
+
+//8
+
+addCollectable("cassete8", { x: 3577, y: 31080 });
+
+
+//9
+addCollectable("cassete9", { x: 580, y: 34798 });
 export const collectablesMetadata = {
     iron: {
         name: "iron",
