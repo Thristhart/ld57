@@ -284,12 +284,21 @@ export const collectablesMetadata = {
         storyMessage: "Discovered a mysterious glowing crystal, it contains previously undiscovered isotopes.",
     },
     cuteFish: {
+		
         name: "cuteFish",
         imageUrl: cuteFishImageUrl,
         description: "Almost too cute to subsume!",
         fuelPoints: 20,
         hullPoints: 0,
         storyMessage: "Discovered a cute fish, fish are fuel not food",
+    },
+        cuteFish2: {
+        name: "cuteFish2",
+        imageUrl: cuteFishImageUrl,//REMEMBER TO CHANGE THIS
+        description: "REMEMBER TO CHANGE THIS",
+        fuelPoints: 20,
+        hullPoints: 0,
+        storyMessage: "REMEMBER TO CHANGE THIS",
     },
     creepyFish3: {
         name: "creepyFish3",
