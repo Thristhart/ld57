@@ -361,28 +361,28 @@ addCollectable("fleshMote", { x: 680, y: 23247 });
 
 
 //CASSETE3
-addCollectable("cassete3", { x: 1120, y: 9396 });
+addCollectable("cassette3", { x: 1120, y: 9396 });
 
 //REAL CASSETE 4
-addCollectable("cassete4", { x: 2171, y: 14094 });
+addCollectable("cassette4", { x: 2171, y: 14094 });
 
 //5
-addCollectable("cassete5", { x: 1391, y: 17485 });
+addCollectable("cassette5", { x: 1391, y: 17485 });
 
 //6
-addCollectable("cassete6", { x: 1466, y: 21675 });
+addCollectable("cassette6", { x: 1466, y: 21675 });
 
 //7
-addCollectable("cassete7", { x: 1908, y: 27582 });
+addCollectable("cassette7", { x: 1908, y: 27582 });
 
 
 //8
 
-addCollectable("cassete8", { x: 3577, y: 31080 });
+addCollectable("cassette8", { x: 3577, y: 31080 });
 
 
 //9
-addCollectable("cassete9", { x: 580, y: 34798 });
+addCollectable("cassette9", { x: 580, y: 34798 });
 export const collectablesMetadata = {
     iron: {
         name: "iron",
