@@ -296,7 +296,7 @@ export const collectablesMetadata = {
         description: "if you see this message it's a bug",
         fuelPoints: 0,
         hullPoints: 0,
-        storyMessage: "With materials gathered down here I've manage to further reinforce my hull to allow further diving. There is a certain closeness I now feel with the New Human Interface Submarine. At times it's easy to forget where my body ends and the vessel begins. After I return to the surface in a couple of days with an new discovery my partner in science will forgive me for venturing down here alone. I'm sure they're worried sick by now.",
+        storyMessage: "With materials gathered down here I've manage to further reinforce my hull to allow further diving. There is a certain closeness I now feel with the Neo Human Interface Submarine. At times it's easy to forget where my body ends and the vessel begins. After I return to the surface in a couple of days with an new discovery my partner in science will forgive me for venturing down here alone. I'm sure they're worried sick by now.",
     },
     cassette5: {
         name: "cassette5",
@@ -336,7 +336,7 @@ export const collectablesMetadata = {
         description: "if you see this message it's a bug",
         fuelPoints: 0,
         hullPoints: 0,
-        storyMessage: "The meat alloy has fused with my flesh. I am the New Human Interface Submarine. It is unlikely that I'll ever be able to return to the surface. Much of my eager curiosity is now gone, only to be replaced by guilt and sorrow. It is unlikely I will ever see my beloved lab partner again. Down here is where I belong now. I'm sorry.",
+        storyMessage: "The meat alloy has fused with my flesh. I am the Neo Human Interface Submarine. It is unlikely that I'll ever be able to return to the surface. Much of my eager curiosity is now gone, only to be replaced by guilt and sorrow. It is unlikely I will ever see my beloved lab partner again. Down here is where I belong now. I'm sorry.",
     }
  
 
