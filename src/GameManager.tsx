@@ -269,7 +269,7 @@ export class GameManager {
             switchBGM(bgmBiome4);
         }
 
-        if (depth > maxDepth && !localStorage.getItem("noclip")) {
+        if (depth > maxDepth && !localStorage.getItem("noclip") && !localStorage.getItem("god")) {
             this.setGameState("alert", { text: "MAXIMUM DEPTH EXCEEDED", type: "error" });
             if (!pressureDamageSFX1.playing()) {
                 pressureDamageSFX1.play();

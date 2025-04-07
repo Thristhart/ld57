@@ -65,7 +65,7 @@ export class Player extends Entity {
         this.timeSincePropulsionSound += dt;
         let acceleration: Vector = { x: 0, y: 0 };
         const fuel = gameManager.getGameState("fuelPoints");
-        if (fuel > 0 || localStorage.getItem("noclip")) {
+        if (fuel > 0 || localStorage.getItem("noclip") || localStorage.getItem("god")) {
             if (InputState.get("w")) {
                 acceleration.y += -1;
                 this.propulseEffects();
