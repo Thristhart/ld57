@@ -4,6 +4,7 @@ import styles from "./datingsim.module.scss";
 import { gameManager } from "#src/GameManager.tsx";
 import classNames from "classnames";
 
+import finalBossImage from "#assets/final_boss.png";
 export function DatingSimOverlay() {
     const [currentPrompt, setPrompt] = useState<string>("chuWhoDares");
     const answers = datingSim[currentPrompt];
@@ -34,7 +35,10 @@ export function DatingSimOverlay() {
     }
     return (
         <div className={styles.DatingSimOverlay}>
-            <div className={styles.DatingPrompt}>{`The Creature: ${chuthuluText[currentPrompt].text}`}</div>
+            <div className={styles.DatingPromptCtn}>
+                <img height={80} width={80} src={finalBossImage} />
+                <div className={styles.DatingPrompt}>{`The Creature: ${chuthuluText[currentPrompt].text}`}</div>
+            </div>
             {answers && <div className={styles.DatingAnswerInstructions}>{`Choose an answer:`}</div>}
             <div>
                 {answers &&
