@@ -315,9 +315,11 @@ export class GameManager {
 
     public click() {
         if (localStorage.getItem("editor")) {
-            console.log(
-                `addCollectable("iron", { x: ${Math.floor(mousePosition.x)}, y: ${Math.floor(mousePosition.y)} });`
-            );
+            const line = `addCollectable("iron", { x: ${Math.floor(mousePosition.x)}, y: ${Math.floor(
+                mousePosition.y
+            )} });`;
+            console.log(line);
+            navigator.clipboard.writeText(line);
         }
         if (this.player.grabber) {
             this.player.retractGrabber();

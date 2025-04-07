@@ -11,10 +11,8 @@ export function MuteButton() {
         Howler.mute(muted);
     }, [muted]);
     return (
-        <div className={styles.MuteButtonContainer}>
-            <button className={styles.MuteButton} onClick={() => setMuted((m) => !m)}>
-                <img src={muted ? unmuteButtonImageUrl : muteButtonImageUrl} />{" "}
-            </button>
-        </div>
+        <button className={styles.MuteButton} onClick={() => setMuted((m) => !m)}>
+            <img src={muted ? unmuteButtonImageUrl : muteButtonImageUrl} />
+        </button>
     );
 }
