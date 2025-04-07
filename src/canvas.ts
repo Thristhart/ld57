@@ -1,5 +1,5 @@
 import { gameManager } from "./GameManager";
-import { backgroundImage, biome1WallsImage } from "./images";
+import { backgroundImage, biome1WallsImage, biome2WallsImage, biome3WallsImage, biome4WallsImage } from "./images";
 import { mousePosition, mousePositionGlobal } from "./input";
 import { wallLines } from "./collision";
 import { add, length, normalizeVector, scale, subtract, Vector } from "./vector";
@@ -83,14 +83,22 @@ export function drawFrame(avgFrameLength: number) {
         gameManager.maxPixelWidth / 2,
         0,
         gameManager.maxPixelWidth / 2,
-        gameManager.maxPixelHeight
+        gameManager.maxPixelHeight * 2
     );
     bgGradient.addColorStop(0, "darkblue");
     bgGradient.addColorStop(1, "black");
     context.fillStyle = bgGradient;
     context.drawImage(backgroundImage.bitmap, 0, 0, backgroundImage.width, backgroundImage.height);
+    context.drawImage(backgroundImage.bitmap, 0, backgroundImage.height, backgroundImage.width, backgroundImage.height);
 
     context.drawImage(biome1WallsImage.bitmap, 0, 0);
+    context.drawImage(biome2WallsImage.bitmap, 0, biome1WallsImage.height);
+    context.drawImage(biome3WallsImage.bitmap, 0, biome1WallsImage.height + biome2WallsImage.height);
+    context.drawImage(
+        biome4WallsImage.bitmap,
+        0,
+        biome1WallsImage.height + biome2WallsImage.height + biome3WallsImage.height
+    );
 
     if (localStorage.getItem("debug")) {
         context.lineWidth = 20;

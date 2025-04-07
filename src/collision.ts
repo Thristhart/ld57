@@ -1,5 +1,13 @@
 import { gameManager } from "./GameManager";
-import { biome1WallsImage, biome1WallVectors } from "./images";
+import {
+    biome1WallsImage,
+    biome1WallVectors,
+    biome2WallsImage,
+    biome2WallVectors,
+    biome3WallsImage,
+    biome3WallVectors,
+    biome4WallVectors,
+} from "./images";
 import { clamp } from "./util";
 import { add, dot, isEqual, length, lengthSquared, normalizeVector, roundMut, scale, subtract, Vector } from "./vector";
 
@@ -10,7 +18,7 @@ interface WallLine {
     length: number;
     color: string;
 }
-export const wallLines: WallLine[] = [];
+export let wallLines: WallLine[] = [];
 
 function randomColor() {
     return `rgb(${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(
@@ -20,6 +28,7 @@ function randomColor() {
 
 export function prepareWallData() {
     for (const vector of biome1WallVectors) {
+        let biomeOffset = 0;
         let vectorLines: WallLine[] = [];
         let lastPoint = { main: { x: 0, y: 0 } };
         for (const shape of vector.curveshapes) {
@@ -39,6 +48,70 @@ export function prepareWallData() {
         vectorLines[0].end = lastPoint.main;
         wallLines.push(...vectorLines);
     }
+    for (const vector of biome2WallVectors) {
+        let biomeOffset = biome1WallsImage.height;
+        let vectorLines: WallLine[] = [];
+        let lastPoint = { main: { x: 0, y: 0 } };
+        for (const shape of vector.curveshapes) {
+            for (const point of shape?.points ?? []) {
+                const segment = subtract(point.main, lastPoint.main);
+                const normal = normalizeVector({ x: segment.y, y: -segment.x });
+                vectorLines.push({
+                    start: { x: point.main.x, y: point.main.y + biomeOffset },
+                    end: { x: lastPoint.main.x, y: lastPoint.main.y + biomeOffset },
+                    normal,
+                    color: randomColor(),
+                    length: length(segment),
+                });
+                lastPoint = point;
+            }
+        }
+        vectorLines[0].end = { x: lastPoint.main.x, y: lastPoint.main.y + biomeOffset };
+        wallLines.push(...vectorLines);
+    }
+    for (const vector of biome3WallVectors) {
+        let biomeOffset = biome1WallsImage.height + biome2WallsImage.height;
+        let vectorLines: WallLine[] = [];
+        let lastPoint = { main: { x: 0, y: 0 } };
+        for (const shape of vector.curveshapes) {
+            for (const point of shape?.points ?? []) {
+                const segment = subtract(point.main, lastPoint.main);
+                const normal = normalizeVector({ x: segment.y, y: -segment.x });
+                vectorLines.push({
+                    start: { x: point.main.x, y: point.main.y + biomeOffset },
+                    end: { x: lastPoint.main.x, y: lastPoint.main.y + biomeOffset },
+                    normal,
+                    color: randomColor(),
+                    length: length(segment),
+                });
+                lastPoint = point;
+            }
+        }
+        vectorLines[0].end = { x: lastPoint.main.x, y: lastPoint.main.y + biomeOffset };
+        wallLines.push(...vectorLines);
+    }
+    for (const vector of biome4WallVectors) {
+        let biomeOffset = biome1WallsImage.height + biome2WallsImage.height + biome3WallsImage.height;
+        let vectorLines: WallLine[] = [];
+        let lastPoint = { main: { x: 0, y: 0 } };
+        for (const shape of vector.curveshapes) {
+            for (const point of shape?.points ?? []) {
+                const segment = subtract(point.main, lastPoint.main);
+                const normal = normalizeVector({ x: segment.y, y: -segment.x });
+                vectorLines.push({
+                    start: { x: point.main.x, y: point.main.y + biomeOffset },
+                    end: { x: lastPoint.main.x, y: lastPoint.main.y + biomeOffset },
+                    normal,
+                    color: randomColor(),
+                    length: length(segment),
+                });
+                lastPoint = point;
+            }
+        }
+        vectorLines[0].end = { x: lastPoint.main.x, y: lastPoint.main.y + biomeOffset };
+        wallLines.push(...vectorLines);
+    }
+    wallLines = wallLines.filter((x) => x.length < 3000);
     wallLines.push({
         start: { x: 0, y: 0 },
         end: { x: gameManager.maxPixelWidth, y: 0 },
