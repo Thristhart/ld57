@@ -161,24 +161,8 @@ import { Vector } from "./vector";
 export const collectablesList: CollectableConfig[] = [
     {
         resource: "iron",
-        x: 1227,
-        y: 1628,
-        height: 100,
-        width: 100,
-        image: ironOreImage,
-    },
-    {
-        resource: "iron",
         x: 1424,
         y: 1846,
-        height: 100,
-        width: 100,
-        image: ironOreImage,
-    },
-    {
-        resource: "iron",
-        x: 1259,
-        y: 1679,
         height: 100,
         width: 100,
         image: ironOreImage,
