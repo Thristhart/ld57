@@ -28,7 +28,6 @@ function randomColor() {
 
 export function prepareWallData() {
     for (const vector of biome1WallVectors) {
-        let biomeOffset = 0;
         let vectorLines: WallLine[] = [];
         let lastPoint = { main: { x: 0, y: 0 } };
         for (const shape of vector.curveshapes) {
@@ -45,7 +44,6 @@ export function prepareWallData() {
                 lastPoint = point;
             }
         }
-        vectorLines[0].end = lastPoint.main;
         wallLines.push(...vectorLines);
     }
     for (const vector of biome2WallVectors) {
@@ -66,7 +64,6 @@ export function prepareWallData() {
                 lastPoint = point;
             }
         }
-        vectorLines[0].end = { x: lastPoint.main.x, y: lastPoint.main.y + biomeOffset };
         wallLines.push(...vectorLines);
     }
     for (const vector of biome3WallVectors) {
@@ -87,7 +84,6 @@ export function prepareWallData() {
                 lastPoint = point;
             }
         }
-        vectorLines[0].end = { x: lastPoint.main.x, y: lastPoint.main.y + biomeOffset };
         wallLines.push(...vectorLines);
     }
     for (const vector of biome4WallVectors) {
@@ -108,7 +104,6 @@ export function prepareWallData() {
                 lastPoint = point;
             }
         }
-        vectorLines[0].end = { x: lastPoint.main.x, y: lastPoint.main.y + biomeOffset };
         wallLines.push(...vectorLines);
     }
     wallLines = wallLines.filter((x) => x.length < 3000);

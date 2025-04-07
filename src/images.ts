@@ -35,23 +35,23 @@ export const biome1WallsImage = loadImage(biome1WallsImageUrl);
 import biome1WallVectorsUrl from "../assets/Biome 1 - Straight Hit Walls.svg?raw";
 export const biome1WallVectors = loadVectorPaths(biome1WallVectorsUrl);
 
-import biome2WallsImageUrl from "../assets/Biome 1 - Curvy Walls.svg";
-export const biome2WallsImage = loadImage(biome1WallsImageUrl);
+import biome2WallsImageUrl from "../assets/level walls/Biome 2 - Curvy Walls.svg";
+export const biome2WallsImage = loadImage(biome2WallsImageUrl);
 
-import biome2WallVectorsUrl from "../assets/Biome 1 - Straight Hit Walls.svg?raw";
-export const biome2WallVectors = loadVectorPaths(biome1WallVectorsUrl);
+import biome2WallVectorsUrl from "../assets/level walls/Biome 2 - Straight Hit Walls.svg?raw";
+export const biome2WallVectors = loadVectorPaths(biome2WallVectorsUrl);
 
 import biome3WallsImageUrl from "../assets/Biome 1 - Curvy Walls.svg";
-export const biome3WallsImage = loadImage(biome1WallsImageUrl);
+export const biome3WallsImage = loadImage(biome3WallsImageUrl);
 
 import biome3WallVectorsUrl from "../assets/Biome 1 - Straight Hit Walls.svg?raw";
-export const biome3WallVectors = loadVectorPaths(biome1WallVectorsUrl);
+export const biome3WallVectors = loadVectorPaths(biome3WallVectorsUrl);
 
 import biome4WallsImageUrl from "../assets/Biome 1 - Curvy Walls.svg";
-export const biome4WallsImage = loadImage(biome1WallsImageUrl);
+export const biome4WallsImage = loadImage(biome4WallsImageUrl);
 
 import biome4WallVectorsUrl from "../assets/Biome 1 - Straight Hit Walls.svg?raw";
-export const biome4WallVectors = loadVectorPaths(biome1WallVectorsUrl);
+export const biome4WallVectors = loadVectorPaths(biome4WallVectorsUrl);
 
 import playerImage1Url from "../assets/sub/sub_level1.png";
 export const playerImage1 = loadImage(playerImage1Url);
