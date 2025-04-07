@@ -10,15 +10,12 @@ export class Grabber extends Entity {
     public bounceFactor = 0.1;
     public maxLength = 150;
     public retracting = false;
+    public angle = 0;
 
     grabbedTarget: Entity | undefined = undefined;
 
     draw(context: CanvasRenderingContext2D): void {
-        context.fillStyle = "cornflowerblue";
-        context.beginPath();
-        context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        context.fill();
-        context.closePath();
+        return;
     }
     tick(dt: number): void {
         super.tick(dt);

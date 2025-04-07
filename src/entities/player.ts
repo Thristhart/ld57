@@ -1,12 +1,13 @@
 import { propulsionSFX } from "#src/audio.ts";
 import { gameManager } from "#src/GameManager.tsx";
-import { playerImage1, playerImage2, playerImage3 } from "#src/images.ts";
+import { claw1Image, claw2Image, claw3Image, playerImage1, playerImage2, playerImage3 } from "#src/images.ts";
 import { InputState, mousePosition } from "#src/input.ts";
 import {
     addMut,
     angleBetweenPoints,
     angleDistance,
     copyMut,
+    getDirectionAngle,
     normalizeVector,
     scale,
     scaleMut,
@@ -17,24 +18,36 @@ import { Bubble } from "./bubble";
 import { Entity } from "./entity";
 import { Grabber } from "./grabber";
 
-const subConfigs = {
+export const subConfigs = {
     1: {
         image: playerImage1,
-        emitterAngle: 0.28,
+        emitterAngle: 0.3,
         emitterDistanceMod: -2,
         radiusMod: 18,
+        clawImage: claw1Image,
+        grabberColor: "#5b8ca2",
+        grabberThickness: 2,
+        grabberOffset: 0,
     },
     2: {
         image: playerImage2,
-        emitterAngle: 0.28,
+        emitterAngle: 0.3,
         emitterDistanceMod: -2,
         radiusMod: 18,
+        clawImage: claw2Image,
+        grabberColor: "#7d5fb9",
+        grabberThickness: 2,
+        grabberOffset: 0,
     },
     3: {
         image: playerImage3,
-        emitterAngle: 0.28,
+        emitterAngle: 0.3,
         emitterDistanceMod: -2,
         radiusMod: 18,
+        clawImage: claw3Image,
+        grabberColor: "#db6cf5",
+        grabberThickness: 4,
+        grabberOffset: -2,
     },
 } as const;
 
@@ -109,6 +122,29 @@ export class Player extends Entity {
     }
 
     draw(context: CanvasRenderingContext2D) {
+        if (this.grabber) {
+            this.calcGrabberEmitPoint();
+            context.strokeStyle = subConfigs[this.upgradeLevel].grabberColor;
+            context.lineWidth = subConfigs[this.upgradeLevel].grabberThickness;
+
+            context.beginPath();
+            context.moveTo(this.grabberEmitPoint!.x, this.grabberEmitPoint!.y);
+            context.lineTo(this.grabber.x, this.grabber.y);
+            context.closePath();
+            context.stroke();
+
+            context.save();
+            context.translate(this.grabber.x, this.grabber.y);
+            const angle = angleBetweenPoints(this.grabber, this.grabberEmitPoint!);
+            context.rotate(angle);
+            const clawImage = subConfigs[this.upgradeLevel].clawImage;
+            context.drawImage(
+                clawImage.bitmap,
+                -clawImage.width / 2,
+                -clawImage.height / 2 - subConfigs[this.upgradeLevel].grabberOffset
+            );
+            context.restore();
+        }
         let flip = false;
         if (this.angle > Math.PI / 2 && this.angle < Math.PI * 1.5) {
             flip = true;
@@ -123,18 +159,6 @@ export class Player extends Entity {
         context.drawImage(subConfigs[this.upgradeLevel].image.bitmap, -radius, -radius, radius * 2, radius * 2);
 
         context.restore();
-
-        if (this.grabber) {
-            this.calcGrabberEmitPoint();
-            context.strokeStyle = "black";
-            context.lineWidth = 6;
-
-            context.beginPath();
-            context.moveTo(this.grabberEmitPoint!.x, this.grabberEmitPoint!.y);
-            context.lineTo(this.grabber.x, this.grabber.y);
-            context.closePath();
-            context.stroke();
-        }
     }
     calcGrabberEmitPoint() {
         let flip = false;
@@ -155,6 +179,7 @@ export class Player extends Entity {
         const emitVector = normalizeVector(subtract(mousePosition, this.grabberEmitPoint!));
         this.grabber = gameManager.addEntity(new Grabber(this.grabberEmitPoint!.x, this.grabberEmitPoint!.y));
         this.grabber.velocity = scale(emitVector, 8);
+        this.grabber.angle = getDirectionAngle(emitVector);
         addMut(this.grabber.velocity, this.velocity);
     }
     retractGrabber() {

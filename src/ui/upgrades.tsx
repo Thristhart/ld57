@@ -12,6 +12,7 @@ import lockedImageUrl from "#assets/ui_elements/skilltree_blocks/skilltree_block
 import leftClickImageUrl from "#assets/ui_elements/left_click.png";
 
 import { ETooltipPosition, useTooltip } from "./Tooltip";
+import { subConfigs } from "#src/entities/player.ts";
 
 const upgradeSize = 80;
 
@@ -143,6 +144,11 @@ function UnlockedUpgrade(props: { upgradeMetadata: Upgrade; index: number; upgra
         });
         gameManager.setGameState("inventory", newInventory);
         gameManager.setGameState(upgradeKey, index);
+        if (upgradeKey === "depthUpgradeLevel") {
+            if (index > 1 && index < 4) {
+                gameManager.player.upgradeLevel = index as keyof typeof subConfigs;
+            }
+        }
     };
 
     const tooltip = useTooltip(

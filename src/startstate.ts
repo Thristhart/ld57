@@ -160,54 +160,6 @@ import { Vector } from "./vector";
 
 export const collectablesList: CollectableConfig[] = [
     {
-        resource: "iron",
-        x: 1424,
-        y: 1846,
-        height: 100,
-        width: 100,
-        image: ironOreImage,
-    },
-    {
-        resource: "iron",
-        x: 2905,
-        y: 5631,
-        height: 100,
-        width: 100,
-        image: ironOreImage,
-    },
-    {
-        resource: "iron",
-        x: 3015,
-        y: 5628,
-        height: 100,
-        width: 100,
-        image: ironOreImage,
-    },
-    {
-        resource: "iron",
-        x: 1107,
-        y: 7184,
-        height: 100,
-        width: 100,
-        image: ironOreImage,
-    },
-    {
-        resource: "iron",
-        x: 1187,
-        y: 7258,
-        height: 100,
-        width: 100,
-        image: ironOreImage,
-    },
-    {
-        resource: "iron",
-        x: 1298,
-        y: 7272,
-        height: 100,
-        width: 100,
-        image: ironOreImage,
-    },
-    {
         resource: "cassette1",
         x: 1394,
         y: 2743,
@@ -223,40 +175,7 @@ export const collectablesList: CollectableConfig[] = [
         width: 100,
         image: cassetteImage,
     },
-    // {
-    //     resource: "cobalt",
-    //     x: 2100,
-    //     y: 400,
-    //     height: 50,
-    //     width: 50,
-    //     image: cobaltOreImage,
-    // },
-    // {
-    //     resource: "crystal",
-    //     x: 2200,
-    //     y: 400,
-    //     height: 50,
-    //     width: 50,
-    //     image: fancyOreImage,
-    // },
-    // {
-    //     resource: "fleshMote",
-    //     x: 1900,
-    //     y: 400,
-    //     height: 50,
-    //     width: 50,
-    //     image: fleshMoteImage,
-    // },
-    // {
-    //     resource: "eyeball",
-    //     x: 1800,
-    //     y: 400,
-    //     height: 50,
-    //     width: 50,
-    //     image: eyeBallImage,
-    // },
 ];
-
 const collectableImages = {
     iron: ironOreImage,
     cobalt: cobaltOreImage,
@@ -282,8 +201,63 @@ function addCollectable(
         ...options,
     });
 }
-addCollectable("cobalt", { x: 2480, y: 9291 });
-
+//iron
+addCollectable("iron", { x: 1427, y: 1807 });
+addCollectable("iron", { x: 2866, y: 5594 });
+addCollectable("iron", { x: 3065, y: 5572 });
+addCollectable("iron", { x: 1061, y: 7056 });
+addCollectable("iron", { x: 1133, y: 7157 });
+addCollectable("iron", { x: 1199, y: 7224 });
+addCollectable("iron", { x: 1327, y: 7264 });
+addCollectable("iron", { x: 3157, y: 9043 });
+addCollectable("iron", { x: 735, y: 12664 });
+addCollectable("iron", { x: 2920, y: 9978 });
+addCollectable("iron", { x: 3024, y: 13725 });
+addCollectable("iron", { x: 818, y: 15222 });
+//cobalt_ore
+addCollectable("cobalt", { x: 2929, y: 8828 });
+addCollectable("cobalt", { x: 2983, y: 9162 });
+addCollectable("cobalt", { x: 701, y: 12434 });
+addCollectable("cobalt", { x: 733, y: 12234 });
+addCollectable("cobalt", { x: 1024, y: 12506 });
+addCollectable("cobalt", { x: 2784, y: 10192 });
+addCollectable("cobalt", { x: 3060, y: 10395 });
+addCollectable("cobalt", { x: 3167, y: 13289 });
+addCollectable("cobalt", { x: 2705, y: 13442 });
+addCollectable("cobalt", { x: 3104, y: 13469 });
+addCollectable("cobalt", { x: 959, y: 15423 });
+addCollectable("cobalt", { x: 929, y: 15045 });
+addCollectable("cobalt", { x: 2670, y: 17756 });
+addCollectable("cobalt", { x: 3069, y: 18087 });
+addCollectable("cobalt", { x: 3119, y: 17930 });
+addCollectable("cobalt", { x: 3032, y: 17844 });
+addCollectable("cobalt", { x: 2827, y: 17925 });
+addCollectable("cobalt", { x: 2620, y: 19260 });
+addCollectable("cobalt", { x: 2824, y: 20431 });
+addCollectable("cobalt", { x: 3062, y: 23061 });
+addCollectable("cobalt", { x: 3495, y: 23001 });
+addCollectable("cobalt", { x: 2424, y: 23166 });
+//crystal in biome3
+addCollectable("crystal", { x: 2844, y: 22820 });
+addCollectable("crystal", { x: 2126, y: 23008 });
+addCollectable("crystal", { x: 2629, y: 21892 });
+addCollectable("crystal", { x: 2449, y: 22102 });
+addCollectable("crystal", { x: 2064, y: 21883 });
+addCollectable("crystal", { x: 2423, y: 16924 });
+addCollectable("crystal", { x: 2521, y: 17156 });
+addCollectable("crystal", { x: 2396, y: 18088 });
+addCollectable("crystal", { x: 2554, y: 18317 });
+addCollectable("crystal", { x: 1817, y: 19649 });
+addCollectable("crystal", { x: 2512, y: 20286 });
+addCollectable("crystal", { x: 1080, y: 21981 });
+addCollectable("crystal", { x: 572, y: 22310 });
+addCollectable("crystal", { x: 482, y: 23266 });
+//cutefish2
+addCollectable("cuteFish2", { x: 1709, y: 15105 });
+addCollectable("cuteFish2", { x: 1670, y: 11142 }); 
+addCollectable("cuteFish2", { x: 1869, y: 20850 });
+//cutefish1
+addCollectable("cuteFish", { x: 2878, y: 12597 });
 export const collectablesMetadata = {
     iron: {
         name: "iron",
@@ -310,6 +284,7 @@ export const collectablesMetadata = {
         storyMessage: "Discovered a mysterious glowing crystal, it contains previously undiscovered isotopes.",
     },
     cuteFish: {
+		
         name: "cuteFish",
         imageUrl: cuteFishImageUrl,
         description: "Almost too cute to subsume!",
@@ -317,11 +292,19 @@ export const collectablesMetadata = {
         hullPoints: 0,
         storyMessage: "Discovered a cute fish, fish are fuel not food",
     },
+        cuteFish2: {
+        name: "cuteFish2",
+        imageUrl: cuteFishImageUrl,//REMEMBER TO CHANGE THIS
+        description: "REMEMBER TO CHANGE THIS",
+        fuelPoints: 40,
+        hullPoints: 0,
+        storyMessage: "REMEMBER TO CHANGE THIS",
+    },
     creepyFish3: {
         name: "creepyFish3",
         imageUrl: creepyFish3Url,
         description: "This fish is strange.",
-        fuelPoints: 40,
+        fuelPoints: 60,
         hullPoints: 0,
         storyMessage: "Discovered a weird fish, it appears to be an efficient fuel source.",
     },
@@ -329,7 +312,7 @@ export const collectablesMetadata = {
         name: "creepyFish4",
         imageUrl: creepyFish4Url,
         description: "What a creepy fish.",
-        fuelPoints: 60,
+        fuelPoints: 80,
         hullPoints: 0,
         storyMessage:
             "Discovered a very strange fish. Its biomass is dense and should be a more efficient fuel source.",
