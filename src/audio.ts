@@ -14,17 +14,18 @@ export const bgmBiome4 = new Howl({ src: bgmBiome4Url, loop: true });
 
 export let currentBgm: Howl | undefined = undefined;
 
+let currentBgmId: number | undefined;
 export function switchBGM(newBGM: Howl) {
     if (newBGM == currentBgm) {
         return;
     }
-    currentBgm?.fade(1, 0, 5000);
-    newBGM.fade(0, 1, 5000);
-    const currentTimestamp = currentBgm?.seek();
+    currentBgm?.fade(1, 0, 3000, currentBgmId);
+    const currentTimestamp = currentBgm?.seek(currentBgmId);
+    currentBgmId = newBGM.play();
     if (currentTimestamp !== undefined) {
-        newBGM.seek(currentTimestamp);
+        newBGM.seek(currentTimestamp, currentBgmId);
     }
-    newBGM.play();
+    newBGM.fade(0, 1, 3000, currentBgmId);
     currentBgm = newBGM;
 }
 
