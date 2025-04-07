@@ -1,4 +1,4 @@
-import { length } from "#src/vector.ts";
+import { add, addMut, angleDistance, copyMut, length, normalizeVector, scale, subtract } from "#src/vector.ts";
 import React, { useSyncExternalStore } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
@@ -25,8 +25,10 @@ import { Vector } from "./vector";
 import cloneDeep from "lodash.clonedeep";
 import { MessageEntity } from "./entities/messageentity";
 import { Collectable } from "./entities/collectable";
-import { isPointOnScreen } from "./canvas";
+import { camera, isPointOnScreen } from "./canvas";
 import { mousePosition } from "./input";
+import { isWithinBounds, lerp } from "./util";
+import { animate, tickAnimations } from "./animation";
 
 const fuelScale = 0.325;
 let nextEntId = 0;
@@ -49,6 +51,13 @@ export function useUpgradedMaxValue<K extends keyof GameUpgradeLevels>(
     useGameStateValue("upgrades"); // makes us re-render when upgrades changes
     return gameManager.getUpgradedMaxValue(property);
 }
+
+const bossBoundsTopLeft = { x: 2360, y: 32772 };
+const bossBoundsBottomRight = { x: 3902, y: 35880 };
+const bossBoundsCameraPosition = { x: 3133, y: 33616 };
+const bossBoundsCameraScale = 0.7;
+const bossBoundsPlayerPos = { x: 2660, y: 33661 };
+const bossBoundsPlayerAngle = 5.88195;
 
 export class GameManager {
     private rerenderUI: () => void = () => {};
@@ -206,8 +215,11 @@ export class GameManager {
         }
     }
 
+    isAnimatingDatingSim = false;
+
     public tick(dt: number) {
-        if (this.gameOverTimestamp) {
+        tickAnimations(dt);
+        if (this.gameOverTimestamp || gameManager.isAnimatingDatingSim || gameManager.isDatingSim) {
             return;
         }
         for (const ent of this.getAllEntities()) {
@@ -315,6 +327,33 @@ export class GameManager {
                 continue;
             }
             collectable.entityId = this.addEntity(new Collectable(collectable)).id;
+        }
+
+        if (isWithinBounds(gameManager.player, bossBoundsTopLeft, bossBoundsBottomRight)) {
+            this.isAnimatingDatingSim = true;
+            const startCamera = { ...camera };
+            const cameraDiff = subtract(startCamera, bossBoundsCameraPosition);
+            const cameraDirection = normalizeVector(cameraDiff);
+            const distance = length(cameraDiff);
+            const playerStart = { x: gameManager.player.x, y: gameManager.player.y, angle: gameManager.player.angle };
+            const angleDiff = angleDistance(playerStart.angle, bossBoundsPlayerAngle);
+            animate({
+                apply(t) {
+                    camera.scale = lerp(t, startCamera.scale, bossBoundsCameraScale);
+                    const lerpedCameraLength = lerp(t, distance, 0);
+                    copyMut(camera, add(bossBoundsCameraPosition, scale(cameraDirection, lerpedCameraLength)));
+
+                    gameManager.player.angle = playerStart.angle + lerp(t, 0, angleDiff);
+                    gameManager.player.x = lerp(t, playerStart.x, bossBoundsPlayerPos.x);
+                    gameManager.player.y = lerp(t, playerStart.y, bossBoundsPlayerPos.y);
+                },
+                duration: 1800,
+            }).then(() => {
+                this.isAnimatingDatingSim = false;
+                this.isDatingSim = true;
+                this.forceUpdate();
+            });
+            this.forceUpdate();
         }
     }
 
