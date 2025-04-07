@@ -65,11 +65,17 @@ export const playerImage3 = loadImage(playerImage3Url);
 import redRectImageUrl from "../assets/collectable/red_rect.png";
 export const redRectImage = loadImage(redRectImageUrl);
 
-import backgroundImageUrl from "../assets/ocean_background.png";
+import backgroundImageUrl from "../assets/ocean_backgrounds/oceanbg_top1.png";
 export const backgroundImage = loadImage(backgroundImageUrl);
 
-import backgroundImageLoopUrl from "../assets/ocean_background_loop.png";
-export const backgroundImageLoop = loadImage(backgroundImageLoopUrl);
+import backgroundImageLoop1Url from "../assets/ocean_backgrounds/oceanbg_loop1.png";
+export const backgroundImageLoop1 = loadImage(backgroundImageLoop1Url);
+
+import backgroundImageLoop2Url from "../assets/ocean_backgrounds/oceanbg_loop2.png";
+export const backgroundImageLoop2 = loadImage(backgroundImageLoop2Url);
+
+import backgroundImageBossUrl from "../assets/ocean_backgrounds/oceanbg_bottombossbase.png";
+export const backgroundImageBoss = loadImage(backgroundImageBossUrl);
 
 // minerals
 import ironOreUrl from "../assets/ocean_objects/minerals/iron_ore.png";
