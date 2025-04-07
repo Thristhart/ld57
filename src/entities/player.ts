@@ -17,7 +17,7 @@ import { Bubble } from "./bubble";
 import { Entity } from "./entity";
 import { Grabber } from "./grabber";
 
-const subConfigs = {
+export const subConfigs = {
     1: {
         image: playerImage1,
         emitterAngle: 0.28,

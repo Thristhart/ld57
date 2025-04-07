@@ -20,9 +20,7 @@ export const introParagraph =
 export const upgrades = {
     depthUpgradeLevel: [
         { description: "Max Depth 1000m", upgradeValue: 1000, materials: {} },
-        { description: "Max Depth 2000m", upgradeValue: 2000,
-			materials: { iron: 3 } 
-		},
+        { description: "Max Depth 2000m", upgradeValue: 2000, materials: { iron: 3 } },
         {
             description: "Max Depth 3000m",
             upgradeValue: 3000,
@@ -35,30 +33,27 @@ export const upgrades = {
         },
     ],
     inventoryUpgradeLevel: [
-        { description: "3 slots", upgradeValue: 3, materials: {}},
-        { description: "5 slots", upgradeValue: 5,
-			materials: { cobalt:2, iron:1 } },
+        { description: "3 slots", upgradeValue: 3, materials: {} },
+        { description: "5 slots", upgradeValue: 5, materials: { cobalt: 2, iron: 1 } },
         {
             description: "10 slots",
             upgradeValue: 10,
-            materials: { cobalt: 3, crystal:2 ,fleshMote:1 },
+            materials: { cobalt: 3, crystal: 2, fleshMote: 1 },
         },
     ],
     fuelUpgradeLevel: [
-        { description: "Max Fuel 100 units", upgradeValue: 100,
-			materials: {} },
-        { description: "Max Fuel 200 units", upgradeValue: 200,
-			materials: { iron:1, cuteFish: 1 } },
-        { description: "Max Fuel 300 units", upgradeValue: 300,
-			materials: { cobalt:2, cuteFish2: 2} },
+        { description: "Max Fuel 100 units", upgradeValue: 100, materials: {} },
+        { description: "Max Fuel 200 units", upgradeValue: 200, materials: { iron: 1, cuteFish: 1 } },
+        { description: "Max Fuel 300 units", upgradeValue: 300, materials: { cobalt: 2, cuteFish2: 2 } },
     ],
     hullUpgradeLevel: [
-        { description: "Max Hull Integrity 100 centiTitans", upgradeValue: 100, 
-			materials: {} },
-        { description: "Max Hull Integrity 200 centiTitans", upgradeValue: 200,
-			materials: {iron:2,cobalt:2} },
-        { description: "Max Hull Integrity 300 centiTitans", upgradeValue: 300,
-			materials: {crystal:3,fleshMote:3} },
+        { description: "Max Hull Integrity 100 centiTitans", upgradeValue: 100, materials: {} },
+        { description: "Max Hull Integrity 200 centiTitans", upgradeValue: 200, materials: { iron: 2, cobalt: 2 } },
+        {
+            description: "Max Hull Integrity 300 centiTitans",
+            upgradeValue: 300,
+            materials: { crystal: 3, fleshMote: 3 },
+        },
     ],
 } as const satisfies { [type: string]: Upgrade[] };
 
@@ -251,7 +246,8 @@ export const collectablesMetadata = {
         description: "this one is even weirder",
         fuelPoints: 60,
         hullPoints: 0,
-        storyMessage: "Discovered a very strange fish. Its biomass is dense and should be a more efficient fuel source.",
+        storyMessage:
+            "Discovered a very strange fish. Its biomass is dense and should be a more efficient fuel source.",
     },
     eyeball: {
         name: "eyeball",
@@ -267,7 +263,8 @@ export const collectablesMetadata = {
         description: "the machine hums in excitement",
         fuelPoints: 150,
         hullPoints: 0,
-        storyMessage: "Discovered a flesh mote. This mysterious ball of meat seems compatible with the strange glowing mineral.",
+        storyMessage:
+            "Discovered a flesh mote. This mysterious ball of meat seems compatible with the strange glowing mineral.",
     },
     cassette1: {
         name: "cassette1",

@@ -16,13 +16,13 @@ export const mousePosition: Vector = { x: 0, y: 0 };
 window.DEV_mousePosition = mousePosition;
 
 function onKeyDown(event: KeyboardEvent) {
-    if (isSupportedInput(event.key)) {
-        InputState.set(event.key, true);
+    if (isSupportedInput(event.key.toLowerCase())) {
+        InputState.set(event.key.toLowerCase() as Input, true);
     }
 }
 function onKeyUp(event: KeyboardEvent) {
-    if (isSupportedInput(event.key)) {
-        InputState.delete(event.key);
+    if (isSupportedInput(event.key.toLowerCase())) {
+        InputState.delete(event.key.toLowerCase() as Input);
     }
 }
 
