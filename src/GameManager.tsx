@@ -366,7 +366,7 @@ export class GameManager {
                     this.isAnimatingDatingSim = false;
                     this.isDatingSim = true;
                     this.forceUpdate();
-                }, 3000);
+                }, 2000);
             });
             this.forceUpdate();
         }
