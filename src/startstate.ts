@@ -593,7 +593,7 @@ export const collectablesMetadata = {
     eyeball: {
         name: "eyeball",
         imageUrl: eyeballImageUrl,
-        description: "Its stares.",
+        description: "It stares.",
         fuelPoints: 50,
         hullPoints: 0,
         storyMessage: "Discovered an eyeball. I see. You see. We all see.",
