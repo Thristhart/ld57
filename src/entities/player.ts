@@ -66,6 +66,7 @@ export class Player extends Entity {
         this.timeSincePropulsionSound += dt;
         let acceleration: Vector = { x: 0, y: 0 };
         const fuel = gameManager.getGameState("fuelPoints");
+        this.frictionRate = -0.001;
         if (fuel > 0 || localStorage.getItem("noclip") || localStorage.getItem("god")) {
             if (InputState.get("w")) {
                 acceleration.y += -1;
@@ -85,6 +86,7 @@ export class Player extends Entity {
             }
         } else {
             acceleration.y += 0.2;
+            this.frictionRate = -0.003;
         }
         acceleration = normalizeVector(acceleration);
         scaleMut(acceleration, dt * 0.003);
