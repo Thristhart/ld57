@@ -122,7 +122,7 @@ export class GameManager {
     public setGameState<K extends keyof GameState>(property: K, value: GameState[K]): void {
         this.gameState[property] = value;
         this.stateChangeSubscriptions.get(property)?.forEach((callback) => callback());
-        if (this.countUpgrades() > 5) {
+        if (this.countUpgrades() > 5 && this.getUpgradedMaxValue("depthUpgradeLevel") > 4000) {
             this.player.upgradeLevel = 3;
         } else if (this.countUpgrades() > 3) {
             this.player.upgradeLevel = 2;
