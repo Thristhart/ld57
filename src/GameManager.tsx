@@ -221,6 +221,16 @@ export class GameManager {
             this.isDatingSim = false;
             camera.scale = 1;
             this.forceUpdate();
+            this.isDatingSim = false;
+
+            const leftUI = document.querySelector(".LeftUI") as HTMLDivElement;
+            const rightUI = document.querySelector(".RightUI") as HTMLDivElement;
+            const canvas = document.querySelector("canvas") as HTMLCanvasElement;
+
+            leftUI.style.transform = "";
+            rightUI.style.transform = "";
+            canvas.width = 1080;
+            canvas.height = 1920;
         }
     }
 
