@@ -23,7 +23,7 @@ import {
 import merge from "lodash.merge";
 
 export const introParagraph =
-    "Your trusted collegue, a brilliant scientist, had taken your joint project, the state of the art EvoAdaptive SymbioSub, on a solo, deep sea, exploration trip. Back in college, you two were roommates, the two of you dreamed about creating such a vessel. After graduation, the two of you worked together for years in order to make those dreams into reality. However, their impulsive nature led them to take the first working prototype on a joyride. That was a year ago. Building another one by yourself was a monumental endeavor, fueled by rage and betrayal. You have your own EvoAdaptive SymbioSub now. It is time to discover the fate of your partner and your shared dream.";
+    "Your trusted colleague, a brilliant scientist, had taken your joint project, the state of the art EvoAdaptive SymbioSub, on a solo, deep sea, exploration trip. Back in college, you two were roommates, the two of you dreamed about creating such a vessel. After graduation, the two of you worked together for years in order to make those dreams into reality. However, their impulsive nature led them to take the first working prototype on a joyride. That was a year ago. Building another one by yourself was a monumental endeavor, fueled by rage and betrayal. You have your own EvoAdaptive SymbioSub now. It is time to discover the fate of your partner and your shared dream.";
 
 export const upgrades = {
     depthUpgradeLevel: [
