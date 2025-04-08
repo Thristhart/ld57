@@ -28,7 +28,7 @@ export const introParagraph =
 export const upgrades = {
     depthUpgradeLevel: [
         { description: "Max Depth 1000m", upgradeValue: 1000, materials: {} },
-        { description: "Max Depth 2000m", upgradeValue: 2000, materials: { iron: 3 } },
+        { description: "Max Depth 2000m", upgradeValue: 2000, materials: { iron: 2, cuteFish: 1 } },
         {
             description: "Max Depth 3000m",
             upgradeValue: 3000,
@@ -37,12 +37,12 @@ export const upgrades = {
         {
             description: "Max Depth ????m",
             upgradeValue: 9000,
-            materials: { fleshMote: 4, crystal: 4 },
+            materials: { creepyFish3: 2, fleshMote: 2, crystal: 4 },
         },
     ],
     inventoryUpgradeLevel: [
         { description: "3 slots", upgradeValue: 3, materials: {} },
-        { description: "5 slots", upgradeValue: 5, materials: { cobalt: 2, iron: 1 } },
+        { description: "5 slots", upgradeValue: 5, materials: { cobalt: 2, cuteFish2: 1 } },
         {
             description: "10 slots",
             upgradeValue: 10,
@@ -51,16 +51,20 @@ export const upgrades = {
     ],
     fuelUpgradeLevel: [
         { description: "Max Fuel 100 units", upgradeValue: 100, materials: {} },
-        { description: "Max Fuel 200 units", upgradeValue: 200, materials: { iron: 1, cuteFish: 1 } },
-        { description: "Max Fuel 300 units", upgradeValue: 300, materials: { cobalt: 2, cuteFish2: 2 } },
+        { description: "Max Fuel 200 units", upgradeValue: 200, materials: { iron: 1, cobalt: 1, cuteFish2: 2 } },
+        { description: "Max Fuel 300 units", upgradeValue: 300, materials: { tentaclePlant: 4, eyeball: 2 } },
     ],
     hullUpgradeLevel: [
         { description: "Max Hull Integrity 100 centiTitans", upgradeValue: 100, materials: {} },
-        { description: "Max Hull Integrity 200 centiTitans", upgradeValue: 200, materials: { iron: 2, cobalt: 2 } },
+        {
+            description: "Max Hull Integrity 200 centiTitans",
+            upgradeValue: 200,
+            materials: { crystal: 2, creepyFish3: 2 },
+        },
         {
             description: "Max Hull Integrity 300 centiTitans",
             upgradeValue: 300,
-            materials: { crystal: 3, fleshMote: 3 },
+            materials: { creepyFish4: 3, crystal: 2, tentaclePlant: 2 },
         },
     ],
 } as const satisfies { [type: string]: Upgrade[] };
@@ -456,12 +460,12 @@ addCollectable("tentaclePlant", { x: 2873, y: 32393 });
 addCollectable("tentaclePlant", { x: 1019, y: 33692 });
 
 //eyeBall
-addCollectable("eyeball", { x: 1555, y: 31658 });
-addCollectable("eyeball", { x: 2401, y: 31581 });
-addCollectable("eyeball", { x: 2357, y: 32473 });
-addCollectable("eyeball", { x: 1735, y: 34476 });
-addCollectable("eyeball", { x: 957, y: 34826 });
-addCollectable("eyeball", { x: 1071, y: 34233 });
+addCollectable("eyeball", { x: 1555, y: 31658 }, { height: 100, width: 75 });
+addCollectable("eyeball", { x: 2401, y: 31581 }, { height: 100, width: 75 });
+addCollectable("eyeball", { x: 2357, y: 32473 }, { height: 100, width: 75 });
+addCollectable("eyeball", { x: 1735, y: 34476 }, { height: 100, width: 75 });
+addCollectable("eyeball", { x: 957, y: 34826 }, { height: 100, width: 75 });
+addCollectable("eyeball", { x: 1071, y: 34233 }, { height: 100, width: 75 });
 
 //cREEPY4
 
