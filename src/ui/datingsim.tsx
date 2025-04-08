@@ -4,7 +4,6 @@ import styles from "./datingsim.module.scss";
 import { gameManager } from "#src/GameManager.tsx";
 import classNames from "classnames";
 
-import finalBossImage from "#assets/final_boss.png";
 export function DatingSimOverlay() {
     const [currentPrompt, setPrompt] = useState<string>("chuWhoDares");
     const answers = datingSim[currentPrompt];
@@ -14,9 +13,16 @@ export function DatingSimOverlay() {
     if (currentPrompt === "neutral" || currentPrompt === "bad" || currentPrompt === "good") {
         return (
             <div className={classNames(styles.DatingSimEnding, styles[currentPrompt])}>
+                <div className={classNames(styles.EndingTitle, styles[`${currentPrompt}ending`])}>
+                    {currentPrompt === "bad"
+                        ? "BAD ENDING"
+                        : currentPrompt === "neutral"
+                        ? "NEUTRAL ENDING"
+                        : "GOOD ENDING"}
+                </div>
                 <div
                     className={classNames(
-                        styles.DatingPrompt
+                        styles.DatingPromptEnding
                     )}>{`The Creature: ${chuthuluText[currentPrompt].text}`}</div>
                 {hasCheckpoint && (
                     <button className={styles.ReplayButton} onClick={() => gameManager.loadCheckpoint()}>
@@ -36,7 +42,6 @@ export function DatingSimOverlay() {
     return (
         <div className={styles.DatingSimCtn}>
             <div className={styles.DatingSimOverlay}>
-                <img className={styles.FinalBossImage} height={500} width={500} src={finalBossImage} />
                 <div className={styles.TextContainer}>
                     <div className={styles.DatingPromptCtn}>
                         <div className={styles.DatingPrompt}>{`The Creature: ${chuthuluText[currentPrompt].text}`}</div>

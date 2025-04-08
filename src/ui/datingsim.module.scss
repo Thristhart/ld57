@@ -11,6 +11,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    user-select: none;
 }
 
 .DatingPromptCtn {
@@ -20,6 +21,22 @@
     text-align: left;
     gap: 16px;
     padding-bottom: 48px;
+}
+
+.EndingTitle {
+    font-size: 120px;
+}
+
+.badending {
+    color: #b31a66;
+}
+
+.neutralending {
+    color: white;
+}
+
+.goodending {
+    color: #0d958d;
 }
 
 .DatingSimCtn {
@@ -59,12 +76,22 @@
     height: 30%;
     bottom: 0;
     padding-top: 32px;
-    background: linear-gradient(180deg, #2f5396 2.58%, #795ab1 82.02%);
+    background: url("../../assets/datingsimbg.png");
+    background-size: cover;
+    text-align: center;
+}
+
+.DatingPromptEnding {
+    font-size: 36px;
+    max-width: 30%;
+    text-align: center;
+    padding-bottom: 24px;
 }
 
 .DatingPrompt {
     font-size: 36px;
     max-width: 30%;
+    text-align: center;
 }
 
 .DatingAnswer {
