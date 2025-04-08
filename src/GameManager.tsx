@@ -218,6 +218,8 @@ export class GameManager {
             this.player.acceleration.x = 0;
             this.player.acceleration.y = 0;
             this.gameOverTimestamp = undefined;
+            this.isDatingSim = false;
+            camera.scale = 1;
             this.forceUpdate();
         }
     }

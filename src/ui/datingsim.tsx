@@ -25,7 +25,12 @@ export function DatingSimOverlay() {
                         styles.DatingPromptEnding
                     )}>{`The Creature: ${chuthuluText[currentPrompt].text}`}</div>
                 {hasCheckpoint && (
-                    <button className={styles.ReplayButton} onClick={() => gameManager.loadCheckpoint()}>
+                    <button
+                        className={styles.ReplayButton}
+                        onClick={() => {
+                            setPrompt("chuWhoDares");
+                            gameManager.loadCheckpoint();
+                        }}>
                         Load Checkpoint
                     </button>
                 )}
