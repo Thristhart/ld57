@@ -76,6 +76,8 @@ export class GameManager {
     public isIntro = true;
     public isDatingSim = false;
 
+    public iFrames = 0;
+
     constructor() {
         const root = ReactDOM.createRoot(document.getElementById("root")!);
         const rootRender = () =>
@@ -240,11 +242,18 @@ export class GameManager {
 
         // set the hull damage
         const hullPoints = this.gameState.hullPoints;
-        if (this.player.collisions.length > 0 && length(this.player.velocity) > 6) {
+        if (!this.iFrames && this.player.collisions.length > 0 && length(this.player.velocity) > 6) {
             const damage = length(this.player.velocity) * hullScale;
             const newHullPoints = hullPoints - Math.floor(damage);
             this.setGameState("hullPoints", newHullPoints);
             playCollisionSound();
+            this.iFrames = 500;
+        }
+        if (this.iFrames) {
+            this.iFrames -= dt;
+        }
+        if (this.iFrames < 0) {
+            this.iFrames = 0;
         }
 
         const fuel = this.gameState.fuelPoints;
