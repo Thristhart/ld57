@@ -57,7 +57,7 @@ export class Player extends Entity {
     public rotationSpeed = 0.01;
     public frictionRate: number = -0.001;
     public shouldCollideWithWall = true;
-    public upgradeLevel: keyof typeof subConfigs = 1;
+    public upgradeLevel: keyof typeof subConfigs = 2;
 
     constructor(x: number, y: number) {
         super(x, y);

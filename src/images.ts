@@ -123,7 +123,7 @@ export const claw2Image = loadImage(claw2Url);
 import claw3Url from "../assets/sub/sub_claw_level3.png";
 export const claw3Image = loadImage(claw3Url);
 
-import bossUrl from "../assets/final_boss.png";
+import bossUrl from "../assets/boss_cliff.png";
 export const bossImage = loadImage(bossUrl);
 
 let resolveImageLoad: () => void;

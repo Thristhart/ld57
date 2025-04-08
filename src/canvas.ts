@@ -176,8 +176,6 @@ export function drawFrame(avgFrameLength: number) {
         }
     }
 
-    context.drawImage(bossImage, bossPos.x, bossPos.y, bossPos.width, bossPos.height);
-
     let maskOpacity = localStorage.getItem("fullbright")
         ? 0
         : Math.min(1, gameManager.player.y / (gameManager.maxPixelHeight / 2));
@@ -251,6 +249,7 @@ export function drawFrame(avgFrameLength: number) {
     for (const ent of drawOnTop) {
         ent.draw(context);
     }
+    context.drawImage(bossImage, bossPos.x, bossPos.y, bossPos.width, bossPos.height);
 
     context.restore();
 
@@ -265,6 +264,6 @@ export function drawFrame(avgFrameLength: number) {
     }
 }
 
-const bossPos = { x: 3547, y: 33213, width: 500, height: 500 };
+const bossPos = { x: 2687, y: 33013, width: 1200, height: 1200 };
 //@ts-ignore
 window.bossPos = bossPos;
